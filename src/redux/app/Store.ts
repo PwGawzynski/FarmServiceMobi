@@ -6,4 +6,3 @@ export default configureStore({
     user: UserReducer,
   },
 });
-console.log('dnis');
