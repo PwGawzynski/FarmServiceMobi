@@ -90,7 +90,39 @@ const dark_theme = createTheme(dark_palette);
 const light_theme = createTheme(light_palette);
 
 const headingFont = createInterFont({
-  family: 'InterBold',
+  family: 'InterSemiBold',
+  weight: {
+    5: '500',
+    6: '600',
+    7: '700',
+    8: '800',
+    9: '900',
+  },
+  size: {
+    1: 11,
+    2: 12,
+    3: 13,
+    4: 14,
+    true: 14,
+    5: 16,
+    6: 18,
+    7: 20,
+    8: 23,
+    9: 30,
+    10: 46,
+    11: 55,
+    12: 62,
+    13: 72,
+    14: 92,
+    15: 114,
+    16: 134,
+  },
+  face: {
+    500: { normal: 'Inter', italic: 'InterItalic' },
+    700: { normal: 'InterSemiBold', italic: 'InterSemiBoldItalic' },
+    800: { normal: 'InterBold', italic: 'InterBoldItalic' },
+    900: { normal: 'InterExtraBold', italic: 'InterExtraBoldItalic' },
+  },
 });
 const bodyFont = createInterFont({
   family: 'Inter',
@@ -107,8 +139,8 @@ const tamaguiConfig = createTamagui({
     dark: dark_theme,
     // eslint-disable-next-line camelcase
     light: light_theme,
-    dark_Stack: {
-      background: '#000',
+    dark_ScreenCard: {
+      background: 'hsl(216,75%,8%)',
     },
   },
   media: createMedia({
