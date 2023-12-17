@@ -21292,7 +21292,7 @@
   "tamaguiConfig": {
     "fonts": {
       "heading": {
-        "family": "Inter",
+        "family": "InterSemiBold",
         "lineHeight": {
           "1": 21,
           "2": 22,
@@ -21313,23 +21313,23 @@
           "true": 24
         },
         "weight": {
-          "1": "300",
-          "2": "300",
-          "3": "300",
-          "4": "300",
-          "5": "300",
-          "6": "300",
-          "7": "300",
-          "8": "300",
-          "9": "300",
-          "10": "300",
-          "11": "300",
-          "12": "300",
-          "13": "300",
-          "14": "300",
-          "15": "300",
-          "16": "300",
-          "true": "300"
+          "1": "500",
+          "2": "500",
+          "3": "500",
+          "4": "500",
+          "5": "500",
+          "6": "600",
+          "7": "700",
+          "8": "800",
+          "9": "900",
+          "10": "900",
+          "11": "900",
+          "12": "900",
+          "13": "900",
+          "14": "900",
+          "15": "900",
+          "16": "900",
+          "true": "900"
         },
         "letterSpacing": {
           "1": 0,
@@ -21368,6 +21368,40 @@
           "15": 114,
           "16": 134,
           "true": 14
+        },
+        "face": {
+          "100": {
+            "normal": "InterSemiBold"
+          },
+          "200": {
+            "normal": "InterSemiBold"
+          },
+          "300": {
+            "normal": "InterSemiBold"
+          },
+          "400": {
+            "normal": "InterSemiBold"
+          },
+          "500": {
+            "normal": "Inter",
+            "italic": "InterItalic"
+          },
+          "600": {
+            "normal": "Inter",
+            "italic": "InterItalic"
+          },
+          "700": {
+            "normal": "InterSemiBold",
+            "italic": "InterSemiBoldItalic"
+          },
+          "800": {
+            "normal": "InterBold",
+            "italic": "InterBoldItalic"
+          },
+          "900": {
+            "normal": "InterExtraBold",
+            "italic": "InterExtraBoldItalic"
+          }
         }
       },
       "body": {
@@ -21575,7 +21609,7 @@
         "id": "dark"
       },
       "light": {
-        "background": "hsl(216, 77%, 14%)",
+        "background": "hsl(216,75%,8%)",
         "backgroundFocus": "hsl(213, 78%, 15%)",
         "backgroundHover": "hsl(210, 79%, 15%)",
         "backgroundPress": "hsl(208, 80%, 16%)",
@@ -21597,9 +21631,9 @@
         "shadowColorPress": "hsl(81, 28%, 55%)",
         "id": "light"
       },
-      "dark_Stack": {
-        "background": "#000",
-        "id": "dark_Stack"
+      "dark_ScreenCard": {
+        "background": "hsl(216,75%,8%)",
+        "id": "dark_ScreenCard"
       }
     },
     "shorthands": {
