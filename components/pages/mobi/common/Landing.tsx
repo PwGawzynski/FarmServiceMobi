@@ -93,7 +93,6 @@ export default function Landing({ navigation }: AuthDriverProps<'landing'>) {
   });
 
   useEffect(() => {
-    // eslint-disable-next-line no-console
     console.log(state.value, isSuccess, isError, isFetching);
 
     switch (state.value) {
