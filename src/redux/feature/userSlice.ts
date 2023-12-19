@@ -13,8 +13,15 @@ const UserSlice = createSlice({
   initialState: {
     theme: 1,
   } as UserContextI,
-  reducers: {},
+  reducers: {
+    setTheme: (state, value) => {
+      // eslint-disable-next-line no-param-reassign
+      state.theme = value.payload;
+    },
+  },
 });
+
+export const { setTheme } = UserSlice.actions;
 
 export const selectTheme = (state: UserSliceI) => state.user.theme;
 

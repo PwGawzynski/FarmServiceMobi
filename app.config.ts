@@ -10,4 +10,5 @@ export const version = '1.0.0';
 export const extra = {
   apiUrl: address(),
   userInterfaceStyle: 'automatic',
+  bundleIdentifier: 'com.pwgawzynski.farmservice',
 };

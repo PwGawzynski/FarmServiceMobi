@@ -142,6 +142,9 @@ const tamaguiConfig = createTamagui({
     dark_ScreenCard: {
       background: 'hsl(216,75%,8%)',
     },
+    light_ScreenCard: {
+      background: 'hsl(64, 63%, 66%)',
+    },
   },
   media: createMedia({
     xs: { maxWidth: 660 },

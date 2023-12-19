@@ -21634,6 +21634,10 @@
       "dark_ScreenCard": {
         "background": "hsl(216,75%,8%)",
         "id": "dark_ScreenCard"
+      },
+      "light_ScreenCard": {
+        "background": "hsl(64, 63%, 66%)",
+        "id": "light_ScreenCard"
       }
     },
     "shorthands": {
