@@ -14,13 +14,24 @@ import { useSelector } from 'react-redux';
 import { createMachine } from 'xstate';
 import { useActor } from '@xstate/react';
 import { useQuery } from '@tanstack/react-query';
+import Container, { Toast } from 'toastify-react-native';
 import { ScreenCard } from '../../../atoms/ScreenCard';
 import { selectTheme } from '../../../../src/redux/feature/userSlice';
 import { AuthDriverProps } from '../../../../types/self/navigation/props/AuthDriverProps';
 
+/**
+ * CONSTANTS
+ */
 const F_COMPLEMENT = 'arm';
 const S_COMPLEMENT = 'ervice';
 const ANIMATION_DURATION = 3000;
+const TOAST_DURATION = 5000;
+const RETRY_MAX_ATTEMPTS = 10;
+const RETRY_INTERVAL = 1000;
+
+/**
+ * Driver to manage all screen states
+ */
 const LandingMachine = createMachine({
   id: 'Landing',
   initial: 'fetching',
@@ -64,19 +75,21 @@ const LandingMachine = createMachine({
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function Landing({ navigation }: AuthDriverProps<'landing'>) {
   const opacity = useSharedValue(0);
-  const color = useTheme().background;
+  const bgColor = useTheme().background;
+  const { color } = useTheme();
   const theme = useSelector(selectTheme);
   const [state, send] = useActor(LandingMachine, { input: { fetchCount: 1 } });
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { data, isFetching, isSuccess, isError, refetch } = useQuery({
     queryKey: ['user'],
-    queryFn: async () => {
+    queryFn: async ({ queryKey }) => {
+      console.log(`QUERYING--->[${queryKey[0]}]`);
       if (Math.random()) throw new Error('ndiw');
       return '';
     },
-    retry: 2,
-    retryDelay: attempts => attempts * 1000,
+    retry: RETRY_MAX_ATTEMPTS,
+    retryDelay: attempts => attempts * RETRY_INTERVAL,
   });
 
   useEffect(() => {
@@ -88,12 +101,11 @@ export default function Landing({ navigation }: AuthDriverProps<'landing'>) {
         if (isSuccess) send({ type: 'Landing.fetched' });
         if (isError) send({ type: 'Landing.fetchingError' });
         break;
-      case 'fetchingError':
-        break;
       case 'animating':
         opacity.value = withTiming(1, { duration: ANIMATION_DURATION });
         break;
       case 'waitRetry':
+        Toast.warn('Something went wrong, click retry Button', 'top');
         break;
       case 'animated':
         // navigation.navigate('landing');
@@ -103,11 +115,17 @@ export default function Landing({ navigation }: AuthDriverProps<'landing'>) {
     }
   }, [isSuccess, isError, isFetching, state.value]);
 
-  useEffect(() => {}, []);
-
   return (
     <ScreenCard filed={theme === 1}>
-      {['animating', 'sanimated'].includes(state.value.toString()) && (
+      <Container
+        theme="dark"
+        style={{
+          backgroundColor: bgColor?.val,
+        }}
+        textStyle={{ color: color?.val, fontSize: 16 }}
+        duration={TOAST_DURATION}
+      />
+      {['animating', 'animated'].includes(state.value.toString()) && (
         <YStack f={1} justifyContent="center">
           <XStack alignItems="center">
             <H1
@@ -115,12 +133,12 @@ export default function Landing({ navigation }: AuthDriverProps<'landing'>) {
               lineHeight="$12"
               fontStyle="italic"
               fontSize="$12"
-              color={color}
+              color={bgColor}
             >
               F
             </H1>
             <Animated.View style={{ opacity, overflow: 'hidden' }}>
-              <H2 color={color} fontSize="$9">
+              <H2 color={bgColor} fontSize="$9">
                 {F_COMPLEMENT}
               </H2>
             </Animated.View>
@@ -129,17 +147,17 @@ export default function Landing({ navigation }: AuthDriverProps<'landing'>) {
               lineHeight="$12"
               fontStyle="italic"
               fontSize="$12"
-              color={color}
+              color={bgColor}
             >
               S
             </H1>
             <Animated.View style={{ opacity, overflow: 'hidden' }}>
-              <H2 color={color} fontSize="$9">
+              <H2 color={bgColor} fontSize="$9">
                 {S_COMPLEMENT}
               </H2>
             </Animated.View>
           </XStack>
-          <Text color={color} w="full" textAlign="right">
+          <Text color={bgColor} w="full" textAlign="right">
             ® By PwG
           </Text>
         </YStack>
@@ -151,10 +169,17 @@ export default function Landing({ navigation }: AuthDriverProps<'landing'>) {
         justifyContent="center"
         f={0.2}
       >
-        {state.matches('fetching') && <Spinner />}
+        {state.matches('fetching') && (
+          <YStack>
+            <Spinner />
+            <Text mt="$4" color={bgColor}>
+              Connecting...
+            </Text>
+          </YStack>
+        )}
         {state.matches('waitRetry') && (
           <Button
-            bg={color}
+            bg={bgColor}
             color="$color"
             onPress={() => {
               refetch();
