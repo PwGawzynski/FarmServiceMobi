@@ -10,14 +10,16 @@ import {
 } from 'tamagui';
 import Animated, { useSharedValue, withTiming } from 'react-native-reanimated';
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { createMachine } from 'xstate';
 import { useActor } from '@xstate/react';
 import { useQuery } from '@tanstack/react-query';
-import Container, { Toast } from 'toastify-react-native';
+import { HttpStatusCode } from 'axios';
 import { ScreenCard } from '../../../atoms/ScreenCard';
-import { selectTheme } from '../../../../src/redux/feature/userSlice';
+import { selectTheme, setUser } from '../../../../src/redux/feature/userSlice';
 import { AuthDriverProps } from '../../../../types/self/navigation/props/AuthDriverProps';
+import { me } from '../../../../api/services/User';
+import { setThemeToStorage } from '../../../../helepers/ThemeHelpers';
 
 /**
  * CONSTANTS
@@ -25,8 +27,10 @@ import { AuthDriverProps } from '../../../../types/self/navigation/props/AuthDri
 const F_COMPLEMENT = 'arm';
 const S_COMPLEMENT = 'ervice';
 const ANIMATION_DURATION = 3000;
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const TOAST_DURATION = 5000;
-const RETRY_MAX_ATTEMPTS = 10;
+// TODO: change to 3
+const RETRY_MAX_ATTEMPTS = 2;
 const RETRY_INTERVAL = 1000;
 
 /**
@@ -76,24 +80,31 @@ const LandingMachine = createMachine({
 export default function Landing({ navigation }: AuthDriverProps<'landing'>) {
   const opacity = useSharedValue(0);
   const bgColor = useTheme().background;
-  const { color } = useTheme();
+  // const { color } = useTheme();
   const theme = useSelector(selectTheme);
+  const dispatch = useDispatch();
   const [state, send] = useActor(LandingMachine, { input: { fetchCount: 1 } });
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { data, isFetching, isSuccess, isError, refetch } = useQuery({
+  const { data, isFetching, isSuccess, isError, error, refetch } = useQuery({
     queryKey: ['user'],
-    queryFn: async ({ queryKey }) => {
-      console.log(`QUERYING--->[${queryKey[0]}]`);
-      if (Math.random()) throw new Error('ndiw');
-      return '';
-    },
+    queryFn: me,
     retry: RETRY_MAX_ATTEMPTS,
     retryDelay: attempts => attempts * RETRY_INTERVAL,
   });
 
   useEffect(() => {
-    console.log(state.value, isSuccess, isError, isFetching);
+    console.log(state.value, isSuccess, isError, isFetching, data);
+    if (data) {
+      dispatch(setUser(data));
+      (async () => {
+        if (data.account.theme) {
+          console.log('test', data.account.theme);
+          // TODO toast when cannot set theme
+          setThemeToStorage(data.account.theme);
+        }
+      })();
+    }
 
     switch (state.value) {
       case 'fetching':
@@ -104,26 +115,23 @@ export default function Landing({ navigation }: AuthDriverProps<'landing'>) {
         opacity.value = withTiming(1, { duration: ANIMATION_DURATION });
         break;
       case 'waitRetry':
-        Toast.warn('Something went wrong, click retry Button', 'top');
-        break;
+        if (error?.cause === HttpStatusCode.Unauthorized)
+          navigation.navigate('login');
+        // TODO: add toast
+        else if (error) {
+          console.log(error);
+        }
+        /* Toast.warn(error.message, 'top'); */ break;
       case 'animated':
         // navigation.navigate('landing');
         break;
       default:
         break;
     }
-  }, [isSuccess, isError, isFetching, state.value]);
+  }, [isSuccess, isError, isFetching, state.value, data]);
 
   return (
     <ScreenCard filed={theme === 1}>
-      <Container
-        theme="dark"
-        style={{
-          backgroundColor: bgColor?.val,
-        }}
-        textStyle={{ color: color?.val, fontSize: 16 }}
-        duration={TOAST_DURATION}
-      />
       {['animating', 'animated'].includes(state.value.toString()) && (
         <YStack f={1} justifyContent="center">
           <XStack alignItems="center">
