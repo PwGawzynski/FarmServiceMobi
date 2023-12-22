@@ -4,11 +4,12 @@ import { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { Provider } from 'react-redux';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ToastProvider } from '@tamagui/toast';
 import AuthDriver from './components/navigators/AuthDriver';
 import store from './src/redux/app/Store';
 // eslint-disable-next-line import/extensions
 import tamaguiConfig from './tamagui.config';
+import { Api } from './api/Api';
+import { UseTheme } from './hooks/UseTheme';
 
 export default function App() {
   const [loaded] = useFonts({
@@ -21,27 +22,19 @@ export default function App() {
     InterExtraBold: require('@tamagui/font-inter/otf/Inter-ExtraBold.otf'),
     InterExtraBoldItalic: require('@tamagui/font-inter/otf/Inter-ExtraBoldItalic.otf'),
   });
-
   useEffect(() => {
-    if (loaded) {
-      // can hide splash screen here
-    }
-  }, [loaded]);
-  const theme = 1;
+    Api.init();
+  }, []);
+  const theme = UseTheme();
   if (!loaded) return null;
 
   const queryClient = new QueryClient();
   return (
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
-        <TamaguiProvider
-          defaultTheme={theme === 1 ? 'dark' : 'light'}
-          config={tamaguiConfig}
-        >
+        <TamaguiProvider defaultTheme={theme} config={tamaguiConfig}>
           <NavigationContainer>
-            <ToastProvider native burntOptions={{ from: 'top' }}>
-              <AuthDriver />
-            </ToastProvider>
+            <AuthDriver />
           </NavigationContainer>
         </TamaguiProvider>
       </Provider>
