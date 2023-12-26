@@ -21600,8 +21600,8 @@
         "colorFocus": "hsl(213, 78%, 15%)",
         "colorHover": "hsl(210, 79%, 15%)",
         "colorPress": "hsl(208, 80%, 16%)",
-        "colorTransparent": "hsla(0,0%,99%,0)",
-        "placeholderColor": "hsl(214, 81%, 10%)",
+        "colorTransparent": "hsla(0,0%,0%,0)",
+        "placeholderColor": "hsl(180,10%,27%)",
         "shadowColor": "hsl(216, 77%, 14%)",
         "shadowColorFocus": "hsl(213, 78%, 15%)",
         "shadowColorHover": "hsl(210, 79%, 15%)",
@@ -21632,12 +21632,30 @@
         "id": "light"
       },
       "dark_ScreenCard": {
-        "background": "hsl(216,75%,8%)",
+        "bg": "hsl(216,75%,8%)",
         "id": "dark_ScreenCard"
       },
       "light_ScreenCard": {
-        "background": "hsl(64, 63%, 66%)",
+        "bg": "hsl(0,0%,100%)",
         "id": "light_ScreenCard"
+      },
+      "light_AppText": {
+        "color": "hsl(216,75%,8%)",
+        "id": "light_AppText"
+      },
+      "dark_AppText": {
+        "color": "hsl(64, 63%, 66%)",
+        "id": "dark_AppText"
+      },
+      "light_Input": {
+        "background": "hsla(0,0%,100%,0)",
+        "color": "hsl(216,75%,8%)",
+        "id": "light_Input"
+      },
+      "dark_Input": {
+        "background": "hsla(0,0%,100%,0)",
+        "color": "hsl(64, 63%, 66%)",
+        "id": "dark_Input"
       }
     },
     "shorthands": {

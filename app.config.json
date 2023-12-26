@@ -17,6 +17,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.pwgawzynski.farmservice",
+      "bitcode": false,
       "config": {
         "usesNonExemptEncryption": false
       }

@@ -9,7 +9,7 @@ export const ScreenCard = styled(Stack, {
   pr: '$4',
   variants: {
     filed: {
-      true: { bg: '$background' },
+      true: { bg: '$bg' },
     },
   },
 });

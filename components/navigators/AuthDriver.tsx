@@ -2,7 +2,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { AuthDriverParamList } from '../../types/self/navigation/paramLists/AuthDriverParamList';
 import Landing from '../pages/mobi/AuthDriver/Landing';
 import { NativeStackScreenOptionsBase } from '../../settings/navigators/NativeStackScreenOptionsBase';
-import { Login } from '../pages/mobi/AuthDriver/Login';
+import { ChooseLoginType } from '../pages/mobi/AuthDriver/ChooseLoginType';
 
 const Stack = createNativeStackNavigator<AuthDriverParamList>();
 
@@ -25,7 +25,7 @@ export default function AuthDriver() {
           animation: 'fade',
         }}
         name="login"
-        component={Login}
+        component={ChooseLoginType}
       />
     </Stack.Navigator>
   );

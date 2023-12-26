@@ -129,6 +129,7 @@ export class Api {
         },
       })
     ).data as ResponseObject<IdentityAuthTokenLoginRaw>;
+    console.log(response, 'important');
     return Api.saveTokensToSecureStoreFromResPayload(response);
   }
 

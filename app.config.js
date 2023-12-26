@@ -1,19 +1,25 @@
 import { address } from 'ip';
 
-// eslint-disable-next-line no-console
-console.log(
-  `Server is running using IP address  ${address()} as backend default`,
-);
-
-export const name = 'FarmService';
-export const version = '1.0.0';
-export const extra = {
+ const name = 'FarmService';
+ const version = '1.0.0';
+ const extra = {
   apiUrl: address(),
   userInterfaceStyle: 'automatic',
   ios: {
     bundleIdentifier: 'com.pwgawzynski.farmservice',
   },
   eas: {
-    projectId: 'b48a6345-3ec7-4a22-810a-1f6908314c3a',
+    projectId: 'd93bb622-30d0-4f55-85c6-5fde5f331ce4',
+      updates: {
+          url: "https://u.expo.dev/d93bb622-30d0-4f55-85c6-5fde5f331ce4"
+      },
+      runtimeVersion: "1.0.0"
   },
 };
+
+ module.exports = ({config}) => ({
+   ...config,
+   name,
+   version,
+   extra: extra,
+ });
