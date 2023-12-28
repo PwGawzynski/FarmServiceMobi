@@ -11,7 +11,7 @@ import { ErrorCause } from '../../types/self/api/ErrorTypes';
  */
 export async function me() {
   const UNAUTHORIZED_MSG = 'Session expired, please login again';
-  const DEFAULT_MSG = 'Something went wrong';
+  const DEFAULT_MSG = 'Something went wrong, try again later';
   try {
     return (await Api.me()).payload;
   } catch (e) {
