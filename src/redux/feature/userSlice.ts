@@ -37,7 +37,7 @@ const UserSlice = createSlice({
       email: undefined,
       password: undefined,
       isActivated: undefined,
-      theme: Theme.dark,
+      theme: Theme.light,
       activationCode: undefined,
     },
   } as UserContextI,
