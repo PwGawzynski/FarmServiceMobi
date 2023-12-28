@@ -4,7 +4,6 @@ import { ErrorCause } from '../../types/self/api/ErrorTypes';
 
 /**
  * Method used when user login in app
- * @param loginData : LoginUser
  * @returns boolean to indicate that access is given or not
  * @throws Error as ErrorCause when server response with UNAUTHORIZED
  * @throws Error with only message on any other error
