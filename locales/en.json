@@ -1,0 +1,10 @@
+{
+  "test": "test",
+  "screens": {
+    "AuthDriver": {
+      "chooseLoginType": {
+        "instructionHeader": "Choose Login Type"
+      }
+    }
+  }
+}

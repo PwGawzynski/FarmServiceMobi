@@ -1,37 +1,24 @@
-import {
-  Button,
-  H1,
-  H2,
-  Spinner,
-  Text,
-  useTheme,
-  XStack,
-  YStack,
-} from 'tamagui';
-import Animated, { useSharedValue, withTiming } from 'react-native-reanimated';
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { createMachine } from 'xstate';
+import { useDispatch } from 'react-redux';
+import { assign, createMachine } from 'xstate';
 import { useActor } from '@xstate/react';
 import { useQuery } from '@tanstack/react-query';
 import { HttpStatusCode } from 'axios';
-import { ScreenCard } from '../../../atoms/ScreenCard';
-import { selectTheme, setUser } from '../../../../src/redux/feature/userSlice';
+import { ActivityIndicator, Text, View } from 'react-native';
+import Toast from 'react-native-root-toast';
+import { setUser } from '../../../../src/redux/feature/userSlice';
 import { AuthDriverProps } from '../../../../types/self/navigation/props/AuthDriverProps';
 import { me } from '../../../../api/services/User';
-import { setThemeToStorage } from '../../../../helepers/ThemeHelpers';
-
-/**
- * CONSTANTS
- */
-const F_COMPLEMENT = 'arm';
-const S_COMPLEMENT = 'ervice';
-const ANIMATION_DURATION = 3000;
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const TOAST_DURATION = 5000;
-// TODO: change to 3
-const RETRY_MAX_ATTEMPTS = 2;
-const RETRY_INTERVAL = 1000;
+import { ScreenBase } from '../common/ScreenBase';
+import { Colors } from '../../../../settings/styles/colors';
+import { Theme } from '../../../../FarmServiceApiTypes/Account/Constants';
+import { UseStoredTheme } from '../../../../hooks/UseStoredTheme';
+import { LandingLogo } from '../../../atoms/LandingLogo';
+import {
+  RETRY_INTERVAL,
+  RETRY_MAX_ATTEMPTS,
+} from '../../../../settings/query/querySettings';
+import { TOAST_DURATION } from '../../../../settings/Toast/toastSettings';
 
 /**
  * Driver to manage all screen states
@@ -39,6 +26,9 @@ const RETRY_INTERVAL = 1000;
 const LandingMachine = createMachine({
   id: 'Landing',
   initial: 'fetching',
+  context: {
+    animationPlayed: false,
+  },
   states: {
     fetching: {
       on: {
@@ -58,10 +48,11 @@ const LandingMachine = createMachine({
       },
     },
     animating: {
-      after: {
-        '3000': {
-          target: '#Landing.animated',
-        },
+      always: {
+        actions: assign({
+          animationPlayed: true,
+        }),
+        target: '#Landing.animated',
       },
     },
     animated: {},
@@ -73,130 +64,65 @@ const LandingMachine = createMachine({
       | { type: 'Landing.fetched' }
       | { type: 'Landing.fetchingError' }
       | { type: 'Landing.Retry' };
+    context: {
+      animationPlayed: boolean;
+    };
   },
 });
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function Landing({ navigation }: AuthDriverProps<'landing'>) {
-  const opacity = useSharedValue(0);
-  const bgColor = useTheme().background;
-  // const { color } = useTheme();
-  const theme = useSelector(selectTheme);
+  const { theme, setTheme } = UseStoredTheme();
   const dispatch = useDispatch();
   const [state, send] = useActor(LandingMachine, { input: { fetchCount: 1 } });
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { data, isFetching, isSuccess, isError, error, refetch } = useQuery({
+  const { data, isFetching, isSuccess, isError, error } = useQuery({
     queryKey: ['user'],
     queryFn: me,
     retry: RETRY_MAX_ATTEMPTS,
     retryDelay: attempts => attempts * RETRY_INTERVAL,
   });
-
   useEffect(() => {
-    console.log(state.value, isSuccess, isError, isFetching, data);
     if (data) {
       dispatch(setUser(data));
       (async () => {
-        if (data.account.theme) {
-          console.log('test', data.account.theme);
-          // TODO toast when cannot set theme
-          setThemeToStorage(data.account.theme);
+        if (data?.account?.theme !== undefined) {
+          setTheme(data.account.theme);
         }
       })();
     }
-
     switch (state.value) {
       case 'fetching':
         if (isSuccess) send({ type: 'Landing.fetched' });
         if (isError) send({ type: 'Landing.fetchingError' });
         break;
-      case 'animating':
-        opacity.value = withTiming(1, { duration: ANIMATION_DURATION });
-        break;
       case 'waitRetry':
         if (error?.cause === HttpStatusCode.Unauthorized)
           navigation.navigate('login');
-        // TODO: add toast
-        else if (error) {
-          console.log(error);
-        }
-        /* Toast.warn(error.message, 'top'); */ break;
-      case 'animated':
-        // navigation.navigate('landing');
+        else if (error)
+          Toast.show(error.message, {
+            backgroundColor:
+              theme === Theme.light ? Colors.WHITE : Colors.GREEN,
+            textColor: Colors.DARK,
+            duration: TOAST_DURATION,
+          });
         break;
       default:
         break;
     }
   }, [isSuccess, isError, isFetching, state.value, data]);
-
   return (
-    <ScreenCard filed={theme === 1}>
-      {['animating', 'animated'].includes(state.value.toString()) && (
-        <YStack f={1} justifyContent="center">
-          <XStack alignItems="center">
-            <H1
-              fontWeight="$6"
-              lineHeight="$12"
-              fontStyle="italic"
-              fontSize="$12"
-              color={bgColor}
-            >
-              F
-            </H1>
-            <Animated.View style={{ opacity, overflow: 'hidden' }}>
-              <H2 color={bgColor} fontSize="$9">
-                {F_COMPLEMENT}
-              </H2>
-            </Animated.View>
-            <H1
-              fontWeight="$6"
-              lineHeight="$12"
-              fontStyle="italic"
-              fontSize="$12"
-              color={bgColor}
-            >
-              S
-            </H1>
-            <Animated.View style={{ opacity, overflow: 'hidden' }}>
-              <H2 color={bgColor} fontSize="$9">
-                {S_COMPLEMENT}
-              </H2>
-            </Animated.View>
-          </XStack>
-          <Text color={bgColor} w="full" textAlign="right">
-            ® By PwG
-          </Text>
-        </YStack>
-      )}
-      <YStack
-        position="absolute"
-        b={50}
-        flexDirection="column"
-        justifyContent="center"
-        f={0.2}
-      >
-        {state.matches('fetching') && (
-          <YStack>
-            <Spinner />
-            <Text mt="$4" color={bgColor}>
-              Connecting...
-            </Text>
-          </YStack>
+    <ScreenBase>
+      <View className="flex-1 items-center justify-end">
+        <LandingLogo play={state.context.animationPlayed} />
+      </View>
+      <View className="flex-1 items-center justify-end">
+        {state.value === 'fetching' && (
+          <View>
+            <ActivityIndicator />
+            <Text className="text-dark dark:text-green">Connecting...</Text>
+          </View>
         )}
-        {state.matches('waitRetry') && (
-          <Button
-            bg={bgColor}
-            color="$color"
-            onPress={() => {
-              refetch();
-              send({ type: 'Landing.fetching' });
-            }}
-          >
-            Retry Login
-          </Button>
-        )}
-      </YStack>
-    </ScreenCard>
+      </View>
+    </ScreenBase>
   );
 }
