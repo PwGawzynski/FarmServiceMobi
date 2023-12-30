@@ -6,6 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import { HttpStatusCode } from 'axios';
 import { ActivityIndicator, Text, View } from 'react-native';
 import Toast from 'react-native-root-toast';
+import { useTranslation } from 'react-i18next';
 import { setUser } from '../../../../src/redux/feature/userSlice';
 import { AuthDriverProps } from '../../../../types/self/navigation/props/AuthDriverProps';
 import { me } from '../../../../api/services/User';
@@ -19,6 +20,7 @@ import {
   RETRY_MAX_ATTEMPTS,
 } from '../../../../settings/query/querySettings';
 import { TOAST_DURATION } from '../../../../settings/Toast/toastSettings';
+import { TranslationNames } from '../../../../locales/TranslationNames';
 
 /**
  * Driver to manage all screen states
@@ -72,6 +74,7 @@ const LandingMachine = createMachine({
 
 export default function Landing({ navigation }: AuthDriverProps<'landing'>) {
   const { theme, setTheme } = UseStoredTheme();
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const [state, send] = useActor(LandingMachine, { input: { fetchCount: 1 } });
 
@@ -97,7 +100,7 @@ export default function Landing({ navigation }: AuthDriverProps<'landing'>) {
         break;
       case 'waitRetry':
         if (error?.cause === HttpStatusCode.Unauthorized)
-          navigation.navigate('login');
+          navigation.navigate('chooseLoginType');
         else if (error)
           Toast.show(error.message, {
             backgroundColor:
@@ -119,7 +122,9 @@ export default function Landing({ navigation }: AuthDriverProps<'landing'>) {
         {state.value === 'fetching' && (
           <View>
             <ActivityIndicator />
-            <Text className="text-dark dark:text-green">Connecting...</Text>
+            <Text className="text-dark dark:text-green">
+              {t(TranslationNames.screens.authDriver.landing.connecting)}
+            </Text>
           </View>
         )}
       </View>
