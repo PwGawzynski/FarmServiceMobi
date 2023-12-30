@@ -170,7 +170,7 @@ export class Api {
   // TODO add types for user data
   /**
    * Register new user in Api
-   * @param userData : RegisterScreensDataCollection
+   * @param userData : userData
    * @returns ResponseObject when operation went correct
    * @throws AxiosError return by axios
    */
