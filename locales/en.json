@@ -1,9 +1,22 @@
 {
-  "test": "test",
   "screens": {
     "AuthDriver": {
       "chooseLoginType": {
-        "instructionHeader": "Choose Login Type"
+        "header": "Sing up for FarmService",
+        "email": "e-mail or NIP ",
+        "google": "Sign in with Google",
+        "registerButton": "Create One Now",
+        "registerText": "Don't have an account?",
+        "instruction": "Sing up for FarmService, and start working with pleasure",
+      },
+      "landing": {
+        "connecting": "Connecting to server..."
+      },
+      "chooseRegisterType": {
+        "header": "Create New Account",
+        "email": "Use e-mail or NIP ",
+        "google": "Use Google",
+        "instruction": "Work smarter, not harder with FarmService"
       }
     }
   }

@@ -1,3 +1,23 @@
 {
-  "test":"Testowanie"
+  "screens": {
+    "AuthDriver": {
+      "chooseLoginType": {
+        "header": "Wybierz sposób logowania",
+        "email": "e-mail lub NIP",
+        "google": "Zaloguj z Google",
+        "registerButton": "Stwórz nowe konto",
+        "registerText": "Nie masz jeszcze konta?",
+        "instruction": "Zaloguj sie do FarmService i zacznij pracowac wygodniej"
+      },
+      "landing": {
+        "connecting": "Łączenie z serwerem..."
+      },
+      "chooseRegisterType": {
+        "header": "Utwurz nowe konto",
+        "email": "Zacznij z e-mail",
+        "google": "Zacznij z Google",
+        "instruction": "Pracuj mądze, nie cięzko z FarmService"
+      }
+    }
+  }
 }
