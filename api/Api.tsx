@@ -68,7 +68,6 @@ export class Api {
       const token: IdentityAuthTokenLoginStored = await JSON.parse(session);
       const now = new Date();
       const tokenDate = new Date(token.last_updated_access_token_at);
-      return false;
       // time is minute reduced to prevent logout after loading desktop and to give time to restore tokens
       return now.getTime() - tokenDate.getTime() < ACCESS_TOKEN_LIVE_TIME;
     } catch (e) {
@@ -202,7 +201,6 @@ export class Api {
   }
 
   static async me() {
-    await Api.session();
     return (
       (await Api.axiosInstance.get('/user/me')) as AxiosResponse<
         ResponseObject<UserResponseBase>
