@@ -24,14 +24,6 @@ export function LandingLogo({ play }: Props) {
       >
         FarmService
       </Animated.Text>
-      <View className="">
-        <Animated.Text
-          style={[animatedStyle]}
-          className="text-xs text-dark dark:text-green text-right"
-        >
-          © PwG
-        </Animated.Text>
-      </View>
     </View>
   );
 }
