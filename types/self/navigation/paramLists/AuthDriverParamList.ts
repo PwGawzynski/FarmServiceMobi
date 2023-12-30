@@ -1,4 +1,6 @@
 export type AuthDriverParamList = {
   landing: undefined;
-  login: undefined;
+  chooseLoginType: undefined;
+  loginByEmail: undefined;
+  chooseRegisterType: undefined;
 };
