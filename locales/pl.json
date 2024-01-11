@@ -17,7 +17,32 @@
         "email": "Zacznij z e-mail",
         "google": "Zacznij z Google",
         "instruction": "Pracuj mądze, nie cięzko z FarmService"
+      },
+      "loginByEmail": {
+        "header": "Zaloguj się",
+        "email": "e-mail lub NIP",
+        "password": "Hasło",
+        "loginButton": "Zaloguj się",
+        "forgotPassword": "Zapomniałeś hasła?",
+        "resetPassword": "Zresetuj hasło",
+        "emailValidationInvalid": "Niepoprawny e-mail lub NIP",
+        "emailValidationRequired": "e-mail lub NIP jest wymagany",
+        "emailValidationMinLength": "e-mail lub NIP nie może być krótszy niż ",
+        "emailValidationMaxLength": "e-mail lub NIP nie może być dłuższy niż ",
+        "passwordValidationRequired": "Hasło jest wymagane",
+        "passwordValidationMinLength": "Hasło nie może być krótsze niż ",
+        "passwordValidationMaxLength": "Hasło nie może być dłuższe niż ",
+        "passwordValidationComplement": "znaki",
+        "passwordValidationPattern": "Hasło musi zawierać co najmniej jedną małą literę, jedną wielką literę i jedną cyfrę",
+        "pendingStatus": "Ładowanie..."
       }
+    }
+  },
+  "userService": {
+    "errorMessages": {
+      "unauthorised": "Nieautoryzowany dostęp",
+      "default": "Wystąpił błąd. Spróbuj ponownie później",
+      "wrongCredentials": "Niepoprawny e-mail lub hasło"
     }
   }
 }
