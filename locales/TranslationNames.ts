@@ -18,6 +18,41 @@ export const TranslationNames = {
         google: 'screens.AuthDriver.chooseRegisterType.google',
         instruction: 'screens.AuthDriver.chooseRegisterType.instruction',
       },
+      loginByEmail: {
+        header: 'screens.AuthDriver.loginByEmail.header',
+        email: 'screens.AuthDriver.loginByEmail.email',
+        password: 'screens.AuthDriver.loginByEmail.password',
+        loginButton: 'screens.AuthDriver.loginByEmail.loginButton',
+        registerText: 'screens.AuthDriver.loginByEmail.registerText',
+        forgotPassword: 'screens.AuthDriver.loginByEmail.forgotPassword',
+        emailValidationInvalid:
+          'screens.AuthDriver.loginByEmail.emailValidationInvalid',
+        emailValidationRequired:
+          'screens.AuthDriver.loginByEmail.emailValidationRequired',
+        emailValidationMinLength:
+          'screens.AuthDriver.loginByEmail.emailValidationMinLength',
+        emailValidationMaxLength:
+          'screens.AuthDriver.loginByEmail.emailValidationMaxLength',
+        passwordValidationRequired:
+          'screens.AuthDriver.loginByEmail.passwordValidationRequired',
+        passwordValidationMinLength:
+          'screens.AuthDriver.loginByEmail.passwordValidationMinLength',
+        passwordValidationMaxLength:
+          'screens.AuthDriver.loginByEmail.passwordValidationMaxLength',
+        charComplement:
+          'screens.AuthDriver.loginByEmail.passwordValidationComplement',
+        passwordValidationPattern:
+          'screens.AuthDriver.loginByEmail.passwordValidationPattern',
+        pendingStatus: 'screens.AuthDriver.loginByEmail.pendingStatus',
+        resetPassword: 'screens.AuthDriver.loginByEmail.resetPassword',
+      },
+    },
+  },
+  userService: {
+    errorMessages: {
+      unauthorised: 'userService.errorMessages.unauthorised',
+      default: 'userService.errorMessages.default',
+      wrongCredentials: 'userService.errorMessages.wrongCredentials',
     },
   },
 };
