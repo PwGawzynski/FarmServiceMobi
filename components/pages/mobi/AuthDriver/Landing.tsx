@@ -1,54 +1,29 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { assign, createMachine } from 'xstate';
 import { useActor } from '@xstate/react';
-import { useQuery } from '@tanstack/react-query';
-import { HttpStatusCode } from 'axios';
 import { ActivityIndicator, Text, View } from 'react-native';
-import Toast from 'react-native-root-toast';
 import { useTranslation } from 'react-i18next';
-import { setUser } from '../../../../src/redux/feature/userSlice';
-import { AuthDriverProps } from '../../../../types/self/navigation/props/AuthDriverProps';
-import { me } from '../../../../api/services/User';
-import { ScreenBase } from '../common/ScreenBase';
-import { Colors } from '../../../../settings/styles/colors';
-import { Theme } from '../../../../FarmServiceApiTypes/Account/Constants';
-import { UseStoredTheme } from '../../../../hooks/UseStoredTheme';
-import { LandingLogo } from '../../../atoms/LandingLogo';
 import {
-  RETRY_INTERVAL,
-  RETRY_MAX_ATTEMPTS,
-} from '../../../../settings/query/querySettings';
-import { TOAST_DURATION } from '../../../../settings/Toast/toastSettings';
+  InitializationStatus,
+  selectInitStatus,
+  selectIsLogged,
+} from '../../../../src/redux/feature/userSlice';
+import { AuthDriverProps } from '../../../../types/self/navigation/props/AuthDriverProps';
+import { ScreenBase } from '../common/ScreenBase';
+import {
+  LANDING_ANIMATION_DURATION,
+  LandingLogo,
+} from '../../../atoms/LandingLogo';
 import { TranslationNames } from '../../../../locales/TranslationNames';
 
-/**
- * Driver to manage all screen states
- */
 const LandingMachine = createMachine({
   id: 'Landing',
-  initial: 'fetching',
+  initial: 'animating',
   context: {
     animationPlayed: false,
   },
   states: {
-    fetching: {
-      on: {
-        'Landing.fetched': {
-          target: 'animating',
-        },
-        'Landing.fetchingError': {
-          target: 'waitRetry',
-        },
-      },
-    },
-    waitRetry: {
-      on: {
-        'Landing.fetching': {
-          target: 'fetching',
-        },
-      },
-    },
     animating: {
       always: {
         actions: assign({
@@ -57,15 +32,28 @@ const LandingMachine = createMachine({
         target: '#Landing.animated',
       },
     },
-    animated: {},
+    animated: {
+      after: {
+        [LANDING_ANIMATION_DURATION]: {
+          target: 'checkUserContextReady',
+        },
+      },
+    },
+    checkUserContextReady: {
+      on: {
+        ready: {
+          target: 'contextReady',
+        },
+        unreachable: {
+          target: 'unreachable',
+        },
+      },
+    },
+    contextReady: {},
+    unreachable: {},
   },
   types: {} as {
-    events:
-      | { type: 'Landing.fetching' }
-      | { type: 'Landing.fetchCountLimitAchieved' }
-      | { type: 'Landing.fetched' }
-      | { type: 'Landing.fetchingError' }
-      | { type: 'Landing.Retry' };
+    events: { type: 'ready' } | { type: 'unreachable' };
     context: {
       animationPlayed: boolean;
     };
@@ -73,46 +61,30 @@ const LandingMachine = createMachine({
 });
 
 export default function Landing({ navigation }: AuthDriverProps<'landing'>) {
-  const { theme, setTheme } = UseStoredTheme();
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const userIntStatus = useSelector(selectInitStatus);
+  const isLogged = useSelector(selectIsLogged);
   const [state, send] = useActor(LandingMachine, { input: { fetchCount: 1 } });
 
-  const { data, isFetching, isSuccess, isError, error } = useQuery({
-    queryKey: ['user'],
-    queryFn: me,
-    retry: RETRY_MAX_ATTEMPTS,
-    retryDelay: attempts => attempts * RETRY_INTERVAL,
-  });
+  console.log(userIntStatus, isLogged, state.value);
   useEffect(() => {
-    if (data) {
-      dispatch(setUser(data));
-      (async () => {
-        if (data?.account?.theme !== undefined) {
-          setTheme(data.account.theme);
-        }
-      })();
-    }
     switch (state.value) {
-      case 'fetching':
-        if (isSuccess) send({ type: 'Landing.fetched' });
-        if (isError) send({ type: 'Landing.fetchingError' });
+      case 'checkUserContextReady':
+        if (userIntStatus === InitializationStatus.FULFILLED)
+          send({ type: 'ready' });
+        if (userIntStatus === InitializationStatus.REJECTED)
+          send({ type: 'unreachable' });
         break;
-      case 'waitRetry':
-        if (error?.cause === HttpStatusCode.Unauthorized)
-          navigation.navigate('chooseLoginType');
-        else if (error)
-          Toast.show(error.message, {
-            backgroundColor:
-              theme === Theme.light ? Colors.WHITE : Colors.GREEN,
-            textColor: Colors.DARK,
-            duration: TOAST_DURATION,
-          });
+      case 'unreachable':
+        if (!isLogged) navigation.navigate('chooseLoginType');
+        break;
+      case 'contextReady':
+        // if (isLogged) navigation.navigate();
         break;
       default:
         break;
     }
-  }, [isSuccess, isError, isFetching, state.value, data]);
+  }, [state.value, userIntStatus, isLogged]);
   return (
     <ScreenBase>
       <View className="flex-1 items-center justify-end">
