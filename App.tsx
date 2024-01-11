@@ -8,11 +8,12 @@ import { I18nextProvider } from 'react-i18next';
 import { RootSiblingParent } from 'react-native-root-siblings';
 import AuthDriver from './components/navigators/AuthDriver';
 import store from './src/redux/app/Store';
-import { Api } from './api/Api';
+import { setUpUser } from './src/redux/feature/userSlice';
 
 export default function App() {
   useEffect(() => {
-    Api.init();
+    // Api init is moved to redux store, if store will be moved, api init should be here
+    store.dispatch(setUpUser());
   }, []);
 
   const queryClient = new QueryClient();
