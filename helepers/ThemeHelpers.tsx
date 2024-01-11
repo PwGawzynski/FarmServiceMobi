@@ -1,11 +1,11 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Theme } from '../FarmServiceApiTypes/Account/Constants';
+import { DEFAULT_THEME } from '../settings/theme/themeSettings';
 
 export async function getThemeFromStorage(): Promise<Theme | undefined> {
   const storedTheme = await AsyncStorage.getItem('theme');
-  console.log(storedTheme, 'FFFF');
   if (storedTheme) return JSON.parse(storedTheme) as Theme;
-  return undefined;
+  return DEFAULT_THEME;
 }
 
 export async function setThemeToStorage(theme: Theme) {
