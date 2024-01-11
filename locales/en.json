@@ -17,7 +17,32 @@
         "email": "Use e-mail or NIP ",
         "google": "Use Google",
         "instruction": "Work smarter, not harder with FarmService"
+      },
+      "loginByEmail": {
+        "header": "Sign in with e-mail or NIP",
+        "email": "e-mail or NIP",
+        "password": "Password",
+        "forgotPassword": "Forgot password?",
+        "resetPassword": "Reset password",
+        "loginButton": "Sign in",
+        "emailValidationInvalid": "Invalid e-mail or NIP",
+        "emailValidationRequired": "e-mail or NIP is required",
+        "emailValidationMinLength": "e-mail or NIP must be at least ",
+        "emailValidationMaxLength": "e-mail or NIP must be at most ",
+        "passwordValidationRequired": "Password is required",
+        "passwordValidationMinLength": "Password must be at least ",
+        "passwordValidationMaxLength": "Password must be at most ",
+        "passwordValidationCharacters": "characters",
+        "passwordValidationPattern": "Password must contain at least one letter and one number and one special character",
+        "pendingStatus": "Signing in..."
       }
+    }
+  },
+  "userService": {
+    "errorMessages": {
+      "unauthorised": "Session expired, please login again",
+      "default": "Something went wrong, please try again later",
+      "wrongCredentials": "Wrong credentials"
     }
   }
 }
