@@ -2,9 +2,10 @@ import { useTranslation } from 'react-i18next';
 import { Text, View } from 'react-native';
 import { ScreenBase } from '../common/ScreenBase';
 import { AppButton } from '../../../atoms/AppButton';
-import { AppLinkButton } from '../../../atoms/AppLinkButton';
 import { AuthDriverProps } from '../../../../types/self/navigation/props/AuthDriverProps';
 import { TranslationNames } from '../../../../locales/TranslationNames';
+import { CenteredMediumHeader } from '../../../atoms/CenteredMediumHeader';
+import { TextWithLink } from '../../../atoms/TextWithLink';
 
 export function ChooseLoginType({
   navigation,
@@ -12,9 +13,9 @@ export function ChooseLoginType({
   const { t } = useTranslation();
   return (
     <ScreenBase>
-      <Text className="text-center text-dark dark:text-green text-2xl font-semibold">
+      <CenteredMediumHeader>
         {t(TranslationNames.screens.authDriver.chooseLoginType.header)}
-      </Text>
+      </CenteredMediumHeader>
 
       <View className="flex-1 justify-center">
         <Text className="text-center text-dark dark:text-green text-base font-medium mb-12">
@@ -30,18 +31,16 @@ export function ChooseLoginType({
         />
       </View>
 
-      <View className="flex-row justify-center mb-12">
-        <Text className="text-center text-dark dark:text-green text-base font-medium ">
-          {t(TranslationNames.screens.authDriver.chooseLoginType.registerText)}
-        </Text>
-        <AppLinkButton
-          onPress={() => navigation.navigate('chooseRegisterType')}
-          textClassName="text-center font-medium text-base ml-1 color-light-green dark:text-white"
-          title={t(
-            TranslationNames.screens.authDriver.chooseLoginType.registerButton,
-          )}
-        />
-      </View>
+      <TextWithLink
+        abs="mb-12"
+        text={t(
+          TranslationNames.screens.authDriver.chooseLoginType.registerText,
+        )}
+        onLinkPress={() => navigation.navigate('chooseRegisterType')}
+        linkText={t(
+          TranslationNames.screens.authDriver.chooseLoginType.registerButton,
+        )}
+      />
     </ScreenBase>
   );
 }
