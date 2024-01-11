@@ -5,7 +5,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { View } from 'react-native';
 
-const ANIMATION_DURATION = 3000;
+export const LANDING_ANIMATION_DURATION = 3000;
 
 export type Props = {
   play: boolean;
@@ -15,7 +15,8 @@ export function LandingLogo({ play }: Props) {
   const opacity = useSharedValue(0);
   const animatedStyle = useAnimatedStyle(() => ({ opacity: opacity.value }));
 
-  if (play) opacity.value = withTiming(1, { duration: ANIMATION_DURATION });
+  if (play)
+    opacity.value = withTiming(1, { duration: LANDING_ANIMATION_DURATION });
   return (
     <View className="justify-center ">
       <Animated.Text
