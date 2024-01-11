@@ -5,6 +5,7 @@ import { NativeStackScreenOptionsBase } from '../../settings/navigators/NativeSt
 import { ChooseLoginType } from '../pages/mobi/AuthDriver/ChooseLoginType';
 import { LoginByEmail } from '../pages/mobi/AuthDriver/LoginByEmail';
 import { ChooseRegisterType } from '../pages/mobi/AuthDriver/ChooseRegisterType';
+import { PasswordReset } from '../pages/mobi/AuthDriver/PasswordReset';
 
 const Stack = createNativeStackNavigator<AuthDriverParamList>();
 
@@ -46,6 +47,15 @@ export default function AuthDriver() {
         }}
         name="chooseRegisterType"
         component={ChooseRegisterType}
+      />
+      <Stack.Screen
+        options={{
+          ...NativeStackScreenOptionsBase,
+          animation: 'fade',
+          gestureDirection: 'horizontal',
+        }}
+        name="passwordReset"
+        component={PasswordReset}
       />
     </Stack.Navigator>
   );
