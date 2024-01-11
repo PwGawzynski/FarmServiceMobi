@@ -3,4 +3,5 @@ export type AuthDriverParamList = {
   chooseLoginType: undefined;
   loginByEmail: undefined;
   chooseRegisterType: undefined;
+  passwordReset: undefined;
 };
