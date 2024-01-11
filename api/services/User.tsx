@@ -1,18 +1,69 @@
 import { AxiosError, HttpStatusCode } from 'axios';
+import { t } from 'i18next';
 import { Api } from '../Api';
 import { ErrorCause } from '../../types/self/api/ErrorTypes';
+import { ResponseObject } from '../../FarmServiceApiTypes/Respnse/responseGeneric';
+import { LoginUser } from '../../FarmServiceApiTypes/User/LoginUser';
+import { TranslationNames } from '../../locales/TranslationNames';
 
 /**
- * Method used when user login in app
- * @returns boolean to indicate that access is given or not
- * @throws Error as ErrorCause when server response with UNAUTHORIZED
- * @throws Error with only message on any other error
+ * Method used to handle api calls as base driver maintaining
+ * base error handling such as unauthorised or default error
+ * @param unauthorisedMsg message to be shown when user is unauthorised
+ * @param defaultMsg message to be shown when something went wrong
+ * @param apiCall api call to be executed
+ */
+export async function apiHandler<T>(
+  unauthorisedMsg: string,
+  defaultMsg: string,
+  apiCall: () => Promise<ResponseObject<T> | undefined>,
+) {
+  try {
+    const data = await apiCall();
+    if (data) return data.payload;
+    return undefined;
+  } catch (e) {
+    if (e instanceof AxiosError) {
+      console.log(e.response?.status);
+      switch (e.response?.status) {
+        case HttpStatusCode.Unauthorized:
+          throw new Error(unauthorisedMsg, {
+            cause: HttpStatusCode.Unauthorized,
+          } as ErrorCause);
+        default:
+          throw new Error(defaultMsg);
+      }
+    } else throw new Error(defaultMsg);
+  }
+}
+
+/**
+ * Method used to get user data from api
+ * @throws Error when session expired or something went wrong
+ * @return UserResponseBase | undefined
  */
 export async function me() {
-  const UNAUTHORIZED_MSG = 'Session expired, please login again';
-  const DEFAULT_MSG = 'Something went wrong, try again later';
+  const UNAUTHORIZED_MSG = t(
+    TranslationNames.userService.errorMessages.unauthorised,
+  );
+  const DEFAULT_MSG = t(TranslationNames.userService.errorMessages.default);
+  return apiHandler(UNAUTHORIZED_MSG, DEFAULT_MSG, Api.me);
+}
+
+/**
+ * Method used to login user
+ * @param data : LoginUser
+ * @throws Error when credentials are wrong or something went wrong
+ * @return UserResponseBase | undefined
+ */
+export async function login(data: LoginUser) {
+  const UNAUTHORIZED_MSG = t(
+    TranslationNames.userService.errorMessages.wrongCredentials,
+  );
+  const DEFAULT_MSG = t(TranslationNames.userService.errorMessages.default);
   try {
-    return (await Api.me()).payload;
+    const response = await Api.loginUser(data);
+    return response?.payload;
   } catch (e) {
     if (e instanceof AxiosError) {
       console.log(e.response?.status);
