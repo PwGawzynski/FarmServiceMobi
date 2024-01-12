@@ -45,6 +45,9 @@ export const TranslationNames = {
           'screens.AuthDriver.loginByEmail.passwordValidationPattern',
         pendingStatus: 'screens.AuthDriver.loginByEmail.pendingStatus',
         resetPassword: 'screens.AuthDriver.loginByEmail.resetPassword',
+        emailPlaceholder: 'screens.AuthDriver.loginByEmail.emailPlaceholder',
+        passwordPlaceholder:
+          'screens.AuthDriver.loginByEmail.passwordPlaceholder',
       },
     },
   },
