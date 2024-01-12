@@ -34,7 +34,9 @@
         "passwordValidationMaxLength": "Password must be at most ",
         "passwordValidationCharacters": "characters",
         "passwordValidationPattern": "Password must contain at least one letter and one number and one special character",
-        "pendingStatus": "Signing in..."
+        "pendingStatus": "Signing in...",
+        "emailPlaceholder": "e-mail or NIP",
+        "passwordPlaceholder": "Password"
       }
     }
   },
