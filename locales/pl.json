@@ -34,7 +34,9 @@
         "passwordValidationMaxLength": "Hasło nie może być dłuższe niż ",
         "passwordValidationComplement": "znaki",
         "passwordValidationPattern": "Hasło musi zawierać co najmniej jedną małą literę, jedną wielką literę i jedną cyfrę",
-        "pendingStatus": "Ładowanie..."
+        "pendingStatus": "Ładowanie...",
+        "emailPlaceholder": "e-mail lub NIP",
+        "passwordPlaceholder": "Hasło"
       }
     }
   },
