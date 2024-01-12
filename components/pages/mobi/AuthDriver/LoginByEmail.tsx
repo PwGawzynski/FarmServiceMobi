@@ -114,6 +114,10 @@ export function LoginByEmail({ navigation }: AuthDriverProps<'loginByEmail'>) {
             textInputProps={{
               autoComplete: 'email',
               keyboardType: 'email-address',
+              placeholder: t(
+                TranslationNames.screens.authDriver.loginByEmail
+                  .emailPlaceholder,
+              ),
             }}
             controllers={{
               field: { onChange, onBlur, value, ref, disabled, name },
@@ -153,6 +157,10 @@ export function LoginByEmail({ navigation }: AuthDriverProps<'loginByEmail'>) {
               secureTextEntry: true,
               autoComplete: 'current-password',
               textContentType: 'password',
+              placeholder: t(
+                TranslationNames.screens.authDriver.loginByEmail
+                  .passwordPlaceholder,
+              ),
             }}
           />
         )}
