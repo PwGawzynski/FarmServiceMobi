@@ -32,7 +32,6 @@ export function AppInput<
   return (
     <View className={`w-full ${abs}`}>
       <TextInput
-        {...textInputProps}
         className="text-dark dark:text-green text-lg pb-2 h-14 border-b-4 border-b-dark dark:border-green "
         onBlur={onBlur}
         ref={ref}
@@ -43,6 +42,7 @@ export function AppInput<
         editable={disabled}
         onChangeText={onChange}
         value={value}
+        {...textInputProps}
       />
       <ValidationError>{error}</ValidationError>
     </View>
