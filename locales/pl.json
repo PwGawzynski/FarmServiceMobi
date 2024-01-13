@@ -37,6 +37,13 @@
         "pendingStatus": "Ładowanie...",
         "emailPlaceholder": "e-mail lub NIP",
         "passwordPlaceholder": "Hasło"
+      },
+      "passwordReset": {
+        "instruction": "Wpisz swój adres e-mail, aby zresetować hasło",
+        "header": "Zresetuj hasło",
+        "button": "Zresetuj hasło",
+        "pendingStatus": "Sending...",
+        "afterSuccess": "Zrobione! Jezeli podany adres e-mail istnieje w naszej bazie, otrzymasz wiadomość z linkiem do resetowania hasła."
       }
     }
   },
