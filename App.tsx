@@ -9,6 +9,10 @@ import { RootSiblingParent } from 'react-native-root-siblings';
 import AuthDriver from './components/navigators/AuthDriver';
 import store from './src/redux/app/Store';
 import { setUpUser } from './src/redux/feature/userSlice';
+import {
+  MIN_QUERY_RETRY_COUNT,
+  QUERY_RETRY_DELAY_MULTIPLICATION,
+} from './settings/query/querySettings';
 
 export default function App() {
   useEffect(() => {
@@ -16,7 +20,15 @@ export default function App() {
     store.dispatch(setUpUser());
   }, []);
 
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      mutations: {
+        retry: MIN_QUERY_RETRY_COUNT,
+        retryDelay: retryCount => retryCount * QUERY_RETRY_DELAY_MULTIPLICATION,
+      },
+    },
+  });
+  console.log(MIN_QUERY_RETRY_COUNT, QUERY_RETRY_DELAY_MULTIPLICATION);
   return (
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>

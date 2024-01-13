@@ -5,6 +5,7 @@ import { ErrorCause } from '../../types/self/api/ErrorTypes';
 import { ResponseObject } from '../../FarmServiceApiTypes/Respnse/responseGeneric';
 import { LoginUser } from '../../FarmServiceApiTypes/User/LoginUser';
 import { TranslationNames } from '../../locales/TranslationNames';
+import { UserResetPasswordReqI } from '../../FarmServiceApiTypes/User/Requests';
 
 /**
  * Method used to handle api calls as base driver maintaining
@@ -13,14 +14,17 @@ import { TranslationNames } from '../../locales/TranslationNames';
  * @param defaultMsg message to be shown when something went wrong
  * @param apiCall api call to be executed
  */
-export async function apiHandler<T>(
+export async function apiHandler<M, T = undefined>(
   unauthorisedMsg: string,
   defaultMsg: string,
-  apiCall: () => Promise<ResponseObject<T> | undefined>,
-) {
+  apiCall:
+    | ((payload: M) => Promise<ResponseObject<T>>)
+    | (() => Promise<ResponseObject<T>>),
+  payload?: M,
+): Promise<ResponseObject<T> | undefined> {
   try {
-    const data = await apiCall();
-    if (data) return data.payload;
+    const data = await apiCall(payload as M);
+    if (data) return data;
     return undefined;
   } catch (e) {
     if (e instanceof AxiosError) {
@@ -77,4 +81,17 @@ export async function login(data: LoginUser) {
       }
     } else throw new Error(DEFAULT_MSG);
   }
+}
+
+export async function resetPwd(data: UserResetPasswordReqI) {
+  const UNAUTHORIZED_MSG = t(
+    TranslationNames.userService.errorMessages.unauthorised,
+  );
+  const DEFAULT_MSG = t(TranslationNames.userService.errorMessages.default);
+  return apiHandler<{ email: string }>(
+    UNAUTHORIZED_MSG,
+    DEFAULT_MSG,
+    Api.resetPassword,
+    data,
+  );
 }

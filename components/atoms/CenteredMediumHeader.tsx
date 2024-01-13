@@ -1,13 +1,17 @@
 import { ReactNode } from 'react';
 import { Text, TextProps } from 'react-native';
 
-export function CenteredMediumHeader({
-  children,
-}: {
+export type Props = {
   children: ReactNode;
-} & TextProps) {
+  textProps?: TextProps;
+};
+
+export function CenteredMediumHeader({ children, textProps }: Props) {
   return (
-    <Text className="text-center text-dark dark:text-green text-2xl font-semibold">
+    <Text
+      {...textProps}
+      className={`text-center text-dark dark:text-green text-2xl font-semibold ${textProps?.className}`}
+    >
       {children}
     </Text>
   );

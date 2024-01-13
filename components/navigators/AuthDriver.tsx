@@ -1,4 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useSelector } from 'react-redux';
 import { AuthDriverParamList } from '../../types/self/navigation/paramLists/AuthDriverParamList';
 import Landing from '../pages/mobi/AuthDriver/Landing';
 import { NativeStackScreenOptionsBase } from '../../settings/navigators/NativeStackScreenOptionsBase';
@@ -6,10 +7,15 @@ import { ChooseLoginType } from '../pages/mobi/AuthDriver/ChooseLoginType';
 import { LoginByEmail } from '../pages/mobi/AuthDriver/LoginByEmail';
 import { ChooseRegisterType } from '../pages/mobi/AuthDriver/ChooseRegisterType';
 import { PasswordReset } from '../pages/mobi/AuthDriver/PasswordReset';
+import { OperationConfirmedAnimation } from '../pages/mobi/AuthDriver/OperationConfirmedAnimation';
+import { selectTheme } from '../../src/redux/feature/userSlice';
 
 const Stack = createNativeStackNavigator<AuthDriverParamList>();
 
 export default function AuthDriver() {
+  const theme = useSelector(selectTheme);
+  console.log(theme);
+  if (theme === undefined) return null;
   return (
     <Stack.Navigator initialRouteName="landing">
       <Stack.Screen
@@ -56,6 +62,15 @@ export default function AuthDriver() {
         }}
         name="passwordReset"
         component={PasswordReset}
+      />
+      <Stack.Screen
+        options={{
+          ...NativeStackScreenOptionsBase,
+          animation: 'fade',
+          gestureDirection: 'horizontal',
+        }}
+        name="OperationConfirmed"
+        component={OperationConfirmedAnimation}
       />
     </Stack.Navigator>
   );
