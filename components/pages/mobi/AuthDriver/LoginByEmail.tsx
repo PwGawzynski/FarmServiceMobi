@@ -1,6 +1,6 @@
 import { Controller, useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
-import { ActivityIndicator, Text, View } from 'react-native';
+import { View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -10,13 +10,14 @@ import { LoginUser } from '../../../../FarmServiceApiTypes/User/LoginUser';
 import { AppButton } from '../../../atoms/AppButton';
 import { LoginUserConstants } from '../../../../FarmServiceApiTypes/User/Constants';
 import { login } from '../../../../api/services/User';
-import { Colors } from '../../../../settings/styles/colors';
 import { setUserAsync } from '../../../../src/redux/feature/userSlice';
 import { AppDispatch } from '../../../../src/redux/app/Store';
 import { TranslationNames } from '../../../../locales/TranslationNames';
 import { CenteredMediumHeader } from '../../../atoms/CenteredMediumHeader';
 import { TextWithLink } from '../../../atoms/TextWithLink';
 import { AuthDriverProps } from '../../../../types/self/navigation/props/AuthDriverProps';
+import { PendingInfo } from '../../../atoms/PendingInfo';
+import { FormErrorInfo } from '../../../atoms/FormErrorInfo';
 
 export function LoginByEmail({ navigation }: AuthDriverProps<'loginByEmail'>) {
   const { t } = useTranslation();
@@ -167,17 +168,13 @@ export function LoginByEmail({ navigation }: AuthDriverProps<'loginByEmail'>) {
         name="password"
       />
       <View className="w-full h-6 mt-2 overflow-hidden flex-row justify-center items-center">
-        {isPending && (
-          <>
-            <ActivityIndicator color={Colors.GREEN} />
-            <Text className="ml-2 text-dark-gray">
-              {t(
-                TranslationNames.screens.authDriver.loginByEmail.pendingStatus,
-              )}
-            </Text>
-          </>
-        )}
-        {error && <Text className="ml-2 text-error-red">{error.message}</Text>}
+        <PendingInfo
+          isVisible={isPending}
+          infoText={t(
+            TranslationNames.screens.authDriver.loginByEmail.pendingStatus,
+          )}
+        />
+        {error && <FormErrorInfo error={error.message} />}
       </View>
       <TextWithLink
         text={t(
