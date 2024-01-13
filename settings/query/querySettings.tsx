@@ -1,8 +1,8 @@
-export const RETRY_MAX_ATTEMPTS =
-  (Number.isNaN(Number(process.env.RETRY_MAX_ATTEMPTS)) &&
-    Number(process.env.RETRY_MAX_ATTEMPTS)) ||
-  5;
-export const RETRY_INTERVAL =
-  (Number.isNaN(Number(process.env.RETRY_INTERVAL)) &&
-    Number(process.env.RETRY_INTERVALs)) ||
+export const MIN_QUERY_RETRY_COUNT =
+  (Number.isNaN(Number(process.env.MIN_QUERY_RETRY_COUNT)) &&
+    Number(process.env.MIN_QUERY_RETRY_COUNT)) ||
+  3;
+export const QUERY_RETRY_DELAY_MULTIPLICATION =
+  (Number.isNaN(Number(process.env.QUERY_RETRY_DELAY_MULTIPLICATION)) &&
+    Number(process.env.QUERY_RETRY_DELAY_MULTIPLICATION)) ||
   1000;
