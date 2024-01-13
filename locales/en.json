@@ -37,6 +37,13 @@
         "pendingStatus": "Signing in...",
         "emailPlaceholder": "e-mail or NIP",
         "passwordPlaceholder": "Password"
+      },
+      "passwordReset": {
+        "instruction": "Enter your e-mail address and we will send you a link to reset your password",
+        "header": "Reset password",
+        "button": "Reset password",
+        "pendingStatus": "Sending...",
+        "afterSuccess": "It's done. If the e-mail address is correct, you will receive a link to reset your password"
       }
     }
   },
