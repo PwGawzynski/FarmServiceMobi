@@ -49,6 +49,13 @@ export const TranslationNames = {
         passwordPlaceholder:
           'screens.AuthDriver.loginByEmail.passwordPlaceholder',
       },
+      passwordReset: {
+        instruction: 'screens.AuthDriver.passwordReset.instruction',
+        header: 'screens.AuthDriver.passwordReset.header',
+        button: 'screens.AuthDriver.passwordReset.button',
+        pendingStatus: 'screens.AuthDriver.passwordReset.pendingStatus',
+        afterSuccess: 'screens.AuthDriver.passwordReset.afterSuccess',
+      },
     },
   },
   userService: {
