@@ -9,7 +9,10 @@ import {
 import { ResponseObject } from '../FarmServiceApiTypes/Respnse/responseGeneric';
 import { UserResponseBase } from '../FarmServiceApiTypes/User/Responses';
 import { Theme } from '../FarmServiceApiTypes/Account/Constants';
-import { CreateUserReqI } from '../FarmServiceApiTypes/User/Requests';
+import {
+  CreateUserReqI,
+  UserResetPasswordReqI,
+} from '../FarmServiceApiTypes/User/Requests';
 
 export class Api {
   /**
@@ -221,5 +224,13 @@ export class Api {
     ).data;
     if (await Api.saveTokensToSecureStoreFromResPayload(response))
       return Api.me();
+  }
+
+  static async resetPassword(data: UserResetPasswordReqI) {
+    return (
+      (await Api.axiosInstance.put('/user/reset-password', undefined, {
+        params: { email: data?.email },
+      })) as AxiosResponse<ResponseObject>
+    ).data;
   }
 }
