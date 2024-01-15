@@ -8,6 +8,7 @@ import {
   InitializationStatus,
   selectInitStatus,
   selectIsLogged,
+  selectUserRole,
 } from '../../../../src/redux/feature/userSlice';
 import { AuthDriverProps } from '../../../../types/self/navigation/props/AuthDriverProps';
 import { ScreenBase } from '../common/ScreenBase';
@@ -16,6 +17,7 @@ import {
   LandingLogo,
 } from '../../../atoms/LandingLogo';
 import { TranslationNames } from '../../../../locales/TranslationNames';
+import { UserRole } from '../../../../FarmServiceApiTypes/User/Enums';
 
 const LandingMachine = createMachine({
   id: 'Landing',
@@ -64,6 +66,7 @@ export default function Landing({ navigation }: AuthDriverProps<'landing'>) {
   const { t } = useTranslation();
   const userIntStatus = useSelector(selectInitStatus);
   const isLogged = useSelector(selectIsLogged);
+  const role = useSelector(selectUserRole);
   const [state, send] = useActor(LandingMachine, { input: { fetchCount: 1 } });
 
   console.log(userIntStatus, isLogged, state.value);
@@ -79,7 +82,16 @@ export default function Landing({ navigation }: AuthDriverProps<'landing'>) {
         if (!isLogged) navigation.navigate('chooseLoginType');
         break;
       case 'contextReady':
-        // if (isLogged) navigation.navigate();
+        if (isLogged && role === UserRole.Owner)
+          navigation.navigate('ownerRootDriver', {
+            screen: 'ordersDriver',
+            params: {
+              screen: 'ordersDesktopRoot',
+              params: {
+                screen: 'ordersDesktop',
+              },
+            },
+          });
         break;
       default:
         break;
