@@ -1,7 +1,7 @@
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { ActivityDesktopRoot } from '../../../pages/mobi/ActivitiesDesktopTopTabNavigator/ActivityDesktopRoot';
 import { MaterialTopTabScreenOptions } from '../../../../settings/navigators/MaterialTopTabScreenOptions';
-import { ActivityDesktopDriverParamList } from '../../../../types/self/navigation/paramLists/ActivityDesktopDriverParamList';
+import { ActivityDesktopDriverParamList } from '../../../../types/self/navigation/paramLists/activities/ActivityDesktopDriverParamList';
 
 const Stack = createMaterialTopTabNavigator<ActivityDesktopDriverParamList>();
 
