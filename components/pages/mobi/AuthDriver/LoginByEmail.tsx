@@ -8,7 +8,6 @@ import { ScreenBase } from '../common/ScreenBase';
 import { AppInput } from '../../../atoms/AppInput';
 import { LoginUser } from '../../../../FarmServiceApiTypes/User/LoginUser';
 import { AppButton } from '../../../atoms/AppButton';
-import { LoginUserConstants } from '../../../../FarmServiceApiTypes/User/Constants';
 import { login } from '../../../../api/services/User';
 import { setUserAsync } from '../../../../src/redux/feature/userSlice';
 import { AppDispatch } from '../../../../src/redux/app/Store';
@@ -18,6 +17,7 @@ import { TextWithLink } from '../../../atoms/TextWithLink';
 import { AuthDriverProps } from '../../../../types/self/navigation/props/AuthDriverProps';
 import { PendingInfo } from '../../../atoms/PendingInfo';
 import { FormErrorInfo } from '../../../atoms/FormErrorInfo';
+import { LoginUserConstants } from '../../../../FarmServiceApiTypes/User/Constants';
 
 export function LoginByEmail({ navigation }: AuthDriverProps<'loginByEmail'>) {
   const { t } = useTranslation();

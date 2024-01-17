@@ -1,0 +1,3 @@
+[submodule "FarmServiceApiTypes"]
+	path = FarmServiceApiTypes
+	url = https://github.com/PwGawzynski/FarmServiceApiTypes.git
