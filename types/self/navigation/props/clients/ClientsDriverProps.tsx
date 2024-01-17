@@ -1,9 +1,9 @@
 import { CompositeScreenProps } from '@react-navigation/native';
 import { StackScreenProps } from '@react-navigation/stack';
-import { OwnerRootDriverParamList } from '../paramLists/OwnerRootDriverParamList';
-import { OwnerRootDriverScreenProps } from './OwnerRootDriverProps';
-import { AuthDriverParamList } from '../paramLists/AuthDriverParamList';
-import { ClientsDriverParamList } from '../paramLists/ClientsDriverParamList';
+import { OwnerRootDriverParamList } from '../../paramLists/OwnerRootDriverParamList';
+import { OwnerRootDriverScreenProps } from '../OwnerRootDriverProps';
+import { AuthDriverParamList } from '../../paramLists/AuthDriverParamList';
+import { ClientsDriverParamList } from '../../paramLists/clients/ClientsDriverParamList';
 
 export type ClientsDriverPros<T extends keyof ClientsDriverParamList> =
   StackScreenProps<ClientsDriverParamList, T>;
