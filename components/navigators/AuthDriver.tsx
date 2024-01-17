@@ -9,6 +9,7 @@ import { ChooseRegisterType } from '../pages/mobi/AuthDriver/ChooseRegisterType'
 import { PasswordReset } from '../pages/mobi/AuthDriver/PasswordReset';
 import { OperationConfirmedAnimation } from '../pages/mobi/AuthDriver/OperationConfirmedAnimation';
 import { selectTheme } from '../../src/redux/feature/userSlice';
+import { OwnerRootDriver } from './owner/OwnerRootDriver';
 
 const Stack = createNativeStackNavigator<AuthDriverParamList>();
 
@@ -33,6 +34,15 @@ export default function AuthDriver() {
           gestureEnabled: false,
           animation: 'fade',
         }}
+        name="ownerRootDriver"
+        component={OwnerRootDriver}
+      />
+      <Stack.Screen
+        options={{
+          ...NativeStackScreenOptionsBase,
+          gestureEnabled: false,
+          animation: 'fade',
+        }}
         name="chooseLoginType"
         component={ChooseLoginType}
       />
@@ -40,6 +50,7 @@ export default function AuthDriver() {
         options={{
           ...NativeStackScreenOptionsBase,
           animation: 'fade',
+          gestureEnabled: true,
           gestureDirection: 'horizontal',
         }}
         name="loginByEmail"
