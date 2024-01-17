@@ -84,11 +84,11 @@ export default function Landing({ navigation }: AuthDriverProps<'landing'>) {
       case 'contextReady':
         if (isLogged && role === UserRole.Owner)
           navigation.navigate('ownerRootDriver', {
-            screen: 'ordersDriver',
+            screen: 'activityDriver',
             params: {
-              screen: 'ordersDesktopRoot',
+              screen: 'activityDesktopRoot',
               params: {
-                screen: 'ordersDesktop',
+                screen: 'lastActivities',
               },
             },
           });
