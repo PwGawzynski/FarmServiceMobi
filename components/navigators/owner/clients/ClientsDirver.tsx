@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NativeStackScreenOptionsBase } from '../../../../settings/navigators/NativeStackScreenOptionsBase';
-import { ClientsDriverParamList } from '../../../../types/self/navigation/paramLists/ClientsDriverParamList';
+import { ClientsDriverParamList } from '../../../../types/self/navigation/paramLists/clients/ClientsDriverParamList';
 import { ClientsDesktopDriver } from './ClientsDesktopDriver';
 
 const Stack = createNativeStackNavigator<ClientsDriverParamList>();
