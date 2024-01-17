@@ -11,7 +11,7 @@ export function OwnerRootDriver() {
   return (
     <Stack.Navigator
       // REMEMEBER TO change navigation in Landing when changing initialRouteName
-      initialRouteName="ordersDriver"
+      initialRouteName="activityDriver"
       screenOptions={NativeStackScreenOptionsBase}
     >
       <Stack.Screen name="clientsDriver" component={ClientsDriver} />

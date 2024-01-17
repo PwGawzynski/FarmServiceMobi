@@ -1,5 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { OrdersDriverParamList } from '../../../../types/self/navigation/paramLists/OrdersDriverParamList';
+import { OrdersDriverParamList } from '../../../../types/self/navigation/paramLists/orders/OrdersDriverParamList';
 import { NativeStackScreenOptionsBase } from '../../../../settings/navigators/NativeStackScreenOptionsBase';
 import { OrdersDesktopDriver } from './OrdersDesktopDriver';
 

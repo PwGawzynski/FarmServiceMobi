@@ -1,7 +1,7 @@
 import { NavigatorScreenParams } from '@react-navigation/native';
-import { ActivityDriverParamList } from './ActivityDriverParamList';
-import { OrdersDriverParamList } from './OrdersDriverParamList';
-import { ClientsDriverParamList } from './ClientsDriverParamList';
+import { ActivityDriverParamList } from './activities/ActivityDriverParamList';
+import { OrdersDriverParamList } from './orders/OrdersDriverParamList';
+import { ClientsDriverParamList } from './clients/ClientsDriverParamList';
 
 export type OwnerRootDriverParamList = {
   activityDriver: NavigatorScreenParams<ActivityDriverParamList>;

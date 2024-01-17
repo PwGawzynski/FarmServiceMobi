@@ -1,9 +1,9 @@
 import { StackScreenProps } from '@react-navigation/stack';
 import { CompositeScreenProps } from '@react-navigation/native';
-import { OrdersDesktopDriverParamList } from '../paramLists/OrdersDesktopDriverParamList';
-import { OrdersDriverParamList } from '../paramLists/OrdersDriverParamList';
-import { OwnerRootDriverParamList } from '../paramLists/OwnerRootDriverParamList';
-import { AuthDriverParamList } from '../paramLists/AuthDriverParamList';
+import { OrdersDesktopDriverParamList } from '../../paramLists/orders/OrdersDesktopDriverParamList';
+import { OrdersDriverParamList } from '../../paramLists/orders/OrdersDriverParamList';
+import { OwnerRootDriverParamList } from '../../paramLists/OwnerRootDriverParamList';
+import { AuthDriverParamList } from '../../paramLists/AuthDriverParamList';
 import { OrdersDriverScreenProps } from './OrdersDriverProps';
 
 export type OrdersDesktopDriverProps<
