@@ -6,7 +6,6 @@ import { useEffect } from 'react';
 import { ScreenBase } from '../common/ScreenBase';
 import { TranslationNames } from '../../../../locales/TranslationNames';
 import { CenteredMediumHeader } from '../../../atoms/CenteredMediumHeader';
-import { LoginUserConstants } from '../../../../FarmServiceApiTypes/User/Constants';
 import { AppInput } from '../../../atoms/AppInput';
 import { LoginUser } from '../../../../FarmServiceApiTypes/User/LoginUser';
 import { AppButton } from '../../../atoms/AppButton';
@@ -15,6 +14,7 @@ import { PendingInfo } from '../../../atoms/PendingInfo';
 import { FormErrorInfo } from '../../../atoms/FormErrorInfo';
 import { ResponseCode } from '../../../../FarmServiceApiTypes/Respnse/responseGeneric';
 import { AuthDriverProps } from '../../../../types/self/navigation/props/AuthDriverProps';
+import { LoginUserConstants } from '../../../../FarmServiceApiTypes/User/Constants';
 
 type FormData = Pick<LoginUser, 'email'>;
 
