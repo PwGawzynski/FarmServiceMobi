@@ -26,7 +26,7 @@ export function NavigationBottomPanel({
 }: Props) {
   return (
     <View
-      className={`flex-1 flex-row gap-3 justify-center items-center flex-wrap mt-2 ${boxStyles}`}
+      className={`flex-row gap-3 justify-center items-center flex-wrap mt-2  ${boxStyles}`}
     >
       {options.map(option => (
         <AppButton
