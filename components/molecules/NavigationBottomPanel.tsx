@@ -12,6 +12,13 @@ export type Props = {
   buttonStyles?: string;
 };
 
+/**
+ * @description - Bottom panel with buttons, generates buttons based on given options array
+ * @param options - array of button options ButtonOptions[]
+ * @param buttonStyles - styles for buttons
+ * @param boxStyles - styles for box
+ * @constructor
+ */
 export function NavigationBottomPanel({
   options,
   buttonStyles,
