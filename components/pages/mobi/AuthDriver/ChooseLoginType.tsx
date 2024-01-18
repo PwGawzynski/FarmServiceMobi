@@ -22,11 +22,12 @@ export function ChooseLoginType({
           {t(TranslationNames.screens.authDriver.chooseLoginType.instruction)}
         </Text>
         <AppButton
+          className="max-h-12"
           onPress={() => navigation.navigate('loginByEmail')}
           title={t(TranslationNames.screens.authDriver.chooseLoginType.email)}
         />
         <AppButton
-          className="mt-2"
+          className="mt-2 max-h-12"
           title={t(TranslationNames.screens.authDriver.chooseLoginType.google)}
         />
       </View>
