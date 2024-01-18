@@ -14,7 +14,7 @@ export function ActivityDesktopRoot({
   'activityDriver',
   'ownerRootDriver'
 >) {
-  const navigationOptios: Array<ButtonOptions> = [
+  const navigationOptions: Array<ButtonOptions> = [
     {
       title: 'orders',
       onPress: () =>
@@ -25,7 +25,11 @@ export function ActivityDesktopRoot({
     },
     {
       title: 'workers',
-      onPress: () => '',
+      onPress: () =>
+        navigation.navigate('workersDriver', {
+          screen: 'workersDesktopRoot',
+          params: { screen: 'workersDesktop' },
+        }),
     },
 
     {
@@ -41,7 +45,7 @@ export function ActivityDesktopRoot({
     <ScreenBase name="Last Activities">
       <View className="flex-1 flex-col justify-end">
         <View className="flex-1">
-          <NavigationBottomPanel options={navigationOptios} />
+          <NavigationBottomPanel options={navigationOptions} />
         </View>
       </View>
     </ScreenBase>
