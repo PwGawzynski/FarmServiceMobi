@@ -23,13 +23,14 @@ export function ChooseRegisterType({
           )}
         </Text>
         <AppButton
+          className="max-h-12"
           onPress={() => navigation.navigate('loginByEmail')}
           title={t(
             TranslationNames.screens.authDriver.chooseRegisterType.email,
           )}
         />
         <AppButton
-          className="mt-2"
+          className="mt-2 max-h-12"
           title={t(
             TranslationNames.screens.authDriver.chooseRegisterType.google,
           )}
