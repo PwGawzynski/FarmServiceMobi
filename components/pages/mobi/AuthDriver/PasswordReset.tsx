@@ -124,7 +124,7 @@ export function PasswordReset({
       </View>
       <AppButton
         title={t(TranslationNames.screens.authDriver.passwordReset.button)}
-        className="mt-2"
+        className="mt-2 max-h-12"
         onPress={handleSubmit(onSubmit)}
       />
     </ScreenBase>

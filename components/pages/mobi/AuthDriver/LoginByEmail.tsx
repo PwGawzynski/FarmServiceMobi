@@ -77,7 +77,15 @@ export function LoginByEmail({ navigation }: AuthDriverProps<'loginByEmail'>) {
 
   useEffect(() => {
     if (data && data.role) {
-      // TODO redirect when user is logged
+      navigation.navigate('ownerRootDriver', {
+        screen: 'activityDriver',
+        params: {
+          screen: 'activityDesktopRoot',
+          params: {
+            screen: 'lastActivities',
+          },
+        },
+      });
       dispatch(setUserAsync({ ...data, isLogged: true }));
     }
   }, [data]);
@@ -187,7 +195,7 @@ export function LoginByEmail({ navigation }: AuthDriverProps<'loginByEmail'>) {
       />
       <AppButton
         title={t(TranslationNames.screens.authDriver.loginByEmail.loginButton)}
-        className="mt-6"
+        className="mt-6 max-h-12"
         onPress={handleSubmit(onSubmit)}
       />
     </ScreenBase>

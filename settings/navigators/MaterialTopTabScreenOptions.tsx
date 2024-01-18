@@ -1,4 +1,5 @@
-import { MaterialTopTabNavigationOptions } from '@react-navigation/material-top-tabs';
+import { MaterialTopTabNavigationOptions } from '@react-navigation/material-top-tabs/lib/typescript/src/types';
+import { Dimensions } from 'react-native';
 
 export const MaterialTopTabScreenOptions = {
   tabBarStyle: {
@@ -19,3 +20,8 @@ export const MaterialTopTabScreenOptions = {
   tabBarShowLabel: false,
   headerShown: false,
 } as MaterialTopTabNavigationOptions;
+
+export const MaterialBaseInitialLayout = {
+  width: Dimensions.get('window').width,
+  height: Dimensions.get('window').height,
+};

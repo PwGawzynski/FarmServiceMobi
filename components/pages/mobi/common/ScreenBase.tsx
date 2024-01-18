@@ -18,8 +18,8 @@ export function ScreenBase({ name, children, activityDot }: Props) {
     setColorScheme(theme === Theme.light ? 'light' : 'dark');
   }, [theme]);
   return (
-    <SafeAreaView className="flex-1 bg-white dark:bg-dark">
-      <View className="flex-1 ml-4 mr-4">
+    <SafeAreaView className="flex-1 bg-[#fff] dark:bg-dark">
+      <View className="flex-1 ml-4 mr-4 ">
         <View className="w-full h-2  items-end">
           {activityDot && (
             <View className="h-2 w-2 rounded-full bg-activity-dot" />

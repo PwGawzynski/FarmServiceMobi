@@ -10,7 +10,8 @@ module.exports = {
       "green": '#d7df71',
       "dark-gray": '#939292',
       "error-red": "#fd6363",
-      "activity-dot": "#ff4400"
+      "activity-dot": "#ff4400",
+      "white": "#ffffff",
     }
   },
   plugins: [],
