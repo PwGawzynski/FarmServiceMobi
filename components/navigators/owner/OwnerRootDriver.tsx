@@ -4,6 +4,7 @@ import { NativeStackScreenOptionsBase } from '../../../settings/navigators/Nativ
 import { ActivityDriver } from './activities/ActivitiesDriver';
 import { OrdersDriver } from './orders/OrdersDriver';
 import { ClientsDriver } from './clients/ClientsDirver';
+import { WorkersDriver } from './workers/WorkersDriver';
 
 const Stack = createNativeStackNavigator<OwnerRootDriverParamList>();
 
@@ -17,6 +18,7 @@ export function OwnerRootDriver() {
       <Stack.Screen name="clientsDriver" component={ClientsDriver} />
       <Stack.Screen name="ordersDriver" component={OrdersDriver} />
       <Stack.Screen name="activityDriver" component={ActivityDriver} />
+      <Stack.Screen name="workersDriver" component={WorkersDriver} />
     </Stack.Navigator>
   );
 }
