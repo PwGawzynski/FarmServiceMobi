@@ -43,8 +43,9 @@ export function ActivityDesktopRoot({
   ];
   return (
     <ScreenBase name="Last Activities">
-      <View className="flex-1 flex-col justify-end">
-        <View className="flex-1">
+      <View className="flex-1 flex-col">
+        <View className="flex-1 " />
+        <View className="flex-1 max-h-32 items-center ">
           <NavigationBottomPanel options={navigationOptions} />
         </View>
       </View>
