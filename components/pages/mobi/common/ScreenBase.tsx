@@ -18,7 +18,13 @@ export function ScreenBase({ name, children, activityDot }: Props) {
     setColorScheme(theme === Theme.light ? 'light' : 'dark');
   }, [theme]);
   return (
-    <SafeAreaView className="flex-1 bg-[#fff] dark:bg-dark">
+    <SafeAreaView
+      className="flex-1 bg-[#fff] dark:bg-dark"
+      // TIP UNCOMMENT it if saveArea is not working
+      /* style={{
+        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+      }} */
+    >
       <View className="flex-1 ml-4 mr-4 ">
         <View className="w-full h-2  items-end">
           {activityDot && (
