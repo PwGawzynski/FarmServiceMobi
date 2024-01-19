@@ -1,3 +1,4 @@
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { Provider } from 'react-redux';
@@ -30,16 +31,18 @@ export default function App() {
   });
   console.log(MIN_QUERY_RETRY_COUNT, QUERY_RETRY_DELAY_MULTIPLICATION);
   return (
-    <QueryClientProvider client={queryClient}>
-      <Provider store={store}>
-        <NavigationContainer>
-          <I18nextProvider i18n={i18next}>
-            <RootSiblingParent>
-              <AuthDriver />
-            </RootSiblingParent>
-          </I18nextProvider>
-        </NavigationContainer>
-      </Provider>
-    </QueryClientProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <QueryClientProvider client={queryClient}>
+        <Provider store={store}>
+          <NavigationContainer>
+            <I18nextProvider i18n={i18next}>
+              <RootSiblingParent>
+                <AuthDriver />
+              </RootSiblingParent>
+            </I18nextProvider>
+          </NavigationContainer>
+        </Provider>
+      </QueryClientProvider>
+    </GestureHandlerRootView>
   );
 }
