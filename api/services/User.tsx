@@ -47,10 +47,8 @@ export async function apiHandler<M, T = undefined>(
  * @return UserResponseBase | undefined
  */
 export async function me() {
-  const UNAUTHORIZED_MSG = t(
-    TranslationNames.userService.errorMessages.unauthorised,
-  );
-  const DEFAULT_MSG = t(TranslationNames.userService.errorMessages.default);
+  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
+  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
   return apiHandler(UNAUTHORIZED_MSG, DEFAULT_MSG, Api.me);
 }
 
@@ -64,7 +62,7 @@ export async function login(data: LoginUser) {
   const UNAUTHORIZED_MSG = t(
     TranslationNames.userService.errorMessages.wrongCredentials,
   );
-  const DEFAULT_MSG = t(TranslationNames.userService.errorMessages.default);
+  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
   try {
     const response = await Api.loginUser(data);
     return response?.payload;
@@ -84,10 +82,8 @@ export async function login(data: LoginUser) {
 }
 
 export async function resetPwd(data: UserResetPasswordReqI) {
-  const UNAUTHORIZED_MSG = t(
-    TranslationNames.userService.errorMessages.unauthorised,
-  );
-  const DEFAULT_MSG = t(TranslationNames.userService.errorMessages.default);
+  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
+  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
   return apiHandler<{ email: string }>(
     UNAUTHORIZED_MSG,
     DEFAULT_MSG,
