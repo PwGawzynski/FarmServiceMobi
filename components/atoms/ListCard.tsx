@@ -18,7 +18,8 @@ export function ListCard({
   const theme = useSelector(selectTheme);
   return (
     <View
-      className={`max-h-[${fixedHeight}px] min-h-[${fixedHeight}px] bg-white dark:bg-dark 
+      style={{ height: fixedHeight, maxHeight: fixedHeight }}
+      className={`bg-white dark:bg-dark 
       border-dark dark:border-green border-2 border-solid rounded-2xl overflow-hidden `}
     >
       <Image
