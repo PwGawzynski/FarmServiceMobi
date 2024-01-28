@@ -30,7 +30,8 @@ export function VerticalList<T>({
     },
     [],
   );
-  const divider = useCallback(() => <View className="h-2" />, []);
+  const divider = useCallback(() => <View className="h-4" />, []);
+
   return (
     <FlashList
       ref={ref}
