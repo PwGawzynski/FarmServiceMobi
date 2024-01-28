@@ -13,6 +13,7 @@ import {
   CreateUserReqI,
   UserResetPasswordReqI,
 } from '../FarmServiceApiTypes/User/Requests';
+import { CreateCompanyReqI } from '../FarmServiceApiTypes/Company/Requests';
 
 export class Api {
   /**
@@ -231,6 +232,16 @@ export class Api {
       (await Api.axiosInstance.put('/user/reset-password', undefined, {
         params: { email: data?.email },
       })) as AxiosResponse<ResponseObject>
+    ).data;
+  }
+
+  static async createCompany(data: CreateCompanyReqI) {
+    await Api.session();
+    return (
+      (await Api.axiosInstance.post(
+        '/company',
+        data,
+      )) as AxiosResponse<ResponseObject>
     ).data;
   }
 }
