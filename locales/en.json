@@ -44,14 +44,51 @@
         "button": "Reset password",
         "pendingStatus": "Sending...",
         "afterSuccess": "It's done. If the e-mail address is correct, you will receive a link to reset your password"
+      },
+      "createCompany": {
+          "screenTitle": "Create company",
+          "submitButton": "Create"
       }
     }
   },
+  "serviceDefaults": {
+    "unauthorised": "Session expired, please login again",
+    "default": "Something went wrong, please try again later"
+  },
   "userService": {
     "errorMessages": {
-      "unauthorised": "Session expired, please login again",
-      "default": "Something went wrong, please try again later",
       "wrongCredentials": "Wrong credentials"
+    }
+  },
+  "createCompanyForm":{
+    "formPlaceholder": {
+      "email": "E-mail",
+      "name": "Company name",
+      "NIP": "NIP",
+      "phoneNumber": "Phone number",
+      "county": "County",
+      "street": "Street",
+      "houseNumber": "House number",
+      "apartmentNumber": "Apartment number",
+      "postalCode": "Postal code",
+      "country": "Country",
+      "voivodeship": "Voivodeship"
+    },
+    "validation": {
+      "email": "E-mail is required",
+      "name": "Company name is required",
+      "NIP": "NIP  is required",
+      "phoneNumber": "Phone number is required",
+      "county": "County is required",
+      "street": "Street is required",
+      "houseNumber": "House number is required",
+      "apartmentNumber": "Apartment number is required",
+      "postalCode": "Postal code is required",
+      "country": "Country is required",
+      "voivodeship": "Voivodeship is required",
+      "validationAtLeast": "must be at least ",
+      "validationMaximum ": "can have maximum ",
+      "validationCharacters": "characters"
     }
   }
 }

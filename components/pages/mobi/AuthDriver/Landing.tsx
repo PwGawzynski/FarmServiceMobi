@@ -7,8 +7,7 @@ import { useTranslation } from 'react-i18next';
 import {
   InitializationStatus,
   selectInitStatus,
-  selectIsLogged,
-  selectUserRole,
+  selectUser,
 } from '../../../../src/redux/feature/userSlice';
 import { AuthDriverProps } from '../../../../types/self/navigation/props/AuthDriverProps';
 import { ScreenBase } from '../common/ScreenBase';
@@ -65,11 +64,10 @@ const LandingMachine = createMachine({
 export default function Landing({ navigation }: AuthDriverProps<'landing'>) {
   const { t } = useTranslation();
   const userIntStatus = useSelector(selectInitStatus);
-  const isLogged = useSelector(selectIsLogged);
-  const role = useSelector(selectUserRole);
+  const { role, company } = useSelector(selectUser) ?? {};
   const [state, send] = useActor(LandingMachine, { input: { fetchCount: 1 } });
 
-  console.log(userIntStatus, isLogged, state.value);
+  console.log(userIntStatus, state.value);
   useEffect(() => {
     switch (state.value) {
       case 'checkUserContextReady':
@@ -79,10 +77,11 @@ export default function Landing({ navigation }: AuthDriverProps<'landing'>) {
           send({ type: 'unreachable' });
         break;
       case 'unreachable':
-        if (!isLogged) navigation.navigate('chooseLoginType');
+        if (!role) navigation.navigate('chooseLoginType');
         break;
       case 'contextReady':
-        if (isLogged && role === UserRole.Owner)
+        console.log(company, 'test');
+        if (role === UserRole.Owner && company)
           navigation.navigate('ownerRootDriver', {
             screen: 'activityDriver',
             params: {
@@ -92,11 +91,13 @@ export default function Landing({ navigation }: AuthDriverProps<'landing'>) {
               },
             },
           });
+        if (role === UserRole.Owner && !company)
+          navigation.navigate('createCompany');
         break;
       default:
         break;
     }
-  }, [state.value, userIntStatus, isLogged]);
+  }, [state.value, userIntStatus]);
   return (
     <ScreenBase>
       <View className="flex-1 items-center justify-end">

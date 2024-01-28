@@ -10,6 +10,7 @@ import { PasswordReset } from '../pages/mobi/AuthDriver/PasswordReset';
 import { OperationConfirmedAnimation } from '../pages/mobi/AuthDriver/OperationConfirmedAnimation';
 import { selectTheme } from '../../src/redux/feature/userSlice';
 import { OwnerRootDriver } from './owner/OwnerRootDriver';
+import { CreateCompany } from '../pages/mobi/AuthDriver/CreateCompany';
 
 const Stack = createNativeStackNavigator<AuthDriverParamList>();
 
@@ -45,6 +46,15 @@ export default function AuthDriver() {
         }}
         name="chooseLoginType"
         component={ChooseLoginType}
+      />
+      <Stack.Screen
+        options={{
+          ...NativeStackScreenOptionsBase,
+          gestureEnabled: false,
+          animation: 'fade',
+        }}
+        name="createCompany"
+        component={CreateCompany}
       />
       <Stack.Screen
         options={{

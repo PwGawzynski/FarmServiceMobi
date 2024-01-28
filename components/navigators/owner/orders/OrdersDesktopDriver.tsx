@@ -6,7 +6,7 @@ import {
   GestureDetector,
 } from 'react-native-gesture-handler';
 import { Platform } from 'react-native';
-import { OrdersDesktop } from '../../../pages/mobi/OrdersDesktopDriver/OrdersDesktop';
+import { OrderDesktop } from '../../../pages/mobi/OrdersDesktopDriver/OrderDesktop';
 import { OrdersDesktopDriverParamList } from '../../../../types/self/navigation/paramLists/orders/OrdersDesktopDriverParamList';
 import {
   MaterialBaseInitialLayout,
@@ -45,7 +45,7 @@ export function OrdersDesktopDriver({
         screenOptions={MaterialTopTabScreenOptions}
         initialRouteName="ordersDesktop"
       >
-        <TopTab.Screen name="ordersDesktop" component={OrdersDesktop} />
+        <TopTab.Screen name="ordersDesktop" component={OrderDesktop} />
       </TopTab.Navigator>
     </GestureDetector>
   );

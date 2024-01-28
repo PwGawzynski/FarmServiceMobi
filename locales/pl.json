@@ -44,14 +44,51 @@
         "button": "Zresetuj hasło",
         "pendingStatus": "Sending...",
         "afterSuccess": "Zrobione! Jezeli podany adres e-mail istnieje w naszej bazie, otrzymasz wiadomość z linkiem do resetowania hasła."
+      },
+      "createCompany": {
+        "screenTitle": "Utwórz nową firmę",
+        "submitButton": "Utwórz firmę"
       }
     }
   },
+  "serviceDefaults": {
+    "unauthorised": "Nieautoryzowany dostęp",
+    "default": "Coś poszło nie tak",
+  },
   "userService": {
     "errorMessages": {
-      "unauthorised": "Nieautoryzowany dostęp",
-      "default": "Wystąpił błąd. Spróbuj ponownie później",
-      "wrongCredentials": "Niepoprawny e-mail lub hasło"
+      "wrongCredentials": "Niepoprawny e-mail lub hasło",
+    }
+  },
+  "createCompanyForm":{
+    "formPlaceholder": {
+      "email": "E-mail",
+      "name": "Nazwa firmy",
+      "NIP": "NIP",
+      "phoneNumber": "Numer telefonu",
+      "county": "Powiat",
+      "street": "Ulica",
+      "houseNumber": "Numer domu",
+      "apartmentNumber": "Numer mieszkania",
+      "postalCode": "Kod pocztowy",
+      "country": "Kraj",
+      "voivodeship": "Województwo"
+    },
+    "validation": {
+      "email": "E-mail jest wymagany",
+      "name": "Nazwa firmy jest wymagana",
+      "NIP": "NIP  jest wymagany",
+      "phoneNumber": "Numer telefonu jest wymagany",
+      "county": "Powiat jest wymagany",
+      "street": "Ulica jest wymagana",
+      "houseNumber": "Numer domu jest wymagany",
+      "apartmentNumber": "Numer mieszkania jest wymagany",
+      "postalCode": "Kod pocztowy jest wymagany",
+      "country": "Kraj jest wymagany",
+      "voivodeship": "Województwo jest wymagane",
+      "validationAtLeast": "musi zawierać co najmniej ",
+      "validationMaximum ": "nie może być dłuższy niż ",
+      "validationCharacters": "znaków"
     }
   }
 }
