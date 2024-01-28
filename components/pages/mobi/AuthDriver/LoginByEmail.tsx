@@ -76,7 +76,7 @@ export function LoginByEmail({ navigation }: AuthDriverProps<'loginByEmail'>) {
   const { mutate, data, isPending, error } = useMutation({ mutationFn: login });
 
   useEffect(() => {
-    if (data && data.role) {
+    if (data && data.role !== undefined) {
       navigation.navigate('ownerRootDriver', {
         screen: 'activityDriver',
         params: {
@@ -86,7 +86,7 @@ export function LoginByEmail({ navigation }: AuthDriverProps<'loginByEmail'>) {
           },
         },
       });
-      dispatch(setUserAsync({ ...data, isLogged: true }));
+      dispatch(setUserAsync(data));
     }
   }, [data]);
 
