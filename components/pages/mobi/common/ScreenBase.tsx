@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { SafeAreaView, Text, View } from 'react-native';
+import { Platform, SafeAreaView, StatusBar, Text, View } from 'react-native';
 import { useColorScheme } from 'nativewind';
 import { useSelector } from 'react-redux';
 import { Theme } from '../../../../FarmServiceApiTypes/Account/Constants';
@@ -20,10 +20,9 @@ export function ScreenBase({ name, children, activityDot }: Props) {
   return (
     <SafeAreaView
       className="flex-1 bg-[#fff] dark:bg-dark"
-      // TIP UNCOMMENT it if saveArea is not working
-      /* style={{
+      style={{
         paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
-      }} */
+      }}
     >
       <View className="flex-1 ml-4 mr-4 ">
         <View className="w-full h-2  items-end">
