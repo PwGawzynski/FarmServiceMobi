@@ -50,8 +50,8 @@ export const rules: Partial<
       message: creteMinLenMessage(CompanyConstants.MIN_NIP_LENGTH, 'NIP'),
     },
     maxLength: {
-      value: CompanyConstants.MIN_PHONE_LENGTH,
-      message: creteMinLenMessage(CompanyConstants.MIN_NIP_LENGTH, 'NIP'),
+      value: CompanyConstants.MAX_NIP_LENGTH,
+      message: creteMinLenMessage(CompanyConstants.MAX_NIP_LENGTH, 'NIP'),
     },
   },
   phoneNumber: {
