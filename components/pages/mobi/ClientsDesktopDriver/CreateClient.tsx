@@ -45,10 +45,10 @@ const defaultValues: CreateClientForm = {
 };
 
 // TODO -> addres data based on location
-export function NewClient({
+export function CreateClient({
   navigation,
 }: ClientsDesktopDriverScreenProps<
-  'newClient',
+  'createClient',
   'clientsDesktopRoot',
   'clientsDriver',
   'ownerRootDriver'
