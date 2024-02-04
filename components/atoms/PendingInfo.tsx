@@ -7,12 +7,12 @@ import Animated, {
 } from 'react-native-reanimated';
 import { Colors } from '../../settings/styles/colors';
 
-export type Props = {
+export type PendingInfoProps = {
   infoText?: string;
   isVisible: boolean;
 };
 
-export function PendingInfo({ infoText, isVisible }: Props) {
+export function PendingInfo({ infoText, isVisible }: PendingInfoProps) {
   const opacity = useSharedValue(0);
   const animatedStyle = useAnimatedStyle(() => ({ opacity: opacity.value }));
 
