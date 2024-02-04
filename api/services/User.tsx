@@ -28,16 +28,22 @@ export async function apiHandler<M, T = undefined>(
     return undefined;
   } catch (e) {
     if (e instanceof AxiosError) {
-      console.log(e.response?.status);
       switch (e.response?.status) {
         case HttpStatusCode.Unauthorized:
           throw new Error(unauthorisedMsg, {
             cause: HttpStatusCode.Unauthorized,
           } as ErrorCause);
+
+        case HttpStatusCode.Conflict:
+          throw new Error(e.response.data.payload.message);
+
+        case HttpStatusCode.BadRequest:
+          throw new Error(e.response.data.payload.message);
         default:
           throw new Error(defaultMsg);
       }
     } else throw new Error(defaultMsg);
+    throw new Error(defaultMsg);
   }
 }
 
