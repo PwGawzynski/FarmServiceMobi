@@ -1,6 +1,6 @@
 import { t } from 'i18next';
 import { FormRulesType } from './FormRulesType';
-import { CreateClientForm } from '../../components/pages/mobi/ClientsDesktopDriver/NewClient';
+import { CreateClientForm } from '../../components/pages/mobi/ClientsDesktopDriver/CreateClient';
 import { TranslationNames } from '../../locales/TranslationNames';
 import AddressConstants from '../../FarmServiceApiTypes/Address/Constants';
 import { creteMinLenMessage } from './FormRulesHelper';
