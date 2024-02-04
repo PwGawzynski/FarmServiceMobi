@@ -1,5 +1,6 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useSelector } from 'react-redux';
+import { TamaguiProvider } from 'tamagui';
 import { AuthDriverParamList } from '../../types/self/navigation/paramLists/AuthDriverParamList';
 import Landing from '../pages/mobi/AuthDriver/Landing';
 import { NativeStackScreenOptionsBase } from '../../settings/navigators/NativeStackScreenOptionsBase';
@@ -11,6 +12,9 @@ import { OperationConfirmedAnimation } from '../pages/mobi/AuthDriver/OperationC
 import { selectTheme } from '../../src/redux/feature/userSlice';
 import { OwnerRootDriver } from './owner/OwnerRootDriver';
 import { CreateCompany } from '../pages/mobi/AuthDriver/CreateCompany';
+// eslint-disable-next-line import/extensions
+import config from '../../tamagui_conf/tamagui.config';
+import { Theme } from '../../FarmServiceApiTypes/Account/Constants';
 
 const Stack = createNativeStackNavigator<AuthDriverParamList>();
 
@@ -19,80 +23,82 @@ export default function AuthDriver() {
   console.log(theme);
   if (theme === undefined) return null;
   return (
-    <Stack.Navigator initialRouteName="landing">
-      <Stack.Screen
-        options={{
-          ...NativeStackScreenOptionsBase,
-          gestureEnabled: false,
-          animation: 'fade',
-        }}
-        name="landing"
-        component={Landing}
-      />
-      <Stack.Screen
-        options={{
-          ...NativeStackScreenOptionsBase,
-          gestureEnabled: false,
-          animation: 'fade',
-        }}
-        name="ownerRootDriver"
-        component={OwnerRootDriver}
-      />
-      <Stack.Screen
-        options={{
-          ...NativeStackScreenOptionsBase,
-          gestureEnabled: false,
-          animation: 'fade',
-        }}
-        name="chooseLoginType"
-        component={ChooseLoginType}
-      />
-      <Stack.Screen
-        options={{
-          ...NativeStackScreenOptionsBase,
-          gestureEnabled: false,
-          animation: 'fade',
-        }}
-        name="createCompany"
-        component={CreateCompany}
-      />
-      <Stack.Screen
-        options={{
-          ...NativeStackScreenOptionsBase,
-          animation: 'fade',
-          gestureEnabled: true,
-          gestureDirection: 'horizontal',
-        }}
-        name="loginByEmail"
-        component={LoginByEmail}
-      />
-      <Stack.Screen
-        options={{
-          ...NativeStackScreenOptionsBase,
-          animation: 'fade',
-          gestureDirection: 'horizontal',
-        }}
-        name="chooseRegisterType"
-        component={ChooseRegisterType}
-      />
-      <Stack.Screen
-        options={{
-          ...NativeStackScreenOptionsBase,
-          animation: 'fade',
-          gestureDirection: 'horizontal',
-        }}
-        name="passwordReset"
-        component={PasswordReset}
-      />
-      <Stack.Screen
-        options={{
-          ...NativeStackScreenOptionsBase,
-          animation: 'fade',
-          gestureDirection: 'horizontal',
-        }}
-        name="OperationConfirmed"
-        component={OperationConfirmedAnimation}
-      />
-    </Stack.Navigator>
+    <TamaguiProvider config={config} defaultTheme={Theme[theme]}>
+      <Stack.Navigator initialRouteName="landing">
+        <Stack.Screen
+          options={{
+            ...NativeStackScreenOptionsBase,
+            gestureEnabled: false,
+            animation: 'fade',
+          }}
+          name="landing"
+          component={Landing}
+        />
+        <Stack.Screen
+          options={{
+            ...NativeStackScreenOptionsBase,
+            gestureEnabled: false,
+            animation: 'fade',
+          }}
+          name="ownerRootDriver"
+          component={OwnerRootDriver}
+        />
+        <Stack.Screen
+          options={{
+            ...NativeStackScreenOptionsBase,
+            gestureEnabled: false,
+            animation: 'fade',
+          }}
+          name="chooseLoginType"
+          component={ChooseLoginType}
+        />
+        <Stack.Screen
+          options={{
+            ...NativeStackScreenOptionsBase,
+            gestureEnabled: false,
+            animation: 'fade',
+          }}
+          name="createCompany"
+          component={CreateCompany}
+        />
+        <Stack.Screen
+          options={{
+            ...NativeStackScreenOptionsBase,
+            animation: 'fade',
+            gestureEnabled: true,
+            gestureDirection: 'horizontal',
+          }}
+          name="loginByEmail"
+          component={LoginByEmail}
+        />
+        <Stack.Screen
+          options={{
+            ...NativeStackScreenOptionsBase,
+            animation: 'fade',
+            gestureDirection: 'horizontal',
+          }}
+          name="chooseRegisterType"
+          component={ChooseRegisterType}
+        />
+        <Stack.Screen
+          options={{
+            ...NativeStackScreenOptionsBase,
+            animation: 'fade',
+            gestureDirection: 'horizontal',
+          }}
+          name="passwordReset"
+          component={PasswordReset}
+        />
+        <Stack.Screen
+          options={{
+            ...NativeStackScreenOptionsBase,
+            animation: 'fade',
+            gestureDirection: 'horizontal',
+          }}
+          name="OperationConfirmed"
+          component={OperationConfirmedAnimation}
+        />
+      </Stack.Navigator>
+    </TamaguiProvider>
   );
 }
