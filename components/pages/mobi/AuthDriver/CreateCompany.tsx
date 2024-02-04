@@ -1,6 +1,5 @@
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { View } from 'react-native';
 import { useMutation } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -14,12 +13,11 @@ import {
 import { AppButton } from '../../../atoms/AppButton';
 import { FormControllerSetup, FormCreator } from '../../../atoms/FormCreator';
 import { createCompany } from '../../../../api/company/Company';
-import { PendingInfo } from '../../../atoms/PendingInfo';
-import { FormErrorInfo } from '../../../atoms/FormErrorInfo';
 import { AuthDriverProps } from '../../../../types/self/navigation/props/AuthDriverProps';
 import { AppDispatch } from '../../../../src/redux/app/Store';
 import { TranslationNames } from '../../../../locales/TranslationNames';
 import { rules } from '../../../../helepers/FormRules/CreateCompanyFormRules';
+import { FormStatusPanel } from '../../../molecules/FormStatusPanel';
 
 export type CreateCompanyForm = CreateCompanyReqI['address'] &
   Omit<CreateCompanyReqI, 'address'>;
@@ -203,10 +201,7 @@ export function CreateCompany({
 
   return (
     <ScreenBase name={SCREEN_TITLE}>
-      <View className="w-full h-6 mt-2 overflow-hidden flex-row justify-center items-center">
-        <PendingInfo isVisible={isPending} infoText="Creating company..." />
-        {error && <FormErrorInfo error={error.message} />}
-      </View>
+      <FormStatusPanel isVisible={isPending} error={error?.message} />
       <FormCreator
         controllerSetups={setup}
         errors={errors}
