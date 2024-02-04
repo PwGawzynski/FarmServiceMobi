@@ -132,7 +132,7 @@ export function CreateCompany({
       rules: rules.city,
       name: 'city',
       textInputProp: {
-        placeholder: t(TranslationNames.createCompanyForm.formPlaceholder.city),
+        placeholder: t(TranslationNames.addressForm.formPlaceholder.city),
       },
     },
     {
@@ -141,9 +141,7 @@ export function CreateCompany({
       name: 'county',
       textInputProp: {
         autoComplete: 'country',
-        placeholder: t(
-          TranslationNames.createCompanyForm.formPlaceholder.county,
-        ),
+        placeholder: t(TranslationNames.addressForm.formPlaceholder.county),
       },
     },
     {
@@ -152,7 +150,7 @@ export function CreateCompany({
       name: 'apartmentNumber',
       textInputProp: {
         placeholder: t(
-          TranslationNames.createCompanyForm.formPlaceholder.apartmentNumber,
+          TranslationNames.addressForm.formPlaceholder.apartmentNumber,
         ),
       },
     },
@@ -162,7 +160,7 @@ export function CreateCompany({
       name: 'houseNumber',
       textInputProp: {
         placeholder: t(
-          TranslationNames.createCompanyForm.formPlaceholder.houseNumber,
+          TranslationNames.addressForm.formPlaceholder.houseNumber,
         ),
       },
     },
@@ -173,9 +171,7 @@ export function CreateCompany({
       textInputProp: {
         keyboardType: 'number-pad',
         autoComplete: 'postal-code',
-        placeholder: t(
-          TranslationNames.createCompanyForm.formPlaceholder.postalCode,
-        ),
+        placeholder: t(TranslationNames.addressForm.formPlaceholder.postalCode),
       },
     },
     {
@@ -184,15 +180,18 @@ export function CreateCompany({
       name: 'street',
       textInputProp: {
         autoComplete: 'street-address',
-        placeholder: t(
-          TranslationNames.createCompanyForm.formPlaceholder.street,
-        ),
+        placeholder: t(TranslationNames.addressForm.formPlaceholder.street),
       },
     },
     {
       control,
       rules: rules.voivodeship,
       name: 'voivodeship',
+      textInputProp: {
+        placeholder: t(
+          TranslationNames.addressForm.formPlaceholder.voivodeship,
+        ),
+      },
     },
   ];
   const SCREEN_TITLE = t(
