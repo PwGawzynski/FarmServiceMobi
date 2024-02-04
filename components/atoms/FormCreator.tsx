@@ -14,7 +14,7 @@ export type FormControllerSetup<T extends FieldValues> = Array<
 export type FormCreatorProps<T extends FieldValues> = {
   controllerSetups: FormControllerSetup<T>;
   errors: FormState<T>['errors'];
-  onSubmit: (formData: T) => void;
+  onSubmit?: (formData: T) => void;
   defaultValues?: DefaultValues<T>;
   abs?: string;
 };
