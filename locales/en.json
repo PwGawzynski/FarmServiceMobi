@@ -47,7 +47,16 @@
       },
       "createCompany": {
           "screenTitle": "Create company",
-          "submitButton": "Create"
+          "submitButton": "Create",
+          "successMessage": "It's done, you ready to go, let's start working with pleasure"
+      },
+      "createClient": {
+        "screenTitle": "Create new client",
+        "submitButton": "Create",
+        "successMessage": "It's done, new client has been added"
+      },
+      "clientsDesktop": {
+        "title": "Clients"
       }
     }
   },
@@ -58,6 +67,31 @@
   "userService": {
     "errorMessages": {
       "wrongCredentials": "Wrong credentials"
+    }
+  },
+  "addressForm": {
+    "formPlaceholder": {
+      "city": "City",
+      "county": "County",
+      "street": "Street",
+      "houseNumber": "House number",
+      "apartmentNumber": "Apartment number",
+      "postalCode": "Postal code",
+      "country": "Country",
+      "voivodeship": "Voivodeship"
+    },
+    "validation": {
+      "city": "City is required",
+      "county": "County is required",
+      "street": "Street is required",
+      "houseNumber": "House number is required",
+      "apartmentNumber": "Apartment number is required",
+      "postalCode": "Postal code is required",
+      "country": "Country is required",
+      "voivodeship": "Voivodeship is required",
+      "validationAtLeast": "must be at least ",
+      "validationMaximum ": "can have maximum ",
+      "validationCharacters": "characters"
     }
   },
   "createCompanyForm":{
@@ -79,13 +113,24 @@
       "name": "Company name is required",
       "NIP": "NIP  is required",
       "phoneNumber": "Phone number is required",
-      "county": "County is required",
-      "street": "Street is required",
-      "houseNumber": "House number is required",
-      "apartmentNumber": "Apartment number is required",
-      "postalCode": "Postal code is required",
-      "country": "Country is required",
-      "voivodeship": "Voivodeship is required",
+      "validationAtLeast": "must be at least ",
+      "validationMaximum ": "can have maximum ",
+      "validationCharacters": "characters"
+    }
+  },
+  "createClientForm":{
+    "formPlaceholder": {
+      "email": "E-mail",
+      "name": "Client name",
+      "surname": "Client surname",
+      "phoneNumber": "Phone number"
+    },
+    "validation": {
+      "email": "E-mail is required",
+      "name": "Client name is required",
+      "surname": "Client surname is required",
+      "NIP": "NIP  is required",
+      "phoneNumber": "Phone number is required",
       "validationAtLeast": "must be at least ",
       "validationMaximum ": "can have maximum ",
       "validationCharacters": "characters"
