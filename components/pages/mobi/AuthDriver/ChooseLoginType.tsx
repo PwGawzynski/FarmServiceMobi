@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { Text, View } from 'react-native';
+import { Text, View } from 'tamagui';
 import { ScreenBase } from '../common/ScreenBase';
 import { AppButton } from '../../../atoms/AppButton';
 import { AuthDriverProps } from '../../../../types/self/navigation/props/AuthDriverProps';
@@ -16,7 +16,6 @@ export function ChooseLoginType({
       <CenteredMediumHeader>
         {t(TranslationNames.screens.authDriver.chooseLoginType.header)}
       </CenteredMediumHeader>
-
       <View className="flex-1 justify-center">
         <Text className="text-center text-dark dark:text-green text-base font-medium mb-12">
           {t(TranslationNames.screens.authDriver.chooseLoginType.instruction)}
@@ -31,7 +30,6 @@ export function ChooseLoginType({
           title={t(TranslationNames.screens.authDriver.chooseLoginType.google)}
         />
       </View>
-
       <TextWithLink
         abs="mb-12"
         text={t(
