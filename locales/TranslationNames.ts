@@ -82,7 +82,7 @@ export const TranslationNames = {
   },
   addressForm: {
     formPlaceholder: {
-      street: 'createCompanyForm.formPlaceholder.street',
+      street: 'addressForm.formPlaceholder.street',
       city: 'addressForm.formPlaceholder.city',
       postalCode: 'addressForm.formPlaceholder.postalCode',
       apartmentNumber: 'addressForm.formPlaceholder.apartmentNumber',
