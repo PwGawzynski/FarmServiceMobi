@@ -47,25 +47,31 @@
       },
       "createCompany": {
         "screenTitle": "Utwórz nową firmę",
-        "submitButton": "Utwórz firmę"
+        "submitButton": "Utwórz firmę",
+        "successMessage": "Zrobione! Twoja firma została utworzona pomyślnie, pora brac sie do roboty!"
+      },
+        "createClient": {
+            "screenTitle": "Utwórz nowego klienta",
+            "submitButton": "Utwórz klienta",
+            "successMessage": "Zrobione! Klient został utworzony pomyślnie"
+        },
+      "clientsDesktop": {
+        "title": "Klienci"
       }
     }
   },
   "serviceDefaults": {
     "unauthorised": "Nieautoryzowany dostęp",
-    "default": "Coś poszło nie tak",
+    "default": "Coś poszło nie tak"
   },
   "userService": {
     "errorMessages": {
       "wrongCredentials": "Niepoprawny e-mail lub hasło",
     }
   },
-  "createCompanyForm":{
+  "addressForm": {
     "formPlaceholder": {
-      "email": "E-mail",
-      "name": "Nazwa firmy",
-      "NIP": "NIP",
-      "phoneNumber": "Numer telefonu",
+      "city": "Miasto",
       "county": "Powiat",
       "street": "Ulica",
       "houseNumber": "Numer domu",
@@ -75,10 +81,7 @@
       "voivodeship": "Województwo"
     },
     "validation": {
-      "email": "E-mail jest wymagany",
-      "name": "Nazwa firmy jest wymagana",
-      "NIP": "NIP  jest wymagany",
-      "phoneNumber": "Numer telefonu jest wymagany",
+      "city": "Miasto jest wymagane",
       "county": "Powiat jest wymagany",
       "street": "Ulica jest wymagana",
       "houseNumber": "Numer domu jest wymagany",
@@ -86,6 +89,40 @@
       "postalCode": "Kod pocztowy jest wymagany",
       "country": "Kraj jest wymagany",
       "voivodeship": "Województwo jest wymagane",
+      "validationAtLeast": "must have at least ",
+      "validationMaximum ": "nie może być dłuższy niż ",
+      "validationCharacters": "znaków"
+    }
+  },
+  "createCompanyForm":{
+    "formPlaceholder": {
+      "email": "E-mail",
+      "name": "Nazwa firmy",
+      "NIP": "NIP",
+      "phoneNumber": "Numer telefonu"
+    },
+    "validation": {
+      "email": "E-mail jest wymagany",
+      "name": "Nazwa firmy jest wymagana",
+      "NIP": "NIP  jest wymagany",
+      "phoneNumber": "Numer telefonu jest wymagany",
+      "validationAtLeast": "musi zawierać co najmniej ",
+      "validationMaximum ": "nie może być dłuższy niż ",
+      "validationCharacters": "znaków"
+    }
+  },
+  "createClientForm":{
+    "formPlaceholder": {
+      "email": "E-mail",
+      "name": "Imię",
+      "surname": "Nazwisko",
+      "phoneNumber": "Numer telefonu"
+    },
+    "validation": {
+      "email": "E-mail jest wymagany",
+      "name": "Imię klienta jest wymagane",
+      "surname": "Nazwisko klienta jest wymagane",
+      "phoneNumber": "Numer telefonu jest wymagany",
       "validationAtLeast": "musi zawierać co najmniej ",
       "validationMaximum ": "nie może być dłuższy niż ",
       "validationCharacters": "znaków"
