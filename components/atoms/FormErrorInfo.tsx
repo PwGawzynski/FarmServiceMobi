@@ -5,14 +5,17 @@ import Animated, {
 } from 'react-native-reanimated';
 import { useEffect } from 'react';
 
-export type Props = {
-  error: string;
+export type FormErrorInfoProps = {
+  error?: string;
   disappearingDuration?: number;
 };
 const APPEARING_DURATION = 300;
 const DISAPPEARING_DURATION_DEFAULT = 300;
 
-export function FormErrorInfo({ error, disappearingDuration }: Props) {
+export function FormErrorInfo({
+  error,
+  disappearingDuration,
+}: FormErrorInfoProps) {
   const opacity = useSharedValue(1);
   const animatedStyle = useAnimatedStyle(() => ({ opacity: opacity.value }));
   if (error) opacity.value = withTiming(1, { duration: APPEARING_DURATION });
