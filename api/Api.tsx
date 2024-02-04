@@ -14,6 +14,7 @@ import {
   UserResetPasswordReqI,
 } from '../FarmServiceApiTypes/User/Requests';
 import { CreateCompanyReqI } from '../FarmServiceApiTypes/Company/Requests';
+import { CreateClientReqI } from '../FarmServiceApiTypes/Clients/Requests';
 
 export class Api {
   /**
@@ -240,6 +241,16 @@ export class Api {
     return (
       (await Api.axiosInstance.post(
         '/company',
+        data,
+      )) as AxiosResponse<ResponseObject>
+    ).data;
+  }
+
+  static async createClient(data: CreateClientReqI) {
+    await Api.session();
+    return (
+      (await Api.axiosInstance.post(
+        '/clients',
         data,
       )) as AxiosResponse<ResponseObject>
     ).data;

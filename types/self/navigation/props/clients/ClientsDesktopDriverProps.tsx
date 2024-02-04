@@ -10,7 +10,7 @@ export type ClientsDesktopDriverProps<
   T extends keyof ClientsDesktopDriverParamList,
 > = StackScreenProps<ClientsDesktopDriverParamList, T>;
 
-export type ActivitiesDesktopDriverScreenProps<
+export type ClientsDesktopDriverScreenProps<
   T extends keyof ClientsDesktopDriverParamList,
   L extends keyof ClientsDriverParamList,
   K extends keyof OwnerRootDriverParamList,
@@ -20,7 +20,7 @@ export type ActivitiesDesktopDriverScreenProps<
   ClientsDriverScreenProps<L, K, M>
 >;
 
-export type ActivitiesDesktopDriverNavigationProps<
+export type ClientsDesktopDriverNavigationProps<
   T extends keyof ClientsDesktopDriverParamList,
   L extends keyof ClientsDriverParamList,
   K extends keyof OwnerRootDriverParamList,
@@ -30,7 +30,7 @@ export type ActivitiesDesktopDriverNavigationProps<
   ClientsDriverScreenProps<L, K, M>
 >['navigation'];
 
-export type ActivitiesDesktopDriverRouteProps<
+export type ClientsDesktopDriverRouteProps<
   T extends keyof ClientsDesktopDriverParamList,
   L extends keyof ClientsDriverParamList,
   K extends keyof OwnerRootDriverParamList,

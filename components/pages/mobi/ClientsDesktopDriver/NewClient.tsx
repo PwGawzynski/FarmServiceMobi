@@ -1,93 +1,104 @@
 import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
 import { View } from 'react-native';
 import { useMutation } from '@tanstack/react-query';
+import { t } from 'i18next';
 import { useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
 import { ScreenBase } from '../common/ScreenBase';
-import { CreateCompanyReqI } from '../../../../FarmServiceApiTypes/Company/Requests';
-import {
-  selectUserAddress,
-  selectUserPersonalData,
-  setCompany,
-} from '../../../../src/redux/feature/userSlice';
-import { AppButton } from '../../../atoms/AppButton';
+import { CreateClientReqI } from '../../../../FarmServiceApiTypes/Clients/Requests';
 import { FormControllerSetup, FormCreator } from '../../../atoms/FormCreator';
-import { createCompany } from '../../../../api/company/Company';
+import { AppButton } from '../../../atoms/AppButton';
 import { PendingInfo } from '../../../atoms/PendingInfo';
 import { FormErrorInfo } from '../../../atoms/FormErrorInfo';
-import { AuthDriverProps } from '../../../../types/self/navigation/props/AuthDriverProps';
-import { AppDispatch } from '../../../../src/redux/app/Store';
+import { createCompany } from '../../../../api/clients/Client';
+import { CreateUserReqI } from '../../../../FarmServiceApiTypes/User/Requests';
+import { rules } from '../../../../helepers/FormRules/CreateClientFormRules';
 import { TranslationNames } from '../../../../locales/TranslationNames';
-import { rules } from '../../../../helepers/FormRules/CreateCompanyFormRules';
+import { ClientsDesktopDriverScreenProps } from '../../../../types/self/navigation/props/clients/ClientsDesktopDriverProps';
 
-export type CreateCompanyForm = CreateCompanyReqI['address'] &
-  Omit<CreateCompanyReqI, 'address'>;
+export type CreateClientForm = Pick<CreateClientReqI['user'], 'email'> &
+  CreateUserReqI['personal_data'] &
+  CreateClientReqI['user']['address'];
 
-export function CreateCompany({
+const CLEAR_TIMEOUT = 500;
+const SCREEN_NAME = t(
+  TranslationNames.screens.authDriver.createClient.screenTitle,
+);
+const SUCCESS_MESSAGE = t(
+  TranslationNames.screens.authDriver.createClient.successMessage,
+);
+const BUTTON_VALUE = t(
+  TranslationNames.screens.authDriver.createClient.submitButton,
+);
+
+const defaultValues: CreateClientForm = {
+  email: '',
+  name: '',
+  surname: '',
+  phone_number: '',
+  city: '',
+  county: '',
+  apartmentNumber: '',
+  houseNumber: '',
+  postalCode: '',
+  street: '',
+  voivodeship: '',
+};
+
+// TODO -> addres data based on location
+export function NewClient({
   navigation,
-}: AuthDriverProps<'createCompany'>) {
-  const userAddress = useSelector(selectUserAddress);
-  const userPersonalData = useSelector(selectUserPersonalData);
-  const dispatch = useDispatch<AppDispatch>();
-  const { t } = useTranslation();
-
-  const defaultValues = {
-    email: '',
-    name: '',
-    NIP: '',
-    phoneNumber: userPersonalData?.phone_number ?? '',
-    city: userAddress?.city ?? '',
-    county: userAddress?.county ?? '',
-    apartmentNumber: userAddress?.apartmentNumber ?? '',
-    houseNumber: userAddress?.houseNumber ?? '',
-    postalCode: userAddress?.postalCode ?? '',
-    street: userAddress?.street ?? '',
-    voivodeship: userAddress?.voivodeship ?? '',
-  } as CreateCompanyForm;
-
+}: ClientsDesktopDriverScreenProps<
+  'newClient',
+  'clientsDesktopRoot',
+  'clientsDriver',
+  'ownerRootDriver'
+>) {
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors },
-  } = useForm<CreateCompanyForm>({
+  } = useForm<CreateClientForm>({
     defaultValues,
   });
 
   const { mutate, data, isPending, error, isSuccess } = useMutation({
     mutationFn: createCompany,
   });
-
   useEffect(() => {
     if (data && isSuccess) {
-      dispatch(setCompany(data));
       navigation.navigate('OperationConfirmed', {
-        shownMessage: 'Company created successfully',
-        redirectScreenName: 'ownerRootDriver',
+        shownMessage: SUCCESS_MESSAGE,
+        redirectScreenName: 'clientsDesktop',
       });
+      const timeOutId = setTimeout(() => reset(), CLEAR_TIMEOUT);
+      return () => clearTimeout(timeOutId);
     }
+    return undefined;
   }, [data, isSuccess]);
 
-  const onSubmit = (formData: CreateCompanyForm) =>
+  const onSubmit = (clientData: CreateClientForm) =>
     mutate({
-      email: formData.email,
-      name: formData.name,
-      NIP: formData.NIP,
-      phoneNumber: formData.phoneNumber,
-      address: {
-        city: formData.city,
-        county: formData.county,
-        street: formData.street?.length ? formData.street : undefined,
-        apartmentNumber: formData.apartmentNumber?.length
-          ? formData.apartmentNumber
-          : undefined,
-        voivodeship: formData.voivodeship,
-        houseNumber: formData.houseNumber,
-        postalCode: formData.postalCode,
+      user: {
+        email: clientData.email,
+        personal_data: {
+          name: clientData.name,
+          surname: clientData.surname,
+          phone_number: clientData.phone_number,
+        },
+        address: {
+          city: clientData.city,
+          county: clientData.county,
+          street: clientData.street?.length ? clientData.street : undefined,
+          apartmentNumber: clientData.apartmentNumber,
+          voivodeship: clientData.voivodeship,
+          houseNumber: clientData.houseNumber,
+          postalCode: clientData.postalCode,
+        },
       },
     });
 
-  const setup: FormControllerSetup<CreateCompanyForm> = [
+  const setup: FormControllerSetup<CreateClientForm> = [
     {
       control,
       rules: rules.email,
@@ -101,29 +112,30 @@ export function CreateCompany({
     },
     {
       control,
-      rules: rules.NIP,
-      name: 'NIP',
-      textInputProp: {
-        keyboardType: 'number-pad',
-        placeholder: t(TranslationNames.createCompanyForm.formPlaceholder.NIP),
-      },
-    },
-    {
-      control,
       rules: rules.name,
       name: 'name',
       textInputProp: {
-        placeholder: t(TranslationNames.createCompanyForm.formPlaceholder.name),
+        placeholder: t(TranslationNames.createClientForm.formPlaceholder.name),
       },
     },
     {
       control,
-      rules: rules.phoneNumber,
-      name: 'phoneNumber',
+      rules: rules.surname,
+      name: 'surname',
+      textInputProp: {
+        placeholder: t(
+          TranslationNames.createClientForm.formPlaceholder.surname,
+        ),
+      },
+    },
+    {
+      control,
+      rules: rules.phone_number,
+      name: 'phone_number',
       textInputProp: {
         keyboardType: 'phone-pad',
         placeholder: t(
-          TranslationNames.createCompanyForm.formPlaceholder.phoneNumber,
+          TranslationNames.createClientForm.formPlaceholder.phoneNumber,
         ),
       },
     },
@@ -194,27 +206,16 @@ export function CreateCompany({
       },
     },
   ];
-  const SCREEN_TITLE = t(
-    TranslationNames.screens.authDriver.createCompany.screenTitle,
-  );
-  const BUTTON_TITLE = t(
-    TranslationNames.screens.authDriver.createCompany.submitButton,
-  );
-
   return (
-    <ScreenBase name={SCREEN_TITLE}>
+    <ScreenBase name={SCREEN_NAME}>
       <View className="w-full h-6 mt-2 overflow-hidden flex-row justify-center items-center">
         <PendingInfo isVisible={isPending} infoText="Creating company..." />
         {error && <FormErrorInfo error={error.message} />}
       </View>
-      <FormCreator
-        controllerSetups={setup}
-        errors={errors}
-        onSubmit={onSubmit}
-      />
+      <FormCreator controllerSetups={setup} errors={errors} />
       <AppButton
-        className="flex-none max-h-10 mb-4"
-        title={BUTTON_TITLE}
+        className="max-h-10"
+        title={BUTTON_VALUE}
         onPress={handleSubmit(onSubmit)}
       />
     </ScreenBase>

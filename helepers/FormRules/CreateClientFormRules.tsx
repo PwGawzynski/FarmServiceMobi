@@ -1,58 +1,71 @@
 import { t } from 'i18next';
-import { TranslationNames } from '../../locales/TranslationNames';
-import { CompanyConstants } from '../../FarmServiceApiTypes/Company/Constants';
-import AddressConstants from '../../FarmServiceApiTypes/Address/Constants';
-import { CreateCompanyForm } from '../../components/pages/mobi/AuthDriver/CreateCompany';
 import { FormRulesType } from './FormRulesType';
+import { CreateClientForm } from '../../components/pages/mobi/ClientsDesktopDriver/NewClient';
+import { TranslationNames } from '../../locales/TranslationNames';
+import AddressConstants from '../../FarmServiceApiTypes/Address/Constants';
 import { creteMinLenMessage } from './FormRulesHelper';
+import { LoginUserConstants } from '../../FarmServiceApiTypes/User/Constants';
+import { UserPersonalDataConstants } from '../../FarmServiceApiTypes/UserPersonalData/Constants';
 
-export const rules: FormRulesType<CreateCompanyForm> = {
+export const rules: FormRulesType<CreateClientForm> = {
   email: {
-    required: t(TranslationNames.createCompanyForm.validation.email),
+    required: t(TranslationNames.createClientForm.validation.email),
     minLength: {
-      value: CompanyConstants.MIN_EMAIL_LENGTH,
-      message: creteMinLenMessage(CompanyConstants.MIN_EMAIL_LENGTH, 'email'),
+      value: LoginUserConstants.EMAIL_MIN_LEN,
+      message: creteMinLenMessage(LoginUserConstants.EMAIL_MIN_LEN, 'email'),
     },
     maxLength: {
-      value: CompanyConstants.MAX_EMAIL_LENGTH,
-      message: creteMinLenMessage(CompanyConstants.MAX_EMAIL_LENGTH, 'email'),
+      value: LoginUserConstants.EMAIL_MAX_LEN,
+      message: creteMinLenMessage(LoginUserConstants.EMAIL_MAX_LEN, 'email'),
     },
   },
   name: {
-    required: t(TranslationNames.createCompanyForm.validation.name),
+    required: t(TranslationNames.createClientForm.validation.name),
     minLength: {
-      value: CompanyConstants.MIN_NAME_LENGTH,
-      message: creteMinLenMessage(CompanyConstants.MIN_EMAIL_LENGTH, 'name'),
-    },
-    maxLength: {
-      value: CompanyConstants.MAX_NAME_LENGTH,
-      message: creteMinLenMessage(CompanyConstants.MAX_NAME_LENGTH, 'name'),
-    },
-  },
-  NIP: {
-    required: t(TranslationNames.createCompanyForm.validation.NIP),
-    minLength: {
-      value: CompanyConstants.MIN_NIP_LENGTH,
-      message: creteMinLenMessage(CompanyConstants.MIN_NIP_LENGTH, 'NIP'),
-    },
-    maxLength: {
-      value: CompanyConstants.MAX_NIP_LENGTH,
-      message: creteMinLenMessage(CompanyConstants.MAX_NIP_LENGTH, 'NIP'),
-    },
-  },
-  phoneNumber: {
-    required: t(TranslationNames.createCompanyForm.validation.phoneNumber),
-    minLength: {
-      value: CompanyConstants.MIN_PHONE_LENGTH,
+      value: UserPersonalDataConstants.NAME_MIN_LEN,
       message: creteMinLenMessage(
-        CompanyConstants.MIN_EMAIL_LENGTH,
+        UserPersonalDataConstants.NAME_MIN_LEN,
+        'name',
+      ),
+    },
+    maxLength: {
+      value: UserPersonalDataConstants.NAME_MAX_LEN,
+      message: creteMinLenMessage(
+        UserPersonalDataConstants.NAME_MAX_LEN,
+        'name',
+      ),
+    },
+  },
+  surname: {
+    required: t(TranslationNames.createClientForm.validation.surname),
+    minLength: {
+      value: UserPersonalDataConstants.SURNAME_MIN_LEN,
+      message: creteMinLenMessage(
+        UserPersonalDataConstants.SURNAME_MIN_LEN,
+        'surname' as never,
+      ),
+    },
+    maxLength: {
+      value: UserPersonalDataConstants.SURNAME_MAX_LEN,
+      message: creteMinLenMessage(
+        UserPersonalDataConstants.SURNAME_MAX_LEN,
+        'surname' as never,
+      ),
+    },
+  },
+  phone_number: {
+    required: t(TranslationNames.createClientForm.validation.phoneNumber),
+    minLength: {
+      value: UserPersonalDataConstants.PHONE_NUMBER_MIN_LEN,
+      message: creteMinLenMessage(
+        UserPersonalDataConstants.PHONE_NUMBER_MIN_LEN,
         'phoneNumber',
       ),
     },
     maxLength: {
-      value: CompanyConstants.MAX_PHONE_LENGTH,
+      value: UserPersonalDataConstants.PHONE_NUMBER_MAX_LEN,
       message: creteMinLenMessage(
-        CompanyConstants.MIN_EMAIL_LENGTH,
+        UserPersonalDataConstants.PHONE_NUMBER_MAX_LEN,
         'phoneNumber',
       ),
     },

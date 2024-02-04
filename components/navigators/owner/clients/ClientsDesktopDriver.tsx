@@ -16,6 +16,7 @@ import { Theme } from '../../../../FarmServiceApiTypes/Account/Constants';
 import { Colors } from '../../../../settings/styles/colors';
 import { selectTheme } from '../../../../src/redux/feature/userSlice';
 import { ClientsDriverScreenProps } from '../../../../types/self/navigation/props/clients/ClientsDriverProps';
+import { NewClient } from '../../../pages/mobi/ClientsDesktopDriver/NewClient';
 
 const TopTab = createMaterialTopTabNavigator<ClientsDesktopDriverParamList>();
 
@@ -45,6 +46,7 @@ export function ClientsDesktopDriver({
         initialLayout={MaterialBaseInitialLayout}
         screenOptions={MaterialTopTabScreenOptions}
       >
+        <TopTab.Screen name="newClient" component={NewClient} />
         <TopTab.Screen name="clientsDesktop" component={ClientsDesktop} />
       </TopTab.Navigator>
     </GestureDetector>

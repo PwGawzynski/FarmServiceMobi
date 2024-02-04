@@ -26,7 +26,7 @@ export function FormErrorInfo({ error, disappearingDuration }: Props) {
   }, []);
   return (
     <Animated.Text
-      className="ml-2 text-error-red flex-1"
+      className="ml-2 text-error-red flex-1 text-center"
       style={[animatedStyle]}
     >
       {error}
