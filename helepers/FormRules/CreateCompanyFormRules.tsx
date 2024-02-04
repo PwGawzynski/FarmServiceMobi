@@ -1,26 +1,12 @@
-import { UseControllerProps } from 'react-hook-form';
 import { t } from 'i18next';
 import { TranslationNames } from '../../locales/TranslationNames';
 import { CompanyConstants } from '../../FarmServiceApiTypes/Company/Constants';
 import AddressConstants from '../../FarmServiceApiTypes/Address/Constants';
 import { CreateCompanyForm } from '../../components/pages/mobi/AuthDriver/CreateCompany';
-import { CreateAddressReqI } from '../../FarmServiceApiTypes/Address/Requests';
+import { FormRulesType } from './FormRulesType';
+import { creteMinLenMessage } from './FormRulesHelper';
 
-const creteMinLenMessage = (
-  minLen: number,
-  key: keyof CreateCompanyForm | keyof CreateAddressReqI,
-) =>
-  `${key} ${t(
-    TranslationNames.createCompanyForm.validation.validationAtLeast,
-  )} ${minLen} ${t(
-    TranslationNames.createCompanyForm.validation.validationCharacters,
-  )}`;
-export const rules: Partial<
-  Record<
-    keyof CreateCompanyForm,
-    UseControllerProps<CreateCompanyForm>['rules']
-  >
-> = {
+export const rules: FormRulesType<CreateCompanyForm> = {
   email: {
     required: t(TranslationNames.createCompanyForm.validation.email),
     minLength: {
@@ -72,18 +58,18 @@ export const rules: Partial<
     },
   },
   city: {
-    required: t(TranslationNames.createCompanyForm.validation.city),
+    required: t(TranslationNames.addressForm.validation.city),
     minLength: {
       value: AddressConstants.CITY_MIN_LEN,
-      message: creteMinLenMessage(CompanyConstants.MIN_EMAIL_LENGTH, 'city'),
+      message: creteMinLenMessage(AddressConstants.CITY_MIN_LEN, 'city'),
     },
     maxLength: {
       value: AddressConstants.CITY_MAX_LEN,
-      message: creteMinLenMessage(CompanyConstants.MIN_EMAIL_LENGTH, 'city'),
+      message: creteMinLenMessage(AddressConstants.CITY_MIN_LEN, 'city'),
     },
   },
   county: {
-    required: t(TranslationNames.createCompanyForm.validation.county),
+    required: t(TranslationNames.addressForm.validation.county),
     minLength: {
       value: AddressConstants.COUNTY_MIN_LEN,
       message: creteMinLenMessage(AddressConstants.COUNTY_MIN_LEN, 'county'),
@@ -110,7 +96,7 @@ export const rules: Partial<
     },
   },
   houseNumber: {
-    required: t(TranslationNames.createCompanyForm.validation.houseNumber),
+    required: t(TranslationNames.addressForm.validation.houseNumber),
     minLength: {
       value: AddressConstants.HOUSE_NR_MIN_LEN,
       message: creteMinLenMessage(
@@ -127,7 +113,7 @@ export const rules: Partial<
     },
   },
   postalCode: {
-    required: t(TranslationNames.createCompanyForm.validation.postalCode),
+    required: t(TranslationNames.addressForm.validation.postalCode),
     minLength: {
       value: AddressConstants.POSTAL_CODE_LEN,
       message: creteMinLenMessage(
@@ -154,7 +140,7 @@ export const rules: Partial<
     },
   },
   voivodeship: {
-    required: t(TranslationNames.createCompanyForm.validation.voivodeship),
+    required: t(TranslationNames.addressForm.validation.voivodeship),
     minLength: {
       value: AddressConstants.VOIVODESHIP_MIN_LEN,
       message: creteMinLenMessage(
