@@ -8,7 +8,7 @@ import { View } from 'react-native';
 
 export type VerticalListProps<T> = {
   renderItem: ListRenderItem<T>;
-  data: T[];
+  data?: T[];
   estimatedSize: number;
 };
 

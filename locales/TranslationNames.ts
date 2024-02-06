@@ -68,6 +68,7 @@ export const TranslationNames = {
       },
       clientsDesktop: {
         title: 'screens.AuthDriver.clientsDesktop.title',
+        searchClient: 'screens.AuthDriver.clientsDesktop.searchPlaceholder',
       },
     },
   },

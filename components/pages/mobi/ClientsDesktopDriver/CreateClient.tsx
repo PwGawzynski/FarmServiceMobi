@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { View } from 'react-native';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { t } from 'i18next';
 import { useEffect } from 'react';
 import { ScreenBase } from '../common/ScreenBase';
@@ -9,11 +9,12 @@ import { FormControllerSetup, FormCreator } from '../../../atoms/FormCreator';
 import { AppButton } from '../../../atoms/AppButton';
 import { PendingInfo } from '../../../atoms/PendingInfo';
 import { FormErrorInfo } from '../../../atoms/FormErrorInfo';
-import { createCompany } from '../../../../api/clients/Client';
+import { createClient } from '../../../../api/clients/Client';
 import { CreateUserReqI } from '../../../../FarmServiceApiTypes/User/Requests';
 import { rules } from '../../../../helepers/FormRules/CreateClientFormRules';
 import { TranslationNames } from '../../../../locales/TranslationNames';
 import { ClientsDesktopDriverScreenProps } from '../../../../types/self/navigation/props/clients/ClientsDesktopDriverProps';
+import { ClientResponseBase } from '../../../../FarmServiceApiTypes/Clients/Responses';
 
 export type CreateClientForm = Pick<CreateClientReqI['user'], 'email'> &
   CreateUserReqI['personal_data'] &
@@ -61,9 +62,18 @@ export function CreateClient({
   } = useForm<CreateClientForm>({
     defaultValues,
   });
-
+  const queryClient = useQueryClient();
   const { mutate, data, isPending, error, isSuccess } = useMutation({
-    mutationFn: createCompany,
+    mutationFn: createClient,
+    onSuccess: (sth, variables) => {
+      queryClient.setQueryData(
+        ['clients'],
+        (oldData: Array<ClientResponseBase>) => {
+          console.log(oldData, 'oldData');
+          return oldData ? [...oldData, variables] : [variables];
+        },
+      );
+    },
   });
   useEffect(() => {
     if (data && isSuccess) {
