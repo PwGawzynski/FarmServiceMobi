@@ -17,9 +17,8 @@ import { UserResetPasswordReqI } from '../../FarmServiceApiTypes/User/Requests';
 export async function apiHandler<M, T = undefined>(
   unauthorisedMsg: string,
   defaultMsg: string,
-  apiCall:
-    | ((payload: M) => Promise<ResponseObject<T>>)
-    | (() => Promise<ResponseObject<T>>),
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  apiCall: any,
   payload?: M,
 ): Promise<ResponseObject<T> | undefined> {
   try {
