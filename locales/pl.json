@@ -56,7 +56,8 @@
             "successMessage": "Zrobione! Klient został utworzony pomyślnie"
         },
       "clientsDesktop": {
-        "title": "Klienci"
+        "title": "Klienci",
+        "searchPlaceholder": "Znajdź klienta"
       }
     }
   },

@@ -56,7 +56,8 @@
         "successMessage": "It's done, new client has been added"
       },
       "clientsDesktop": {
-        "title": "Clients"
+        "title": "Clients",
+        "searchPlaceholder": "Find a client"
       }
     }
   },
