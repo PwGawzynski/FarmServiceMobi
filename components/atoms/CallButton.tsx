@@ -1,6 +1,8 @@
 import * as Linking from 'expo-linking';
 import { Button, useTheme } from 'tamagui';
 import { t } from 'i18next';
+import { useEffect } from 'react';
+import { Alert } from 'react-native';
 import Phone from '../../assets/phone.svg';
 import { TranslationNames } from '../../locales/TranslationNames';
 
@@ -10,8 +12,26 @@ export type CallButtonProps = {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function CallButton({ phoneNumber }: CallButtonProps) {
-  const onCallAction = () => Linking.openURL(`tel:${phoneNumber}`);
+  const performAlert = () =>
+    Alert.alert(
+      t(TranslationNames.components.call.cannotCallAlertTitle),
+      t(TranslationNames.components.call.cannotCallAlertMessage),
+    );
+  const onCallAction = async () => {
+    try {
+      await Linking.openURL(`tel:${phoneNumber}`);
+    } catch (e) {
+      performAlert();
+    }
+  };
   const { color4 } = useTheme();
+  useEffect(() => {
+    (async () => {
+      if (!(await Linking.canOpenURL(`tel:${phoneNumber}`))) {
+        performAlert();
+      }
+    })();
+  }, []);
   return (
     <Button
       f={1}
@@ -31,7 +51,7 @@ export function CallButton({ phoneNumber }: CallButtonProps) {
         adjustsFontSizeToFit
         numberOfLines={1}
       >
-        {t(TranslationNames.components.button.call)}
+        {t(TranslationNames.components.call.title)}
       </Button.Text>
     </Button>
   );
