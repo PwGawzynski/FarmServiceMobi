@@ -76,6 +76,18 @@
       "wrongCredentials": "Niepoprawny e-mail lub hasło",
     }
   },
+  "components": {
+    "sendMail": {
+      "title": "Wyślij e-mail",
+      "cannotSendAlertTitle": "Błąd wysyłania e-maila",
+      "cannotSendAlertMessage": "Nie udało się wysłać e-maila. Prawdopodobnie nie masz skonfigurowanego klienta poczty na swoim urządzeniu."
+    },
+    "call": {
+      "title": "Zadzwoń",
+      "cannotCallAlertTitle": "Błąd połączenia",
+      "cannotCallAlertMessage": "Nie udało się wykonać połączenia. Prawdopodobnie to urządzenie nie obsługuje dzwonienia."
+    }
+  },
   "addressForm": {
     "formPlaceholder": {
       "city": "Miasto",

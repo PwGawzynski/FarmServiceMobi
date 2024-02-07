@@ -87,6 +87,18 @@ export const TranslationNames = {
       wrongCredentials: 'userService.errorMessages.wrongCredentials',
     },
   },
+  components: {
+    sendMail: {
+      title: 'components.sendMail.title',
+      cannotSendAlertTitle: 'components.sendMail.cannotSendAlertTitle',
+      cannotSendAlertMessage: 'components.sendMail.cannotSendAlertMessage',
+    },
+    call: {
+      title: 'components.call.title',
+      cannotCallAlertTitle: 'components.call.cannotCallAlertTitle',
+      cannotCallAlertMessage: 'components.call.cannotCallAlertMessage',
+    },
+  },
   addressForm: {
     formPlaceholder: {
       street: 'addressForm.formPlaceholder.street',

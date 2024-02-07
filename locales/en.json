@@ -76,6 +76,18 @@
       "wrongCredentials": "Wrong credentials"
     }
   },
+  "components": {
+    "sendMail": {
+      "title": "Send E-mail",
+      "cannotSendAlertTitle": "Cannot send e-mail",
+      "cannotSendAlertMessage": "Sorry we cannot send e-mail, possibly you don't have any e-mail client installed"
+    },
+    "call": {
+      "title": "Call",
+      "cannotCallAlertTitle": "Cannot call",
+      "cannotCallAlertMessage": "Sorry we cannot call, possibly this device doesn't support calling"
+    }
+  },
   "addressForm": {
     "formPlaceholder": {
       "city": "City",
