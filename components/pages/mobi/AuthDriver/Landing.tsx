@@ -4,6 +4,7 @@ import { assign, createMachine } from 'xstate';
 import { useActor } from '@xstate/react';
 import { ActivityIndicator, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import { useQuery } from '@tanstack/react-query';
 import {
   InitializationStatus,
   selectInitStatus,
@@ -17,6 +18,7 @@ import {
 } from '../../../atoms/LandingLogo';
 import { TranslationNames } from '../../../../locales/TranslationNames';
 import { UserRole } from '../../../../FarmServiceApiTypes/User/Enums';
+import { getClients } from '../../../../api/clients/Client';
 
 const LandingMachine = createMachine({
   id: 'Landing',
@@ -66,8 +68,14 @@ export default function Landing({ navigation }: AuthDriverProps<'landing'>) {
   const userIntStatus = useSelector(selectInitStatus);
   const { role, company } = useSelector(selectUser) ?? {};
   const [state, send] = useActor(LandingMachine, { input: { fetchCount: 1 } });
+  // PREFETCH clients
+  useQuery({
+    queryKey: ['clients'],
+    queryFn: getClients,
+    notifyOnChangeProps: [],
+  });
 
-  console.log(userIntStatus, state.value);
+  console.log('render');
   useEffect(() => {
     switch (state.value) {
       case 'checkUserContextReady':
