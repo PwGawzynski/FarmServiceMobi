@@ -58,6 +58,12 @@
       "clientsDesktop": {
         "title": "Klienci",
         "searchPlaceholder": "Znajdź klienta"
+      },
+      "clientDetails": {
+        "personalData": "Dane osobowe",
+        "address": "Adres",
+        "companyData": "Dane firmy",
+        "companyAddress": "Adres firmy"
       }
     }
   },

@@ -70,6 +70,12 @@ export const TranslationNames = {
         title: 'screens.AuthDriver.clientsDesktop.title',
         searchClient: 'screens.AuthDriver.clientsDesktop.searchPlaceholder',
       },
+      clientDetails: {
+        personalData: 'screens.AuthDriver.clientDetails.personalData',
+        address: 'screens.AuthDriver.clientDetails.address',
+        companyData: 'screens.AuthDriver.clientDetails.companyData',
+        companyAddress: 'screens.AuthDriver.clientDetails.companyAddress',
+      },
     },
   },
   serviceDefaults: {
