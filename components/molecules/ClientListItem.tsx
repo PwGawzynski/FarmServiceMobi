@@ -1,22 +1,26 @@
-import { Card, Text, XStack, YStack } from 'tamagui';
+import { Card, SizableText, XStack, YStack } from 'tamagui';
+import { useNavigation } from '@react-navigation/native';
 import { UserAvatar } from './UserAvatar';
 import { ClientResponseBase } from '../../FarmServiceApiTypes/Clients/Responses';
 
 export type Props = {
-  user: ClientResponseBase['user'];
+  client: ClientResponseBase;
 };
 
-export function ClientListItem({ user }: Props) {
-  const { name, surname } = user.personal_data;
+export function ClientListItem({ client }: Props) {
+  const { name, surname } = client.user.personal_data;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const navigation = useNavigation<any>();
+  const onPress = () => navigation.navigate('clientDetails', { client });
   return (
-    <Card>
+    <Card onPress={onPress}>
       <XStack p="$2" ai="center" justifyContent="space-between">
         <UserAvatar
-          nameFirstLetter={user.personal_data.name[0]}
-          surnameFirstLetter={user.personal_data.surname[0]}
+          nameFirstLetter={client.user.personal_data.name[0]}
+          surnameFirstLetter={client.user.personal_data.surname[0]}
         />
         <YStack ml="$2">
-          <Text
+          <SizableText
             fontWeight="bold"
             fontSize={name.length + surname.length > 20 ? '$4' : '$7'}
             color="$color"
@@ -27,10 +31,10 @@ export function ClientListItem({ user }: Props) {
           >
             {name.length > 10 ? `${name.slice(0, 10)}...` : name}{' '}
             {surname.length > 10 ? `${surname.slice(0, 10)}...` : surname}
-          </Text>
-          <Text color="$color8" textAlign="right">
-            {user.address.city}
-          </Text>
+          </SizableText>
+          <SizableText color="$color8" textAlign="right">
+            {client.user.address.city}
+          </SizableText>
         </YStack>
       </XStack>
     </Card>

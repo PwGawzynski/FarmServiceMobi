@@ -7,6 +7,7 @@ import { TranslationNames } from '../../../../locales/TranslationNames';
 import { getClients } from '../../../../api/clients/Client';
 import { ClientList } from '../../../organisms/ClientsList';
 import { SearchBox } from '../../../molecules/SearchBox';
+import { EXPO_PUBLIC_CLIENTS_QUERY_STALE_TIME } from '../../../../settings/query/querySettings';
 
 const SCREEN_NAME = t(TranslationNames.screens.authDriver.clientsDesktop.title);
 
@@ -14,6 +15,7 @@ export function ClientsDesktop() {
   const { data } = useQuery({
     queryKey: ['clients'],
     queryFn: getClients,
+    staleTime: EXPO_PUBLIC_CLIENTS_QUERY_STALE_TIME,
   });
   const [filter, setFilter] = useState<string | undefined>(undefined);
 

@@ -70,6 +70,12 @@ export const TranslationNames = {
         title: 'screens.AuthDriver.clientsDesktop.title',
         searchClient: 'screens.AuthDriver.clientsDesktop.searchPlaceholder',
       },
+      clientDetails: {
+        personalData: 'screens.AuthDriver.clientDetails.personalData',
+        address: 'screens.AuthDriver.clientDetails.address',
+        companyData: 'screens.AuthDriver.clientDetails.companyData',
+        companyAddress: 'screens.AuthDriver.clientDetails.companyAddress',
+      },
     },
   },
   serviceDefaults: {
@@ -79,6 +85,18 @@ export const TranslationNames = {
   userService: {
     errorMessages: {
       wrongCredentials: 'userService.errorMessages.wrongCredentials',
+    },
+  },
+  components: {
+    sendMail: {
+      title: 'components.sendMail.title',
+      cannotSendAlertTitle: 'components.sendMail.cannotSendAlertTitle',
+      cannotSendAlertMessage: 'components.sendMail.cannotSendAlertMessage',
+    },
+    call: {
+      title: 'components.call.title',
+      cannotCallAlertTitle: 'components.call.cannotCallAlertTitle',
+      cannotCallAlertMessage: 'components.call.cannotCallAlertMessage',
     },
   },
   addressForm: {

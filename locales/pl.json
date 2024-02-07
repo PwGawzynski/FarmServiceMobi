@@ -58,6 +58,12 @@
       "clientsDesktop": {
         "title": "Klienci",
         "searchPlaceholder": "Znajdź klienta"
+      },
+      "clientDetails": {
+        "personalData": "Dane osobowe",
+        "address": "Adres",
+        "companyData": "Dane firmy",
+        "companyAddress": "Adres firmy"
       }
     }
   },
@@ -68,6 +74,18 @@
   "userService": {
     "errorMessages": {
       "wrongCredentials": "Niepoprawny e-mail lub hasło",
+    }
+  },
+  "components": {
+    "sendMail": {
+      "title": "Wyślij e-mail",
+      "cannotSendAlertTitle": "Błąd wysyłania e-maila",
+      "cannotSendAlertMessage": "Nie udało się wysłać e-maila. Prawdopodobnie nie masz skonfigurowanego klienta poczty na swoim urządzeniu."
+    },
+    "call": {
+      "title": "Zadzwoń",
+      "cannotCallAlertTitle": "Błąd połączenia",
+      "cannotCallAlertMessage": "Nie udało się wykonać połączenia. Prawdopodobnie to urządzenie nie obsługuje dzwonienia."
     }
   },
   "addressForm": {

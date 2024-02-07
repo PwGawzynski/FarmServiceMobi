@@ -11,7 +11,7 @@ export type Props = {
 export function ClientList({ data }: Props) {
   const renderItem = useCallback(
     ({ item }: ListRenderItemInfo<ClientResponseBase>) => (
-      <ClientListItem user={item.user} />
+      <ClientListItem client={item} />
     ),
     [],
   );

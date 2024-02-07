@@ -69,7 +69,6 @@ export function CreateClient({
       queryClient.setQueryData(
         ['clients'],
         (oldData: Array<ClientResponseBase>) => {
-          console.log(oldData, 'oldData');
           return oldData ? [...oldData, variables] : [variables];
         },
       );
