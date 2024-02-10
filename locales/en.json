@@ -49,21 +49,36 @@
           "screenTitle": "Create company",
           "submitButton": "Create",
           "successMessage": "It's done, you ready to go, let's start working with pleasure"
-      },
-      "createClient": {
-        "screenTitle": "Create new client",
-        "submitButton": "Create",
-        "successMessage": "It's done, new client has been added"
-      },
-      "clientsDesktop": {
-        "title": "Clients",
-        "searchPlaceholder": "Find a client"
+      }
+    },
+    "clientDriver": {
+      "assignCompanyToClient": {
+        "screenTitle": "Assign company",
+        "submitButton": "Assign",
+        "successMessageStart": "It's done, client ",
+        "successMessageEnd": " has been added and company has been assigned to it"
       },
       "clientDetails": {
         "personalData": "Personal",
         "address": "Address",
         "companyData": "Company",
         "companyAddress": "Address"
+      }
+    },
+    "clientDesktopDriver": {
+      "createClient": {
+        "screenTitle": "Create new client",
+        "submitButton": "Create",
+        "successMessage": "It's done, new client has been added",
+        "alertTitle": "Has your client a owner of company ?",
+        "alertDescription": "If your client has a company, click create to save its data to be able to use it in the future accounting",
+        "alertGoWithoutButton": "Go without",
+        "alertCreateButton": "Create",
+        "pendingStatus": "Creating..."
+      },
+      "clientsDesktop": {
+        "title": "Clients",
+        "searchPlaceholder": "Find a client"
       }
     }
   },
@@ -105,7 +120,7 @@
       "street": "Street is required",
       "houseNumber": "House number is required",
       "apartmentNumber": "Apartment number is required",
-      "postalCode": "Postal code is required",
+      "postalCode": "Postal code must be in format XX-XXX",
       "country": "Country is required",
       "voivodeship": "Voivodeship is required",
       "validationAtLeast": "must be at least ",
@@ -146,6 +161,7 @@
     },
     "validation": {
       "email": "E-mail is required",
+      "emailPattern": "E-mail must be in email format",
       "name": "Client name is required",
       "surname": "Client surname is required",
       "NIP": "NIP  is required",

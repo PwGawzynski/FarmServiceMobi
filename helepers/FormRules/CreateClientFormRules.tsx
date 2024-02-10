@@ -9,6 +9,10 @@ import { UserPersonalDataConstants } from '../../FarmServiceApiTypes/UserPersona
 
 export const rules: FormRulesType<CreateClientForm> = {
   email: {
+    pattern: {
+      value: /^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/,
+      message: t(TranslationNames.createClientForm.validation.emailPattern),
+    },
     required: t(TranslationNames.createClientForm.validation.email),
     minLength: {
       value: LoginUserConstants.EMAIL_MIN_LEN,
@@ -127,19 +131,9 @@ export const rules: FormRulesType<CreateClientForm> = {
   },
   postalCode: {
     required: t(TranslationNames.addressForm.validation.postalCode),
-    minLength: {
-      value: AddressConstants.POSTAL_CODE_LEN,
-      message: creteMinLenMessage(
-        AddressConstants.HOUSE_NR_MIN_LEN,
-        'postalCode',
-      ),
-    },
-    maxLength: {
-      value: AddressConstants.POSTAL_CODE_LEN,
-      message: creteMinLenMessage(
-        AddressConstants.POSTAL_CODE_LEN,
-        'postalCode',
-      ),
+    pattern: {
+      value: /^[0-9]{2}-[0-9]{3}$/,
+      message: t(TranslationNames.addressForm.validation.postalCode),
     },
   },
   street: {

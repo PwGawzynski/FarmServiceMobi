@@ -5765,6 +5765,13 @@ expo-secure-store@~12.3.1:
   resolved "https://registry.npmjs.org/expo-secure-store/-/expo-secure-store-12.3.1.tgz"
   integrity sha512-XLIgWDiIuiR0c+AA4NCWWibAMHCZUyRcy+lQBU49U6rvG+xmd3YrBJfQjfqAPyLroEqnLPGTWUX57GyRsfDOQw==
 
+expo-sensors@~12.3.0:
+  version "12.3.0"
+  resolved "https://registry.yarnpkg.com/expo-sensors/-/expo-sensors-12.3.0.tgz#a3f0f86f54cf5d06a4e643d6678bc15ff4a446c9"
+  integrity sha512-KYL/WsJNJGTHRzpeCblPleuqaoCCHbIEQHg3NiRVVG1ismlGnisCPI6OBWYVZhfCJ0FjGvK0Z311Ac/KY8JSpA==
+  dependencies:
+    invariant "^2.2.4"
+
 expo-splash-screen@~0.20.5:
   version "0.20.5"
   resolved "https://registry.npmjs.org/expo-splash-screen/-/expo-splash-screen-0.20.5.tgz"

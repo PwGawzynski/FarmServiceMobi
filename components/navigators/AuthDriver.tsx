@@ -1,6 +1,8 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useSelector } from 'react-redux';
 import { TamaguiProvider } from 'tamagui';
+import { useColorScheme } from 'nativewind';
+import { useEffect } from 'react';
 import { AuthDriverParamList } from '../../types/self/navigation/paramLists/AuthDriverParamList';
 import Landing from '../pages/mobi/AuthDriver/Landing';
 import { NativeStackScreenOptionsBase } from '../../settings/navigators/NativeStackScreenOptionsBase';
@@ -20,7 +22,19 @@ const Stack = createNativeStackNavigator<AuthDriverParamList>();
 
 export default function AuthDriver() {
   const theme = useSelector(selectTheme);
-  console.log(theme);
+  const { setColorScheme } = useColorScheme();
+  useEffect(() => {
+    setColorScheme(theme === Theme.light ? 'light' : 'dark');
+  }, [theme]);
+
+  // TODO impossible for ios do it for android
+  /* const [{ illuminance }, setData] = useState({ illuminance: 0 });
+  useEffect(() => {
+    const subscription = LightSensor.addListener(setData);
+
+    return subscription && subscription.remove();
+  }, []); */
+
   if (theme === undefined) return null;
   return (
     <TamaguiProvider config={config} defaultTheme={Theme[theme]}>

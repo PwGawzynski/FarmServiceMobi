@@ -61,20 +61,42 @@ export const TranslationNames = {
         submitButton: 'screens.AuthDriver.createCompany.submitButton',
         successMessage: 'screens.AuthDriver.createCompany.successMessage',
       },
-      createClient: {
-        screenTitle: 'screens.AuthDriver.createClient.screenTitle',
-        submitButton: 'screens.AuthDriver.createClient.submitButton',
-        successMessage: 'screens.AuthDriver.createClient.successMessage',
-      },
-      clientsDesktop: {
-        title: 'screens.AuthDriver.clientsDesktop.title',
-        searchClient: 'screens.AuthDriver.clientsDesktop.searchPlaceholder',
+    },
+    clientDriver: {
+      assignCompanyToClient: {
+        screenTitle: 'screens.clientDriver.assignCompanyToClient.screenTitle',
+        submitButton: 'screens.clientDriver.assignCompanyToClient.submitButton',
+        successMessageStart:
+          'screens.clientDriver.assignCompanyToClient.successMessageStart',
+        successMessageEnd:
+          'screens.clientDriver.assignCompanyToClient.successMessageEnd',
       },
       clientDetails: {
-        personalData: 'screens.AuthDriver.clientDetails.personalData',
-        address: 'screens.AuthDriver.clientDetails.address',
-        companyData: 'screens.AuthDriver.clientDetails.companyData',
-        companyAddress: 'screens.AuthDriver.clientDetails.companyAddress',
+        personalData: 'screens.clientDriver.clientDetails.personalData',
+        address: 'screens.clientDriver.clientDetails.address',
+        companyData: 'screens.clientDriver.clientDetails.companyData',
+        companyAddress: 'screens.clientDriver.clientDetails.companyAddress',
+      },
+    },
+    clientDesktopDriver: {
+      createClient: {
+        screenTitle: 'screens.clientDesktopDriver.createClient.screenTitle',
+        submitButton: 'screens.clientDesktopDriver.createClient.submitButton',
+        successMessage:
+          'screens.clientDesktopDriver.createClient.successMessage',
+        alertTitle: 'screens.clientDesktopDriver.createClient.alertTitle',
+        alertDescription:
+          'screens.clientDesktopDriver.createClient.alertDescription',
+        alertGoWithoutButton:
+          'screens.clientDesktopDriver.createClient.alertGoWithoutButton',
+        alertCreateButton:
+          'screens.clientDesktopDriver.createClient.alertCreateButton',
+        pendingStatus: 'screens.clientDesktopDriver.createClient.pendingStatus',
+      },
+      clientsDesktop: {
+        title: 'screens.clientDesktopDriver.clientsDesktop.title',
+        searchClient:
+          'screens.clientDesktopDriver.clientsDesktop.searchPlaceholder',
       },
     },
   },
@@ -151,6 +173,7 @@ export const TranslationNames = {
     },
     validation: {
       email: 'createClientForm.validation.email',
+      emailPattern: 'createClientForm.validation.emailPattern',
       name: 'createClientForm.validation.name',
       surname: 'createClientForm.validation.surname',
       phoneNumber: 'createClientForm.validation.phoneNumber',
