@@ -20,7 +20,9 @@ export function ClientDetails({
       <YStack f={1}>
         <Card bordered p="$2" mt="$4">
           <SizableText textTransform="uppercase" size="$7" fontWeight="bold">
-            {t(TranslationNames.screens.authDriver.clientDetails.personalData)}
+            {t(
+              TranslationNames.screens.clientDriver.clientDetails.personalData,
+            )}
           </SizableText>
           <KeyValuePair
             name={t(
@@ -31,7 +33,7 @@ export function ClientDetails({
         </Card>
         <Card bordered p="$2" mt="$4">
           <SizableText textTransform="uppercase" size="$7" fontWeight="bold">
-            {t(TranslationNames.screens.authDriver.clientDetails.address)}
+            {t(TranslationNames.screens.clientDriver.clientDetails.address)}
           </SizableText>
           <KeyValuePair
             name={t(TranslationNames.addressForm.formPlaceholder.city)}
@@ -67,7 +69,9 @@ export function ClientDetails({
         {company && (
           <Card bordered p="$2" mt="$4">
             <SizableText textTransform="uppercase" size="$7" fontWeight="bold">
-              {t(TranslationNames.screens.authDriver.clientDetails.companyData)}
+              {t(
+                TranslationNames.screens.clientDriver.clientDetails.companyData,
+              )}
             </SizableText>
             <KeyValuePair
               name={t(TranslationNames.createCompanyForm.formPlaceholder.name)}
@@ -95,7 +99,7 @@ export function ClientDetails({
               mb="$2"
             >
               {t(
-                TranslationNames.screens.authDriver.clientDetails
+                TranslationNames.screens.clientDriver.clientDetails
                   .companyAddress,
               )}
             </SizableText>
