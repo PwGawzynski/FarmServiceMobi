@@ -49,21 +49,36 @@
         "screenTitle": "Utwórz nową firmę",
         "submitButton": "Utwórz firmę",
         "successMessage": "Zrobione! Twoja firma została utworzona pomyślnie, pora brac sie do roboty!"
-      },
-        "createClient": {
-            "screenTitle": "Utwórz nowego klienta",
-            "submitButton": "Utwórz klienta",
-            "successMessage": "Zrobione! Klient został utworzony pomyślnie"
-        },
-      "clientsDesktop": {
-        "title": "Klienci",
-        "searchPlaceholder": "Znajdź klienta"
+      }
+    },
+    "clientDriver": {
+      "assignCompanyToClient": {
+        "screenTitle": "Przypisz firmę",
+        "submitButton": "Przypisz firmę",
+        "successMessageStart": "Zrobione! Klient ",
+        "successMessageEnd": " został dodany wraz z firmą"
       },
       "clientDetails": {
         "personalData": "Dane osobowe",
         "address": "Adres",
         "companyData": "Dane firmy",
         "companyAddress": "Adres firmy"
+      }
+    },
+    "clientDesktopDriver": {
+      "createClient": {
+        "screenTitle": "Utwórz nowego klienta",
+        "submitButton": "Utwórz klienta",
+        "successMessage": "Zrobione! Klient został utworzony pomyślnie",
+        "alertTitle": "Has your client a owner of company ?",
+        "alertDescription": "If your client has a company, click create to save its data to be able to use it in the future accounting",
+        "alertGoWithoutButton": "Go without",
+        "alertCreateButton": "Create",
+        "pendingStatus": "Tworzenie klienta..."
+      },
+      "clientsDesktop": {
+        "title": "Klienci",
+        "searchPlaceholder": "Znajdź klienta"
       }
     }
   },
@@ -105,7 +120,7 @@
       "street": "Ulica jest wymagana",
       "houseNumber": "Numer domu jest wymagany",
       "apartmentNumber": "Numer mieszkania jest wymagany",
-      "postalCode": "Kod pocztowy jest wymagany",
+      "postalCode": "Kod pocztowy musi być w formacie XX-XXX",
       "country": "Kraj jest wymagany",
       "voivodeship": "Województwo jest wymagane",
       "validationAtLeast": "must have at least ",
@@ -139,6 +154,7 @@
     },
     "validation": {
       "email": "E-mail jest wymagany",
+      "emailPattern": "Niepoprawny format e-maila",
       "name": "Imię klienta jest wymagane",
       "surname": "Nazwisko klienta jest wymagane",
       "phoneNumber": "Numer telefonu jest wymagany",
