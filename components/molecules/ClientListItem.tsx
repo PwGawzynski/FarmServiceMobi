@@ -29,8 +29,7 @@ export function ClientListItem({ client }: Props) {
             adjustsFontSizeToFit
             numberOfLines={1}
           >
-            {name.length > 10 ? `${name.slice(0, 10)}...` : name}{' '}
-            {surname.length > 10 ? `${surname.slice(0, 10)}...` : surname}
+            {name} {surname}
           </SizableText>
           <SizableText color="$color8" textAlign="right">
             {client.user.address.city}
