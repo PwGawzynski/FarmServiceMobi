@@ -3,6 +3,7 @@ import { NativeStackScreenOptionsBase } from '../../../../settings/navigators/Na
 import { ClientsDriverParamList } from '../../../../types/self/navigation/paramLists/clients/ClientsDriverParamList';
 import { ClientsDesktopDriver } from './ClientsDesktopDriver';
 import { ClientDetails } from '../../../pages/mobi/ClientsDriver/ClientDetails';
+import { AssignCompanyToClient } from '../../../pages/mobi/ClientsDriver/AssignCompanyToClient';
 
 const Stack = createNativeStackNavigator<ClientsDriverParamList>();
 
@@ -21,6 +22,14 @@ export function ClientsDriver() {
         component={ClientDetails}
         options={{
           animation: 'default',
+          gestureDirection: 'horizontal',
+        }}
+      />
+      <Stack.Screen
+        name="assignCompanyToClient"
+        component={AssignCompanyToClient}
+        options={{
+          animation: 'none',
           gestureDirection: 'horizontal',
         }}
       />
