@@ -11,13 +11,13 @@ import {
   setCompany,
 } from '../../../../src/redux/feature/userSlice';
 import { AppButton } from '../../../atoms/AppButton';
-import { FormControllerSetup, FormCreator } from '../../../atoms/FormCreator';
+import { FormCreator } from '../../../atoms/FormCreator';
 import { createCompany } from '../../../../api/company/Company';
 import { AuthDriverProps } from '../../../../types/self/navigation/props/AuthDriverProps';
 import { AppDispatch } from '../../../../src/redux/app/Store';
 import { TranslationNames } from '../../../../locales/TranslationNames';
-import { rules } from '../../../../helepers/FormRules/CreateCompanyFormRules';
 import { FormStatusPanel } from '../../../molecules/FormStatusPanel';
+import { createCompanySetup } from '../../../../helepers/FormSetups/CreateCompanySetup';
 
 export type CreateCompanyForm = CreateCompanyReqI['address'] &
   Omit<CreateCompanyReqI, 'address'>;
@@ -85,113 +85,6 @@ export function CreateCompany({
       },
     });
 
-  const setup: FormControllerSetup<CreateCompanyForm> = [
-    {
-      control,
-      rules: rules.email,
-      name: 'email',
-      textInputProp: {
-        keyboardType: 'email-address',
-        placeholder: t(
-          TranslationNames.createCompanyForm.formPlaceholder.email,
-        ),
-      },
-    },
-    {
-      control,
-      rules: rules.NIP,
-      name: 'NIP',
-      textInputProp: {
-        keyboardType: 'number-pad',
-        placeholder: t(TranslationNames.createCompanyForm.formPlaceholder.NIP),
-      },
-    },
-    {
-      control,
-      rules: rules.name,
-      name: 'name',
-      textInputProp: {
-        placeholder: t(TranslationNames.createCompanyForm.formPlaceholder.name),
-      },
-    },
-    {
-      control,
-      rules: rules.phoneNumber,
-      name: 'phoneNumber',
-      textInputProp: {
-        keyboardType: 'phone-pad',
-        placeholder: t(
-          TranslationNames.createCompanyForm.formPlaceholder.phoneNumber,
-        ),
-      },
-    },
-    {
-      control,
-      rules: rules.city,
-      name: 'city',
-      textInputProp: {
-        placeholder: t(TranslationNames.addressForm.formPlaceholder.city),
-      },
-    },
-    {
-      control,
-      rules: rules.county,
-      name: 'county',
-      textInputProp: {
-        autoComplete: 'country',
-        placeholder: t(TranslationNames.addressForm.formPlaceholder.county),
-      },
-    },
-    {
-      control,
-      rules: rules.apartmentNumber,
-      name: 'apartmentNumber',
-      textInputProp: {
-        placeholder: t(
-          TranslationNames.addressForm.formPlaceholder.apartmentNumber,
-        ),
-      },
-    },
-    {
-      control,
-      rules: rules.houseNumber,
-      name: 'houseNumber',
-      textInputProp: {
-        placeholder: t(
-          TranslationNames.addressForm.formPlaceholder.houseNumber,
-        ),
-      },
-    },
-    {
-      control,
-      rules: rules.postalCode,
-      name: 'postalCode',
-      textInputProp: {
-        keyboardType: 'number-pad',
-        autoComplete: 'postal-code',
-        placeholder: t(TranslationNames.addressForm.formPlaceholder.postalCode),
-      },
-    },
-    {
-      control,
-      rules: rules.street,
-      name: 'street',
-      textInputProp: {
-        autoComplete: 'street-address',
-        placeholder: t(TranslationNames.addressForm.formPlaceholder.street),
-      },
-    },
-    {
-      control,
-      rules: rules.voivodeship,
-      name: 'voivodeship',
-      textInputProp: {
-        placeholder: t(
-          TranslationNames.addressForm.formPlaceholder.voivodeship,
-        ),
-      },
-    },
-  ];
   const SCREEN_TITLE = t(
     TranslationNames.screens.authDriver.createCompany.screenTitle,
   );
@@ -203,7 +96,7 @@ export function CreateCompany({
     <ScreenBase name={SCREEN_TITLE}>
       <FormStatusPanel isVisible={isPending} error={error?.message} />
       <FormCreator
-        controllerSetups={setup}
+        controllerSetups={createCompanySetup(control)}
         errors={errors}
         onSubmit={onSubmit}
       />
