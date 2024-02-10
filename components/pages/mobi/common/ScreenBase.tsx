@@ -1,9 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Platform, SafeAreaView, StatusBar, Text, View } from 'react-native';
-import { useColorScheme } from 'nativewind';
-import { useSelector } from 'react-redux';
-import { Theme } from '../../../../FarmServiceApiTypes/Account/Constants';
-import { selectTheme } from '../../../../src/redux/feature/userSlice';
 
 export type Props = {
   name?: string;
@@ -12,11 +8,6 @@ export type Props = {
 };
 
 export function ScreenBase({ name, children, activityDot }: Props) {
-  const theme = useSelector(selectTheme);
-  const { setColorScheme } = useColorScheme();
-  useEffect(() => {
-    setColorScheme(theme === Theme.light ? 'light' : 'dark');
-  }, [theme]);
   return (
     <SafeAreaView
       className="flex-1 bg-[#fff] dark:bg-dark"
