@@ -9,7 +9,9 @@ import { ClientList } from '../../../organisms/ClientsList';
 import { SearchBox } from '../../../molecules/SearchBox';
 import { EXPO_PUBLIC_CLIENTS_QUERY_STALE_TIME } from '../../../../settings/query/querySettings';
 
-const SCREEN_NAME = t(TranslationNames.screens.authDriver.clientsDesktop.title);
+const SCREEN_NAME = t(
+  TranslationNames.screens.clientDesktopDriver.clientsDesktop.title,
+);
 
 export function ClientsDesktop() {
   const { data } = useQuery({
@@ -42,7 +44,8 @@ export function ClientsDesktop() {
         <SearchBox
           onTextChange={text => setFilter(text)}
           placeholder={t(
-            TranslationNames.screens.authDriver.clientsDesktop.searchClient,
+            TranslationNames.screens.clientDesktopDriver.clientsDesktop
+              .searchClient,
           )}
         />
       </YStack>
