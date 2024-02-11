@@ -9,6 +9,7 @@ export type ClientsDriverParamList = {
     client: ClientResponseBase;
   };
   assignCompanyToClient: {
-    client: CreateClientReqI;
+    client?: CreateClientReqI;
+    editClient?: ClientResponseBase;
   };
 };
