@@ -16,6 +16,8 @@ import {
 import { CreateCompanyReqI } from '../FarmServiceApiTypes/Company/Requests';
 import { CreateClientReqI } from '../FarmServiceApiTypes/Clients/Requests';
 import { ClientResponseBase } from '../FarmServiceApiTypes/Clients/Responses';
+import { CreateClientsCompanyReqI } from '../FarmServiceApiTypes/ClientsCompany/Requests';
+import { ClientsCompanyResponseBase } from '../FarmServiceApiTypes/ClientsCompany/Responses';
 
 export class Api {
   /**
@@ -255,6 +257,16 @@ export class Api {
         data,
       )) as AxiosResponse<ResponseObject>
     ).data.payload as ClientResponseBase | undefined;
+  }
+
+  static async assignCompanyToClient(data: CreateClientsCompanyReqI) {
+    await Api.session();
+    return (
+      (await Api.axiosInstance.post(
+        '/clients-company',
+        data,
+      )) as AxiosResponse<ResponseObject>
+    ).data.payload as ClientsCompanyResponseBase | undefined;
   }
 
   static async getClients() {
