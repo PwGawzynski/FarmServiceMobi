@@ -5,9 +5,12 @@ import { ScreenBase } from '../common/ScreenBase';
 import { KeyValuePair } from '../../../atoms/KeyValuePair';
 import { TranslationNames } from '../../../../locales/TranslationNames';
 import { CallAndMailPanel } from '../../../molecules/CallAndMailPanel';
+import PenIco from '../../../../assets/pen.svg';
+import { ButtonTamagui } from '../../../atoms/ButtonTamagui';
 
 export function ClientDetails({
   route,
+  navigation,
 }: ClientsDriverScreenProps<
   'clientDetails',
   'clientsDriver',
@@ -19,11 +22,26 @@ export function ClientDetails({
     <ScreenBase name={`${personalData.name} ${personalData.surname}`}>
       <YStack f={1}>
         <Card bordered p="$2" mt="$4">
-          <SizableText textTransform="uppercase" size="$7" fontWeight="bold">
-            {t(
-              TranslationNames.screens.clientDriver.clientDetails.personalData,
-            )}
-          </SizableText>
+          <XStack jc="space-between" ai="center">
+            <SizableText textTransform="uppercase" size="$7" fontWeight="bold">
+              {t(
+                TranslationNames.screens.clientDriver.clientDetails
+                  .personalData,
+              )}
+            </SizableText>
+            <ButtonTamagui
+              icon={<PenIco height="70%" />}
+              text={t(
+                TranslationNames.screens.clientDriver.clientDetails.editButton,
+              )}
+              buttonProps={{
+                size: '$2',
+                onPress: () => {
+                  console.log('Add data edit!');
+                },
+              }}
+            />
+          </XStack>
           <KeyValuePair
             name={t(
               TranslationNames.createClientForm.formPlaceholder.phoneNumber,
@@ -32,9 +50,23 @@ export function ClientDetails({
           />
         </Card>
         <Card bordered p="$2" mt="$4">
-          <SizableText textTransform="uppercase" size="$7" fontWeight="bold">
-            {t(TranslationNames.screens.clientDriver.clientDetails.address)}
-          </SizableText>
+          <XStack jc="space-between" ai="center">
+            <SizableText textTransform="uppercase" size="$7" fontWeight="bold">
+              {t(TranslationNames.screens.clientDriver.clientDetails.address)}
+            </SizableText>
+            <ButtonTamagui
+              icon={<PenIco height="70%" />}
+              text={t(
+                TranslationNames.screens.clientDriver.clientDetails.editButton,
+              )}
+              buttonProps={{
+                size: '$2',
+                onPress: () => {
+                  console.log('Add data edit!');
+                },
+              }}
+            />
+          </XStack>
           <KeyValuePair
             name={t(TranslationNames.addressForm.formPlaceholder.city)}
             value={address.city}
@@ -66,75 +98,112 @@ export function ClientDetails({
             value={address.voivodeship}
           />
         </Card>
-        {company && (
-          <Card bordered p="$2" mt="$4">
+        <Card bordered p="$2" mt="$4">
+          <XStack jc="space-between" ai="center">
             <SizableText textTransform="uppercase" size="$7" fontWeight="bold">
               {t(
                 TranslationNames.screens.clientDriver.clientDetails.companyData,
               )}
             </SizableText>
-            <KeyValuePair
-              name={t(TranslationNames.createCompanyForm.formPlaceholder.name)}
-              value={company?.name}
+            <ButtonTamagui
+              icon={<PenIco height="70%" />}
+              text={
+                company
+                  ? t(
+                      TranslationNames.screens.clientDriver.clientDetails
+                        .editButton,
+                    )
+                  : t(
+                      TranslationNames.screens.clientDriver.clientDetails
+                        .assignCompanyButton,
+                    )
+              }
+              buttonProps={{
+                size: '$2',
+                onPress: () => {
+                  navigation.navigate('assignCompanyToClient', {
+                    editClient: route.params.client,
+                  });
+                },
+              }}
             />
-            <KeyValuePair
-              name={t(TranslationNames.createCompanyForm.formPlaceholder.NIP)}
-              value={company?.NIP}
-            />
-            <KeyValuePair
-              name={t(TranslationNames.createCompanyForm.formPlaceholder.email)}
-              value={company?.email}
-            />
-            <KeyValuePair
-              name={t(
-                TranslationNames.createCompanyForm.formPlaceholder.phoneNumber,
-              )}
-              value={company?.phoneNumber}
-            />
-            <SizableText
-              textTransform="uppercase"
-              size="$4"
-              fontWeight="bold"
-              mt="$3"
-              mb="$2"
-            >
-              {t(
-                TranslationNames.screens.clientDriver.clientDetails
-                  .companyAddress,
-              )}
-            </SizableText>
-            <KeyValuePair
-              name={t(TranslationNames.addressForm.formPlaceholder.city)}
-              value={company?.address.city}
-            />
-            <KeyValuePair
-              name={t(TranslationNames.addressForm.formPlaceholder.county)}
-              value={company?.address.county}
-            />
-            <KeyValuePair
-              name={t(
-                TranslationNames.addressForm.formPlaceholder.apartmentNumber,
-              )}
-              value={company?.address.apartmentNumber}
-            />
-            <KeyValuePair
-              name={t(TranslationNames.addressForm.formPlaceholder.houseNumber)}
-              value={company?.address.houseNumber}
-            />
-            <KeyValuePair
-              name={t(TranslationNames.addressForm.formPlaceholder.postalCode)}
-              value={company?.address.postalCode}
-            />
-            <KeyValuePair
-              name={t(TranslationNames.addressForm.formPlaceholder.street)}
-              value={company?.address.street}
-            />
-            <KeyValuePair
-              name={t(TranslationNames.addressForm.formPlaceholder.voivodeship)}
-              value={company?.address.voivodeship}
-            />
-          </Card>
-        )}
+          </XStack>
+          {company && (
+            <>
+              <KeyValuePair
+                name={t(
+                  TranslationNames.createCompanyForm.formPlaceholder.name,
+                )}
+                value={company?.name}
+              />
+              <KeyValuePair
+                name={t(TranslationNames.createCompanyForm.formPlaceholder.NIP)}
+                value={company?.NIP}
+              />
+              <KeyValuePair
+                name={t(
+                  TranslationNames.createCompanyForm.formPlaceholder.email,
+                )}
+                value={company?.email}
+              />
+              <KeyValuePair
+                name={t(
+                  TranslationNames.createCompanyForm.formPlaceholder
+                    .phoneNumber,
+                )}
+                value={company?.phoneNumber}
+              />
+              <SizableText
+                textTransform="uppercase"
+                size="$4"
+                fontWeight="bold"
+                mt="$3"
+                mb="$2"
+              >
+                {t(
+                  TranslationNames.screens.clientDriver.clientDetails
+                    .companyAddress,
+                )}
+              </SizableText>
+              <KeyValuePair
+                name={t(TranslationNames.addressForm.formPlaceholder.city)}
+                value={company?.address.city}
+              />
+              <KeyValuePair
+                name={t(TranslationNames.addressForm.formPlaceholder.county)}
+                value={company?.address.county}
+              />
+              <KeyValuePair
+                name={t(
+                  TranslationNames.addressForm.formPlaceholder.apartmentNumber,
+                )}
+                value={company?.address.apartmentNumber}
+              />
+              <KeyValuePair
+                name={t(
+                  TranslationNames.addressForm.formPlaceholder.houseNumber,
+                )}
+                value={company?.address.houseNumber}
+              />
+              <KeyValuePair
+                name={t(
+                  TranslationNames.addressForm.formPlaceholder.postalCode,
+                )}
+                value={company?.address.postalCode}
+              />
+              <KeyValuePair
+                name={t(TranslationNames.addressForm.formPlaceholder.street)}
+                value={company?.address.street}
+              />
+              <KeyValuePair
+                name={t(
+                  TranslationNames.addressForm.formPlaceholder.voivodeship,
+                )}
+                value={company?.address.voivodeship}
+              />
+            </>
+          )}
+        </Card>
       </YStack>
       <XStack mt="$4">
         <CallAndMailPanel
