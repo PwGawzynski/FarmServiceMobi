@@ -70,12 +70,17 @@ export const TranslationNames = {
           'screens.clientDriver.assignCompanyToClient.successMessageStart',
         successMessageEnd:
           'screens.clientDriver.assignCompanyToClient.successMessageEnd',
+        pendingStatus:
+          'screens.clientDriver.assignCompanyToClient.pendingStatus',
       },
       clientDetails: {
         personalData: 'screens.clientDriver.clientDetails.personalData',
         address: 'screens.clientDriver.clientDetails.address',
         companyData: 'screens.clientDriver.clientDetails.companyData',
         companyAddress: 'screens.clientDriver.clientDetails.companyAddress',
+        editButton: 'screens.clientDriver.clientDetails.editButton',
+        assignCompanyButton:
+          'screens.clientDriver.clientDetails.assignCompanyButton',
       },
     },
     clientDesktopDriver: {

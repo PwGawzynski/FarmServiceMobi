@@ -56,13 +56,16 @@
         "screenTitle": "Przypisz firmę",
         "submitButton": "Przypisz firmę",
         "successMessageStart": "Zrobione! Klient ",
-        "successMessageEnd": " został dodany wraz z firmą"
+        "successMessageEnd": " został dodany wraz z firmą",
+        "pendingStatus": "Tworzenie..."
       },
       "clientDetails": {
         "personalData": "Dane osobowe",
         "address": "Adres",
         "companyData": "Dane firmy",
-        "companyAddress": "Adres firmy"
+        "companyAddress": "Adres firmy",
+        "editButton": "Edytuj",
+        "assignCompanyButton": "Dopisz dane firmy"
       }
     },
     "clientDesktopDriver": {

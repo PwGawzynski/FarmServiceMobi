@@ -56,13 +56,16 @@
         "screenTitle": "Assign company",
         "submitButton": "Assign",
         "successMessageStart": "It's done, client ",
-        "successMessageEnd": " has been added and company has been assigned to it"
+        "successMessageEnd": " has been added and company has been assigned to it",
+        "pendingStatus": "Processing..."
       },
       "clientDetails": {
         "personalData": "Personal",
         "address": "Address",
         "companyData": "Company",
-        "companyAddress": "Address"
+        "companyAddress": "Address",
+        "editButton": "Edit",
+        "assignCompanyButton": "Assign company data"
       }
     },
     "clientDesktopDriver": {

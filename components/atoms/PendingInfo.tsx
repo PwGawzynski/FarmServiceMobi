@@ -30,7 +30,7 @@ export function PendingInfo({ infoText, isVisible }: PendingInfoProps) {
       className="flex-1 flex-row items-center justify-center"
     >
       <ActivityIndicator color={Colors.GREEN} />
-      <Text className="ml-2 text-dark-gray">{infoText}</Text>
+      <Text className="ml-2 text-dark dark:text-green">{infoText}</Text>
     </Animated.View>
   );
 }

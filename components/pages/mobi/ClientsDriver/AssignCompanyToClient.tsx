@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { t } from 'i18next';
 import { ScreenBase } from '../common/ScreenBase';
@@ -10,8 +10,12 @@ import { AppButton } from '../../../atoms/AppButton';
 import { TranslationNames } from '../../../../locales/TranslationNames';
 import { CreateCompanyForm } from '../AuthDriver/CreateCompany';
 import { CreateClientsCompanyReqI } from '../../../../FarmServiceApiTypes/ClientsCompany/Requests';
-import { createClient } from '../../../../api/clients/Client';
+import {
+  assignCompanyToClient,
+  createClient,
+} from '../../../../api/clients/Client';
 import { createCompanySetup } from '../../../../helepers/FormSetups/CreateCompanySetup';
+import { ClientResponseBase } from '../../../../FarmServiceApiTypes/Clients/Responses';
 
 export type CreateClientsCompanyForm = CreateClientsCompanyReqI['address'] &
   Omit<CreateClientsCompanyReqI, 'address'>;
@@ -31,24 +35,23 @@ export function AssignCompanyToClient({
   'clientsDriver',
   'ownerRootDriver'
 >) {
-  const { client } = params;
-
-  const {
-    user: { address, personal_data: personalData },
-  } = client;
+  const { client, editClient } = params;
+  const personalData =
+    client?.user.personal_data || editClient?.user.personal_data;
+  const address = client?.user.address || editClient?.user.address;
 
   const defaultValues = {
     email: '',
     name: '',
     NIP: '',
-    phoneNumber: personalData.phone_number ?? '',
-    city: address.city ?? '',
-    county: address.county ?? '',
-    apartmentNumber: address.apartmentNumber ?? '',
-    houseNumber: address.houseNumber ?? '',
-    postalCode: address.postalCode ?? '',
-    street: address.street ?? '',
-    voivodeship: address.voivodeship ?? '',
+    phoneNumber: personalData?.phone_number ?? '',
+    city: address?.city ?? '',
+    county: address?.county ?? '',
+    apartmentNumber: address?.apartmentNumber ?? '',
+    houseNumber: address?.houseNumber ?? '',
+    postalCode: address?.postalCode ?? '',
+    street: address?.street ?? '',
+    voivodeship: address?.voivodeship ?? '',
   } as CreateClientsCompanyForm;
 
   const {
@@ -58,9 +61,38 @@ export function AssignCompanyToClient({
   } = useForm<CreateClientsCompanyForm>({
     defaultValues,
   });
+  const queryClient = useQueryClient();
 
   const { mutate, data, isPending, error, isSuccess } = useMutation({
     mutationFn: createClient,
+    onSuccess: response => {
+      queryClient.setQueryData(
+        ['clients'],
+        (oldData: Array<ClientResponseBase>) => {
+          return oldData ? [...oldData, response] : [response];
+        },
+      );
+    },
+  });
+  const {
+    mutate: edit,
+    data: editedData,
+    isPending: isEditPending,
+    error: editError,
+    isSuccess: isEditSuccess,
+  } = useMutation({
+    mutationFn: assignCompanyToClient,
+    onSuccess: response => {
+      queryClient.setQueryData(
+        ['clients'],
+        (oldData: Array<ClientResponseBase>) => {
+          if (editClient) editClient.company = response;
+          return oldData
+            ? [...oldData.filter(c => c.id !== editClient?.id), editClient]
+            : [editClient];
+        },
+      );
+    },
   });
 
   useEffect(() => {
@@ -69,44 +101,64 @@ export function AssignCompanyToClient({
         shownMessage: `${t(
           TranslationNames.screens.clientDriver.assignCompanyToClient
             .successMessageStart,
-        )} ${personalData.name} ${personalData.surname} ${t(
+        )} ${personalData?.name} ${personalData?.surname} ${t(
           TranslationNames.screens.clientDriver.assignCompanyToClient
             .successMessageEnd,
         )}`,
         redirectScreenName: 'clientsDesktop',
       });
     }
-  }, [data, isSuccess]);
-
-  const onSubmit = (formData: CreateCompanyForm) =>
-    mutate({
-      user: { ...client.user },
-      company: {
-        email: formData.email,
-        name: formData.name,
-        NIP: formData.NIP,
-        phoneNumber: formData.phoneNumber,
-        address: {
-          city: formData.city,
-          county: formData.county,
-          street: formData.street?.length ? formData.street : undefined,
-          apartmentNumber: formData.apartmentNumber?.length
-            ? formData.apartmentNumber
-            : undefined,
-          voivodeship: formData.voivodeship,
-          houseNumber: formData.houseNumber,
-          postalCode: formData.postalCode,
+    if (editedData && isEditSuccess && editClient)
+      navigation.navigate('clientDetails', {
+        client: {
+          ...editClient,
+          company: editedData,
         },
+      });
+  }, [data, isSuccess, isEditSuccess, editedData, editClient]);
+
+  const onSubmit = (formData: CreateCompanyForm) => {
+    const company = {
+      email: formData.email,
+      name: formData.name,
+      NIP: formData.NIP,
+      phoneNumber: formData.phoneNumber,
+      address: {
+        city: formData.city,
+        county: formData.county,
+        street: formData.street?.length ? formData.street : undefined,
+        apartmentNumber: formData.apartmentNumber?.length
+          ? formData.apartmentNumber
+          : undefined,
+        voivodeship: formData.voivodeship,
+        houseNumber: formData.houseNumber,
+        postalCode: formData.postalCode,
       },
-    });
+    };
+    if (editClient) {
+      edit({ client: editClient.id, ...company });
+    } else {
+      mutate({
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        user: { ...(client?.user as any) },
+        company,
+      });
+    }
+  };
 
   return (
     <ScreenBase name={SCREEN_TITLE}>
-      <FormStatusPanel isVisible={isPending} error={error?.message} />
+      <FormStatusPanel
+        infoText={t(
+          TranslationNames.screens.clientDriver.assignCompanyToClient
+            .pendingStatus,
+        )}
+        isVisible={isPending || isEditPending}
+        error={error?.message || editError?.message}
+      />
       <FormCreator
         controllerSetups={createCompanySetup(control)}
         errors={errors}
-        onSubmit={onSubmit}
       />
       <AppButton
         className="flex-none max-h-10 mb-4"
