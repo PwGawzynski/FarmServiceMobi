@@ -39,10 +39,11 @@ export function AssignCompanyToClient({
 >) {
   const { onCreateClient, afterCreateClient, onEdit } = params;
   const personalData =
-    onCreateClient?.user.personal_data || afterCreateClient?.user.personal_data;
+    onCreateClient?.user.personal_data ||
+    afterCreateClient?.user?.personal_data;
   const address =
     onCreateClient?.user.address ||
-    afterCreateClient?.user.address ||
+    afterCreateClient?.user?.address ||
     onEdit?.company?.address;
 
   const defaultValues = {
@@ -95,7 +96,7 @@ export function AssignCompanyToClient({
           if (afterCreateClient) afterCreateClient.company = response;
           return oldData
             ? [
-                ...oldData.filter(c => c.id !== afterCreateClient?.id),
+                ...oldData.filter(c => c.id !== afterCreateData?.id),
                 afterCreateClient,
               ]
             : [afterCreateClient];
@@ -129,7 +130,10 @@ export function AssignCompanyToClient({
   });
 
   useEffect(() => {
-    if (data && isSuccess) {
+    if (
+      (data && isSuccess) ||
+      (afterCreateData && isAfterCreateSuccess && afterCreateClient)
+    ) {
       navigation.navigate('OperationConfirmed', {
         shownMessage: `${t(
           TranslationNames.screens.clientDriver.assignCompanyToClient
@@ -144,11 +148,12 @@ export function AssignCompanyToClient({
     if (afterCreateData && isAfterCreateSuccess && afterCreateClient)
       navigation.navigate('clientDetails', {
         client: {
-          ...afterCreateClient,
+          id: afterCreateClient.id,
+          user: afterCreateClient.user,
+          email: afterCreateData.email,
           company: afterCreateData,
         },
       });
-    console.log(onEditData, isOnEditSuccess, onEdit);
     if (onEditData && isOnEditSuccess && onEdit)
       navigation.navigate('clientDetails', {
         client: {

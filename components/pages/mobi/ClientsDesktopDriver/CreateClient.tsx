@@ -32,19 +32,21 @@ const BUTTON_VALUE = t(
   TranslationNames.screens.clientDesktopDriver.createClient.submitButton,
 );
 
-const defaultValues: CreateClientForm = {
-  email: '',
-  name: '',
-  surname: '',
-  phone_number: '',
-  city: '',
-  county: '',
-  apartmentNumber: '',
-  houseNumber: '',
-  postalCode: '',
-  street: '',
-  voivodeship: '',
-};
+function prepeareDefaultValues(client?: ClientResponseBase): CreateClientForm {
+  return {
+    email: client?.email || '',
+    name: client?.user.personal_data.name || '',
+    surname: client?.user.personal_data.surname || '',
+    phone_number: client?.user.personal_data.phone_number || '',
+    city: client?.user.address.city || '',
+    county: client?.user.address.county || '',
+    apartmentNumber: client?.user.address.apartmentNumber || '',
+    houseNumber: client?.user.address.houseNumber || '',
+    postalCode: client?.user.address.postalCode || '',
+    street: client?.user.address.street || '',
+    voivodeship: client?.user.address.voivodeship || '',
+  } as CreateClientForm;
+}
 
 const convertFormDataToRequestType = (
   data: CreateClientForm,
@@ -73,12 +75,15 @@ const convertFormDataToRequestType = (
 // TODO -> addres data based on location
 export function CreateClient({
   navigation,
+  route: { params },
 }: ClientsDesktopDriverScreenProps<
   'createClient',
   'clientsDesktopRoot',
   'clientsDriver',
   'ownerRootDriver'
 >) {
+  const client = params?.client;
+
   const {
     control,
     reset,
@@ -87,7 +92,7 @@ export function CreateClient({
     getValues,
     formState: { errors },
   } = useForm<CreateClientForm>({
-    defaultValues,
+    defaultValues: prepeareDefaultValues(client),
   });
   const queryClient = useQueryClient();
   const { mutate, data, isPending, error, isSuccess } = useMutation({
@@ -145,7 +150,7 @@ export function CreateClient({
         onRightButtonClick={async () => {
           setAlert(false);
           navigation.navigate('assignCompanyToClient', {
-            client: convertFormDataToRequestType(getValues()),
+            onCreateClient: convertFormDataToRequestType(getValues()),
           });
         }}
       />

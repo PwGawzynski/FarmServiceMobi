@@ -1,4 +1,8 @@
+import { ClientResponseBase } from '../../../../../FarmServiceApiTypes/Clients/Responses';
+
 export type ClientsDesktopDriverParamList = {
   clientsDesktop: undefined;
-  createClient: undefined;
+  createClient: {
+    client?: ClientResponseBase;
+  };
 };
