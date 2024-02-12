@@ -4,7 +4,10 @@ import { apiHandler } from '../services/User';
 import { TranslationNames } from '../../locales/TranslationNames';
 import { ClientResponseBase } from '../../FarmServiceApiTypes/Clients/Responses';
 import { CreateClientReqI } from '../../FarmServiceApiTypes/Clients/Requests';
-import { CreateClientsCompanyReqI } from '../../FarmServiceApiTypes/ClientsCompany/Requests';
+import {
+  CreateClientsCompanyReqI,
+  UpdateClientsCompanyReqI,
+} from '../../FarmServiceApiTypes/ClientsCompany/Requests';
 import { ClientsCompanyResponseBase } from '../../FarmServiceApiTypes/ClientsCompany/Responses';
 
 export async function createClient(data: CreateClientReqI) {
@@ -31,6 +34,21 @@ export async function assignCompanyToClient(data: CreateClientsCompanyReqI) {
     data,
   ) as unknown as ClientsCompanyResponseBase | undefined;
 }
+
+export async function updateClientsCompany(data: UpdateClientsCompanyReqI) {
+  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
+  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
+  return apiHandler<
+    UpdateClientsCompanyReqI,
+    ClientsCompanyResponseBase | undefined
+  >(
+    UNAUTHORIZED_MSG,
+    DEFAULT_MSG,
+    Api.updateClientsCompany,
+    data,
+  ) as unknown as ClientsCompanyResponseBase | undefined;
+}
+
 export async function getClients() {
   const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
   const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
