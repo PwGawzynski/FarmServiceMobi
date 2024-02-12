@@ -10,12 +10,14 @@ import { AppButton } from '../../../atoms/AppButton';
 import { TranslationNames } from '../../../../locales/TranslationNames';
 import { CreateCompanyForm } from '../AuthDriver/CreateCompany';
 import { CreateClientsCompanyReqI } from '../../../../FarmServiceApiTypes/ClientsCompany/Requests';
+
+import { createCompanySetup } from '../../../../helepers/FormSetups/CreateCompanySetup';
+import { ClientResponseBase } from '../../../../FarmServiceApiTypes/Clients/Responses';
 import {
   assignCompanyToClient,
   createClient,
+  updateClientsCompany,
 } from '../../../../api/clients/Client';
-import { createCompanySetup } from '../../../../helepers/FormSetups/CreateCompanySetup';
-import { ClientResponseBase } from '../../../../FarmServiceApiTypes/Clients/Responses';
 
 export type CreateClientsCompanyForm = CreateClientsCompanyReqI['address'] &
   Omit<CreateClientsCompanyReqI, 'address'>;
@@ -35,16 +37,20 @@ export function AssignCompanyToClient({
   'clientsDriver',
   'ownerRootDriver'
 >) {
-  const { client, editClient } = params;
+  const { onCreateClient, afterCreateClient, onEdit } = params;
   const personalData =
-    client?.user.personal_data || editClient?.user.personal_data;
-  const address = client?.user.address || editClient?.user.address;
+    onCreateClient?.user.personal_data || afterCreateClient?.user.personal_data;
+  const address =
+    onCreateClient?.user.address ||
+    afterCreateClient?.user.address ||
+    onEdit?.company?.address;
 
   const defaultValues = {
-    email: '',
-    name: '',
-    NIP: '',
-    phoneNumber: personalData?.phone_number ?? '',
+    email: onEdit?.company?.email || '',
+    name: onEdit?.company?.name || '',
+    NIP: onEdit?.company?.NIP || '',
+    phoneNumber:
+      personalData?.phone_number || onEdit?.company?.phoneNumber || '',
     city: address?.city ?? '',
     county: address?.county ?? '',
     apartmentNumber: address?.apartmentNumber ?? '',
@@ -75,21 +81,48 @@ export function AssignCompanyToClient({
     },
   });
   const {
-    mutate: edit,
-    data: editedData,
-    isPending: isEditPending,
-    error: editError,
-    isSuccess: isEditSuccess,
+    mutate: afterCreateMutate,
+    data: afterCreateData,
+    isPending: isAfterCreatePending,
+    error: afterCreateError,
+    isSuccess: isAfterCreateSuccess,
   } = useMutation({
     mutationFn: assignCompanyToClient,
     onSuccess: response => {
       queryClient.setQueryData(
         ['clients'],
         (oldData: Array<ClientResponseBase>) => {
-          if (editClient) editClient.company = response;
+          if (afterCreateClient) afterCreateClient.company = response;
           return oldData
-            ? [...oldData.filter(c => c.id !== editClient?.id), editClient]
-            : [editClient];
+            ? [
+                ...oldData.filter(c => c.id !== afterCreateClient?.id),
+                afterCreateClient,
+              ]
+            : [afterCreateClient];
+        },
+      );
+    },
+  });
+
+  const {
+    mutate: onEditMutate,
+    data: onEditData,
+    isPending: isOnEditPending,
+    error: onEditError,
+    isSuccess: isOnEditSuccess,
+  } = useMutation({
+    mutationFn: updateClientsCompany,
+    onSuccess: response => {
+      queryClient.setQueryData(
+        ['clients'],
+        (oldData: Array<ClientResponseBase>) => {
+          if (onEdit) onEdit.client.company = response;
+          return oldData
+            ? [
+                ...oldData.filter(c => c.id !== onEdit?.client?.id),
+                onEdit?.client,
+              ]
+            : [onEdit?.client];
         },
       );
     },
@@ -108,14 +141,33 @@ export function AssignCompanyToClient({
         redirectScreenName: 'clientsDesktop',
       });
     }
-    if (editedData && isEditSuccess && editClient)
+    if (afterCreateData && isAfterCreateSuccess && afterCreateClient)
       navigation.navigate('clientDetails', {
         client: {
-          ...editClient,
-          company: editedData,
+          ...afterCreateClient,
+          company: afterCreateData,
         },
       });
-  }, [data, isSuccess, isEditSuccess, editedData, editClient]);
+    console.log(onEditData, isOnEditSuccess, onEdit);
+    if (onEditData && isOnEditSuccess && onEdit)
+      navigation.navigate('clientDetails', {
+        client: {
+          id: onEdit.client.id,
+          user: onEdit.client.user,
+          email: onEditData.email,
+          company: onEditData,
+        },
+      });
+  }, [
+    data,
+    isSuccess,
+    isAfterCreateSuccess,
+    afterCreateData,
+    afterCreateClient,
+    onEditData,
+    isOnEditSuccess,
+    onEdit,
+  ]);
 
   const onSubmit = (formData: CreateCompanyForm) => {
     const company = {
@@ -135,14 +187,16 @@ export function AssignCompanyToClient({
         postalCode: formData.postalCode,
       },
     };
-    if (editClient) {
-      edit({ client: editClient.id, ...company });
-    } else {
+    if (afterCreateClient) {
+      afterCreateMutate({ client: afterCreateClient.id, ...company });
+    } else if (onCreateClient) {
       mutate({
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        user: { ...(client?.user as any) },
+        user: { ...(onCreateClient?.user as any) },
         company,
       });
+    } else if (onEdit) {
+      onEditMutate({ ...company, company: onEdit.company.id });
     }
   };
 
@@ -153,8 +207,10 @@ export function AssignCompanyToClient({
           TranslationNames.screens.clientDriver.assignCompanyToClient
             .pendingStatus,
         )}
-        isVisible={isPending || isEditPending}
-        error={error?.message || editError?.message}
+        isVisible={isPending || isAfterCreatePending || isOnEditPending}
+        error={
+          error?.message || afterCreateError?.message || onEditError?.message
+        }
       />
       <FormCreator
         controllerSetups={createCompanySetup(control)}
