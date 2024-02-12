@@ -121,9 +121,17 @@ export function ClientDetails({
               buttonProps={{
                 size: '$2',
                 onPress: () => {
-                  navigation.navigate('assignCompanyToClient', {
-                    editClient: route.params.client,
-                  });
+                  if (company)
+                    navigation.navigate('assignCompanyToClient', {
+                      onEdit: {
+                        company,
+                        client: route.params.client,
+                      },
+                    });
+                  else
+                    navigation.navigate('assignCompanyToClient', {
+                      afterCreateClient: route.params.client,
+                    });
                 },
               }}
             />
