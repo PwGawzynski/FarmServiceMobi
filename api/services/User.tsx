@@ -23,6 +23,12 @@ export async function apiHandler<M, T = undefined>(
 ): Promise<ResponseObject<T> | undefined> {
   try {
     const data = await apiCall(payload as M);
+    console.info(
+      data,
+      `DATA TYPE RETURNED FROM API HANDLER:  ${
+        apiCall.name
+      } AT: ${new Date().toLocaleTimeString()}`,
+    );
     if (data) return data;
     return undefined;
   } catch (e) {

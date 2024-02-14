@@ -1,5 +1,6 @@
 import { Card, SizableText, XStack, YStack } from 'tamagui';
 import { t } from 'i18next';
+import { useNavigation } from '@react-navigation/native';
 import { ClientsDriverScreenProps } from '../../../../types/self/navigation/props/clients/ClientsDriverProps';
 import { ScreenBase } from '../common/ScreenBase';
 import { KeyValuePair } from '../../../atoms/KeyValuePair';
@@ -16,6 +17,9 @@ export function ClientDetails({
   'clientsDriver',
   'ownerRootDriver'
 >) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const nav = useNavigation<any>();
+
   const { personal_data: personalData, address } = route.params.client.user;
   const { company, email } = route.params.client;
   return (
@@ -37,7 +41,9 @@ export function ClientDetails({
               buttonProps={{
                 size: '$2',
                 onPress: () => {
-                  console.log('Add data edit!');
+                  nav.navigate('createClient', {
+                    client: route.params.client,
+                  });
                 },
               }}
             />
@@ -46,7 +52,7 @@ export function ClientDetails({
             name={t(
               TranslationNames.createClientForm.formPlaceholder.phoneNumber,
             )}
-            value={personalData.phone_number}
+            value={personalData.phoneNumber}
           />
         </Card>
         <Card bordered p="$2" mt="$4">
@@ -61,9 +67,10 @@ export function ClientDetails({
               )}
               buttonProps={{
                 size: '$2',
-                onPress: () => {
-                  console.log('Add data edit!');
-                },
+                onPress: () =>
+                  nav.navigate('createClient', {
+                    client: route.params.client,
+                  }),
               }}
             />
           </XStack>
@@ -215,7 +222,7 @@ export function ClientDetails({
       </YStack>
       <XStack mt="$4">
         <CallAndMailPanel
-          callButtonProps={{ phoneNumber: personalData.phone_number }}
+          callButtonProps={{ phoneNumber: personalData.phoneNumber }}
           mailButtonProps={{
             emailOptions: {
               body: 'Send from FarmService T.M',

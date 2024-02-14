@@ -1,5 +1,9 @@
 import { useForm } from 'react-hook-form';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import {
+  QueryClient,
+  useMutation,
+  useQueryClient,
+} from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { t } from 'i18next';
 import { ScreenBase } from '../common/ScreenBase';
@@ -11,13 +15,14 @@ import { TranslationNames } from '../../../../locales/TranslationNames';
 import { CreateCompanyForm } from '../AuthDriver/CreateCompany';
 import { CreateClientsCompanyReqI } from '../../../../FarmServiceApiTypes/ClientsCompany/Requests';
 
-import { createCompanySetup } from '../../../../helepers/FormSetups/CreateCompanySetup';
+import { createClientCompanySetup } from '../../../../helepers/FormSetups/CreateCompanySetup';
 import { ClientResponseBase } from '../../../../FarmServiceApiTypes/Clients/Responses';
 import {
   assignCompanyToClient,
   createClient,
   updateClientsCompany,
 } from '../../../../api/clients/Client';
+import { ClientsCompanyResponseBase } from '../../../../FarmServiceApiTypes/ClientsCompany/Responses';
 
 export type CreateClientsCompanyForm = CreateClientsCompanyReqI['address'] &
   Omit<CreateClientsCompanyReqI, 'address'>;
@@ -25,9 +30,68 @@ export type CreateClientsCompanyForm = CreateClientsCompanyReqI['address'] &
 const SCREEN_TITLE = t(
   TranslationNames.screens.clientDriver.assignCompanyToClient.screenTitle,
 );
-const BUTTON_TITLE = t(
-  TranslationNames.screens.clientDriver.assignCompanyToClient.submitButton,
+const WHEN_ASSIGNATION_BUTTON_TITLE = t(
+  TranslationNames.screens.clientDriver.assignCompanyToClient
+    .assignationSubmitButton,
 );
+const WHEN_CREATE_BUTTON_TITLE = t(
+  TranslationNames.screens.clientDriver.assignCompanyToClient
+    .createSubmitButton,
+);
+const WHEN_EDIT_BUTTON_TITLE = t(
+  TranslationNames.screens.clientDriver.assignCompanyToClient.editSubmitButton,
+);
+
+const cachingAssignationResponse = (
+  response: ClientsCompanyResponseBase | undefined,
+  queryClient: QueryClient,
+  givenScreenClient: ClientResponseBase | undefined,
+) => {
+  queryClient.setQueryData(
+    ['clients'],
+    (oldData: Array<ClientResponseBase>) => {
+      // eslint-disable-next-line no-param-reassign
+      if (givenScreenClient) givenScreenClient.company = response;
+      return oldData
+        ? [
+            ...oldData.filter(c => c.id !== givenScreenClient?.id),
+            givenScreenClient,
+          ]
+        : [givenScreenClient];
+    },
+  );
+};
+
+const cachingCreateResponse = (
+  response: ClientResponseBase | undefined,
+  queryClient: QueryClient,
+) => {
+  queryClient.setQueryData(
+    ['clients'],
+    (oldData: Array<ClientResponseBase>) => {
+      return oldData ? [...oldData, response] : [response];
+    },
+  );
+};
+
+const cachingEditResponse = (
+  response: ClientsCompanyResponseBase | undefined,
+  queryClient: QueryClient,
+  onEdit:
+    | { client: ClientResponseBase; company: ClientsCompanyResponseBase }
+    | undefined,
+) => {
+  queryClient.setQueryData(
+    ['clients'],
+    (oldData: Array<ClientResponseBase>) => {
+      // eslint-disable-next-line no-param-reassign
+      if (onEdit) onEdit.client.company = response;
+      return oldData
+        ? [...oldData.filter(c => c.id !== onEdit?.client?.id), onEdit?.client]
+        : [onEdit?.client];
+    },
+  );
+};
 
 export function AssignCompanyToClient({
   route: { params },
@@ -39,10 +103,11 @@ export function AssignCompanyToClient({
 >) {
   const { onCreateClient, afterCreateClient, onEdit } = params;
   const personalData =
-    onCreateClient?.user.personal_data || afterCreateClient?.user.personal_data;
+    onCreateClient?.user.personal_data ||
+    afterCreateClient?.user?.personal_data;
   const address =
     onCreateClient?.user.address ||
-    afterCreateClient?.user.address ||
+    afterCreateClient?.user?.address ||
     onEdit?.company?.address;
 
   const defaultValues = {
@@ -50,7 +115,7 @@ export function AssignCompanyToClient({
     name: onEdit?.company?.name || '',
     NIP: onEdit?.company?.NIP || '',
     phoneNumber:
-      personalData?.phone_number || onEdit?.company?.phoneNumber || '',
+      personalData?.phoneNumber || onEdit?.company?.phoneNumber || '',
     city: address?.city ?? '',
     county: address?.county ?? '',
     apartmentNumber: address?.apartmentNumber ?? '',
@@ -67,19 +132,13 @@ export function AssignCompanyToClient({
   } = useForm<CreateClientsCompanyForm>({
     defaultValues,
   });
-  const queryClient = useQueryClient();
 
+  const queryClient = useQueryClient();
   const { mutate, data, isPending, error, isSuccess } = useMutation({
     mutationFn: createClient,
-    onSuccess: response => {
-      queryClient.setQueryData(
-        ['clients'],
-        (oldData: Array<ClientResponseBase>) => {
-          return oldData ? [...oldData, response] : [response];
-        },
-      );
-    },
+    onSuccess: res => cachingCreateResponse(res, queryClient),
   });
+
   const {
     mutate: afterCreateMutate,
     data: afterCreateData,
@@ -88,20 +147,8 @@ export function AssignCompanyToClient({
     isSuccess: isAfterCreateSuccess,
   } = useMutation({
     mutationFn: assignCompanyToClient,
-    onSuccess: response => {
-      queryClient.setQueryData(
-        ['clients'],
-        (oldData: Array<ClientResponseBase>) => {
-          if (afterCreateClient) afterCreateClient.company = response;
-          return oldData
-            ? [
-                ...oldData.filter(c => c.id !== afterCreateClient?.id),
-                afterCreateClient,
-              ]
-            : [afterCreateClient];
-        },
-      );
-    },
+    onSuccess: res =>
+      cachingAssignationResponse(res, queryClient, afterCreateClient),
   });
 
   const {
@@ -112,24 +159,14 @@ export function AssignCompanyToClient({
     isSuccess: isOnEditSuccess,
   } = useMutation({
     mutationFn: updateClientsCompany,
-    onSuccess: response => {
-      queryClient.setQueryData(
-        ['clients'],
-        (oldData: Array<ClientResponseBase>) => {
-          if (onEdit) onEdit.client.company = response;
-          return oldData
-            ? [
-                ...oldData.filter(c => c.id !== onEdit?.client?.id),
-                onEdit?.client,
-              ]
-            : [onEdit?.client];
-        },
-      );
-    },
+    onSuccess: res => cachingEditResponse(res, queryClient, onEdit),
   });
 
   useEffect(() => {
-    if (data && isSuccess) {
+    if (
+      (data && isSuccess) ||
+      (afterCreateData && isAfterCreateSuccess && afterCreateClient)
+    ) {
       navigation.navigate('OperationConfirmed', {
         shownMessage: `${t(
           TranslationNames.screens.clientDriver.assignCompanyToClient
@@ -144,11 +181,12 @@ export function AssignCompanyToClient({
     if (afterCreateData && isAfterCreateSuccess && afterCreateClient)
       navigation.navigate('clientDetails', {
         client: {
-          ...afterCreateClient,
+          id: afterCreateClient.id,
+          user: afterCreateClient.user,
+          email: afterCreateData.email,
           company: afterCreateData,
         },
       });
-    console.log(onEditData, isOnEditSuccess, onEdit);
     if (onEditData && isOnEditSuccess && onEdit)
       navigation.navigate('clientDetails', {
         client: {
@@ -213,12 +251,16 @@ export function AssignCompanyToClient({
         }
       />
       <FormCreator
-        controllerSetups={createCompanySetup(control)}
+        controllerSetups={createClientCompanySetup(control)}
         errors={errors}
       />
       <AppButton
         className="flex-none max-h-10 mb-4"
-        title={BUTTON_TITLE}
+        title={
+          (onEdit && WHEN_EDIT_BUTTON_TITLE) ||
+          (afterCreateClient && WHEN_CREATE_BUTTON_TITLE) ||
+          WHEN_ASSIGNATION_BUTTON_TITLE
+        }
         onPress={handleSubmit(onSubmit)}
       />
     </ScreenBase>
