@@ -117,12 +117,9 @@ export const createCompanySetupBase = <T, M>(control: T): M =>
 
 export const createClientCompanySetup = (
   control: Control<CreateClientsCompanyForm>,
-): FormControllerSetup<CreateClientsCompanyForm> => ({
-  ...createCompanySetupBase(control),
-});
+): FormControllerSetup<CreateClientsCompanyForm> =>
+  createCompanySetupBase(control);
 
 export const createCompanySetup = (
   control: Control<CreateCompanyForm>,
-): FormControllerSetup<CreateCompanyForm> => ({
-  ...createCompanySetupBase(control),
-});
+): FormControllerSetup<CreateCompanyForm> => createCompanySetupBase(control);

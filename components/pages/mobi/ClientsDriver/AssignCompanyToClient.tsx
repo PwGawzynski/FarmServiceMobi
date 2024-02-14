@@ -237,7 +237,7 @@ export function AssignCompanyToClient({
       onEditMutate({ ...company, company: onEdit.company.id });
     }
   };
-
+  console.log(createClientCompanySetup(control));
   return (
     <ScreenBase name={SCREEN_TITLE}>
       <FormStatusPanel

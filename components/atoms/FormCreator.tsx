@@ -24,6 +24,7 @@ export function FormCreator<T extends FieldValues>({
   errors,
   abs,
 }: FormCreatorProps<T>) {
+  console.log(controllerSetups[0].name, 'test');
   return (
     <KeyboardAwareScrollView
       showsVerticalScrollIndicator={false}
