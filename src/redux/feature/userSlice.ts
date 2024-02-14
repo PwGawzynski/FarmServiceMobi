@@ -42,7 +42,6 @@ const initUserData: UserContextI = {
     name: undefined,
     surname: undefined,
     phoneNumber: undefined,
-    phone_number: undefined,
   },
   address: {
     city: undefined,

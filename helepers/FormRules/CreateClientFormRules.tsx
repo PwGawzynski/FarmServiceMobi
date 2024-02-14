@@ -42,7 +42,7 @@ export const rules: FormRulesType<CreateClientForm> = {
       ),
     },
   },
-  phone_number: {
+  phoneNumber: {
     required: t(TranslationNames.createClientForm.validation.phoneNumber),
     minLength: {
       value: UserPersonalDataConstants.PHONE_NUMBER_MIN_LEN,

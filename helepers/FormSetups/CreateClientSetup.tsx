@@ -36,8 +36,8 @@ export const createClientSetup = (
   },
   {
     control,
-    rules: rules.phone_number,
-    name: 'phone_number',
+    rules: rules.phoneNumber,
+    name: 'phoneNumber',
     textInputProp: {
       onFocus: onPhoneNumberFocus,
       keyboardType: 'phone-pad',
@@ -86,7 +86,7 @@ export const createClientSetup = (
     rules: rules.postalCode,
     name: 'postalCode',
     textInputProp: {
-      keyboardType: 'number-pad',
+      keyboardType: 'numbers-and-punctuation',
       autoComplete: 'postal-code',
       placeholder: t(TranslationNames.addressForm.formPlaceholder.postalCode),
     },

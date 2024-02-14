@@ -34,7 +34,7 @@ export function CreateCompany({
     email: '',
     name: '',
     NIP: '',
-    phoneNumber: userPersonalData?.phone_number ?? '',
+    phoneNumber: userPersonalData?.phoneNumber ?? '',
     city: userAddress?.city ?? '',
     county: userAddress?.county ?? '',
     apartmentNumber: userAddress?.apartmentNumber ?? '',
