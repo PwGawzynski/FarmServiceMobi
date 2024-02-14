@@ -23,6 +23,7 @@ export const createClientSetup = (
     rules: rules.name,
     name: 'name',
     textInputProp: {
+      keyboardType: 'default',
       placeholder: t(TranslationNames.createClientForm.formPlaceholder.name),
     },
   },
@@ -31,6 +32,7 @@ export const createClientSetup = (
     rules: rules.surname,
     name: 'surname',
     textInputProp: {
+      keyboardType: 'default',
       placeholder: t(TranslationNames.createClientForm.formPlaceholder.surname),
     },
   },
@@ -51,6 +53,7 @@ export const createClientSetup = (
     rules: rules.city,
     name: 'city',
     textInputProp: {
+      keyboardType: 'default',
       placeholder: t(TranslationNames.addressForm.formPlaceholder.city),
     },
   },
@@ -59,6 +62,7 @@ export const createClientSetup = (
     rules: rules.county,
     name: 'county',
     textInputProp: {
+      keyboardType: 'default',
       autoComplete: 'country',
       placeholder: t(TranslationNames.addressForm.formPlaceholder.county),
     },
@@ -68,6 +72,7 @@ export const createClientSetup = (
     rules: rules.apartmentNumber,
     name: 'apartmentNumber',
     textInputProp: {
+      keyboardType: 'numbers-and-punctuation',
       placeholder: t(
         TranslationNames.addressForm.formPlaceholder.apartmentNumber,
       ),
@@ -78,6 +83,7 @@ export const createClientSetup = (
     rules: rules.houseNumber,
     name: 'houseNumber',
     textInputProp: {
+      keyboardType: 'numbers-and-punctuation',
       placeholder: t(TranslationNames.addressForm.formPlaceholder.houseNumber),
     },
   },
@@ -96,6 +102,7 @@ export const createClientSetup = (
     rules: rules.street,
     name: 'street',
     textInputProp: {
+      keyboardType: 'default',
       autoComplete: 'street-address',
       placeholder: t(TranslationNames.addressForm.formPlaceholder.street),
     },
@@ -105,6 +112,8 @@ export const createClientSetup = (
     rules: rules.voivodeship,
     name: 'voivodeship',
     textInputProp: {
+      keyboardType: 'default',
+      autoComplete: 'postal-address-region',
       placeholder: t(TranslationNames.addressForm.formPlaceholder.voivodeship),
     },
   },

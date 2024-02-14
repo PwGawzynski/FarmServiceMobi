@@ -56,7 +56,7 @@
         "screenTitle": "Assign company",
         "assignationSubmitButton": "Assign",
         "editSubmitButton": "Save",
-        "createSubmitButton": "Create Client with company",
+        "createButton": "Create Client with company",
         "successMessageStart": "It's done, client ",
         "successMessageEnd": " has been added and company has been assigned to it",
         "pendingStatus": "Processing..."

@@ -237,7 +237,6 @@ export function AssignCompanyToClient({
       onEditMutate({ ...company, company: onEdit.company.id });
     }
   };
-  console.log(createClientCompanySetup(control));
   return (
     <ScreenBase name={SCREEN_TITLE}>
       <FormStatusPanel
@@ -258,8 +257,9 @@ export function AssignCompanyToClient({
         className="flex-none max-h-10 mb-4"
         title={
           (onEdit && WHEN_EDIT_BUTTON_TITLE) ||
-          (afterCreateClient && WHEN_CREATE_BUTTON_TITLE) ||
-          WHEN_ASSIGNATION_BUTTON_TITLE
+          (afterCreateClient && WHEN_ASSIGNATION_BUTTON_TITLE) ||
+          (onCreateClient && WHEN_CREATE_BUTTON_TITLE) ||
+          ''
         }
         onPress={handleSubmit(onSubmit)}
       />

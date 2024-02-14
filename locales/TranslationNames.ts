@@ -66,7 +66,7 @@ export const TranslationNames = {
       assignCompanyToClient: {
         screenTitle: 'screens.clientDriver.assignCompanyToClient.screenTitle',
         assignationSubmitButton:
-          'screens.clientDriver.assignCompanyToClient.submitButton',
+          'screens.clientDriver.assignCompanyToClient.assignationSubmitButton',
         editSubmitButton:
           'screens.clientDriver.assignCompanyToClient.editSubmitButton',
         createSubmitButton:

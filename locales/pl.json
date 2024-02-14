@@ -54,9 +54,9 @@
     "clientDriver": {
       "assignCompanyToClient": {
         "screenTitle": "Przypisz firmę",
-        "assignationSubmitButton": "Przypisz firmę",
+        "assignationSubmitButton": "Przypisz",
         "editSubmitButton": "Zapisz zmiany",
-        "createSubmitButton": "Utwórz klienta z firmą",
+        "createButton": "Utwórz klienta i jego firme",
         "successMessageStart": "Zrobione! Klient ",
         "successMessageEnd": " został dodany wraz z firmą",
         "pendingStatus": "Tworzenie..."

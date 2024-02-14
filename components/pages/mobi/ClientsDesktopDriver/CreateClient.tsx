@@ -161,7 +161,8 @@ export function CreateClient({
   'ownerRootDriver'
 >) {
   const client = params?.client;
-
+  const hasBeenEjected = useRef(false);
+  const isDirtyRef = useRef<boolean>();
   const {
     control,
     reset,
@@ -175,10 +176,10 @@ export function CreateClient({
       [params?.client],
     ),
   });
-  useEffect(
-    () => reset(prepareDefaultValues(params?.client)),
-    [params?.client],
-  );
+  useEffect(() => {
+    hasBeenEjected.current = !!params?.client;
+    reset(prepareDefaultValues(params?.client));
+  }, [params?.client]);
 
   /**
    * @description this query is used when creating a new client
@@ -187,6 +188,8 @@ export function CreateClient({
   const { mutate, data, isPending, error, isSuccess } = useMutation({
     mutationFn: createClient,
     onSuccess: (sth, variables) => {
+      isDirtyRef.current = false;
+      hasBeenEjected.current = false;
       queryClient.setQueryData(
         ['clients'],
         (oldData: Array<ClientResponseBase>) => {
@@ -208,6 +211,8 @@ export function CreateClient({
   } = useMutation({
     mutationFn: updateClient,
     onSuccess: (sth, variables) => {
+      isDirtyRef.current = false;
+      hasBeenEjected.current = false;
       queryClient.setQueryData(
         ['clients'],
         (oldData: Array<ClientResponseBase>) => {
@@ -254,17 +259,19 @@ export function CreateClient({
       mutate(convertFormDataToRequestType(getValues()));
     },
     onRightButtonClick: async () => {
+      hasBeenEjected.current = false;
+      isDirtyRef.current = false;
       setAlert(prevState => ({ ...prevState, status: false }));
       navigation.navigate('assignCompanyToClient', {
         onCreateClient: convertFormDataToRequestType(getValues()),
       });
+      reset(prepareDefaultValues());
     },
   });
-
   /**
    * @description this ref is used to check if the form is dirty, because we must use ref in listener
    */
-  const isDirtyRef = useRef<boolean>();
+
   useEffect(() => {
     isDirtyRef.current = isDirty;
   }, [isDirty]);
@@ -274,12 +281,13 @@ export function CreateClient({
    */
   useEffect(() => {
     navigation.addListener('blur', () => {
-      if (isDirtyRef.current)
+      if (isDirtyRef.current || hasBeenEjected.current)
         setAlert({
           ...screeBlurAlert,
           status: true,
           onLeftButtonClick: () => {
             reset(prepareDefaultValues());
+            hasBeenEjected.current = false;
             setAlert(prevState => ({ ...prevState, status: false }));
           },
           onRightButtonClick: () => {

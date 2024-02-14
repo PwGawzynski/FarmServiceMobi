@@ -23,11 +23,10 @@ export function PendingInfo({ infoText, isVisible }: PendingInfoProps) {
     };
   }, [isVisible]);
 
-  if (!isVisible) return null;
   return (
     <Animated.View
       style={[animatedStyle]}
-      className="flex-1 flex-row items-center justify-center"
+      className="flex-1 min-w-[100%] flex-row items-center justify-center"
     >
       <ActivityIndicator color={Colors.GREEN} />
       <Text className="ml-2 text-dark dark:text-green">{infoText}</Text>
