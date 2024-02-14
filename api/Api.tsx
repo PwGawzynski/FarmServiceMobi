@@ -14,7 +14,10 @@ import {
   UserResetPasswordReqI,
 } from '../FarmServiceApiTypes/User/Requests';
 import { CreateCompanyReqI } from '../FarmServiceApiTypes/Company/Requests';
-import { CreateClientReqI } from '../FarmServiceApiTypes/Clients/Requests';
+import {
+  CreateClientReqI,
+  UpdateClientReqI,
+} from '../FarmServiceApiTypes/Clients/Requests';
 import { ClientResponseBase } from '../FarmServiceApiTypes/Clients/Responses';
 import {
   CreateClientsCompanyReqI,
@@ -192,7 +195,7 @@ export class Api {
       personal_data: {
         name: userData.personal_data.name,
         surname: userData.personal_data.surname,
-        phone_number: userData.personal_data.phone_number,
+        phoneNumber: userData.personal_data.phoneNumber,
       },
       address: {
         city: userData.address.city,
@@ -256,6 +259,16 @@ export class Api {
     await Api.session();
     return (
       (await Api.axiosInstance.post(
+        '/clients',
+        data,
+      )) as AxiosResponse<ResponseObject>
+    ).data.payload as ClientResponseBase | undefined;
+  }
+
+  static async updateClient(data: UpdateClientReqI) {
+    await Api.session();
+    return (
+      (await Api.axiosInstance.put(
         '/clients',
         data,
       )) as AxiosResponse<ResponseObject>
