@@ -98,7 +98,7 @@
   },
   "userService": {
     "errorMessages": {
-      "wrongCredentials": "Niepoprawny e-mail lub hasło",
+      "wrongCredentials": "Niepoprawny e-mail lub hasło"
     }
   },
   "components": {
