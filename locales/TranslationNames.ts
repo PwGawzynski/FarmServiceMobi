@@ -65,7 +65,12 @@ export const TranslationNames = {
     clientDriver: {
       assignCompanyToClient: {
         screenTitle: 'screens.clientDriver.assignCompanyToClient.screenTitle',
-        submitButton: 'screens.clientDriver.assignCompanyToClient.submitButton',
+        assignationSubmitButton:
+          'screens.clientDriver.assignCompanyToClient.submitButton',
+        editSubmitButton:
+          'screens.clientDriver.assignCompanyToClient.editSubmitButton',
+        createSubmitButton:
+          'screens.clientDriver.assignCompanyToClient.createButton',
         successMessageStart:
           'screens.clientDriver.assignCompanyToClient.successMessageStart',
         successMessageEnd:
@@ -87,6 +92,8 @@ export const TranslationNames = {
       createClient: {
         screenTitle: 'screens.clientDesktopDriver.createClient.screenTitle',
         submitButton: 'screens.clientDesktopDriver.createClient.submitButton',
+        editSubmitButton:
+          'screens.clientDesktopDriver.createClient.editSubmitButton',
         successMessage:
           'screens.clientDesktopDriver.createClient.successMessage',
         alertTitle: 'screens.clientDesktopDriver.createClient.alertTitle',
@@ -96,6 +103,14 @@ export const TranslationNames = {
           'screens.clientDesktopDriver.createClient.alertGoWithoutButton',
         alertCreateButton:
           'screens.clientDesktopDriver.createClient.alertCreateButton',
+        alertOnScreenBlurTitle:
+          'screens.clientDesktopDriver.createClient.alertOnScreenBlurTitle',
+        alertOnScreenBlurDescription:
+          'screens.clientDesktopDriver.createClient.alertOnScreenBlurDescription',
+        alertOnScreenBlurLeaveButton:
+          'screens.clientDesktopDriver.createClient.alertOnScreenBlurLeaveButton',
+        alertOnScreenBlurStayButton:
+          'screens.clientDesktopDriver.createClient.alertOnScreenBlurStayButton',
         pendingStatus: 'screens.clientDesktopDriver.createClient.pendingStatus',
       },
       clientsDesktop: {

@@ -54,7 +54,9 @@
     "clientDriver": {
       "assignCompanyToClient": {
         "screenTitle": "Assign company",
-        "submitButton": "Assign",
+        "assignationSubmitButton": "Assign",
+        "editSubmitButton": "Save",
+        "createSubmitButton": "Create Client with company",
         "successMessageStart": "It's done, client ",
         "successMessageEnd": " has been added and company has been assigned to it",
         "pendingStatus": "Processing..."
@@ -72,11 +74,16 @@
       "createClient": {
         "screenTitle": "Create new client",
         "submitButton": "Create",
+        "editSubmitButton": "Save",
         "successMessage": "It's done, new client has been added",
         "alertTitle": "Has your client a owner of company ?",
         "alertDescription": "If your client has a company, click create to save its data to be able to use it in the future accounting",
         "alertGoWithoutButton": "Go without",
         "alertCreateButton": "Create",
+        "alertOnScreenBlurTitle": "Are you sure?",
+        "alertOnScreenBlurDescription": "You have unsaved changes, are you sure you want to leave this page?",
+        "alertOnScreenBlurLeaveButton": "Leave",
+        "alertOnScreenBlurStayButton": "Stay",
         "pendingStatus": "Creating..."
       },
       "clientsDesktop": {

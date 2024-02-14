@@ -54,7 +54,9 @@
     "clientDriver": {
       "assignCompanyToClient": {
         "screenTitle": "Przypisz firmę",
-        "submitButton": "Przypisz firmę",
+        "assignationSubmitButton": "Przypisz firmę",
+        "editSubmitButton": "Zapisz zmiany",
+        "createSubmitButton": "Utwórz klienta z firmą",
         "successMessageStart": "Zrobione! Klient ",
         "successMessageEnd": " został dodany wraz z firmą",
         "pendingStatus": "Tworzenie..."
@@ -72,11 +74,16 @@
       "createClient": {
         "screenTitle": "Utwórz nowego klienta",
         "submitButton": "Utwórz klienta",
+        "editSubmitButton": "Zapisz zmiany",
         "successMessage": "Zrobione! Klient został utworzony pomyślnie",
-        "alertTitle": "Has your client a owner of company ?",
-        "alertDescription": "If your client has a company, click create to save its data to be able to use it in the future accounting",
-        "alertGoWithoutButton": "Go without",
-        "alertCreateButton": "Create",
+        "alertTitle": "Czy klient ma firmę?",
+        "alertDescription": "Jeżeli klient ma firmę, możesz ją przypisać do niego co bedzie przydatne podczas wystawiania faktur. Jeżeli nie, możesz pominąć ten krok.",
+        "alertGoWithoutButton": "Przejdź dalej",
+        "alertCreateButton": "Utwórz firmę",
+        "alertOnScreenBlurTitle": "Uważaj! Niezapisane zmiany",
+        "alertOnScreenBlurDescription": "Masz niezapisane zmiany. Czy na pewno chcesz wyjść ?",
+        "alertOnScreenBlurLeaveButton": "Opuść",
+        "alertOnScreenBlurStayButton": "Zostań",
         "pendingStatus": "Tworzenie klienta..."
       },
       "clientsDesktop": {
