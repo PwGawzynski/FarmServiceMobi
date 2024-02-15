@@ -140,6 +140,10 @@ export const TranslationNames = {
       cannotCallAlertTitle: 'components.call.cannotCallAlertTitle',
       cannotCallAlertMessage: 'components.call.cannotCallAlertMessage',
     },
+    clientList: {
+      listEmptyText: 'components.clientList.listEmptyText',
+      listLoadingText: 'components.clientList.listLoadingText',
+    },
   },
   addressForm: {
     formPlaceholder: {
