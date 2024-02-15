@@ -111,6 +111,10 @@
       "title": "Call",
       "cannotCallAlertTitle": "Cannot call",
       "cannotCallAlertMessage": "Sorry we cannot call, possibly this device doesn't support calling"
+    },
+    "clientList": {
+      "listEmptyText": "No clients yet, swipe right to create one",
+      "listLoadingText": "Loading clients..."
     }
   },
   "addressForm": {

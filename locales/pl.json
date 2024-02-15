@@ -13,10 +13,10 @@
         "connecting": "Łączenie z serwerem..."
       },
       "chooseRegisterType": {
-        "header": "Utwurz nowe konto",
+        "header": "Utwórz nowe konto",
         "email": "Zacznij z e-mail",
         "google": "Zacznij z Google",
-        "instruction": "Pracuj mądze, nie cięzko z FarmService"
+        "instruction": "Pracuj mądże, nie ciężko z FarmService"
       },
       "loginByEmail": {
         "header": "Zaloguj się",
@@ -111,6 +111,10 @@
       "title": "Zadzwoń",
       "cannotCallAlertTitle": "Błąd połączenia",
       "cannotCallAlertMessage": "Nie udało się wykonać połączenia. Prawdopodobnie to urządzenie nie obsługuje dzwonienia."
+    },
+    "clientList": {
+      "listEmptyText": "Nie masz jeszcze żadnych klientów, przeciągnij w prawo aby dodać nowego klienta",
+      "listLoadingText": "Pobiranie Klientów..."
     }
   },
   "addressForm": {
