@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { TamaguiProvider } from 'tamagui';
 import { useColorScheme } from 'nativewind';
 import { useEffect } from 'react';
+import Toast from 'react-native-toast-message';
 import { AuthDriverParamList } from '../../types/self/navigation/paramLists/AuthDriverParamList';
 import Landing from '../pages/mobi/AuthDriver/Landing';
 import { NativeStackScreenOptionsBase } from '../../settings/navigators/NativeStackScreenOptionsBase';
@@ -17,6 +18,7 @@ import { CreateCompany } from '../pages/mobi/AuthDriver/CreateCompany';
 // eslint-disable-next-line import/extensions
 import config from '../../tamagui_conf/tamagui.config';
 import { Theme } from '../../FarmServiceApiTypes/Account/Constants';
+import { ToastSetup } from '../../helepers/ToastSetup';
 
 const Stack = createNativeStackNavigator<AuthDriverParamList>();
 
@@ -113,6 +115,8 @@ export default function AuthDriver() {
           component={OperationConfirmedAnimation}
         />
       </Stack.Navigator>
+      {/* If there is any error in toast, start by moving it to app.tsx */}
+      <Toast config={ToastSetup(theme)} />
     </TamaguiProvider>
   );
 }
