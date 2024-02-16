@@ -111,6 +111,10 @@
       "title": "Call",
       "cannotCallAlertTitle": "Cannot call",
       "cannotCallAlertMessage": "Sorry we cannot call, possibly this device doesn't support calling"
+    },
+    "toast": {
+      "clientsFetchErrorHeader": "Clients fetch error",
+      "clientsFetchErrorContext": "Sorry we cannot fetch clients, please try again later"
     }
   },
   "addressForm": {
