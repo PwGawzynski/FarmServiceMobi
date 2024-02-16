@@ -17,7 +17,7 @@ export enum InitializationStatus {
   REJECTED,
 }
 
-type UserContextI = {
+export type UserContextI = {
   role: UserRole | undefined;
   personal_data: Partial<UserResponseBase['personal_data']>;
   address: Partial<UserResponseBase['address']>;
