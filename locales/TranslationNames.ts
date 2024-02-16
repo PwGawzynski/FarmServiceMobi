@@ -140,6 +140,10 @@ export const TranslationNames = {
       cannotCallAlertTitle: 'components.call.cannotCallAlertTitle',
       cannotCallAlertMessage: 'components.call.cannotCallAlertMessage',
     },
+    toast: {
+      clientsFetchErrorHeader: 'components.toast.clientsFetchErrorHeader',
+      clientsFetchErrorContext: 'components.toast.clientsFetchErrorContext',
+    },
   },
   addressForm: {
     formPlaceholder: {
