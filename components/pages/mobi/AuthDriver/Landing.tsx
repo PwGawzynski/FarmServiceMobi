@@ -1,10 +1,11 @@
-import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { assign, createMachine } from 'xstate';
 import { useActor } from '@xstate/react';
 import { ActivityIndicator, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { useQuery } from '@tanstack/react-query';
+import { QueryClient } from '@tanstack/react-query';
+import Toast from 'react-native-toast-message';
 import {
   InitializationStatus,
   selectInitStatus,
@@ -19,6 +20,14 @@ import {
 import { TranslationNames } from '../../../../locales/TranslationNames';
 import { UserRole } from '../../../../FarmServiceApiTypes/User/Enums';
 import { getClients } from '../../../../api/clients/Client';
+import {
+  selectQueryFetchLog,
+  setQueryFetchLogs,
+} from '../../../../src/redux/feature/cachingDriverSlice';
+import {
+  MIN_QUERY_RETRY_COUNT,
+  QUERY_RETRY_DELAY_MULTIPLICATION,
+} from '../../../../settings/query/querySettings';
 
 const LandingMachine = createMachine({
   id: 'Landing',
@@ -68,12 +77,44 @@ export default function Landing({ navigation }: AuthDriverProps<'landing'>) {
   const userIntStatus = useSelector(selectInitStatus);
   const { role, company } = useSelector(selectUser) ?? {};
   const [state, send] = useActor(LandingMachine, { input: { fetchCount: 1 } });
-  // PREFETCH clients
-  useQuery({
-    queryKey: ['clients'],
-    queryFn: getClients,
-    notifyOnChangeProps: [],
-  });
+  const queryLog = useSelector(selectQueryFetchLog('clients-fetch-error'));
+  const dispatch = useDispatch();
+
+  const queryClient = useRef(
+    new QueryClient({
+      defaultOptions: {
+        queries: {
+          queryKey: ['clients'],
+          queryFn: getClients,
+          refetchOnWindowFocus: false,
+          refetchOnMount: false,
+        },
+      },
+    }),
+  );
+  useEffect(() => {
+    if (!queryLog)
+      queryClient.current
+        .fetchQuery({
+          queryKey: ['clients'],
+          retry: MIN_QUERY_RETRY_COUNT,
+          retryDelay: retryCount =>
+            retryCount * QUERY_RETRY_DELAY_MULTIPLICATION,
+        })
+        .then(console.log)
+        .catch(e => {
+          dispatch(
+            setQueryFetchLogs({ key: 'clients-fetch-error', value: e.message }),
+          );
+          Toast.show({
+            type: 'error',
+            text1: t(TranslationNames.components.toast.clientsFetchErrorHeader),
+            text2: t(
+              TranslationNames.components.toast.clientsFetchErrorContext,
+            ),
+          });
+        });
+  }, [queryLog]);
 
   console.log('render');
   useEffect(() => {
