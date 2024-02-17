@@ -7,6 +7,7 @@ import './i18next';
 import i18next from 'i18next';
 import { I18nextProvider } from 'react-i18next';
 import { RootSiblingParent } from 'react-native-root-siblings';
+import { useFonts } from 'expo-font';
 import AuthDriver from './components/navigators/AuthDriver';
 import store from './src/redux/app/Store';
 import { setUpUser } from './src/redux/feature/userSlice';
@@ -28,6 +29,10 @@ export default function App() {
         retryDelay: retryCount => retryCount * QUERY_RETRY_DELAY_MULTIPLICATION,
       },
     },
+  });
+  // TODO fix fonts
+  useFonts({
+    Helvetica: require('./helvetica/Helvetica/Helvetica.ttf'),
   });
   console.log(MIN_QUERY_RETRY_COUNT, QUERY_RETRY_DELAY_MULTIPLICATION);
   return (

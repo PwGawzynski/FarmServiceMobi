@@ -111,6 +111,10 @@
       "title": "Zadzwoń",
       "cannotCallAlertTitle": "Błąd połączenia",
       "cannotCallAlertMessage": "Nie udało się wykonać połączenia. Prawdopodobnie to urządzenie nie obsługuje dzwonienia."
+    },
+    "toast": {
+      "clientsFetchErrorHeader": "Błąd pobierania klientów",
+      "clientsFetchErrorContext": "Nie udało się pobrać listy klientów. Spróbuj ponownie później."
     }
   },
   "addressForm": {

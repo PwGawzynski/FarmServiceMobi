@@ -5,7 +5,9 @@ import Animated, {
 } from 'react-native-reanimated';
 import { View } from 'react-native';
 
-export const LANDING_ANIMATION_DURATION = 3000;
+export const LANDING_ANIMATION_DURATION = process.env.EXPO_PUBLIC_IS_DEV
+  ? 0
+  : 3000;
 
 export type Props = {
   play: boolean;
