@@ -41,6 +41,7 @@ export function ActivityDesktopRoot({
         }),
     },
   ];
+
   return (
     <ScreenBase name="Last Activities">
       <View className="flex-1 flex-col">
