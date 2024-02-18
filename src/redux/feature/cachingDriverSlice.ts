@@ -1,9 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { MainStoreI } from '../app/Store';
 
+export interface LogI {
+  key: string;
+  value: {
+    lastOccurredAt: string;
+  };
+}
+
 export interface CachingDriverI {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  queryFetchLogs: Array<{ key: string; value: any }>;
+  queryFetchLogs: Array<LogI>;
 }
 
 const initialState: CachingDriverI = {
@@ -15,7 +22,7 @@ const CachingDriverSlice = createSlice({
   name: 'cachingDriver',
   initialState,
   reducers: {
-    setQueryFetchLogs: (state, action) => {
+    setQueryFetchLogs: (state, action: { payload: LogI; type: string }) => {
       // eslint-disable-next-line no-param-reassign
       state.queryFetchLogs = [
         ...state.queryFetchLogs.filter(log => log.key !== action.payload.key),
