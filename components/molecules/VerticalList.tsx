@@ -6,10 +6,14 @@ import {
 import { useCallback, useEffect, useRef } from 'react';
 import { View } from 'react-native';
 import Empty from '../../assets/empty.svg';
-import { EmptyList } from '../atoms/EmptyList';
+import X from '../../assets/x.svg';
+import { ListInfo } from '../atoms/ListInfo';
+import { Colors } from '../../settings/styles/colors';
 
 export type VerticalListProps<T> = {
   renderItem: ListRenderItem<T>;
+  isLoading?: boolean;
+  isLoadingError?: boolean;
   estimatedSize: number;
   data?: T[];
   ListEmptyComponent?: JSX.Element;
@@ -22,6 +26,8 @@ export function VerticalList<T>({
   estimatedSize,
   ListEmptyComponent,
   onLoadingData,
+  isLoading,
+  isLoadingError,
 }: VerticalListProps<T>) {
   const ref = useRef<FlashList<T>>(null);
   const [blankAreaTrackerResult, onBlankArea] = useBlankAreaTracker(ref);
@@ -37,8 +43,24 @@ export function VerticalList<T>({
     [],
   );
   const divider = useCallback(() => <View className="h-4" />, []);
-  const ListEmpty = useCallback(() => <EmptyList EmptyIco={Empty} />, []);
-  if (data === undefined) return onLoadingData;
+  const ListEmpty = useCallback(
+    () => <ListInfo Ico={Empty} text="There's nothing to se here" />,
+    [],
+  );
+  const DataUndefinedInfo = useCallback(() => <ListInfo Ico={X} />, []);
+  const LoadingErrorInfo = useCallback(
+    () => (
+      <ListInfo
+        Ico={X}
+        color={Colors.ERROR_RED}
+        text="Problem occurred when fetching clients, please try again letter"
+      />
+    ),
+    [],
+  );
+  if (isLoading) return onLoadingData;
+  if (isLoadingError) return <LoadingErrorInfo />;
+  if (data === undefined) return <DataUndefinedInfo />;
   return (
     <FlashList
       ref={ref}
