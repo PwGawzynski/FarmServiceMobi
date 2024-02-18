@@ -237,6 +237,17 @@ export class Api {
       return Api.me();
   }
 
+  // eslint-disable-next-line no-underscore-dangle
+  static async delayRes() {
+    return process.env.EXPO_PUBLIC_IS_DEV
+      ? new Promise(resolve => {
+          setTimeout(() => {
+            resolve(true);
+          }, 1000);
+        })
+      : true;
+  }
+
   static async resetPassword(data: UserResetPasswordReqI) {
     return (
       (await Api.axiosInstance.put('/user/reset-password', undefined, {
@@ -296,6 +307,7 @@ export class Api {
   }
 
   static async getClients() {
+    await Api.delayRes();
     await Api.session();
     return (
       (await Api.axiosInstance.get(
