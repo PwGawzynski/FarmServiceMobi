@@ -112,6 +112,11 @@
       "cannotCallAlertTitle": "Cannot call",
       "cannotCallAlertMessage": "Sorry we cannot call, possibly this device doesn't support calling"
     },
+
+    "clientList": {
+      "listEmptyText": "No clients yet, swipe right to create one",
+      "listLoadingText": "Loading clients..."
+  }
     "toast": {
       "clientsFetchErrorHeader": "Clients fetch error",
       "clientsFetchErrorContext": "Sorry we cannot fetch clients, please try again later"

@@ -5,17 +5,23 @@ import {
 } from '@shopify/flash-list';
 import { useCallback, useEffect, useRef } from 'react';
 import { View } from 'react-native';
+import Empty from '../../assets/empty.svg';
+import { EmptyList } from '../atoms/EmptyList';
 
 export type VerticalListProps<T> = {
   renderItem: ListRenderItem<T>;
-  data?: T[];
   estimatedSize: number;
+  data?: T[];
+  ListEmptyComponent?: JSX.Element;
+  onLoadingData?: JSX.Element[] | JSX.Element;
 };
 
 export function VerticalList<T>({
   renderItem,
   data,
   estimatedSize,
+  ListEmptyComponent,
+  onLoadingData,
 }: VerticalListProps<T>) {
   const ref = useRef<FlashList<T>>(null);
   const [blankAreaTrackerResult, onBlankArea] = useBlankAreaTracker(ref);
@@ -31,7 +37,8 @@ export function VerticalList<T>({
     [],
   );
   const divider = useCallback(() => <View className="h-4" />, []);
-
+  const ListEmpty = useCallback(() => <EmptyList EmptyIco={Empty} />, []);
+  if (data === undefined) return onLoadingData;
   return (
     <FlashList
       ref={ref}
@@ -39,6 +46,7 @@ export function VerticalList<T>({
       ItemSeparatorComponent={divider}
       estimatedItemSize={estimatedSize}
       data={data}
+      ListEmptyComponent={ListEmptyComponent ?? ListEmpty}
       renderItem={renderItem}
       onBlankArea={onBlankArea}
       onLoad={onLoadListener}
