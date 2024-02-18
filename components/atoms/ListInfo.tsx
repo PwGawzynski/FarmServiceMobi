@@ -4,17 +4,19 @@ import React from 'react';
 
 export type ListEmptyProps = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  EmptyIco: any;
+  Ico: any;
   height?: number;
   text?: string;
   children?: React.ReactElement;
+  color?: string;
 };
 
-export function EmptyList({
-  EmptyIco: Ico,
+export function ListInfo({
+  Ico,
   height,
   text,
   children,
+  color: _color,
 }: ListEmptyProps) {
   const EMPTY_HEIGHT = height ?? Dimensions.get('window').height * 0.7;
   const { color } = useTheme();
@@ -28,10 +30,14 @@ export function EmptyList({
       <Ico
         width={EMPTY_HEIGHT / 10}
         height={EMPTY_HEIGHT / 10}
-        color={color?.val}
+        color={_color ?? color?.val}
       />
-      <SizableText className="mt-8" fontSize="$5">
-        {text ?? 'There is nothing to see here :('}
+      <SizableText
+        color={_color ?? color?.val}
+        className="mt-8  text-center"
+        fontSize="$5"
+      >
+        {text ?? 'Unknown Error Occurred!'}
       </SizableText>
       {children}
     </View>
