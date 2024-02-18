@@ -112,11 +112,10 @@
       "cannotCallAlertTitle": "Błąd połączenia",
       "cannotCallAlertMessage": "Nie udało się wykonać połączenia. Prawdopodobnie to urządzenie nie obsługuje dzwonienia."
     },
-
     "clientList": {
       "listEmptyText": "Nie masz jeszcze żadnych klientów, przeciągnij w prawo aby dodać nowego klienta",
       "listLoadingText": "Pobiranie Klientów..."
-    }
+    },
     "toast": {
       "clientsFetchErrorHeader": "Błąd pobierania klientów",
       "clientsFetchErrorContext": "Nie udało się pobrać listy klientów. Spróbuj ponownie później."
