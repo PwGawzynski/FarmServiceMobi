@@ -14,10 +14,11 @@ const SCREEN_NAME = t(
 );
 
 export function ClientsDesktop() {
-  const { data } = useQuery({
+  const { data, isFetching, isError } = useQuery({
     queryKey: ['clients'],
     queryFn: getClients,
     staleTime: EXPO_PUBLIC_CLIENTS_QUERY_STALE_TIME,
+    refetchOnWindowFocus: true,
   });
   const [filter, setFilter] = useState<string | undefined>(undefined);
 
@@ -50,7 +51,10 @@ export function ClientsDesktop() {
         />
       </YStack>
       <YStack f={1}>
-        <ClientList data={sorted} />
+        <ClientList
+          data={sorted}
+          listSetup={{ isLoading: isFetching, isLoadingError: isError }}
+        />
       </YStack>
     </ScreenBase>
   );
