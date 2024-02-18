@@ -5,7 +5,6 @@ import { useActor } from '@xstate/react';
 import { ActivityIndicator, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { QueryClient } from '@tanstack/react-query';
-import Toast from 'react-native-toast-message';
 import {
   InitializationStatus,
   selectInitStatus,
@@ -20,14 +19,8 @@ import {
 import { TranslationNames } from '../../../../locales/TranslationNames';
 import { UserRole } from '../../../../FarmServiceApiTypes/User/Enums';
 import { getClients } from '../../../../api/clients/Client';
-import {
-  selectQueryFetchLog,
-  setQueryFetchLogs,
-} from '../../../../src/redux/feature/cachingDriverSlice';
-import {
-  MIN_QUERY_RETRY_COUNT,
-  QUERY_RETRY_DELAY_MULTIPLICATION,
-} from '../../../../settings/query/querySettings';
+import { selectQueryFetchLog } from '../../../../src/redux/feature/cachingDriverSlice';
+import { fetchClientDriver } from '../../../../helepers/FetchingHelpers';
 
 const LandingMachine = createMachine({
   id: 'Landing',
@@ -88,32 +81,15 @@ export default function Landing({ navigation }: AuthDriverProps<'landing'>) {
           queryFn: getClients,
           refetchOnWindowFocus: false,
           refetchOnMount: false,
+          retry: 1,
         },
       },
     }),
   );
   useEffect(() => {
-    if (!queryLog)
-      queryClient.current
-        .fetchQuery({
-          queryKey: ['clients'],
-          retry: MIN_QUERY_RETRY_COUNT,
-          retryDelay: retryCount =>
-            retryCount * QUERY_RETRY_DELAY_MULTIPLICATION,
-        })
-        .then(console.log)
-        .catch(e => {
-          dispatch(
-            setQueryFetchLogs({ key: 'clients-fetch-error', value: e.message }),
-          );
-          Toast.show({
-            type: 'error',
-            text1: t(TranslationNames.components.toast.clientsFetchErrorHeader),
-            text2: t(
-              TranslationNames.components.toast.clientsFetchErrorContext,
-            ),
-          });
-        });
+    const intervalId = fetchClientDriver(queryClient, queryLog, dispatch);
+    if (intervalId) return () => clearInterval(intervalId);
+    return undefined;
   }, [queryLog]);
 
   console.log('render');
