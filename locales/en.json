@@ -90,6 +90,13 @@
         "title": "Clients",
         "searchPlaceholder": "Find a client"
       }
+    },
+    "workerAssignation": {
+      "qrCodeScanCommunication": "Let the owner scan the QR code to assign you to the company",
+      "qrCodeTimeOut": "Scan this code before the timer runs out",
+      "connectionTimeout": "Connection timeout...",
+      "error": "Error occurred...",
+      "retryButton": "Retry"
     }
   },
   "serviceDefaults": {
