@@ -6,8 +6,7 @@ import {
   GestureDetector,
 } from 'react-native-gesture-handler';
 import { Platform } from 'react-native';
-import { ClientsDesktopDriverParamList } from '../../../../types/self/navigation/paramLists/clients/ClientsDesktopDriverParamList';
-import { ClientsDesktop } from '../../../pages/mobi/ClientsDesktopDriver/ClientsDesktop';
+import { ClientsDesktopDriverParamList } from '../../../../types/self/navigation/Owner/paramLists/clients/ClientsDesktopDriverParamList';
 import {
   MaterialBaseInitialLayout,
   MaterialTopTabScreenOptions,
@@ -15,8 +14,9 @@ import {
 import { Theme } from '../../../../FarmServiceApiTypes/Account/Constants';
 import { Colors } from '../../../../settings/styles/colors';
 import { selectTheme } from '../../../../src/redux/feature/userSlice';
-import { ClientsDriverScreenProps } from '../../../../types/self/navigation/props/clients/ClientsDriverProps';
-import { CreateClient } from '../../../pages/mobi/ClientsDesktopDriver/CreateClient';
+import { ClientsDriverScreenProps } from '../../../../types/self/navigation/Owner/props/clients/ClientsDriverProps';
+import { ClientsDesktop } from '../../../pages/owner/mobi/ClientsDesktopDriver/ClientsDesktop';
+import { CreateClient } from '../../../pages/owner/mobi/ClientsDesktopDriver/CreateClient';
 
 const TopTab = createMaterialTopTabNavigator<ClientsDesktopDriverParamList>();
 

@@ -6,8 +6,7 @@ import {
   GestureDetector,
 } from 'react-native-gesture-handler';
 import { Platform } from 'react-native';
-import { OrderDesktop } from '../../../pages/mobi/OrdersDesktopDriver/OrderDesktop';
-import { OrdersDesktopDriverParamList } from '../../../../types/self/navigation/paramLists/orders/OrdersDesktopDriverParamList';
+import { OrdersDesktopDriverParamList } from '../../../../types/self/navigation/Owner/paramLists/orders/OrdersDesktopDriverParamList';
 import {
   MaterialBaseInitialLayout,
   MaterialTopTabScreenOptions,
@@ -15,7 +14,8 @@ import {
 import { selectTheme } from '../../../../src/redux/feature/userSlice';
 import { Theme } from '../../../../FarmServiceApiTypes/Account/Constants';
 import { Colors } from '../../../../settings/styles/colors';
-import { OrdersDriverScreenProps } from '../../../../types/self/navigation/props/orders/OrdersDriverProps';
+import { OrdersDriverScreenProps } from '../../../../types/self/navigation/Owner/props/orders/OrdersDriverProps';
+import { OrderDesktop } from '../../../pages/owner/mobi/OrdersDesktopDriver/OrderDesktop';
 
 const TopTab = createMaterialTopTabNavigator<OrdersDesktopDriverParamList>();
 

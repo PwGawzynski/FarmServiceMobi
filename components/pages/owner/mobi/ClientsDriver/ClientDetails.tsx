@@ -1,13 +1,13 @@
 import { Card, SizableText, XStack, YStack } from 'tamagui';
 import { t } from 'i18next';
 import { useNavigation } from '@react-navigation/native';
-import { ClientsDriverScreenProps } from '../../../../types/self/navigation/props/clients/ClientsDriverProps';
+import { ClientsDriverScreenProps } from '../../../../../types/self/navigation/Owner/props/clients/ClientsDriverProps';
 import { ScreenBase } from '../common/ScreenBase';
-import { KeyValuePair } from '../../../atoms/KeyValuePair';
-import { TranslationNames } from '../../../../locales/TranslationNames';
-import { CallAndMailPanel } from '../../../molecules/CallAndMailPanel';
-import PenIco from '../../../../assets/pen.svg';
-import { ButtonTamagui } from '../../../atoms/ButtonTamagui';
+import { TranslationNames } from '../../../../../locales/TranslationNames';
+import { ButtonTamagui } from '../../../../atoms/ButtonTamagui';
+import PenIco from '../../../../../assets/pen.svg';
+import { KeyValuePair } from '../../../../atoms/KeyValuePair';
+import { CallAndMailPanel } from '../../../../molecules/CallAndMailPanel';
 
 export function ClientDetails({
   route,

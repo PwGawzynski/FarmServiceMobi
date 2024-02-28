@@ -8,12 +8,12 @@ import Animated, {
 import { Audio } from 'expo-av';
 import { Sound } from 'expo-av/build/Audio/Sound';
 import { useSelector } from 'react-redux';
-import CheckIco from '../../../../assets/check.svg';
-import { AuthDriverProps } from '../../../../types/self/navigation/props/AuthDriverProps';
+import { selectTheme } from '../../../../../src/redux/feature/userSlice';
+import { AuthDriverProps } from '../../../../../types/self/navigation/Owner/props/AuthDriverProps';
+import CheckIco from '../../../../../assets/check.svg';
 import { ScreenBase } from '../common/ScreenBase';
-import { selectTheme } from '../../../../src/redux/feature/userSlice';
-import { Theme } from '../../../../FarmServiceApiTypes/Account/Constants';
-import { Colors } from '../../../../settings/styles/colors';
+import { Theme } from '../../../../../FarmServiceApiTypes/Account/Constants';
+import { Colors } from '../../../../../settings/styles/colors';
 
 const ANIMATION_START_DELAY = 1000;
 const ANIMATION_DURATION = 2000;
@@ -38,8 +38,8 @@ export function OperationConfirmedAnimation({
     if (!acceptBell) {
       (async () => {
         const { sound } = await Audio.Sound.createAsync(
-          // eslint-disable-next-line @typescript-eslint/no-var-requires
-          require('../../../../assets/beep.mp3'),
+          // eslint-disable-next-line @typescript-eslint/no-var-requires,import/extensions
+          require('../../../../../assets/beep.mp3'),
         );
         setAcceptBell(sound);
       })();

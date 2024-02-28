@@ -1,11 +1,11 @@
 import { useTranslation } from 'react-i18next';
 import { Text, View } from 'tamagui';
 import { ScreenBase } from '../common/ScreenBase';
-import { AppButton } from '../../../atoms/AppButton';
-import { AuthDriverProps } from '../../../../types/self/navigation/props/AuthDriverProps';
-import { TranslationNames } from '../../../../locales/TranslationNames';
-import { CenteredMediumHeader } from '../../../atoms/CenteredMediumHeader';
-import { TextWithLink } from '../../../atoms/TextWithLink';
+import { TranslationNames } from '../../../../../locales/TranslationNames';
+import { CenteredMediumHeader } from '../../../../atoms/CenteredMediumHeader';
+import { AuthDriverProps } from '../../../../../types/self/navigation/Owner/props/AuthDriverProps';
+import { AppButton } from '../../../../atoms/AppButton';
+import { TextWithLink } from '../../../../atoms/TextWithLink';
 
 export function ChooseLoginType({
   navigation,

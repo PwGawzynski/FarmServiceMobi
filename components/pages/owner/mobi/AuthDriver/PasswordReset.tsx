@@ -4,17 +4,17 @@ import { Controller, useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { ScreenBase } from '../common/ScreenBase';
-import { TranslationNames } from '../../../../locales/TranslationNames';
-import { CenteredMediumHeader } from '../../../atoms/CenteredMediumHeader';
-import { AppInput } from '../../../atoms/AppInput';
-import { LoginUser } from '../../../../FarmServiceApiTypes/User/LoginUser';
-import { AppButton } from '../../../atoms/AppButton';
-import { resetPwd } from '../../../../api/services/User';
-import { PendingInfo } from '../../../atoms/PendingInfo';
-import { FormErrorInfo } from '../../../atoms/FormErrorInfo';
-import { ResponseCode } from '../../../../FarmServiceApiTypes/Respnse/responseGeneric';
-import { AuthDriverProps } from '../../../../types/self/navigation/props/AuthDriverProps';
-import { LoginUserConstants } from '../../../../FarmServiceApiTypes/User/Constants';
+import { LoginUser } from '../../../../../FarmServiceApiTypes/User/LoginUser';
+import { AuthDriverProps } from '../../../../../types/self/navigation/Owner/props/AuthDriverProps';
+import { TranslationNames } from '../../../../../locales/TranslationNames';
+import { LoginUserConstants } from '../../../../../FarmServiceApiTypes/User/Constants';
+import { resetPwd } from '../../../../../api/services/User';
+import { ResponseCode } from '../../../../../FarmServiceApiTypes/Respnse/responseGeneric';
+import { CenteredMediumHeader } from '../../../../atoms/CenteredMediumHeader';
+import { PendingInfo } from '../../../../atoms/PendingInfo';
+import { FormErrorInfo } from '../../../../atoms/FormErrorInfo';
+import { AppButton } from '../../../../atoms/AppButton';
+import { AppInput } from '../../../../atoms/AppInput';
 
 type FormData = Pick<LoginUser, 'email'>;
 

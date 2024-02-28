@@ -4,20 +4,20 @@ import { useMutation } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ScreenBase } from '../common/ScreenBase';
-import { CreateCompanyReqI } from '../../../../FarmServiceApiTypes/Company/Requests';
+import { CreateCompanyReqI } from '../../../../../FarmServiceApiTypes/Company/Requests';
+import { AuthDriverProps } from '../../../../../types/self/navigation/Owner/props/AuthDriverProps';
 import {
   selectUserAddress,
   selectUserPersonalData,
   setCompany,
-} from '../../../../src/redux/feature/userSlice';
-import { AppButton } from '../../../atoms/AppButton';
-import { FormCreator } from '../../../atoms/FormCreator';
-import { createCompany } from '../../../../api/company/Company';
-import { AuthDriverProps } from '../../../../types/self/navigation/props/AuthDriverProps';
-import { AppDispatch } from '../../../../src/redux/app/Store';
-import { TranslationNames } from '../../../../locales/TranslationNames';
-import { FormStatusPanel } from '../../../molecules/FormStatusPanel';
-import { createCompanySetup } from '../../../../helepers/FormSetups/CreateCompanySetup';
+} from '../../../../../src/redux/feature/userSlice';
+import { AppDispatch } from '../../../../../src/redux/app/Store';
+import { createCompany } from '../../../../../api/company/Company';
+import { TranslationNames } from '../../../../../locales/TranslationNames';
+import { FormStatusPanel } from '../../../../molecules/FormStatusPanel';
+import { FormCreator } from '../../../../atoms/FormCreator';
+import { AppButton } from '../../../../atoms/AppButton';
+import { createCompanySetup } from '../../../../../helepers/FormSetups/CreateCompanySetup';
 
 export type CreateCompanyForm = CreateCompanyReqI['address'] &
   Omit<CreateCompanyReqI, 'address'>;

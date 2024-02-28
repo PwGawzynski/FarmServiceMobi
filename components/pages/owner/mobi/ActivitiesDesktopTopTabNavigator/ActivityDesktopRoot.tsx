@@ -1,10 +1,10 @@
 import { View } from 'react-native';
 import { ScreenBase } from '../common/ScreenBase';
-import { ActivitiesDesktopDriverScreenProps } from '../../../../types/self/navigation/props/activities/ActivitiesDesktopDriverProps';
 import {
   ButtonOptions,
   NavigationBottomPanel,
-} from '../../../molecules/NavigationBottomPanel';
+} from '../../../../molecules/NavigationBottomPanel';
+import { ActivitiesDesktopDriverScreenProps } from '../../../../../types/self/navigation/Owner/props/activities/ActivitiesDesktopDriverProps';
 
 export function ActivityDesktopRoot({
   navigation,

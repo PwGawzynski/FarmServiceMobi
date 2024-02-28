@@ -1,5 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { ActivityDriverParamList } from '../../../../types/self/navigation/paramLists/activities/ActivityDriverParamList';
+import { ActivityDriverParamList } from '../../../../types/self/navigation/Owner/paramLists/activities/ActivityDriverParamList';
 import { NativeStackScreenOptionsBase } from '../../../../settings/navigators/NativeStackScreenOptionsBase';
 import { ActivitiesDesktopDriver } from './ActivitiesDesktopDriver';
 

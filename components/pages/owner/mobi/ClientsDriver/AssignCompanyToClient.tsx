@@ -7,22 +7,21 @@ import {
 import { useEffect } from 'react';
 import { t } from 'i18next';
 import { ScreenBase } from '../common/ScreenBase';
-import { ClientsDriverScreenProps } from '../../../../types/self/navigation/props/clients/ClientsDriverProps';
-import { FormStatusPanel } from '../../../molecules/FormStatusPanel';
-import { FormCreator } from '../../../atoms/FormCreator';
-import { AppButton } from '../../../atoms/AppButton';
-import { TranslationNames } from '../../../../locales/TranslationNames';
-import { CreateCompanyForm } from '../AuthDriver/CreateCompany';
-import { CreateClientsCompanyReqI } from '../../../../FarmServiceApiTypes/ClientsCompany/Requests';
-
-import { createClientCompanySetup } from '../../../../helepers/FormSetups/CreateCompanySetup';
-import { ClientResponseBase } from '../../../../FarmServiceApiTypes/Clients/Responses';
+import { CreateClientsCompanyReqI } from '../../../../../FarmServiceApiTypes/ClientsCompany/Requests';
+import { TranslationNames } from '../../../../../locales/TranslationNames';
+import { ClientsCompanyResponseBase } from '../../../../../FarmServiceApiTypes/ClientsCompany/Responses';
+import { ClientResponseBase } from '../../../../../FarmServiceApiTypes/Clients/Responses';
+import { ClientsDriverScreenProps } from '../../../../../types/self/navigation/Owner/props/clients/ClientsDriverProps';
 import {
   assignCompanyToClient,
   createClient,
   updateClientsCompany,
-} from '../../../../api/clients/Client';
-import { ClientsCompanyResponseBase } from '../../../../FarmServiceApiTypes/ClientsCompany/Responses';
+} from '../../../../../api/clients/Client';
+import { CreateCompanyForm } from '../AuthDriver/CreateCompany';
+import { FormStatusPanel } from '../../../../molecules/FormStatusPanel';
+import { FormCreator } from '../../../../atoms/FormCreator';
+import { createClientCompanySetup } from '../../../../../helepers/FormSetups/CreateCompanySetup';
+import { AppButton } from '../../../../atoms/AppButton';
 
 export type CreateClientsCompanyForm = CreateClientsCompanyReqI['address'] &
   Omit<CreateClientsCompanyReqI, 'address'>;

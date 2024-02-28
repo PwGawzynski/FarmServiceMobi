@@ -6,6 +6,7 @@ import { ClientsDriverParamList } from './clients/ClientsDriverParamList';
 import { ClientsDesktopDriverParamList } from './clients/ClientsDesktopDriverParamList';
 import { ActivityDriverParamList } from './activities/ActivityDriverParamList';
 import { ActivityDesktopDriverParamList } from './activities/ActivityDesktopDriverParamList';
+import { WorkerRootDriverParamList } from '../../Worker/paramList/WorkerRootDriverParamList';
 
 export type AuthDriverParamList = {
   createCompany: undefined;
@@ -15,6 +16,7 @@ export type AuthDriverParamList = {
   chooseRegisterType: undefined;
   passwordReset: undefined;
   ownerRootDriver: NavigatorScreenParams<OwnerRootDriverParamList>;
+  workerRootDriver: NavigatorScreenParams<WorkerRootDriverParamList>;
   OperationConfirmed: {
     redirectScreenName:
       | keyof AuthDriverParamList

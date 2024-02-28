@@ -3,11 +3,11 @@ import { useQuery } from '@tanstack/react-query';
 import { YStack } from 'tamagui';
 import { useState } from 'react';
 import { ScreenBase } from '../common/ScreenBase';
-import { TranslationNames } from '../../../../locales/TranslationNames';
-import { getClients } from '../../../../api/clients/Client';
-import { ClientList } from '../../../organisms/ClientsList';
-import { SearchBox } from '../../../molecules/SearchBox';
-import { EXPO_PUBLIC_CLIENTS_QUERY_STALE_TIME } from '../../../../settings/query/querySettings';
+import { TranslationNames } from '../../../../../locales/TranslationNames';
+import { getClients } from '../../../../../api/clients/Client';
+import { EXPO_PUBLIC_CLIENTS_QUERY_STALE_TIME } from '../../../../../settings/query/querySettings';
+import { SearchBox } from '../../../../molecules/SearchBox';
+import { ClientList } from '../../../../organisms/ClientsList';
 
 const SCREEN_NAME = t(
   TranslationNames.screens.clientDesktopDriver.clientsDesktop.title,
