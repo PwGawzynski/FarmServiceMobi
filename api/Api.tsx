@@ -1,6 +1,7 @@
 import Constants from 'expo-constants';
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import * as SecureStore from 'expo-secure-store';
+import RNEventSource, { ListenerCallback } from 'react-native-event-source';
 import {
   IdentityAuthTokenLoginRaw,
   IdentityAuthTokenLoginStored,
@@ -24,6 +25,13 @@ import {
   UpdateClientsCompanyReqI,
 } from '../FarmServiceApiTypes/ClientsCompany/Requests';
 import { ClientsCompanyResponseBase } from '../FarmServiceApiTypes/ClientsCompany/Responses';
+import { WorkerIdResponseBase } from '../FarmServiceApiTypes/Worker/Responses';
+
+export interface sseAsyncListenerParams {
+  open?: ListenerCallback;
+  message: ListenerCallback;
+  error?: ListenerCallback;
+}
 
 export class Api {
   /**
@@ -222,6 +230,14 @@ export class Api {
     ).data;
   }
 
+  static async workerData() {
+    return (
+      (await Api.axiosInstance.get('/worker')) as AxiosResponse<
+        ResponseObject<WorkerIdResponseBase>
+      >
+    ).data;
+  }
+
   /**
    * Method used when user login ion app
    * @param loginData : LoginUser
@@ -314,5 +330,28 @@ export class Api {
         '/clients/all',
       )) as AxiosResponse<ResponseObject>
     ).data.payload as Array<ClientResponseBase> | undefined;
+  }
+
+  static workerAssignedListener({
+    open,
+    message,
+    error,
+  }: sseAsyncListenerParams) {
+    const eventSource = new RNEventSource(
+      `http://${Constants.expoConfig?.extra?.apiUrl}:3006/worker/sse/info`,
+      { headers: { Authorization: `Bearer ${Api.access_token}` } },
+    );
+
+    eventSource.addEventListener('message', data => {
+      message(data);
+      eventSource.removeAllListeners();
+      eventSource.close();
+    });
+    eventSource.addEventListener('error', data => {
+      if (error) error(data);
+      eventSource.removeAllListeners();
+      eventSource.close();
+    });
+    eventSource.addEventListener('open', open || (() => {}));
   }
 }
