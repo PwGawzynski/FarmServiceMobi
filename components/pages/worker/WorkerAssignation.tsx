@@ -56,7 +56,6 @@ export function WorkerAssignation({
     if (state.value === 'WorkerQueryPending' && data)
       send({ type: 'Fetched', data });
     if (state.value === 'WorkerQueryPending' && error) send({ type: 'Error' });
-
     if (state.value === 'sseOpening' && !data?.workerData) {
       Api.workerAssignedListener({
         open: handleOpenSse,
