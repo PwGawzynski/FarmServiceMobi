@@ -90,6 +90,13 @@
         "title": "Klienci",
         "searchPlaceholder": "Znajdź klienta"
       }
+    },
+    "workerAssignation": {
+      "qrCodeScanCommunication": "Pokaż właścicielowi kod QR, aby zeskanował go za pomocą swojej aplikacji FarmService",
+      "qrCodeTimeOut": "Zeskanuj kod QR w ciągu 60 sekund",
+      "connectionTimeout": "Przekroczono limit czasu połączenia...",
+      "error": "Wystąpił błąd...",
+      "retryButton": "Spróbuj ponownie"
     }
   },
   "serviceDefaults": {
