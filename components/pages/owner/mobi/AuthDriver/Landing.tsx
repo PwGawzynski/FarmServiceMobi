@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { assign, setup } from 'xstate';
 import { useActor } from '@xstate/react';
 import { ActivityIndicator, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
@@ -16,82 +15,58 @@ import { selectQueryFetchLog } from '../../../../../src/redux/feature/cachingDri
 import { getClients } from '../../../../../api/clients/Client';
 import { fetchClientDriver } from '../../../../../helepers/FetchingHelpers';
 import { ScreenBase } from '../common/ScreenBase';
-import {
-  LANDING_ANIMATION_DURATION,
-  LandingLogo,
-} from '../../../../atoms/LandingLogo';
+import { LandingLogo } from '../../../../atoms/LandingLogo';
 import { TranslationNames } from '../../../../../locales/TranslationNames';
 import { matchesAny } from '../../../../../helepers/StateMachines/MatchesAny';
+import { LandingMachine } from '../../../../../helepers/StateMachines/LandingMachine';
 
-const LandingMachine = setup({
-  types: {} as {
-    events:
-      | { type: 'ready'; userRole: UserRole | undefined }
-      | { type: 'unreachable' };
-    context: {
-      animationPlayed: boolean;
-      userRole: UserRole | undefined;
-    };
-  },
-  guards: {
-    isOwner: machine => machine.context.userRole === UserRole.Owner,
-    isWorker: machine => machine.context.userRole === UserRole.Worker,
-  },
-}).createMachine({
-  id: 'Landing',
-  initial: 'animating',
-  context: {
-    userRole: undefined,
-    animationPlayed: false,
-  },
-  states: {
-    animating: {
-      always: {
-        actions: assign({
-          animationPlayed: true,
-        }),
-        target: '#Landing.animated',
-      },
-    },
-    animated: {
-      after: {
-        [LANDING_ANIMATION_DURATION]: {
-          target: 'checkUserContextReady',
-        },
-      },
-    },
-    checkUserContextReady: {
-      on: {
-        ready: {
-          actions: assign({
-            userRole: incoming => {
-              return incoming.event.userRole;
+function provideActionsBaseOnStates(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  state: any,
+  userIntStatus: InitializationStatus | undefined,
+  role: UserRole | undefined,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  company: any,
+  navigation: AuthDriverProps<'landing'>['navigation'],
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  send: any,
+) {
+  switch (state.value) {
+    case 'checkUserContextReady':
+      if (userIntStatus === InitializationStatus.FULFILLED)
+        send({ type: 'ready', userRole: role });
+
+      if (userIntStatus === InitializationStatus.REJECTED)
+        send({ type: 'unreachable' });
+
+      break;
+    case 'unreachable':
+      if (!role) navigation.navigate('chooseLoginType');
+      break;
+
+    case 'userIsOwner':
+      if (company)
+        navigation.navigate('ownerRootDriver', {
+          screen: 'activityDriver',
+          params: {
+            screen: 'activityDesktopRoot',
+            params: {
+              screen: 'lastActivities',
             },
-          }),
-          target: 'contextReady',
-        },
-        unreachable: {
-          target: 'unreachable',
-        },
-      },
-    },
-    contextReady: {
-      always: [
-        {
-          guard: 'isOwner',
-          target: 'userIsOwner',
-        },
-        {
-          guard: 'isWorker',
-          target: 'userIsWorker',
-        },
-      ],
-    },
-    userIsOwner: {},
-    userIsWorker: {},
-    unreachable: {},
-  },
-});
+          },
+        });
+      if (!company) navigation.navigate('createCompany');
+
+      break;
+    case 'userIsWorker':
+      navigation.navigate('workerRootDriver', {
+        screen: 'workerAssignationScreen',
+      });
+      break;
+    default:
+      break;
+  }
+}
 
 export default function Landing({ navigation }: AuthDriverProps<'landing'>) {
   const { t } = useTranslation();
@@ -126,33 +101,16 @@ export default function Landing({ navigation }: AuthDriverProps<'landing'>) {
   }, [queryLog]);
 
   useEffect(() => {
-    if (state.value === 'checkUserContextReady') {
-      if (userIntStatus === InitializationStatus.FULFILLED) {
-        console.log(role);
-        send({ type: 'ready', userRole: role });
-      }
-      if (userIntStatus === InitializationStatus.REJECTED)
-        send({ type: 'unreachable' });
-    } else if (state.value === 'unreachable') {
-      if (!role) navigation.navigate('chooseLoginType');
-    } else if (state.value === 'userIsOwner') {
-      if (company)
-        navigation.navigate('ownerRootDriver', {
-          screen: 'activityDriver',
-          params: {
-            screen: 'activityDesktopRoot',
-            params: {
-              screen: 'lastActivities',
-            },
-          },
-        });
-      if (!company) navigation.navigate('createCompany');
-    } else if (state.value === 'userIsWorker') {
-      navigation.navigate('workerRootDriver', {
-        screen: 'workerAssignationScreen',
-      });
-    }
+    provideActionsBaseOnStates(
+      state,
+      userIntStatus,
+      role,
+      company,
+      navigation,
+      send,
+    );
   }, [state.value, userIntStatus]);
+
   return (
     <ScreenBase>
       <View className="flex-1 items-center justify-end">
