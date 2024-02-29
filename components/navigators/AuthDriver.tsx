@@ -4,21 +4,22 @@ import { TamaguiProvider } from 'tamagui';
 import { useColorScheme } from 'nativewind';
 import { useEffect } from 'react';
 import Toast from 'react-native-toast-message';
-import { AuthDriverParamList } from '../../types/self/navigation/paramLists/AuthDriverParamList';
-import Landing from '../pages/mobi/AuthDriver/Landing';
-import { NativeStackScreenOptionsBase } from '../../settings/navigators/NativeStackScreenOptionsBase';
-import { ChooseLoginType } from '../pages/mobi/AuthDriver/ChooseLoginType';
-import { LoginByEmail } from '../pages/mobi/AuthDriver/LoginByEmail';
-import { ChooseRegisterType } from '../pages/mobi/AuthDriver/ChooseRegisterType';
-import { PasswordReset } from '../pages/mobi/AuthDriver/PasswordReset';
-import { OperationConfirmedAnimation } from '../pages/mobi/AuthDriver/OperationConfirmedAnimation';
-import { selectTheme } from '../../src/redux/feature/userSlice';
-import { OwnerRootDriver } from './owner/OwnerRootDriver';
-import { CreateCompany } from '../pages/mobi/AuthDriver/CreateCompany';
+import { AuthDriverParamList } from '../../types/self/navigation/Owner/paramLists/AuthDriverParamList';
 // eslint-disable-next-line import/extensions
 import config from '../../tamagui_conf/tamagui.config';
 import { Theme } from '../../FarmServiceApiTypes/Account/Constants';
 import { ToastSetup } from '../../helepers/ToastSetup';
+import { selectTheme } from '../../src/redux/feature/userSlice';
+import { NativeStackScreenOptionsBase } from '../../settings/navigators/NativeStackScreenOptionsBase';
+import Landing from '../pages/owner/mobi/AuthDriver/Landing';
+import { OwnerRootDriver } from './owner/OwnerRootDriver';
+import { ChooseLoginType } from '../pages/owner/mobi/AuthDriver/ChooseLoginType';
+import { CreateCompany } from '../pages/owner/mobi/AuthDriver/CreateCompany';
+import { LoginByEmail } from '../pages/owner/mobi/AuthDriver/LoginByEmail';
+import { ChooseRegisterType } from '../pages/owner/mobi/AuthDriver/ChooseRegisterType';
+import { PasswordReset } from '../pages/owner/mobi/AuthDriver/PasswordReset';
+import { OperationConfirmedAnimation } from '../pages/owner/mobi/AuthDriver/OperationConfirmedAnimation';
+import { WorkerRootDriver } from './worker/WorkerRootDriver';
 
 const Stack = createNativeStackNavigator<AuthDriverParamList>();
 
@@ -58,6 +59,15 @@ export default function AuthDriver() {
           }}
           name="ownerRootDriver"
           component={OwnerRootDriver}
+        />
+        <Stack.Screen
+          options={{
+            ...NativeStackScreenOptionsBase,
+            gestureEnabled: false,
+            animation: 'fade',
+          }}
+          name="workerRootDriver"
+          component={WorkerRootDriver}
         />
         <Stack.Screen
           options={{

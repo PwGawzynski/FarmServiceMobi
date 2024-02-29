@@ -4,7 +4,7 @@ import { t } from 'i18next';
 import { Dimensions } from 'react-native';
 import { VerticalList, VerticalListProps } from '../molecules/VerticalList';
 import { ClientResponseBase } from '../../FarmServiceApiTypes/Clients/Responses';
-import { EmptyList } from '../atoms/EmptyList';
+import { ListInfo } from '../atoms/ListInfo';
 import NoUser from '../../assets/noUser.svg';
 import { TranslationNames } from '../../locales/TranslationNames';
 import { SwipeRightAnimated } from '../atoms/SwipeRightAnimated';
@@ -33,12 +33,12 @@ export function ClientList({ data, listSetup }: Props) {
 
   const ListEmptyComponent = useMemo(
     () => (
-      <EmptyList
-        EmptyIco={NoUser}
+      <ListInfo
+        Ico={NoUser}
         text={t(TranslationNames.components.clientList.listEmptyText)}
       >
         <SwipeRightAnimated />
-      </EmptyList>
+      </ListInfo>
     ),
     [],
   );

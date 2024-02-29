@@ -119,6 +119,14 @@ export const TranslationNames = {
           'screens.clientDesktopDriver.clientsDesktop.searchPlaceholder',
       },
     },
+    workerAssignation: {
+      qrCodeScanCommunication:
+        'screens.workerAssignation.qrCodeScanCommunication',
+      qrCodeTimeOut: 'screens.workerAssignation.qrCodeTimeOut',
+      connectionTimeout: 'screens.workerAssignation.connectionTimeout',
+      error: 'screens.workerAssignation.error',
+      retryButton: 'screens.workerAssignation.retryButton',
+    },
   },
   serviceDefaults: {
     unauthorised: 'serviceDefaults.unauthorised',
@@ -140,14 +148,13 @@ export const TranslationNames = {
       cannotCallAlertTitle: 'components.call.cannotCallAlertTitle',
       cannotCallAlertMessage: 'components.call.cannotCallAlertMessage',
     },
-
     clientList: {
       listEmptyText: 'components.clientList.listEmptyText',
       listLoadingText: 'components.clientList.listLoadingText',
-    }
+    },
     toast: {
       clientsFetchErrorHeader: 'components.toast.clientsFetchErrorHeader',
-      clientsFetchErrorContext: 'components.toast.clientsFetchErrorContext'
+      clientsFetchErrorContext: 'components.toast.clientsFetchErrorContext',
     },
   },
   addressForm: {

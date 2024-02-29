@@ -1,5 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { OwnerRootDriverParamList } from '../../../types/self/navigation/paramLists/OwnerRootDriverParamList';
+import { OwnerRootDriverParamList } from '../../../types/self/navigation/Owner/paramLists/OwnerRootDriverParamList';
 import { NativeStackScreenOptionsBase } from '../../../settings/navigators/NativeStackScreenOptionsBase';
 import { ActivityDriver } from './activities/ActivitiesDriver';
 import { OrdersDriver } from './orders/OrdersDriver';

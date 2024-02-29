@@ -13,9 +13,9 @@ import {
 import { selectTheme } from '../../../../src/redux/feature/userSlice';
 import { Theme } from '../../../../FarmServiceApiTypes/Account/Constants';
 import { Colors } from '../../../../settings/styles/colors';
-import { WorkersDesktopDriverParamList } from '../../../../types/self/navigation/paramLists/workers/WorkersDesktopDriverParamList';
-import { WorkersDesktop } from '../../../pages/mobi/WorkersDesktopDriver/WorkersDesktop';
-import { WorkersDriverScreenProps } from '../../../../types/self/navigation/props/workers/WorkersDriverProps';
+import { WorkersDesktopDriverParamList } from '../../../../types/self/navigation/Owner/paramLists/workers/WorkersDesktopDriverParamList';
+import { WorkersDriverScreenProps } from '../../../../types/self/navigation/Owner/props/workers/WorkersDriverProps';
+import { WorkersDesktop } from '../../../pages/owner/mobi/WorkersDesktopDriver/WorkersDesktop';
 
 const TopTab = createMaterialTopTabNavigator<WorkersDesktopDriverParamList>();
 

@@ -90,6 +90,13 @@
         "title": "Clients",
         "searchPlaceholder": "Find a client"
       }
+    },
+    "workerAssignation": {
+      "qrCodeScanCommunication": "Let the owner scan the QR code to assign you to the company",
+      "qrCodeTimeOut": "Scan this code before the timer runs out",
+      "connectionTimeout": "Connection timeout...",
+      "error": "Error occurred...",
+      "retryButton": "Retry"
     }
   },
   "serviceDefaults": {
@@ -112,11 +119,10 @@
       "cannotCallAlertTitle": "Cannot call",
       "cannotCallAlertMessage": "Sorry we cannot call, possibly this device doesn't support calling"
     },
-
     "clientList": {
       "listEmptyText": "No clients yet, swipe right to create one",
       "listLoadingText": "Loading clients..."
-  }
+    },
     "toast": {
       "clientsFetchErrorHeader": "Clients fetch error",
       "clientsFetchErrorContext": "Sorry we cannot fetch clients, please try again later"

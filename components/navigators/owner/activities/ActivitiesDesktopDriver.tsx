@@ -1,14 +1,14 @@
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useSelector } from 'react-redux';
-import { ActivityDesktopRoot } from '../../../pages/mobi/ActivitiesDesktopTopTabNavigator/ActivityDesktopRoot';
 import {
   MaterialBaseInitialLayout,
   MaterialTopTabScreenOptions,
 } from '../../../../settings/navigators/MaterialTopTabScreenOptions';
-import { ActivityDesktopDriverParamList } from '../../../../types/self/navigation/paramLists/activities/ActivityDesktopDriverParamList';
+import { ActivityDesktopDriverParamList } from '../../../../types/self/navigation/Owner/paramLists/activities/ActivityDesktopDriverParamList';
 import { selectTheme } from '../../../../src/redux/feature/userSlice';
 import { Theme } from '../../../../FarmServiceApiTypes/Account/Constants';
 import { Colors } from '../../../../settings/styles/colors';
+import { ActivityDesktopRoot } from '../../../pages/owner/mobi/ActivitiesDesktopTopTabNavigator/ActivityDesktopRoot';
 
 const Stack = createMaterialTopTabNavigator<ActivityDesktopDriverParamList>();
 
