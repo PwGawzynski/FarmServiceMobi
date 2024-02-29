@@ -10,5 +10,6 @@ export function ActivityDesktopRoot({
   'workerActivityDriver',
   'workerRootDriver'
 >) {
+  // const worker = useSelector(selectWorker);
   return <ScreenBase name="Worker Last Activities" />;
 }
