@@ -17,8 +17,9 @@ export function fetchClientDriver(
   queryLog: LogI | undefined,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   dispatch: any,
+  preventFetch?: boolean,
 ) {
-  if (!queryLog)
+  if (!queryLog && !preventFetch)
     queryClient.current
       .fetchQuery({
         queryKey: ['clients'],

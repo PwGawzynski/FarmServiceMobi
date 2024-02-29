@@ -115,7 +115,12 @@ export default function Landing({ navigation }: AuthDriverProps<'landing'>) {
     }),
   );
   useEffect(() => {
-    const intervalId = fetchClientDriver(queryClient, queryLog, dispatch);
+    const intervalId = fetchClientDriver(
+      queryClient,
+      queryLog,
+      dispatch,
+      role !== UserRole.Owner,
+    );
     if (intervalId) return () => clearInterval(intervalId);
     return undefined;
   }, [queryLog]);
