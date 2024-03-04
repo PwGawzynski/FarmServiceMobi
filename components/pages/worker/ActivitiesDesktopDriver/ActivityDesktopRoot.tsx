@@ -14,6 +14,6 @@ export function ActivityDesktopRoot({
 >) {
   const worker = useSelector(selectWorker);
   console.log(worker);
-  const name = worker?.workerData?.personalData.name;
+  const name = worker?.personalData.name;
   return <ScreenBase name={`Welcome ${name}`} />;
 }
