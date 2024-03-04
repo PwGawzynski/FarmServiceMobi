@@ -40,6 +40,12 @@
             "deploymentTarget": "16.4"
           }
         }
+      ],
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow FarmService to access your camera"
+        }
       ]
     ],
     "extra": {
