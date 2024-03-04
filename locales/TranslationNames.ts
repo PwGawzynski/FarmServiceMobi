@@ -126,6 +126,8 @@ export const TranslationNames = {
       connectionTimeout: 'screens.workerAssignation.connectionTimeout',
       error: 'screens.workerAssignation.error',
       retryButton: 'screens.workerAssignation.retryButton',
+      welcomeText: 'screens.workerAssignation.welcomeText',
+      pendingStatus: 'screens.workerAssignation.pendingStatus',
     },
   },
   serviceDefaults: {
