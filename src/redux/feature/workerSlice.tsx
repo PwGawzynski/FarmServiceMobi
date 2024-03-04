@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { WorkerResponseBase } from '../../../FarmServiceApiTypes/Worker/Responses';
+import { WorkerIdResponseBase } from '../../../FarmServiceApiTypes/Worker/Responses';
 import { MainStoreI } from '../app/Store';
 
 export type WorkerSliceI = {
   worker: {
-    data: WorkerResponseBase | null;
+    data: WorkerIdResponseBase | null;
   };
 };
 

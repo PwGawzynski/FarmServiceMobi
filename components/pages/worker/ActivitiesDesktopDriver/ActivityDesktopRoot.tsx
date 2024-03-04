@@ -1,5 +1,7 @@
+import { useSelector } from 'react-redux';
 import { ScreenBase } from '../../owner/mobi/common/ScreenBase';
 import { ActivitiesDesktopDriverScreenProps } from '../../../../types/self/navigation/Worker/props/activities/WorkerActivitiesDesktopDriverProps';
+import { selectWorker } from '../../../../src/redux/feature/workerSlice';
 
 export function ActivityDesktopRoot({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -10,6 +12,8 @@ export function ActivityDesktopRoot({
   'workerActivityDriver',
   'workerRootDriver'
 >) {
-  // const worker = useSelector(selectWorker);
-  return <ScreenBase name="Worker Last Activities" />;
+  const worker = useSelector(selectWorker);
+  console.log(worker);
+  const name = worker?.workerData?.personalData.name;
+  return <ScreenBase name={`Welcome ${name}`} />;
 }
