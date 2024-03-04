@@ -11,6 +11,7 @@ enum SseStatus {
   MESSAGE,
 }
 export const SSE_TIMEOUT = 60000;
+export const AFTER_ASSIGNATION_ANIMATION = 3000;
 
 export const AssignationMachine = setup({
   types: {} as {
@@ -73,7 +74,7 @@ export const AssignationMachine = setup({
       always: [
         {
           guard: 'queryWorkerAssigned',
-          target: 'workerAssigned',
+          target: 'ready',
         },
         {
           guard: 'queryWorkerNotAssigned',
@@ -88,7 +89,14 @@ export const AssignationMachine = setup({
         },
       },
     },
-    workerAssigned: {},
+    workerAssigned: {
+      after: {
+        [AFTER_ASSIGNATION_ANIMATION]: {
+          target: 'ready',
+        },
+      },
+    },
+    ready: {},
     sseOpening: {
       on: {
         sseOpened: {
