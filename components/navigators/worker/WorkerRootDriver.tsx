@@ -11,9 +11,18 @@ export function WorkerRootDriver() {
     <Stack.Navigator
       // REMEMEBER TO change navigation in Landing when changing initialRouteName
       initialRouteName="workerActivityDriver"
-      screenOptions={NativeStackScreenOptionsBase}
+      screenOptions={{
+        ...NativeStackScreenOptionsBase,
+      }}
     >
-      <Stack.Screen name="workerActivityDriver" component={ActivityDriver} />
+      <Stack.Screen
+        options={{
+          gestureEnabled: false,
+          animation: 'fade',
+        }}
+        name="workerActivityDriver"
+        component={ActivityDriver}
+      />
       <Stack.Screen
         name="workerAssignationScreen"
         component={WorkerAssignation}

@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { MessageEvent } from 'react-native-event-source';
 import { useActor } from '@xstate/react';
 import QRCode from 'react-native-qrcode-svg';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { SizableText, YStack } from 'tamagui';
 import { useQuery } from '@tanstack/react-query';
 import { ActivityIndicator } from 'react-native';
@@ -24,12 +24,18 @@ import {
 } from '../../../helepers/StateMachines/AssignationMachine';
 import { matchesAny } from '../../../helepers/StateMachines/MatchesAny';
 import { TranslationNames } from '../../../locales/TranslationNames';
+import {
+  ResponseCode,
+  ResponseObject,
+} from '../../../FarmServiceApiTypes/Respnse/responseGeneric';
+import { setWorker } from '../../../src/redux/feature/workerSlice';
 
 export function WorkerAssignation({
   navigation,
 }: WorkerRootDriverScreenProps<'workerAssignationScreen', 'workerRootDriver'>) {
   const [state, send] = useActor(AssignationMachine);
   const theme = useSelector(selectTheme);
+  const dispatch = useDispatch();
 
   /**
    * SSE Event handlers
@@ -40,8 +46,13 @@ export function WorkerAssignation({
   const handleErrorSse = () => send({ type: 'sseError' });
   const handleMessageSse = (message: MessageEvent) => {
     if (message.data) {
-      const res = JSON.parse(message.data) as WorkerResponseBase;
-      send({ type: 'dataReady', data: res });
+      const res = JSON.parse(
+        message.data,
+      ) as ResponseObject<WorkerResponseBase>;
+      if (res.payload && res.code === ResponseCode.ProcessedCorrect) {
+        dispatch(setWorker(res.payload));
+        send({ type: 'dataReady', data: res.payload });
+      }
     }
   };
 
@@ -64,6 +75,7 @@ export function WorkerAssignation({
       });
     }
     if (state.matches('workerAssigned')) {
+      if (data) dispatch(setWorker(data));
       navigation.navigate('workerRootDriver', {
         screen: 'workerActivityDriver',
         params: {
