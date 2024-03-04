@@ -16,6 +16,7 @@ import { Colors } from '../../../../settings/styles/colors';
 import { WorkersDesktopDriverParamList } from '../../../../types/self/navigation/Owner/paramLists/workers/WorkersDesktopDriverParamList';
 import { WorkersDriverScreenProps } from '../../../../types/self/navigation/Owner/props/workers/WorkersDriverProps';
 import { WorkersDesktop } from '../../../pages/owner/mobi/WorkersDesktopDriver/WorkersDesktop';
+import { AddWorker } from '../../../pages/owner/mobi/WorkersDesktopDriver/AddWorker';
 
 const TopTab = createMaterialTopTabNavigator<WorkersDesktopDriverParamList>();
 
@@ -45,6 +46,7 @@ export function WorkersDesktopDriver({
         screenOptions={MaterialTopTabScreenOptions}
         initialRouteName="workersDesktop"
       >
+        <TopTab.Screen name="addWorker" component={AddWorker} />
         <TopTab.Screen name="workersDesktop" component={WorkersDesktop} />
       </TopTab.Navigator>
     </GestureDetector>
