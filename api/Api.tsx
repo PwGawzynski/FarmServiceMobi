@@ -25,7 +25,11 @@ import {
   UpdateClientsCompanyReqI,
 } from '../FarmServiceApiTypes/ClientsCompany/Requests';
 import { ClientsCompanyResponseBase } from '../FarmServiceApiTypes/ClientsCompany/Responses';
-import { WorkerIdResponseBase } from '../FarmServiceApiTypes/Worker/Responses';
+import {
+  WorkerIdResponseBase,
+  WorkerResponseBase,
+} from '../FarmServiceApiTypes/Worker/Responses';
+import { CreateWorkerReqI } from '../FarmServiceApiTypes/Worker/Requests';
 
 export interface sseAsyncListenerParams {
   open?: ListenerCallback;
@@ -290,6 +294,16 @@ export class Api {
         data,
       )) as AxiosResponse<ResponseObject>
     ).data.payload as ClientResponseBase | undefined;
+  }
+
+  static async assignWorker(data: CreateWorkerReqI) {
+    await Api.session();
+    return (
+      (await Api.axiosInstance.post(
+        '/worker',
+        data,
+      )) as AxiosResponse<WorkerResponseBase>
+    ).data as WorkerResponseBase | undefined;
   }
 
   static async updateClient(data: UpdateClientReqI) {
