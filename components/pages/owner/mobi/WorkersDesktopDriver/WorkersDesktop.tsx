@@ -2,6 +2,10 @@ import { Button, Card, H2, Paragraph, XStack } from 'tamagui';
 import { ScreenBase } from '../common/ScreenBase';
 
 export function WorkersDesktop() {
+  /* const { data } = useQuery({
+    queryKey: ['workers'],
+    queryFn: () => [],
+  }); */
   return (
     <ScreenBase name="Workers">
       <Card elevate size="$4" bordered>
