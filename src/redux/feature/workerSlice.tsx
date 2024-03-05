@@ -18,7 +18,6 @@ const WorkerSlice = createSlice({
   name: 'worker',
   reducers: {
     setWorker: (state, action: { payload: WorkerResponseBase }) => {
-      console.log(action.payload, 'tescior');
       if (state.worker.data === null)
         // eslint-disable-next-line no-param-reassign
         state.worker.data = action.payload;
