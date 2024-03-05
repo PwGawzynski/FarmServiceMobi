@@ -9,6 +9,7 @@ import Animated, {
   withRepeat,
   withTiming,
 } from 'react-native-reanimated';
+import { Camera } from 'expo-camera';
 import ScanningIco from '../../assets/scan-line.svg';
 import OkIco from '../../assets/check-circle.svg';
 import { selectTheme } from '../../src/redux/feature/userSlice';
@@ -60,7 +61,7 @@ export function QRScanner({ scanned, handleBarCodeScanned }: QRScannerProps) {
   return (
     <View className="flex-1">
       {!scanned && (
-        <BarCodeScanner
+        <Camera
           onBarCodeScanned={
             scanned
               ? undefined
