@@ -1,13 +1,16 @@
 import { t } from 'i18next';
 import { useQuery } from '@tanstack/react-query';
 import { YStack } from 'tamagui';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
+import { ListRenderItemInfo } from '@shopify/flash-list';
 import { ScreenBase } from '../common/ScreenBase';
 import { TranslationNames } from '../../../../../locales/TranslationNames';
 import { getClients } from '../../../../../api/clients/Client';
 import { EXPO_PUBLIC_CLIENTS_QUERY_STALE_TIME } from '../../../../../settings/query/querySettings';
 import { SearchBox } from '../../../../molecules/SearchBox';
-import { ClientList } from '../../../../organisms/ClientsList';
+import { ClientResponseBase } from '../../../../../FarmServiceApiTypes/Clients/Responses';
+import PersonListItem from '../../../../molecules/PersonListItem';
+import { UniversalList } from '../../../../organisms/UniversalList';
 
 const SCREEN_NAME = t(
   TranslationNames.screens.clientDesktopDriver.clientsDesktop.title,
@@ -39,6 +42,20 @@ export function ClientsDesktop() {
         ? 1
         : -1,
     );
+  const renderItem = useCallback(
+    ({ item }: ListRenderItemInfo<ClientResponseBase>) => {
+      return (
+        <PersonListItem
+          name={item.user.personal_data.name}
+          surname={item.user.personal_data.surname}
+          bottomRightText={item.user.address.city}
+          onPressNavigateTo="clientDetails"
+          navigationParams={{ client: item }}
+        />
+      );
+    },
+    [],
+  );
   return (
     <ScreenBase name={SCREEN_NAME}>
       <YStack mt="$4" mb="$4">
@@ -51,7 +68,8 @@ export function ClientsDesktop() {
         />
       </YStack>
       <YStack f={1}>
-        <ClientList
+        <UniversalList
+          renderItem={renderItem}
           data={sorted}
           listSetup={{ isLoading: isFetching, isLoadingError: isError }}
         />
