@@ -1,41 +1,40 @@
-import { ListRenderItemInfo } from '@shopify/flash-list';
-import { useCallback, useMemo } from 'react';
-import { t } from 'i18next';
 import { Dimensions } from 'react-native';
+import { useCallback, useMemo } from 'react';
+import { ListRenderItemInfo } from '@shopify/flash-list';
+import { t } from 'i18next';
 import { VerticalList, VerticalListProps } from '../molecules/VerticalList';
-import { ClientResponseBase } from '../../FarmServiceApiTypes/Clients/Responses';
 import { ListInfo } from '../atoms/ListInfo';
-import NoUser from '../../assets/noUser.svg';
+import Empty from '../../assets/empty.svg';
 import { TranslationNames } from '../../locales/TranslationNames';
 import { SwipeRightAnimated } from '../atoms/SwipeRightAnimated';
-import ClientListItem, {
-  ClientListItemSkeleton,
-} from '../molecules/ClientListItem';
+import { ListItemSkeleton } from '../molecules/PersonListItem';
 
-export type Props = {
-  data?: Array<ClientResponseBase>;
-  listSetup?: Omit<
-    VerticalListProps<ClientResponseBase>,
-    'renderItem' | 'estimatedSize'
-  >;
+export type Props<T> = {
+  data?: Array<T>;
+  listSetup?: Omit<VerticalListProps<T>, 'renderItem' | 'estimatedSize'>;
+  renderItem: (info: ListRenderItemInfo<T>) => JSX.Element;
+  listEmptyComponent?: JSX.Element;
+  listEmptyText?: string;
 };
 
 const EL_HEIGHT = 100;
 const EL_COUNT = Math.floor(Dimensions.get('window').height / EL_HEIGHT);
 
-export function ClientList({ data, listSetup }: Props) {
-  const renderItem = useCallback(
-    ({ item }: ListRenderItemInfo<ClientResponseBase>) => (
-      <ClientListItem client={item} />
-    ),
-    [],
-  );
-
+export function UniversalList<T>({
+  data,
+  listSetup,
+  renderItem,
+  listEmptyComponent,
+  listEmptyText,
+}: Props<T>) {
   const ListEmptyComponent = useMemo(
     () => (
       <ListInfo
-        Ico={NoUser}
-        text={t(TranslationNames.components.clientList.listEmptyText)}
+        Ico={Empty}
+        text={
+          listEmptyText ||
+          t(TranslationNames.components.universalList.listEmptyText)
+        }
       >
         <SwipeRightAnimated />
       </ListInfo>
@@ -46,13 +45,13 @@ export function ClientList({ data, listSetup }: Props) {
   const onFetching = useCallback(() => {
     const elements = [];
     for (let i = 0; i < EL_COUNT; i += 1) {
-      elements.push(<ClientListItemSkeleton key={i} />);
+      elements.push(<ListItemSkeleton key={i} />);
     }
     return elements;
   }, []);
   return (
     <VerticalList
-      ListEmptyComponent={ListEmptyComponent}
+      ListEmptyComponent={listEmptyComponent || ListEmptyComponent}
       estimatedSize={150}
       renderItem={renderItem}
       data={data}
