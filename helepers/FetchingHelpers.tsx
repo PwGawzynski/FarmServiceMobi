@@ -26,7 +26,7 @@ export function fetchClientDriver(
         retry: MIN_QUERY_RETRY_COUNT,
         retryDelay: retryCount => retryCount * QUERY_RETRY_DELAY_MULTIPLICATION,
       })
-      .then(console.log)
+      .then()
       .catch(() => {
         dispatch(
           setQueryFetchLogs({

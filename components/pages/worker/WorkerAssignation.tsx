@@ -5,12 +5,14 @@ import QRCode from 'react-native-qrcode-svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { SizableText, YStack } from 'tamagui';
 import { useQuery } from '@tanstack/react-query';
-import { ActivityIndicator } from 'react-native';
 import { t } from 'i18next';
 import { ScreenBase } from '../owner/mobi/common/ScreenBase';
 import { WorkerResponseBase } from '../../../FarmServiceApiTypes/Worker/Responses';
 import { Api } from '../../../api/Api';
-import { WorkerRootDriverScreenProps } from '../../../types/self/navigation/Worker/props/WorkerRootDriverProps';
+import {
+  WorkerRootDriverNavigationProps,
+  WorkerRootDriverScreenProps,
+} from '../../../types/self/navigation/Worker/props/WorkerRootDriverProps';
 import { Colors } from '../../../settings/styles/colors';
 import { selectTheme } from '../../../src/redux/feature/userSlice';
 import { Theme } from '../../../FarmServiceApiTypes/Account/Constants';
@@ -29,6 +31,29 @@ import {
   ResponseObject,
 } from '../../../FarmServiceApiTypes/Respnse/responseGeneric';
 import { setWorker } from '../../../src/redux/feature/workerSlice';
+import { WelcomeAnimation } from '../../atoms/WelcomeAnimation';
+import { PendingInfo } from '../../atoms/PendingInfo';
+
+type ScreenNavigationType = WorkerRootDriverNavigationProps<
+  'workerAssignationScreen',
+  'ownerRootDriver'
+>;
+
+const navigateToWorkerRoot = (navigation: ScreenNavigationType) =>
+  navigation.navigate('workerRootDriver', {
+    screen: 'workerActivityDriver',
+    params: {
+      screen: 'workerActivityDesktopRoot',
+      params: {
+        screen: 'workerLastActivities',
+      },
+    },
+  });
+
+const navigateToWorkerAssignation = (navigation: ScreenNavigationType) =>
+  navigation.navigate('workerRootDriver', {
+    screen: 'workerAssignationScreen',
+  });
 
 export function WorkerAssignation({
   navigation,
@@ -61,34 +86,39 @@ export function WorkerAssignation({
     queryFn: workerData,
     retry: 2,
   });
+
   useEffect(() => {
-    if (state.value === 'QueringWorkerData' || isPending)
-      send({ type: 'Pending' });
-    if (state.value === 'WorkerQueryPending' && data)
-      send({ type: 'Fetched', data });
-    if (state.value === 'WorkerQueryPending' && error) send({ type: 'Error' });
-    if (state.value === 'sseOpening' && !data?.workerData) {
-      Api.workerAssignedListener({
-        open: handleOpenSse,
-        error: handleErrorSse,
-        message: handleMessageSse,
-      });
-    }
-    if (state.matches('workerAssigned')) {
-      if (data) dispatch(setWorker(data));
-      navigation.navigate('workerRootDriver', {
-        screen: 'workerActivityDriver',
-        params: {
-          screen: 'workerActivityDesktopRoot',
-          params: {
-            screen: 'workerLastActivities',
-          },
-        },
-      });
-    } else if (state.matches('workerNotAssigned')) {
-      navigation.navigate('workerRootDriver', {
-        screen: 'workerAssignationScreen',
-      });
+    if (data && data.workerData) dispatch(setWorker(data.workerData));
+    switch (state.value) {
+      case 'QueringWorkerData':
+        if (isPending) {
+          send({ type: 'Pending' });
+        }
+        break;
+      case 'WorkerQueryPending':
+        if (data) {
+          send({ type: 'Fetched', data });
+        } else if (error) {
+          send({ type: 'Error' });
+        }
+        break;
+      case 'sseOpening':
+        if (!data?.workerData) {
+          Api.workerAssignedListener({
+            open: handleOpenSse,
+            error: handleErrorSse,
+            message: handleMessageSse,
+          });
+        }
+        break;
+      case 'ready':
+        navigateToWorkerRoot(navigation);
+        break;
+      case 'workerNotAssigned':
+        navigateToWorkerAssignation(navigation);
+        break;
+      default:
+        break;
     }
   }, [state.value, error, isPending, data]);
 
@@ -100,14 +130,15 @@ export function WorkerAssignation({
     }
   };
 
-  console.log(state.value);
   return (
     <ScreenBase>
       <YStack f={1} jc="center" ai="center" mr="$8" ml="$8">
         {state.value === 'WorkerQueryPending' && (
-          <ActivityIndicator
-            size="large"
-            color={theme === Theme.dark ? Colors.GREEN : Colors.DARK_BLUE}
+          <PendingInfo
+            isVisible
+            infoText={t(
+              TranslationNames.screens.workerAssignation.pendingStatus,
+            )}
           />
         )}
         {state.value === 'sseOpened' && data?.userId && (
@@ -157,6 +188,12 @@ export function WorkerAssignation({
             />
           </YStack>
         )}
+        <WelcomeAnimation
+          played={state.value === 'workerAssigned' && !!data}
+          welcomeText={`${t(
+            TranslationNames.screens.workerAssignation.welcomeText,
+          )} ${state.context.workerData?.personalData.name}`}
+        />
       </YStack>
     </ScreenBase>
   );

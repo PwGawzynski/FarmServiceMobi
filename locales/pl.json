@@ -84,7 +84,7 @@
         "alertOnScreenBlurDescription": "Masz niezapisane zmiany. Czy na pewno chcesz wyjść ?",
         "alertOnScreenBlurLeaveButton": "Opuść",
         "alertOnScreenBlurStayButton": "Zostań",
-        "pendingStatus": "Tworzenie klienta..."
+        "pendingStatus": "Tworzenie klienta...",
       },
       "clientsDesktop": {
         "title": "Klienci",
@@ -96,7 +96,9 @@
       "qrCodeTimeOut": "Zeskanuj kod QR w ciągu 60 sekund",
       "connectionTimeout": "Przekroczono limit czasu połączenia...",
       "error": "Wystąpił błąd...",
-      "retryButton": "Spróbuj ponownie"
+      "retryButton": "Spróbuj ponownie",
+      "welcomeText": "Witaj na Pokładzie! ",
+      "pendingStatus": "Chwileczkę pobieramy dane o tobie..."
     }
   },
   "serviceDefaults": {

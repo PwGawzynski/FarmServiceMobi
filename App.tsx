@@ -34,7 +34,6 @@ export default function App() {
   useFonts({
     Helvetica: require('./helvetica/Helvetica/Helvetica.ttf'),
   });
-  console.log(MIN_QUERY_RETRY_COUNT, QUERY_RETRY_DELAY_MULTIPLICATION);
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <QueryClientProvider client={queryClient}>

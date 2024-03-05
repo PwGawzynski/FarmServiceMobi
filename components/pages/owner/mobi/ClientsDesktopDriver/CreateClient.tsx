@@ -210,13 +210,12 @@ export function CreateClient({
     isSuccess: isEditSuccess,
   } = useMutation({
     mutationFn: updateClient,
-    onSuccess: (sth, variables) => {
+    onSuccess: sth => {
       isDirtyRef.current = false;
       hasBeenEjected.current = false;
       queryClient.setQueryData(
         ['clients'],
         (oldData: Array<ClientResponseBase>) => {
-          console.log(variables);
           return oldData ? [...oldData, sth] : [sth];
         },
       );

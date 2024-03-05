@@ -23,12 +23,12 @@ export async function apiHandler<M, T = undefined>(
 ): Promise<ResponseObject<T> | undefined> {
   try {
     const data = await apiCall(payload as M);
-    console.info(
-      data,
+    /* console.info(
+      typeof data,
       `DATA TYPE RETURNED FROM API HANDLER:  ${
         apiCall.name
       } AT: ${new Date().toLocaleTimeString()}`,
-    );
+    ); */
     if (data) return data;
     return undefined;
   } catch (e) {
@@ -79,7 +79,6 @@ export async function login(data: LoginUser) {
     return response?.payload;
   } catch (e) {
     if (e instanceof AxiosError) {
-      console.log(e.response?.status);
       switch (e.response?.status) {
         case HttpStatusCode.Unauthorized:
           throw new Error(UNAUTHORIZED_MSG, {

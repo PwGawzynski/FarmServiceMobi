@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { WorkerIdResponseBase } from '../../../FarmServiceApiTypes/Worker/Responses';
+import { WorkerResponseBase } from '../../../FarmServiceApiTypes/Worker/Responses';
 import { MainStoreI } from '../app/Store';
 
 export type WorkerSliceI = {
   worker: {
-    data: WorkerIdResponseBase | null;
+    data: WorkerResponseBase | null;
   };
 };
 
@@ -17,7 +17,7 @@ const WorkerSlice = createSlice({
   initialState: worker,
   name: 'worker',
   reducers: {
-    setWorker: (state, action) => {
+    setWorker: (state, action: { payload: WorkerResponseBase }) => {
       if (state.worker.data === null)
         // eslint-disable-next-line no-param-reassign
         state.worker.data = action.payload;
