@@ -12,10 +12,12 @@ export async function workerData() {
 export async function assignWorker(data: CreateWorkerReqI) {
   const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
   const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
-  return apiHandler<CreateWorkerReqI>(
-    UNAUTHORIZED_MSG,
-    DEFAULT_MSG,
-    Api.assignWorker,
-    data,
-  ) as unknown as ResponseObject<WorkerResponseBase>;
+  return (
+    (await apiHandler<CreateWorkerReqI>(
+      UNAUTHORIZED_MSG,
+      DEFAULT_MSG,
+      Api.assignWorker,
+      data,
+    )) as unknown as ResponseObject<WorkerResponseBase | undefined>
+  )?.payload;
 }
