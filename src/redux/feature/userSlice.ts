@@ -67,7 +67,6 @@ export const setUpUser = createAsyncThunk('user/fetchUser', async () => {
   try {
     await Api.init();
     const response = await Api.me();
-    console.log(response.payload, 'setUpUser');
     if (response.code === ResponseCode.ProcessedCorrect && response.payload)
       setThemeToStorage(response.payload.account.theme);
     return {
@@ -93,7 +92,6 @@ export const setUpUser = createAsyncThunk('user/fetchUser', async () => {
 export const setUserAsync = createAsyncThunk(
   'user/setUserAsync',
   async (data: UserResponseBase) => {
-    console.log(data.company, 'setUserAsync');
     await setThemeToStorage(data.account.theme);
     return { ...data };
   },
