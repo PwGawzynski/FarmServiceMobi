@@ -84,7 +84,7 @@
         "alertOnScreenBlurDescription": "Masz niezapisane zmiany. Czy na pewno chcesz wyjść ?",
         "alertOnScreenBlurLeaveButton": "Opuść",
         "alertOnScreenBlurStayButton": "Zostań",
-        "pendingStatus": "Tworzenie klienta...",
+        "pendingStatus": "Tworzenie klienta..."
       },
       "clientsDesktop": {
         "title": "Klienci",
@@ -99,6 +99,11 @@
       "retryButton": "Spróbuj ponownie",
       "welcomeText": "Witaj na Pokładzie! ",
       "pendingStatus": "Chwileczkę pobieramy dane o tobie..."
+    },
+    "workersDesktop": {
+      "title": "Pracownicy",
+      "searchPlaceholder": "Znajdź pracownika",
+      "emptyList": "Brak pracowników do wyświetlenia, przeciągni w prawo aby dodać nowego skanując kod QR"
     }
   },
   "serviceDefaults": {
@@ -121,10 +126,11 @@
       "cannotCallAlertTitle": "Błąd połączenia",
       "cannotCallAlertMessage": "Nie udało się wykonać połączenia. Prawdopodobnie to urządzenie nie obsługuje dzwonienia."
     },
-    "clientList": {
-      "listEmptyText": "Nie masz jeszcze żadnych klientów, przeciągnij w prawo aby dodać nowego klienta",
+    "universalList": {
+      "listEmptyText": "Brak danych do wyświetlenia...",
       "listLoadingText": "Pobiranie Klientów..."
     },
+
     "toast": {
       "clientsFetchErrorHeader": "Błąd pobierania klientów",
       "clientsFetchErrorContext": "Nie udało się pobrać listy klientów. Spróbuj ponownie później."

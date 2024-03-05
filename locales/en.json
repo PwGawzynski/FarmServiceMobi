@@ -99,6 +99,11 @@
       "retryButton": "Retry",
       "welcomeText": "Welcome on board! ",
       "pendingStatus": "Querying your data..."
+    },
+    "workersDesktop": {
+      "title": "Workers",
+      "searchPlaceholder": "Find a worker",
+      "emptyList": "No workers to display, swipe right and add new one by scanning QR code"
     }
   },
   "serviceDefaults": {
@@ -121,8 +126,8 @@
       "cannotCallAlertTitle": "Cannot call",
       "cannotCallAlertMessage": "Sorry we cannot call, possibly this device doesn't support calling"
     },
-    "clientList": {
-      "listEmptyText": "No clients yet, swipe right to create one",
+    "universalList": {
+      "listEmptyText": "No data to display...",
       "listLoadingText": "Loading clients..."
     },
     "toast": {
