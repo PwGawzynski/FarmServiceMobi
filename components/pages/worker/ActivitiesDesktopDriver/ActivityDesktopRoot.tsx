@@ -13,7 +13,6 @@ export function ActivityDesktopRoot({
   'workerRootDriver'
 >) {
   const worker = useSelector(selectWorker);
-  console.log(worker);
   const name = worker?.personalData.name;
   return <ScreenBase name={`Welcome ${name}`} />;
 }
