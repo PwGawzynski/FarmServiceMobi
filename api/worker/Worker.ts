@@ -21,3 +21,14 @@ export async function assignWorker(data: CreateWorkerReqI) {
     )) as unknown as ResponseObject<WorkerResponseBase | undefined>
   )?.payload;
 }
+
+export async function allWorkers() {
+  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
+  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
+  console.log('Test');
+  return (await apiHandler<undefined>(
+    UNAUTHORIZED_MSG,
+    DEFAULT_MSG,
+    Api.getWorkers,
+  )) as unknown as Array<WorkerResponseBase> | undefined;
+}
