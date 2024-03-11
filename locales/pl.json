@@ -91,19 +91,21 @@
         "searchPlaceholder": "Znajdź klienta"
       }
     },
-    "workerAssignation": {
-      "qrCodeScanCommunication": "Pokaż właścicielowi kod QR, aby zeskanował go za pomocą swojej aplikacji FarmService",
-      "qrCodeTimeOut": "Zeskanuj kod QR w ciągu 60 sekund",
-      "connectionTimeout": "Przekroczono limit czasu połączenia...",
-      "error": "Wystąpił błąd...",
-      "retryButton": "Spróbuj ponownie",
-      "welcomeText": "Witaj na Pokładzie! ",
-      "pendingStatus": "Chwileczkę pobieramy dane o tobie..."
-    },
-    "workersDesktop": {
-      "title": "Pracownicy",
-      "searchPlaceholder": "Znajdź pracownika",
-      "emptyList": "Brak pracowników do wyświetlenia, przeciągni w prawo aby dodać nowego skanując kod QR"
+    "ownerRootDriver": {
+      "workerAssignation": {
+        "qrCodeScanCommunication": "Pokaż właścicielowi kod QR, aby zeskanował go za pomocą swojej aplikacji FarmService",
+        "qrCodeTimeOut": "Zeskanuj kod QR w ciągu 60 sekund",
+        "connectionTimeout": "Przekroczono limit czasu połączenia...",
+        "error": "Wystąpił błąd...",
+        "retryButton": "Spróbuj ponownie",
+        "welcomeText": "Witaj na Pokładzie! ",
+        "pendingStatus": "Chwileczkę pobieramy dane o tobie..."
+      },
+      "workersDesktop": {
+        "title": "Pracownicy",
+        "searchPlaceholder": "Znajdź pracownika",
+        "emptyList": "Brak pracowników do wyświetlenia, przeciągni w prawo aby dodać nowego skanując kod QR"
+      }
     }
   },
   "serviceDefaults": {

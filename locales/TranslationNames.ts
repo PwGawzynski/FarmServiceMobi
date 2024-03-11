@@ -119,20 +119,26 @@ export const TranslationNames = {
           'screens.clientDesktopDriver.clientsDesktop.searchPlaceholder',
       },
     },
-    workerAssignation: {
-      qrCodeScanCommunication:
-        'screens.workerAssignation.qrCodeScanCommunication',
-      qrCodeTimeOut: 'screens.workerAssignation.qrCodeTimeOut',
-      connectionTimeout: 'screens.workerAssignation.connectionTimeout',
-      error: 'screens.workerAssignation.error',
-      retryButton: 'screens.workerAssignation.retryButton',
-      welcomeText: 'screens.workerAssignation.welcomeText',
-      pendingStatus: 'screens.workerAssignation.pendingStatus',
-    },
-    workersDesktop: {
-      title: 'screens.workersDesktop.title',
-      searchPlaceholder: 'screens.workersDesktop.searchPlaceholder',
-      emptyList: 'screens.workersDesktop.emptyList',
+    ownerRootDriver: {
+      workerAssignation: {
+        qrCodeScanCommunication:
+          'screens.ownerRootDriver.workerAssignation.qrCodeScanCommunication',
+        qrCodeTimeOut:
+          'screens.ownerRootDriver.workerAssignation.qrCodeTimeOut',
+        connectionTimeout:
+          'screens.ownerRootDriver.workerAssignation.connectionTimeout',
+        error: 'screens.ownerRootDriver.workerAssignation.error',
+        retryButton: 'screens.ownerRootDriver.workerAssignation.retryButton',
+        welcomeText: 'screens.ownerRootDriver.workerAssignation.welcomeText',
+        pendingStatus:
+          'screens.ownerRootDriver.workerAssignation.pendingStatus',
+      },
+      workersDesktop: {
+        title: 'screens.ownerRootDriver.workersDesktop.title',
+        searchPlaceholder:
+          'screens.ownerRootDriver.workersDesktop.searchPlaceholder',
+        emptyList: 'screens.ownerRootDriver.workersDesktop.emptyList',
+      },
     },
   },
   serviceDefaults: {
