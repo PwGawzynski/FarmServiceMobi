@@ -129,6 +129,11 @@ export const TranslationNames = {
       welcomeText: 'screens.workerAssignation.welcomeText',
       pendingStatus: 'screens.workerAssignation.pendingStatus',
     },
+    workersDesktop: {
+      title: 'screens.workersDesktop.title',
+      searchPlaceholder: 'screens.workersDesktop.searchPlaceholder',
+      emptyList: 'screens.workersDesktop.emptyList',
+    },
   },
   serviceDefaults: {
     unauthorised: 'serviceDefaults.unauthorised',
@@ -150,9 +155,9 @@ export const TranslationNames = {
       cannotCallAlertTitle: 'components.call.cannotCallAlertTitle',
       cannotCallAlertMessage: 'components.call.cannotCallAlertMessage',
     },
-    clientList: {
-      listEmptyText: 'components.clientList.listEmptyText',
-      listLoadingText: 'components.clientList.listLoadingText',
+    universalList: {
+      listEmptyText: 'components.universalList.listEmptyText',
+      listLoadingText: 'components.universalList.listLoadingText',
     },
     toast: {
       clientsFetchErrorHeader: 'components.toast.clientsFetchErrorHeader',
