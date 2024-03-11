@@ -346,6 +346,16 @@ export class Api {
     ).data.payload as Array<ClientResponseBase> | undefined;
   }
 
+  static async getWorkers() {
+    await Api.delayRes();
+    await Api.session();
+    return (
+      (await Api.axiosInstance.get(
+        '/worker/all',
+      )) as AxiosResponse<ResponseObject>
+    ).data.payload as Array<WorkerResponseBase> | undefined;
+  }
+
   static workerAssignedListener({
     open,
     message,
