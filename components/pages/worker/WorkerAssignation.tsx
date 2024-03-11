@@ -137,7 +137,8 @@ export function WorkerAssignation({
           <PendingInfo
             isVisible
             infoText={t(
-              TranslationNames.screens.workerAssignation.pendingStatus,
+              TranslationNames.screens.ownerRootDriver.workerAssignation
+                .pendingStatus,
             )}
           />
         )}
@@ -152,12 +153,15 @@ export function WorkerAssignation({
 
             <SizableText mt="$8" textAlign="center">
               {t(
-                TranslationNames.screens.workerAssignation
+                TranslationNames.screens.ownerRootDriver.workerAssignation
                   .qrCodeScanCommunication,
               )}
             </SizableText>
             <SizableText mt="$8" mb="$8" textAlign="center" size="$4">
-              {t(TranslationNames.screens.workerAssignation.qrCodeTimeOut)}
+              {t(
+                TranslationNames.screens.ownerRootDriver.workerAssignation
+                  .qrCodeTimeOut,
+              )}
             </SizableText>
             <CountdownBar time={SSE_TIMEOUT} />
           </>
@@ -173,15 +177,21 @@ export function WorkerAssignation({
               <SizableText textAlign="center" size="$4">
                 {state.value === 'connectionTimeOut'
                   ? t(
-                      TranslationNames.screens.workerAssignation
+                      TranslationNames.screens.ownerRootDriver.workerAssignation
                         .connectionTimeout,
                     )
-                  : t(TranslationNames.screens.workerAssignation.error)}
+                  : t(
+                      TranslationNames.screens.ownerRootDriver.workerAssignation
+                        .error,
+                    )}
               </SizableText>
             </YStack>
             <ButtonTamagui
               icon={<Refresh />}
-              text={t(TranslationNames.screens.workerAssignation.retryButton)}
+              text={t(
+                TranslationNames.screens.ownerRootDriver.workerAssignation
+                  .retryButton,
+              )}
               buttonProps={{
                 onPress: () => handleRetryButtonPress(),
               }}
@@ -191,7 +201,8 @@ export function WorkerAssignation({
         <WelcomeAnimation
           played={state.value === 'workerAssigned' && !!data}
           welcomeText={`${t(
-            TranslationNames.screens.workerAssignation.welcomeText,
+            TranslationNames.screens.ownerRootDriver.workerAssignation
+              .welcomeText,
           )} ${state.context.workerData?.personalData.name}`}
         />
       </YStack>
