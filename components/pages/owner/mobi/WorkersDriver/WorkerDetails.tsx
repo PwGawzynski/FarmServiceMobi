@@ -1,5 +1,9 @@
 import { XStack, YStack } from 'tamagui';
-import { useMutation } from '@tanstack/react-query';
+import {
+  QueryClient,
+  useMutation,
+  useQueryClient,
+} from '@tanstack/react-query';
 import { ScreenBase } from '../common/ScreenBase';
 import { WorkersDriverScreenProps } from '../../../../../types/self/navigation/Owner/props/workers/WorkersDriverProps';
 import { EntityAsACard } from '../../../../molecules/EntityAsACard';
@@ -10,8 +14,11 @@ import {
 } from '../../../../../FarmServiceApiTypes/Worker/Enums';
 import { CallAndMailPanel } from '../../../../molecules/CallAndMailPanel';
 import { updateWorkerStatusOrPosition } from '../../../../../api/worker/Worker';
+import { ClientResponseBase } from '../../../../../FarmServiceApiTypes/Clients/Responses';
+import { WorkerResponseBase } from '../../../../../FarmServiceApiTypes/Worker/Responses';
 
 type enumType = { [key: string]: string | number };
+
 const makeArray = (e: enumType) =>
   Object.keys(e)
     .map(key => e[key])
@@ -21,6 +28,21 @@ const findEnumVal = (e: enumType, value: string) =>
   Object.keys(e)
     .filter(k => Number.isNaN(Number(k)))
     .findIndex(key => key.toLowerCase() === value.toLowerCase());
+
+const cacheResponse = (
+  response: WorkerResponseBase | undefined,
+  queryClient: QueryClient,
+) => {
+  queryClient.setQueryData(
+    ['workers'],
+    (oldData: Array<ClientResponseBase>) => {
+      // eslint-disable-next-line no-param-reassign
+      return oldData
+        ? [...oldData.filter(c => c.id !== response?.id), response]
+        : [response];
+    },
+  );
+};
 export function WorkerDetails({
   route: {
     params: { worker },
@@ -32,11 +54,14 @@ export function WorkerDetails({
 >) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { id, email, status, position, personalData, address } = worker;
-  const { data, mutate } = useMutation({
+  const queryClient = useQueryClient();
+
+  const { mutate, isPending } = useMutation({
     mutationKey: ['updateWorkerStatusOrPosition', id],
     mutationFn: updateWorkerStatusOrPosition,
+    onSuccess: res => cacheResponse(res, queryClient),
   });
-  console.log(data, 'data-worker-details');
+
   if (!worker) return null;
   return (
     <ScreenBase name={`${personalData.name} ${personalData.surname}`}>
@@ -83,6 +108,7 @@ export function WorkerDetails({
           </YStack>
           <YStack className="mt-4 mb-4">
             <Selector
+              pending={isPending}
               initialValue={
                 position !== undefined ? Position[position].toLowerCase() : ''
               }
@@ -90,7 +116,6 @@ export function WorkerDetails({
               description="Position"
               itemListLabel="Choose role"
               onValueChange={v => {
-                console.log(findEnumVal(Position, v));
                 mutate({ position: findEnumVal(Position, v), worker: id });
               }}
             />
