@@ -1,4 +1,5 @@
 import { XStack, YStack } from 'tamagui';
+import { useMutation } from '@tanstack/react-query';
 import { ScreenBase } from '../common/ScreenBase';
 import { WorkersDriverScreenProps } from '../../../../../types/self/navigation/Owner/props/workers/WorkersDriverProps';
 import { EntityAsACard } from '../../../../molecules/EntityAsACard';
@@ -8,12 +9,18 @@ import {
   Status,
 } from '../../../../../FarmServiceApiTypes/Worker/Enums';
 import { CallAndMailPanel } from '../../../../molecules/CallAndMailPanel';
+import { updateWorkerStatusOrPosition } from '../../../../../api/worker/Worker';
 
-const makeArray = (e: { [key: string]: string | number }) =>
+type enumType = { [key: string]: string | number };
+const makeArray = (e: enumType) =>
   Object.keys(e)
     .map(key => e[key])
     .filter(_e => typeof _e === 'string') as Array<string>;
 
+const findEnumVal = (e: enumType, value: string) =>
+  Object.keys(e)
+    .filter(k => Number.isNaN(Number(k)))
+    .findIndex(key => key.toLowerCase() === value.toLowerCase());
 export function WorkerDetails({
   route: {
     params: { worker },
@@ -25,10 +32,11 @@ export function WorkerDetails({
 >) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { id, email, status, position, personalData, address } = worker;
-  /* const { data, mutate } = useMutation({
+  const { data, mutate } = useMutation({
     mutationKey: ['updateWorkerStatusOrPosition', id],
     mutationFn: updateWorkerStatusOrPosition,
-  }); */
+  });
+  console.log(data, 'data-worker-details');
   if (!worker) return null;
   return (
     <ScreenBase name={`${personalData.name} ${personalData.surname}`}>
@@ -67,6 +75,10 @@ export function WorkerDetails({
               items={makeArray(Status).map(e => ({ name: e }))}
               description="Status"
               itemListLabel="Choose role"
+              onValueChange={v => {
+                console.log(findEnumVal(Status, v));
+                mutate({ status: findEnumVal(Status, v), worker: id });
+              }}
             />
           </YStack>
           <YStack className="mt-4 mb-4">
@@ -77,6 +89,10 @@ export function WorkerDetails({
               items={makeArray(Position).map(e => ({ name: e }))}
               description="Position"
               itemListLabel="Choose role"
+              onValueChange={v => {
+                console.log(findEnumVal(Position, v));
+                mutate({ position: findEnumVal(Position, v), worker: id });
+              }}
             />
           </YStack>
         </YStack>
