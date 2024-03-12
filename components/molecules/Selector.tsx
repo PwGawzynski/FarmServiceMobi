@@ -5,6 +5,7 @@ import ChevronDown from '../../assets/chevron-down.svg';
 import { Theme } from '../../FarmServiceApiTypes/Account/Constants';
 import { Colors } from '../../settings/styles/colors';
 import { selectTheme } from '../../src/redux/feature/userSlice';
+import { PendingInfo } from '../atoms/PendingInfo';
 
 export type SelectorProps = {
   initialValue: string;
@@ -12,6 +13,7 @@ export type SelectorProps = {
   items: { name: string }[];
   itemListLabel?: string;
   description?: string;
+  pending?: boolean;
 };
 
 export function Selector({
@@ -20,6 +22,7 @@ export function Selector({
   items,
   itemListLabel,
   description,
+  pending,
 }: SelectorProps) {
   const [val, setVal] = useState(initialValue.toLowerCase());
   const handleValueChange = (v: string) => {
@@ -87,12 +90,16 @@ export function Selector({
             />
           }
         >
-          <Select.Value
-            style={{ textTransform: 'uppercase' }}
-            pressStyle={{ color: '$color8' }}
-          >
-            {val}
-          </Select.Value>
+          {!pending ? (
+            <Select.Value
+              style={{ textTransform: 'uppercase' }}
+              pressStyle={{ color: '$color8' }}
+            >
+              {val}
+            </Select.Value>
+          ) : (
+            <PendingInfo isVisible infoText="Pending" />
+          )}
         </Select.Trigger>
 
         <Adapt when="sm" platform="touch">
