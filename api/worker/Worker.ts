@@ -3,7 +3,10 @@ import { Api } from '../Api';
 import { TranslationNames } from '../../locales/TranslationNames';
 import { apiHandler } from '../services/User';
 import { ResponseObject } from '../../FarmServiceApiTypes/Respnse/responseGeneric';
-import { CreateWorkerReqI } from '../../FarmServiceApiTypes/Worker/Requests';
+import {
+  CreateWorkerReqI,
+  UpdateWorkerStatusOrPositionReqI,
+} from '../../FarmServiceApiTypes/Worker/Requests';
 import { WorkerResponseBase } from '../../FarmServiceApiTypes/Worker/Responses';
 
 export async function workerData() {
@@ -20,6 +23,19 @@ export async function assignWorker(data: CreateWorkerReqI) {
       data,
     )) as unknown as ResponseObject<WorkerResponseBase | undefined>
   )?.payload;
+}
+
+export async function updateWorkerStatusOrPosition(
+  data: UpdateWorkerStatusOrPositionReqI,
+) {
+  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
+  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
+  return (await apiHandler<UpdateWorkerStatusOrPositionReqI>(
+    UNAUTHORIZED_MSG,
+    DEFAULT_MSG,
+    Api.updateWorkerStatusOrPosition,
+    data,
+  )) as unknown as WorkerResponseBase | undefined;
 }
 
 export async function allWorkers() {
