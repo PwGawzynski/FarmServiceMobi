@@ -322,6 +322,7 @@ export class Api {
   static async updateWorkerStatusOrPosition(
     data: UpdateWorkerStatusOrPositionReqI,
   ) {
+    await Api.delayRes();
     await Api.session();
     return (
       (await Api.axiosInstance.put(
