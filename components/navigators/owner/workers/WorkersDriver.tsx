@@ -21,6 +21,7 @@ export function WorkersDriver() {
         component={WorkerDetails}
         options={{
           animation: 'slide_from_right',
+          gestureDirection: 'horizontal',
         }}
       />
     </Stack.Navigator>
