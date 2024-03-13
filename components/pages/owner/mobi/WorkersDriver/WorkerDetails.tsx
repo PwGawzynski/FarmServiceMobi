@@ -21,18 +21,16 @@ import { ClientResponseBase } from '../../../../../FarmServiceApiTypes/Clients/R
 import { WorkerResponseBase } from '../../../../../FarmServiceApiTypes/Worker/Responses';
 import { UpdateWorkerStatusOrPositionReqI } from '../../../../../FarmServiceApiTypes/Worker/Requests';
 import { AddressResponseBase } from '../../../../../FarmServiceApiTypes/Address/Ressponses';
-import { AsAny } from '../../../../../helepers/typing';
+import { AsAny, EnumType } from '../../../../../helepers/typing';
 import { TranslationNames } from '../../../../../locales/TranslationNames';
 import { PersonalDataBase } from '../../../../../FarmServiceApiTypes/UserPersonalData/Responses';
 
-type enumType = { [key: string]: string | number };
-
-const makeArray = (e: enumType) =>
+const makeArray = (e: EnumType) =>
   Object.keys(e)
     .map(key => e[key])
     .filter(_e => typeof _e === 'string') as Array<string>;
 
-const findEnumVal = (e: enumType, value: string) =>
+const findEnumVal = (e: EnumType, value: string) =>
   Object.keys(e)
     .filter(k => Number.isNaN(Number(k)))
     .findIndex(key => key.toLowerCase() === value.toLowerCase());
@@ -79,7 +77,6 @@ export function WorkerDetails({
   'workersDriver',
   'ownerRootDriver'
 >) {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [worker, setWorker] = useState(givenWorker);
   const queryClient = useQueryClient();
   const [mutationData, setMutationData] = useState<
@@ -199,7 +196,7 @@ export function WorkerDetails({
             callButtonProps={{ phoneNumber: worker.personalData.phoneNumber }}
             mailButtonProps={{
               emailOptions: {
-                body: 'Send from FarmService T.M',
+                body: t(TranslationNames.components.CallAndMailPanel.sign),
                 recipients: [worker.email],
               },
             }}

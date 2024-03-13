@@ -136,6 +136,9 @@
       "cannotCallAlertTitle": "Błąd połączenia",
       "cannotCallAlertMessage": "Nie udało się wykonać połączenia. Prawdopodobnie to urządzenie nie obsługuje dzwonienia."
     },
+    "CallAndMailPanel": {
+      "sign": "Wysłano z FarmService T.M"
+    },
     "universalList": {
       "listEmptyText": "Brak danych do wyświetlenia...",
       "listLoadingText": "Pobiranie Klientów..."

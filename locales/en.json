@@ -136,6 +136,9 @@
       "cannotCallAlertTitle": "Cannot call",
       "cannotCallAlertMessage": "Sorry we cannot call, possibly this device doesn't support calling"
     },
+    "CallAndMailPanel": {
+      "sign": "Sent from FarmService T.M."
+    },
     "universalList": {
       "listEmptyText": "No data to display...",
       "listLoadingText": "Loading clients..."

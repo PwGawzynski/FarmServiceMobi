@@ -169,6 +169,9 @@ export const TranslationNames = {
       cannotCallAlertTitle: 'components.call.cannotCallAlertTitle',
       cannotCallAlertMessage: 'components.call.cannotCallAlertMessage',
     },
+    CallAndMailPanel: {
+      sign: 'components.CallAndMailPanel.sign',
+    },
     universalList: {
       listEmptyText: 'components.universalList.listEmptyText',
       listLoadingText: 'components.universalList.listLoadingText',
