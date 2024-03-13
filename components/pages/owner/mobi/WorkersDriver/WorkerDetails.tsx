@@ -6,6 +6,7 @@ import {
 } from '@tanstack/react-query';
 import { useState } from 'react';
 import { t } from 'i18next';
+import Toast from 'react-native-toast-message';
 import { ScreenBase } from '../common/ScreenBase';
 import { WorkersDriverScreenProps } from '../../../../../types/self/navigation/Owner/props/workers/WorkersDriverProps';
 import { EntityAsACard } from '../../../../molecules/EntityAsACard';
@@ -71,7 +72,7 @@ const PersonalDataTranslations = {
 
 export function WorkerDetails({
   route: {
-    params: { worker },
+    params: { worker: givenWorker },
   },
 }: WorkersDriverScreenProps<
   'workerDetails',
@@ -79,27 +80,39 @@ export function WorkerDetails({
   'ownerRootDriver'
 >) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { id, email, status, position, personalData, address } = worker;
+  const [worker, setWorker] = useState(givenWorker);
   const queryClient = useQueryClient();
   const [mutationData, setMutationData] = useState<
     UpdateWorkerStatusOrPositionReqI | undefined
   >(undefined);
   const { mutate, isPending } = useMutation({
-    mutationKey: ['updateWorkerStatusOrPosition', id],
+    mutationKey: ['updateWorkerStatusOrPosition', worker.id],
     mutationFn: (data: UpdateWorkerStatusOrPositionReqI) => {
       setMutationData(data);
       return updateWorkerStatusOrPosition(data);
     },
-    onSuccess: res => cacheResponse(res, queryClient),
+    onSuccess: res => {
+      if (res) setWorker(res);
+      cacheResponse(res, queryClient);
+    },
+    onError: () => {
+      Toast.show({
+        type: 'error',
+        text1: t(TranslationNames.components.toast.workerUpdateErrorHeader),
+        text2: t(TranslationNames.components.toast.workerUpdateErrorContext),
+      });
+    },
   });
 
   if (!worker) return null;
   return (
-    <ScreenBase name={`${personalData.name} ${personalData.surname}`}>
+    <ScreenBase
+      name={`${worker.personalData.name} ${worker.personalData.surname}`}
+    >
       <YStack justifyContent="space-between" f={1}>
         <YStack>
           <EntityAsACard
-            data={personalData}
+            data={worker.personalData}
             names={{
               name: PersonalDataTranslations.name,
               surname: PersonalDataTranslations.surname,
@@ -115,7 +128,7 @@ export function WorkerDetails({
             omittedKeys={['name', 'surname']}
           />
           <EntityAsACard
-            data={address}
+            data={worker.address}
             names={{
               city: AddressTranslations.city,
               street: AddressTranslations.street,
@@ -134,8 +147,10 @@ export function WorkerDetails({
           />
           <YStack className="mt-4 mb-4">
             <Selector
-              initialValue={
-                status !== undefined ? Status[status].toLowerCase() : ''
+              value={
+                worker.status !== undefined
+                  ? Status[worker.status].toLowerCase()
+                  : ''
               }
               pending={isPending && mutationData?.status !== undefined}
               items={makeArray(Status).map(e => ({ name: e }))}
@@ -149,15 +164,17 @@ export function WorkerDetails({
               )}:`}
               onValueChange={v => {
                 console.log(findEnumVal(Status, v));
-                mutate({ status: findEnumVal(Status, v), worker: id });
+                mutate({ status: findEnumVal(Status, v), worker: worker.id });
               }}
             />
           </YStack>
           <YStack className="mt-4 mb-4">
             <Selector
               pending={isPending && mutationData?.position !== undefined}
-              initialValue={
-                position !== undefined ? Position[position].toLowerCase() : ''
+              value={
+                worker.position !== undefined
+                  ? Position[worker.position].toLowerCase()
+                  : ''
               }
               items={makeArray(Position).map(e => ({ name: e }))}
               description={t(
@@ -169,18 +186,21 @@ export function WorkerDetails({
                 TranslationNames.screens.ownerRootDriver.workerDetails.position,
               )}:`}
               onValueChange={v => {
-                mutate({ position: findEnumVal(Position, v), worker: id });
+                mutate({
+                  position: findEnumVal(Position, v),
+                  worker: worker.id,
+                });
               }}
             />
           </YStack>
         </YStack>
         <XStack mt="$4">
           <CallAndMailPanel
-            callButtonProps={{ phoneNumber: personalData.phoneNumber }}
+            callButtonProps={{ phoneNumber: worker.personalData.phoneNumber }}
             mailButtonProps={{
               emailOptions: {
                 body: 'Send from FarmService T.M',
-                recipients: [email],
+                recipients: [worker.email],
               },
             }}
           />
