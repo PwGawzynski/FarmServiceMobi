@@ -143,7 +143,9 @@
 
     "toast": {
       "clientsFetchErrorHeader": "Błąd pobierania klientów",
-      "clientsFetchErrorContext": "Nie udało się pobrać listy klientów. Spróbuj ponownie później."
+      "workerUpdateErrorHeader": "Błąd aktualizacji pracownika",
+      "clientsFetchErrorContext": "Nie udało się pobrać listy klientów. Spróbuj ponownie później.",
+      "workerUpdateErrorContext": "Nie udało sie zaktualizować danych."
     }
   },
   "addressForm": {
