@@ -4,6 +4,7 @@ import {
   useMutation,
   useQueryClient,
 } from '@tanstack/react-query';
+import { useState } from 'react';
 import { ScreenBase } from '../common/ScreenBase';
 import { WorkersDriverScreenProps } from '../../../../../types/self/navigation/Owner/props/workers/WorkersDriverProps';
 import { EntityAsACard } from '../../../../molecules/EntityAsACard';
@@ -16,6 +17,7 @@ import { CallAndMailPanel } from '../../../../molecules/CallAndMailPanel';
 import { updateWorkerStatusOrPosition } from '../../../../../api/worker/Worker';
 import { ClientResponseBase } from '../../../../../FarmServiceApiTypes/Clients/Responses';
 import { WorkerResponseBase } from '../../../../../FarmServiceApiTypes/Worker/Responses';
+import { UpdateWorkerStatusOrPositionReqI } from '../../../../../FarmServiceApiTypes/Worker/Requests';
 
 type enumType = { [key: string]: string | number };
 
@@ -55,10 +57,15 @@ export function WorkerDetails({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { id, email, status, position, personalData, address } = worker;
   const queryClient = useQueryClient();
-
+  const [mutationData, setMutationData] = useState<
+    UpdateWorkerStatusOrPositionReqI | undefined
+  >(undefined);
   const { mutate, isPending } = useMutation({
     mutationKey: ['updateWorkerStatusOrPosition', id],
-    mutationFn: updateWorkerStatusOrPosition,
+    mutationFn: (data: UpdateWorkerStatusOrPositionReqI) => {
+      setMutationData(data);
+      return updateWorkerStatusOrPosition(data);
+    },
     onSuccess: res => cacheResponse(res, queryClient),
   });
 
@@ -97,6 +104,7 @@ export function WorkerDetails({
               initialValue={
                 status !== undefined ? Status[status].toLowerCase() : ''
               }
+              pending={isPending && mutationData?.status !== undefined}
               items={makeArray(Status).map(e => ({ name: e }))}
               description="Status"
               itemListLabel="Choose role"
@@ -108,7 +116,7 @@ export function WorkerDetails({
           </YStack>
           <YStack className="mt-4 mb-4">
             <Selector
-              pending={isPending}
+              pending={isPending && mutationData?.position !== undefined}
               initialValue={
                 position !== undefined ? Position[position].toLowerCase() : ''
               }
