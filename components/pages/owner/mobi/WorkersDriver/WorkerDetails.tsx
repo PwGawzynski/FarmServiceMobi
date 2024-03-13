@@ -79,6 +79,7 @@ export function WorkerDetails({
 >) {
   const [worker, setWorker] = useState(givenWorker);
   const queryClient = useQueryClient();
+  // used to store data used in mutation to determine with param has been updated
   const [mutationData, setMutationData] = useState<
     UpdateWorkerStatusOrPositionReqI | undefined
   >(undefined);
