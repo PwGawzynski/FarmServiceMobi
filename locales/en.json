@@ -142,7 +142,9 @@
     },
     "toast": {
       "clientsFetchErrorHeader": "Clients fetch error",
-      "clientsFetchErrorContext": "Sorry we cannot fetch clients, please try again later"
+      "workerUpdateErrorHeader": "Worker update error",
+      "clientsFetchErrorContext": "Sorry we cannot fetch clients",
+      "workerUpdateErrorContext": "Sorry we cannot update worker"
     }
   },
   "addressForm": {
