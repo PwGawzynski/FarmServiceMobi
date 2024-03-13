@@ -105,6 +105,14 @@
         "title": "Pracownicy",
         "searchPlaceholder": "Znajdź pracownika",
         "emptyList": "Brak pracowników do wyświetlenia, przeciągni w prawo aby dodać nowego skanując kod QR"
+      },
+      "workerDetails": {
+        "personalData": "Dane osobowe",
+        "address": "Adres",
+        "status": "Status",
+        "Position": "Stanowisko",
+        "editButton": "Edytuj",
+        "choose": "Wybierz"
       }
     }
   },
