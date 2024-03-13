@@ -225,7 +225,7 @@ export function ClientDetails({
           callButtonProps={{ phoneNumber: personalData.phoneNumber }}
           mailButtonProps={{
             emailOptions: {
-              body: 'Send from FarmService T.M',
+              body: t(TranslationNames.components.CallAndMailPanel.sign),
               recipients: [email],
             },
           }}
