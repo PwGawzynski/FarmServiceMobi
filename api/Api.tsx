@@ -323,6 +323,7 @@ export class Api {
     data: UpdateWorkerStatusOrPositionReqI,
   ) {
     await Api.delayRes();
+    // throw new Error('kurewka');
     await Api.session();
     return (
       (await Api.axiosInstance.put(
