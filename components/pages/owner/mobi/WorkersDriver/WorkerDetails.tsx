@@ -5,6 +5,7 @@ import {
   useQueryClient,
 } from '@tanstack/react-query';
 import { useState } from 'react';
+import { t } from 'i18next';
 import { ScreenBase } from '../common/ScreenBase';
 import { WorkersDriverScreenProps } from '../../../../../types/self/navigation/Owner/props/workers/WorkersDriverProps';
 import { EntityAsACard } from '../../../../molecules/EntityAsACard';
@@ -18,6 +19,10 @@ import { updateWorkerStatusOrPosition } from '../../../../../api/worker/Worker';
 import { ClientResponseBase } from '../../../../../FarmServiceApiTypes/Clients/Responses';
 import { WorkerResponseBase } from '../../../../../FarmServiceApiTypes/Worker/Responses';
 import { UpdateWorkerStatusOrPositionReqI } from '../../../../../FarmServiceApiTypes/Worker/Requests';
+import { AddressResponseBase } from '../../../../../FarmServiceApiTypes/Address/Ressponses';
+import { AsAny } from '../../../../../helepers/typing';
+import { TranslationNames } from '../../../../../locales/TranslationNames';
+import { PersonalDataBase } from '../../../../../FarmServiceApiTypes/UserPersonalData/Responses';
 
 type enumType = { [key: string]: string | number };
 
@@ -45,6 +50,25 @@ const cacheResponse = (
     },
   );
 };
+
+const AddressTranslations = {
+  street: t(TranslationNames.addressForm.formPlaceholder.street),
+  city: t(TranslationNames.addressForm.formPlaceholder.city),
+  county: t(TranslationNames.addressForm.formPlaceholder.county),
+  postalCode: t(TranslationNames.addressForm.formPlaceholder.postalCode),
+  houseNumber: t(TranslationNames.addressForm.formPlaceholder.houseNumber),
+  apartmentNumber: t(
+    TranslationNames.addressForm.formPlaceholder.apartmentNumber,
+  ),
+  voivodeship: t(TranslationNames.addressForm.formPlaceholder.voivodeship),
+} as AsAny<AddressResponseBase>;
+
+const PersonalDataTranslations = {
+  name: t(TranslationNames.createClientForm.formPlaceholder.name),
+  surname: t(TranslationNames.createClientForm.formPlaceholder.surname),
+  phoneNumber: t(TranslationNames.createClientForm.formPlaceholder.phoneNumber),
+} as AsAny<PersonalDataBase>;
+
 export function WorkerDetails({
   route: {
     params: { worker },
@@ -77,27 +101,36 @@ export function WorkerDetails({
           <EntityAsACard
             data={personalData}
             names={{
-              name: 'Name',
-              surname: 'Surname',
-              phoneNumber: 'Phone number',
+              name: PersonalDataTranslations.name,
+              surname: PersonalDataTranslations.surname,
+              phoneNumber: PersonalDataTranslations.phoneNumber,
             }}
-            cardName="Personal"
-            topRightButtonName="Edit"
+            cardName={t(
+              TranslationNames.screens.ownerRootDriver.workerDetails
+                .personalData,
+            )}
+            topRightButtonName={t(
+              TranslationNames.screens.ownerRootDriver.workerDetails.editButton,
+            )}
             omittedKeys={['name', 'surname']}
           />
           <EntityAsACard
             data={address}
             names={{
-              city: 'City',
-              street: 'Street',
-              houseNumber: 'House number',
-              county: 'County',
-              apartmentNumber: 'Apartment number',
-              postalCode: 'Postal code',
-              voivodeship: 'Voivodeship',
+              city: AddressTranslations.city,
+              street: AddressTranslations.street,
+              houseNumber: AddressTranslations.houseNumber,
+              county: AddressTranslations.county,
+              apartmentNumber: AddressTranslations.apartmentNumber,
+              postalCode: AddressTranslations.postalCode,
+              voivodeship: AddressTranslations.voivodeship,
             }}
-            cardName="Address"
-            topRightButtonName="Edit"
+            cardName={t(
+              TranslationNames.screens.ownerRootDriver.workerDetails.address,
+            )}
+            topRightButtonName={t(
+              TranslationNames.screens.ownerRootDriver.workerDetails.editButton,
+            )}
           />
           <YStack className="mt-4 mb-4">
             <Selector
@@ -106,8 +139,14 @@ export function WorkerDetails({
               }
               pending={isPending && mutationData?.status !== undefined}
               items={makeArray(Status).map(e => ({ name: e }))}
-              description="Status"
-              itemListLabel="Choose role"
+              description={t(
+                TranslationNames.screens.ownerRootDriver.workerDetails.status,
+              )}
+              itemListLabel={`${t(
+                TranslationNames.screens.ownerRootDriver.workerDetails.choose,
+              )} ${t(
+                TranslationNames.screens.ownerRootDriver.workerDetails.status,
+              )}:`}
               onValueChange={v => {
                 console.log(findEnumVal(Status, v));
                 mutate({ status: findEnumVal(Status, v), worker: id });
@@ -121,8 +160,14 @@ export function WorkerDetails({
                 position !== undefined ? Position[position].toLowerCase() : ''
               }
               items={makeArray(Position).map(e => ({ name: e }))}
-              description="Position"
-              itemListLabel="Choose role"
+              description={t(
+                TranslationNames.screens.ownerRootDriver.workerDetails.position,
+              )}
+              itemListLabel={`${t(
+                TranslationNames.screens.ownerRootDriver.workerDetails.choose,
+              )} ${t(
+                TranslationNames.screens.ownerRootDriver.workerDetails.position,
+              )}:`}
               onValueChange={v => {
                 mutate({ position: findEnumVal(Position, v), worker: id });
               }}
