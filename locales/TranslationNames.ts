@@ -139,6 +139,14 @@ export const TranslationNames = {
           'screens.ownerRootDriver.workersDesktop.searchPlaceholder',
         emptyList: 'screens.ownerRootDriver.workersDesktop.emptyList',
       },
+      workerDetails: {
+        personalData: 'screens.ownerRootDriver.workerDetails.personalData',
+        address: 'screens.ownerRootDriver.workerDetails.address',
+        status: 'screens.ownerRootDriver.workerDetails.status',
+        position: 'screens.ownerRootDriver.workerDetails.Position',
+        editButton: 'screens.ownerRootDriver.workerDetails.editButton',
+        choose: 'screens.ownerRootDriver.workerDetails.choose',
+      },
     },
   },
   serviceDefaults: {
