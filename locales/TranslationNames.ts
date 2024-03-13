@@ -175,7 +175,9 @@ export const TranslationNames = {
     },
     toast: {
       clientsFetchErrorHeader: 'components.toast.clientsFetchErrorHeader',
+      workerUpdateErrorHeader: 'components.toast.workerUpdateErrorHeader',
       clientsFetchErrorContext: 'components.toast.clientsFetchErrorContext',
+      workerUpdateErrorContext: 'components.toast.workerUpdateErrorContext',
     },
   },
   addressForm: {
