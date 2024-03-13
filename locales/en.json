@@ -105,6 +105,14 @@
         "title": "Workers",
         "searchPlaceholder": "Find a worker",
         "emptyList": "No workers to display, swipe right and add new one by scanning QR code"
+      },
+      "workerDetails": {
+        "personalData": "Personal",
+        "address": "Address",
+        "status": "Status",
+        "Position": "Position",
+        "editButton": "Edit",
+        "choose": "Choose"
       }
     }
   },
