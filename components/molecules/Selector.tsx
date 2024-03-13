@@ -1,5 +1,5 @@
 import { Adapt, Select, Sheet, SizableText, XStack } from 'tamagui';
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import ChevronDown from '../../assets/chevron-down.svg';
 import { Theme } from '../../FarmServiceApiTypes/Account/Constants';
@@ -8,7 +8,7 @@ import { selectTheme } from '../../src/redux/feature/userSlice';
 import { PendingInfo } from '../atoms/PendingInfo';
 
 export type SelectorProps = {
-  initialValue: string;
+  value: string;
   onValueChange?: (val: string) => void;
   items: { name: string }[];
   itemListLabel?: string;
@@ -17,16 +17,14 @@ export type SelectorProps = {
 };
 
 export function Selector({
-  initialValue,
+  value,
   onValueChange,
   items,
   itemListLabel,
   description,
   pending,
 }: SelectorProps) {
-  const [val, setVal] = useState(initialValue.toLowerCase());
   const handleValueChange = (v: string) => {
-    setVal(v);
     if (onValueChange) onValueChange(v);
   };
   const theme = useSelector(selectTheme);
@@ -40,11 +38,11 @@ export function Selector({
             key={item.name}
             value={item.name.toLowerCase()}
             style={{
-              fontWeight: item.name.toLowerCase() === val ? 'bold' : 'normal',
-              fontSize: item.name.toLowerCase() === val ? '$7' : '$4',
+              fontWeight: item.name.toLowerCase() === value ? 'bold' : 'normal',
+              fontSize: item.name.toLowerCase() === value ? '$7' : '$4',
               color:
                 // eslint-disable-next-line no-nested-ternary
-                item.name.toLowerCase() === val
+                item.name.toLowerCase() === value
                   ? theme === Theme.dark
                     ? Colors.WHITE
                     : Colors.DARK_BLUE
@@ -59,7 +57,7 @@ export function Selector({
           </Select.Item>
         );
       }),
-    [items, val],
+    [items, value],
   );
 
   return (
@@ -74,7 +72,7 @@ export function Selector({
         </SizableText>
       </XStack>
       <Select
-        value={val}
+        value={value}
         onValueChange={handleValueChange}
         disablePreventBodyScroll
       >
@@ -95,7 +93,7 @@ export function Selector({
               style={{ textTransform: 'uppercase' }}
               pressStyle={{ color: '$color8' }}
             >
-              {val}
+              {value}
             </Select.Value>
           ) : (
             <PendingInfo isVisible infoText="Pending" />
