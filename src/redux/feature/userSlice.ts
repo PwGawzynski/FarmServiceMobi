@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 import { UserResponseBase } from '../../../FarmServiceApiTypes/User/Responses';
 import { UserRole } from '../../../FarmServiceApiTypes/User/Enums';
-import { Api } from '../../../api/Api';
+import { Api, ApiSelf } from '../../../api/Api';
 import {
   getThemeFromStorage,
   setThemeToStorage,
@@ -65,7 +65,7 @@ const initUserData: UserContextI = {
 
 export const setUpUser = createAsyncThunk('user/fetchUser', async () => {
   try {
-    await Api.init();
+    await ApiSelf.init();
     const response = await Api.me();
     if (response.code === ResponseCode.ProcessedCorrect && response.payload)
       setThemeToStorage(response.payload.account.theme);
