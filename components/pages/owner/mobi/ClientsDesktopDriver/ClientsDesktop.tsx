@@ -21,7 +21,9 @@ export function ClientsDesktop() {
     queryKey: ['clients'],
     queryFn: getClients,
     staleTime: EXPO_PUBLIC_CLIENTS_QUERY_STALE_TIME,
-    refetchOnWindowFocus: true,
+    gcTime: EXPO_PUBLIC_CLIENTS_QUERY_STALE_TIME,
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
   });
   const [filter, setFilter] = useState<string | undefined>(undefined);
 
