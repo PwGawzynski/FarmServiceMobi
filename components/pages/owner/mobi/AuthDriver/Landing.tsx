@@ -81,7 +81,6 @@ export default function Landing({ navigation }: AuthDriverProps<'landing'>) {
     new QueryClient({
       defaultOptions: {
         queries: {
-          queryKey: ['clients'],
           queryFn: getClients,
           refetchOnWindowFocus: false,
           refetchOnMount: false,

@@ -15,11 +15,14 @@ import { ListInfo } from '../../../../atoms/ListInfo';
 import { SwipeRightAnimated } from '../../../../atoms/SwipeRightAnimated';
 import { searchEngineNameSurnameFilter } from '../../../../../helepers/filterFunctions';
 import { allWorkers } from '../../../../../api/worker/Worker';
+import { EXPO_PUBLIC_CLIENTS_QUERY_STALE_TIME } from '../../../../../settings/query/querySettings';
 
 export function WorkersDesktop() {
   const { data, isFetching, isError } = useQuery({
     queryKey: ['workers'],
     queryFn: allWorkers,
+    staleTime: EXPO_PUBLIC_CLIENTS_QUERY_STALE_TIME,
+    gcTime: EXPO_PUBLIC_CLIENTS_QUERY_STALE_TIME,
   });
   console.log(data);
   const [filter, setFilter] = useState<string | undefined>(undefined);
@@ -33,7 +36,6 @@ export function WorkersDesktop() {
         bottomRightText={
           item.status !== undefined ? Status[item.status] : undefined
         }
-        // TODO dodsać ekran worker details
         onPressNavigateTo="workerDetails"
         navigationParams={{ worker: item }}
       />

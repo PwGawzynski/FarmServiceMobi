@@ -27,7 +27,9 @@ export function fetchClientDriver(
         gcTime: EXPO_PUBLIC_CLIENTS_QUERY_STALE_TIME,
         retryDelay: retryCount => retryCount * QUERY_RETRY_DELAY_MULTIPLICATION,
       })
-      .then()
+      .then(data => {
+        queryClient.current.setQueryData(['clients'], data);
+      })
       .catch(() => {
         dispatch(
           setQueryFetchLogs({

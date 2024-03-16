@@ -8,6 +8,7 @@ import i18next from 'i18next';
 import { I18nextProvider } from 'react-i18next';
 import { RootSiblingParent } from 'react-native-root-siblings';
 import { useFonts } from 'expo-font';
+import { DevToolsBubble } from 'react-native-react-query-devtools';
 import AuthDriver from './components/navigators/AuthDriver';
 import store from './src/redux/app/Store';
 import { setUpUser } from './src/redux/feature/userSlice';
@@ -46,6 +47,7 @@ export default function App() {
             </I18nextProvider>
           </NavigationContainer>
         </Provider>
+        <DevToolsBubble />
       </QueryClientProvider>
     </GestureHandlerRootView>
   );
