@@ -68,6 +68,11 @@
         "companyAddress": "Adres firmy",
         "editButton": "Edytuj",
         "assignCompanyButton": "Dopisz dane firmy"
+      },
+      "clientControlPanel": {
+        "title": "Panel klienta",
+        "clientDataButton": "Informacje",
+        "clientFieldsButton": "Pola klienta"
       }
     },
     "clientDesktopDriver": {
