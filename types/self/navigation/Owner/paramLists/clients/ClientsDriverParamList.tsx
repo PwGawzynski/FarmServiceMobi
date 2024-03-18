@@ -9,6 +9,9 @@ export type ClientsDriverParamList = {
   clientDetails: {
     client: ClientResponseBase;
   };
+  clientControlPanel: {
+    client: ClientResponseBase;
+  };
   assignCompanyToClient: {
     onCreateClient?: CreateClientReqI;
     afterCreateClient?: ClientResponseBase;
