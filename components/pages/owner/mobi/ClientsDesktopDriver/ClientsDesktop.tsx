@@ -51,7 +51,7 @@ export function ClientsDesktop() {
           name={item.user.personal_data.name}
           surname={item.user.personal_data.surname}
           bottomRightText={item.user.address.city}
-          onPressNavigateTo="clientDetails"
+          onPressNavigateTo="clientControlPanel"
           navigationParams={{ client: item }}
         />
       );
