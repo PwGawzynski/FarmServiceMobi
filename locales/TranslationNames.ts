@@ -87,6 +87,13 @@ export const TranslationNames = {
         assignCompanyButton:
           'screens.clientDriver.clientDetails.assignCompanyButton',
       },
+      clientControlPanel: {
+        title: 'screens.clientDriver.clientControlPanel.title',
+        clientDataButton:
+          'screens.clientDriver.clientControlPanel.clientDataButton',
+        clientFieldsButton:
+          'screens.clientDriver.clientControlPanel.clientFieldsButton',
+      },
     },
     clientDesktopDriver: {
       createClient: {
