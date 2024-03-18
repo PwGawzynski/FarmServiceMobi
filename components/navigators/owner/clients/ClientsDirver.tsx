@@ -4,6 +4,7 @@ import { ClientsDriverParamList } from '../../../../types/self/navigation/Owner/
 import { ClientsDesktopDriver } from './ClientsDesktopDriver';
 import { ClientDetails } from '../../../pages/owner/mobi/ClientsDriver/ClientDetails';
 import { AssignCompanyToClient } from '../../../pages/owner/mobi/ClientsDriver/AssignCompanyToClient';
+import { ClientControlPanel } from '../../../pages/owner/mobi/ClientsDriver/ClientControlPanel';
 
 const Stack = createNativeStackNavigator<ClientsDriverParamList>();
 
@@ -20,6 +21,14 @@ export function ClientsDriver() {
       <Stack.Screen
         name="clientDetails"
         component={ClientDetails}
+        options={{
+          animation: 'default',
+          gestureDirection: 'horizontal',
+        }}
+      />
+      <Stack.Screen
+        name="clientControlPanel"
+        component={ClientControlPanel}
         options={{
           animation: 'default',
           gestureDirection: 'horizontal',
