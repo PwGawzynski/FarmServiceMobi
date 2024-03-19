@@ -6,7 +6,7 @@ import { ListRenderItemInfo } from '@shopify/flash-list';
 import { ScreenBase } from '../common/ScreenBase';
 import { TranslationNames } from '../../../../../locales/TranslationNames';
 import { getClients } from '../../../../../api/clients/Client';
-import { EXPO_PUBLIC_CLIENTS_QUERY_STALE_TIME } from '../../../../../settings/query/querySettings';
+import { EXPO_PUBLIC_QUERY_STALE_TIME } from '../../../../../settings/query/querySettings';
 import { SearchBox } from '../../../../molecules/SearchBox';
 import { ClientResponseBase } from '../../../../../FarmServiceApiTypes/Clients/Responses';
 import PersonListItem from '../../../../molecules/PersonListItem';
@@ -20,8 +20,8 @@ export function ClientsDesktop() {
   const { data, isFetching, isError } = useQuery({
     queryKey: ['clients'],
     queryFn: getClients,
-    staleTime: EXPO_PUBLIC_CLIENTS_QUERY_STALE_TIME,
-    gcTime: EXPO_PUBLIC_CLIENTS_QUERY_STALE_TIME,
+    staleTime: EXPO_PUBLIC_QUERY_STALE_TIME,
+    gcTime: EXPO_PUBLIC_QUERY_STALE_TIME,
     refetchOnWindowFocus: false,
     refetchOnMount: false,
   });
