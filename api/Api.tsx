@@ -390,6 +390,14 @@ export class ApiSelf {
     ).data.payload as Array<WorkerResponseBase> | undefined;
   }
 
+  static async getClientFields(id: string) {
+    return (
+      (await ApiSelf.axiosInstance.get('/field/all', {
+        params: { client: id },
+      })) as AxiosResponse<ResponseObject>
+    ).data.payload;
+  }
+
   static workerAssignedListener({
     open,
     message,
