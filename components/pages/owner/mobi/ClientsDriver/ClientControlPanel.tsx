@@ -40,6 +40,10 @@ export function ClientControlPanel({
           <ButtonTamagui
             buttonProps={{
               mt: '$4',
+              onPress: () =>
+                navigation.navigate('clientFields', {
+                  client: route.params.client,
+                }),
             }}
             icon={<MapIco />}
             text={t(
