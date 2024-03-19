@@ -12,6 +12,7 @@ import {
   UpdateClientsCompanyReqI,
 } from '../../FarmServiceApiTypes/ClientsCompany/Requests';
 import { ClientsCompanyResponseBase } from '../../FarmServiceApiTypes/ClientsCompany/Responses';
+import { FieldResponseBase } from '../../FarmServiceApiTypes/Field/Ressponses';
 
 export async function createClient(data: CreateClientReqI) {
   const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
@@ -71,4 +72,14 @@ export async function getClients() {
     DEFAULT_MSG,
     Api.getClients,
   ) as unknown as Array<ClientResponseBase> | undefined;
+}
+export async function getClientFields(id: string) {
+  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
+  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
+  return apiHandler<string, FieldResponseBase[]>(
+    UNAUTHORIZED_MSG,
+    DEFAULT_MSG,
+    Api.getClientFields,
+    id,
+  ) as unknown as Array<FieldResponseBase> | undefined;
 }
