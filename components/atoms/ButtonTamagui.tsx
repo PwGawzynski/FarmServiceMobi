@@ -1,7 +1,7 @@
 import { Button, ButtonProps } from 'tamagui';
 
 export type IconButtonProps = {
-  icon: React.ReactNode;
+  icon?: React.ReactNode;
   text: string;
   buttonProps?: ButtonProps;
   textProps?: ButtonProps['textProps'];
