@@ -15,6 +15,7 @@ export type Props<T> = {
   renderItem: (info: ListRenderItemInfo<T>) => JSX.Element;
   listEmptyComponent?: JSX.Element;
   listEmptyText?: string;
+  swipeRightAnimation?: boolean;
 };
 
 const EL_HEIGHT = 100;
@@ -26,6 +27,7 @@ export function UniversalList<T>({
   renderItem,
   listEmptyComponent,
   listEmptyText,
+  swipeRightAnimation,
 }: Props<T>) {
   const ListEmptyComponent = useMemo(
     () => (
@@ -36,7 +38,7 @@ export function UniversalList<T>({
           t(TranslationNames.components.universalList.listEmptyText)
         }
       >
-        <SwipeRightAnimated />
+        {swipeRightAnimation && <SwipeRightAnimated />}
       </ListInfo>
     ),
     [],
