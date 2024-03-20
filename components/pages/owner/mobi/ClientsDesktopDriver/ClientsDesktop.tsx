@@ -73,6 +73,7 @@ export function ClientsDesktop() {
         <UniversalList
           renderItem={renderItem}
           data={sorted}
+          swipeRightAnimation
           listSetup={{ isLoading: isFetching, isLoadingError: isError }}
         />
       </YStack>
