@@ -1,13 +1,23 @@
 import React from 'react';
 import { Platform, SafeAreaView, StatusBar, Text, View } from 'react-native';
+import {
+  MainBottomSheet,
+  MainBottomSheetProps,
+} from '../../../../organisms/BottomSheet';
 
 export type Props = {
   name?: string;
   children?: React.ReactNode;
   activityDot?: boolean;
+  bottomSheetsProps?: MainBottomSheetProps;
 };
 
-export function ScreenBase({ name, children, activityDot }: Props) {
+export function ScreenBase({
+  name,
+  children,
+  activityDot,
+  bottomSheetsProps,
+}: Props) {
   return (
     <SafeAreaView
       className="flex-1 bg-[#fff] dark:bg-dark"
@@ -30,6 +40,7 @@ export function ScreenBase({ name, children, activityDot }: Props) {
         )}
         {children}
       </View>
+      {bottomSheetsProps && <MainBottomSheet {...bottomSheetsProps} />}
     </SafeAreaView>
   );
 }
