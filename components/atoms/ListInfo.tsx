@@ -7,7 +7,7 @@ export type ListEmptyProps = {
   Ico: any;
   height?: number;
   text?: string;
-  children?: React.ReactElement;
+  children?: React.ReactElement | React.ReactElement[] | boolean;
   color?: string;
 };
 
