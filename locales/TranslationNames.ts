@@ -189,6 +189,14 @@ export const TranslationNames = {
       clientsFetchErrorContext: 'components.toast.clientsFetchErrorContext',
       workerUpdateErrorContext: 'components.toast.workerUpdateErrorContext',
     },
+    filedBottomSheet: {
+      showOnMapButton: 'components.filedBottomSheet.showOnMapButton',
+      editButton: 'components.filedBottomSheet.editButton',
+      deleteButton: 'components.filedBottomSheet.deleteButton',
+      addButton: 'components.filedBottomSheet.addButton',
+      historyButton: 'components.filedBottomSheet.historyButton',
+      address: 'components.filedBottomSheet.address',
+    },
   },
   addressForm: {
     formPlaceholder: {
@@ -200,6 +208,8 @@ export const TranslationNames = {
       county: 'addressForm.formPlaceholder.county',
       country: 'addressForm.formPlaceholder.country',
       voivodeship: 'addressForm.formPlaceholder.voivodeship',
+      latitude: 'addressForm.formPlaceholder.latitude',
+      longitude: 'addressForm.formPlaceholder.longitude',
     },
     validation: {
       street: 'addressForm.validation.street',
