@@ -1,5 +1,6 @@
 import React from 'react';
 import { Platform, SafeAreaView, StatusBar, Text, View } from 'react-native';
+import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import {
   MainBottomSheet,
   MainBottomSheetProps,
@@ -25,22 +26,24 @@ export function ScreenBase({
         paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
       }}
     >
-      <View className="flex-1 ml-4 mr-4 ">
-        <View className="w-full h-2  items-end">
-          {activityDot && (
-            <View className="h-2 w-2 rounded-full bg-activity-dot" />
-          )}
-        </View>
-        {name && (
-          <View className="w-full">
-            <Text className="text-2xl uppercase font-bold text-dark dark:text-green">
-              {name}
-            </Text>
+      <BottomSheetModalProvider>
+        <View className="flex-1 ml-4 mr-4 ">
+          <View className="w-full h-2  items-end">
+            {activityDot && (
+              <View className="h-2 w-2 rounded-full bg-activity-dot" />
+            )}
           </View>
-        )}
-        {children}
-      </View>
-      {bottomSheetsProps && <MainBottomSheet {...bottomSheetsProps} />}
+          {name && (
+            <View className="w-full">
+              <Text className="text-2xl uppercase font-bold text-dark dark:text-green">
+                {name}
+              </Text>
+            </View>
+          )}
+          {children}
+        </View>
+        {bottomSheetsProps && <MainBottomSheet {...bottomSheetsProps} />}
+      </BottomSheetModalProvider>
     </SafeAreaView>
   );
 }
