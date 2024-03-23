@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
+import { ColorSchemeName } from 'react-native';
 import { UserResponseBase } from '../../../FarmServiceApiTypes/User/Responses';
 import { UserRole } from '../../../FarmServiceApiTypes/User/Enums';
 import { Api, ApiSelf } from '../../../api/Api';
@@ -10,6 +11,7 @@ import {
 } from '../../../helepers/ThemeHelpers';
 import { ResponseCode } from '../../../FarmServiceApiTypes/Respnse/responseGeneric';
 import { AddressResponseBase } from '../../../FarmServiceApiTypes/Address/Ressponses';
+import { Theme } from '../../../FarmServiceApiTypes/Account/Constants';
 
 export enum InitializationStatus {
   PENDING,
@@ -56,38 +58,43 @@ const initUserData: UserContextI = {
     email: undefined,
     password: undefined,
     isActivated: undefined,
-    theme: undefined,
+    theme: Theme.dark,
     activationCode: undefined,
   },
   company: undefined,
   initializationStatus: InitializationStatus.PENDING,
 } as UserContextI;
 
-export const setUpUser = createAsyncThunk('user/fetchUser', async () => {
-  try {
-    await ApiSelf.init();
-    const response = await Api.me();
-    if (response.code === ResponseCode.ProcessedCorrect && response.payload)
-      setThemeToStorage(response.payload.account.theme);
-    return {
-      initializationStatus: InitializationStatus.FULFILLED,
-      ...response.payload,
-    };
-  } catch (error) {
-    console.info(error, "Couldn't fetch user in userSlice");
-    if (error instanceof AxiosError) {
+export const setUpUser = createAsyncThunk(
+  'user/fetchUser',
+  async (shameName: ColorSchemeName) => {
+    try {
+      await ApiSelf.init();
+      const response = await Api.me();
+      if (response.code === ResponseCode.ProcessedCorrect && response.payload)
+        setThemeToStorage(response.payload.account.theme);
+      return {
+        initializationStatus: InitializationStatus.FULFILLED,
+        ...response.payload,
+      };
+    } catch (error) {
+      console.info(error, "Couldn't fetch user in userSlice");
+      if (error instanceof AxiosError) {
+        return {
+          ...initUserData,
+          initializationStatus: InitializationStatus.REJECTED,
+          account: { theme: await getThemeFromStorage() },
+        };
+      }
+      await setThemeToStorage(shameName === 'dark' ? Theme.dark : Theme.light);
       return {
         ...initUserData,
-        initializationStatus: InitializationStatus.REJECTED,
         account: { theme: await getThemeFromStorage() },
+        initializationStatus: InitializationStatus.REJECTED,
       };
     }
-    return {
-      ...initUserData,
-      initializationStatus: InitializationStatus.REJECTED,
-    };
-  }
-});
+  },
+);
 
 export const setUserAsync = createAsyncThunk(
   'user/setUserAsync',
