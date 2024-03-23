@@ -68,6 +68,11 @@
         "companyAddress": "Address",
         "editButton": "Edit",
         "assignCompanyButton": "Assign company data"
+      },
+      "clientControlPanel": {
+        "title": "Client control panel",
+        "clientDataButton": "Info",
+        "clientFieldsButton": "Fields"
       }
     },
     "clientDesktopDriver": {
@@ -91,19 +96,29 @@
         "searchPlaceholder": "Find a client"
       }
     },
-    "workerAssignation": {
-      "qrCodeScanCommunication": "Let the owner scan the QR code to assign you to the company",
-      "qrCodeTimeOut": "Scan this code before the timer runs out",
-      "connectionTimeout": "Connection timeout...",
-      "error": "Error occurred...",
-      "retryButton": "Retry",
-      "welcomeText": "Welcome on board! ",
-      "pendingStatus": "Querying your data..."
-    },
-    "workersDesktop": {
-      "title": "Workers",
-      "searchPlaceholder": "Find a worker",
-      "emptyList": "No workers to display, swipe right and add new one by scanning QR code"
+    "ownerRootDriver": {
+      "workerAssignation": {
+        "qrCodeScanCommunication": "Let the owner scan the QR code to assign you to the company",
+        "qrCodeTimeOut": "Scan this code before the timer runs out",
+        "connectionTimeout": "Connection timeout...",
+        "error": "Error occurred...",
+        "retryButton": "Retry",
+        "welcomeText": "Welcome on board! ",
+        "pendingStatus": "Querying your data..."
+      },
+      "workersDesktop": {
+        "title": "Workers",
+        "searchPlaceholder": "Find a worker",
+        "emptyList": "No workers to display, swipe right and add new one by scanning QR code"
+      },
+      "workerDetails": {
+        "personalData": "Personal",
+        "address": "Address",
+        "status": "Status",
+        "Position": "Position",
+        "editButton": "Edit",
+        "choose": "Choose"
+      }
     }
   },
   "serviceDefaults": {
@@ -126,13 +141,18 @@
       "cannotCallAlertTitle": "Cannot call",
       "cannotCallAlertMessage": "Sorry we cannot call, possibly this device doesn't support calling"
     },
+    "CallAndMailPanel": {
+      "sign": "Sent from FarmService T.M."
+    },
     "universalList": {
       "listEmptyText": "No data to display...",
       "listLoadingText": "Loading clients..."
     },
     "toast": {
       "clientsFetchErrorHeader": "Clients fetch error",
-      "clientsFetchErrorContext": "Sorry we cannot fetch clients, please try again later"
+      "workerUpdateErrorHeader": "Worker update error",
+      "clientsFetchErrorContext": "Sorry we cannot fetch clients",
+      "workerUpdateErrorContext": "Sorry we cannot update worker"
     }
   },
   "addressForm": {

@@ -8,6 +8,10 @@ import { address } from 'ip';
   ios: {
     bundleIdentifier: 'com.pwgawzynski.farmservice',
   },
+     plugins: [
+         "expo-localization",
+         "expo-secure-store"
+     ],
   eas: {
     projectId: 'd93bb622-30d0-4f55-85c6-5fde5f331ce4',
       updates: {

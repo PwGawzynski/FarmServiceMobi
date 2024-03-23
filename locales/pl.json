@@ -68,6 +68,11 @@
         "companyAddress": "Adres firmy",
         "editButton": "Edytuj",
         "assignCompanyButton": "Dopisz dane firmy"
+      },
+      "clientControlPanel": {
+        "title": "Panel klienta",
+        "clientDataButton": "Informacje",
+        "clientFieldsButton": "Pola klienta"
       }
     },
     "clientDesktopDriver": {
@@ -91,19 +96,29 @@
         "searchPlaceholder": "Znajdź klienta"
       }
     },
-    "workerAssignation": {
-      "qrCodeScanCommunication": "Pokaż właścicielowi kod QR, aby zeskanował go za pomocą swojej aplikacji FarmService",
-      "qrCodeTimeOut": "Zeskanuj kod QR w ciągu 60 sekund",
-      "connectionTimeout": "Przekroczono limit czasu połączenia...",
-      "error": "Wystąpił błąd...",
-      "retryButton": "Spróbuj ponownie",
-      "welcomeText": "Witaj na Pokładzie! ",
-      "pendingStatus": "Chwileczkę pobieramy dane o tobie..."
-    },
-    "workersDesktop": {
-      "title": "Pracownicy",
-      "searchPlaceholder": "Znajdź pracownika",
-      "emptyList": "Brak pracowników do wyświetlenia, przeciągni w prawo aby dodać nowego skanując kod QR"
+    "ownerRootDriver": {
+      "workerAssignation": {
+        "qrCodeScanCommunication": "Pokaż właścicielowi kod QR, aby zeskanował go za pomocą swojej aplikacji FarmService",
+        "qrCodeTimeOut": "Zeskanuj kod QR w ciągu 60 sekund",
+        "connectionTimeout": "Przekroczono limit czasu połączenia...",
+        "error": "Wystąpił błąd...",
+        "retryButton": "Spróbuj ponownie",
+        "welcomeText": "Witaj na Pokładzie! ",
+        "pendingStatus": "Chwileczkę pobieramy dane o tobie..."
+      },
+      "workersDesktop": {
+        "title": "Pracownicy",
+        "searchPlaceholder": "Znajdź pracownika",
+        "emptyList": "Brak pracowników do wyświetlenia, przeciągni w prawo aby dodać nowego skanując kod QR"
+      },
+      "workerDetails": {
+        "personalData": "Dane osobowe",
+        "address": "Adres",
+        "status": "Status",
+        "Position": "Stanowisko",
+        "editButton": "Edytuj",
+        "choose": "Wybierz"
+      }
     }
   },
   "serviceDefaults": {
@@ -126,6 +141,9 @@
       "cannotCallAlertTitle": "Błąd połączenia",
       "cannotCallAlertMessage": "Nie udało się wykonać połączenia. Prawdopodobnie to urządzenie nie obsługuje dzwonienia."
     },
+    "CallAndMailPanel": {
+      "sign": "Wysłano z FarmService T.M"
+    },
     "universalList": {
       "listEmptyText": "Brak danych do wyświetlenia...",
       "listLoadingText": "Pobiranie Klientów..."
@@ -133,7 +151,9 @@
 
     "toast": {
       "clientsFetchErrorHeader": "Błąd pobierania klientów",
-      "clientsFetchErrorContext": "Nie udało się pobrać listy klientów. Spróbuj ponownie później."
+      "workerUpdateErrorHeader": "Błąd aktualizacji pracownika",
+      "clientsFetchErrorContext": "Nie udało się pobrać listy klientów. Spróbuj ponownie później.",
+      "workerUpdateErrorContext": "Nie udało sie zaktualizować danych."
     }
   },
   "addressForm": {

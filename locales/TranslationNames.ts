@@ -87,6 +87,13 @@ export const TranslationNames = {
         assignCompanyButton:
           'screens.clientDriver.clientDetails.assignCompanyButton',
       },
+      clientControlPanel: {
+        title: 'screens.clientDriver.clientControlPanel.title',
+        clientDataButton:
+          'screens.clientDriver.clientControlPanel.clientDataButton',
+        clientFieldsButton:
+          'screens.clientDriver.clientControlPanel.clientFieldsButton',
+      },
     },
     clientDesktopDriver: {
       createClient: {
@@ -119,20 +126,34 @@ export const TranslationNames = {
           'screens.clientDesktopDriver.clientsDesktop.searchPlaceholder',
       },
     },
-    workerAssignation: {
-      qrCodeScanCommunication:
-        'screens.workerAssignation.qrCodeScanCommunication',
-      qrCodeTimeOut: 'screens.workerAssignation.qrCodeTimeOut',
-      connectionTimeout: 'screens.workerAssignation.connectionTimeout',
-      error: 'screens.workerAssignation.error',
-      retryButton: 'screens.workerAssignation.retryButton',
-      welcomeText: 'screens.workerAssignation.welcomeText',
-      pendingStatus: 'screens.workerAssignation.pendingStatus',
-    },
-    workersDesktop: {
-      title: 'screens.workersDesktop.title',
-      searchPlaceholder: 'screens.workersDesktop.searchPlaceholder',
-      emptyList: 'screens.workersDesktop.emptyList',
+    ownerRootDriver: {
+      workerAssignation: {
+        qrCodeScanCommunication:
+          'screens.ownerRootDriver.workerAssignation.qrCodeScanCommunication',
+        qrCodeTimeOut:
+          'screens.ownerRootDriver.workerAssignation.qrCodeTimeOut',
+        connectionTimeout:
+          'screens.ownerRootDriver.workerAssignation.connectionTimeout',
+        error: 'screens.ownerRootDriver.workerAssignation.error',
+        retryButton: 'screens.ownerRootDriver.workerAssignation.retryButton',
+        welcomeText: 'screens.ownerRootDriver.workerAssignation.welcomeText',
+        pendingStatus:
+          'screens.ownerRootDriver.workerAssignation.pendingStatus',
+      },
+      workersDesktop: {
+        title: 'screens.ownerRootDriver.workersDesktop.title',
+        searchPlaceholder:
+          'screens.ownerRootDriver.workersDesktop.searchPlaceholder',
+        emptyList: 'screens.ownerRootDriver.workersDesktop.emptyList',
+      },
+      workerDetails: {
+        personalData: 'screens.ownerRootDriver.workerDetails.personalData',
+        address: 'screens.ownerRootDriver.workerDetails.address',
+        status: 'screens.ownerRootDriver.workerDetails.status',
+        position: 'screens.ownerRootDriver.workerDetails.Position',
+        editButton: 'screens.ownerRootDriver.workerDetails.editButton',
+        choose: 'screens.ownerRootDriver.workerDetails.choose',
+      },
     },
   },
   serviceDefaults: {
@@ -155,13 +176,18 @@ export const TranslationNames = {
       cannotCallAlertTitle: 'components.call.cannotCallAlertTitle',
       cannotCallAlertMessage: 'components.call.cannotCallAlertMessage',
     },
+    CallAndMailPanel: {
+      sign: 'components.CallAndMailPanel.sign',
+    },
     universalList: {
       listEmptyText: 'components.universalList.listEmptyText',
       listLoadingText: 'components.universalList.listLoadingText',
     },
     toast: {
       clientsFetchErrorHeader: 'components.toast.clientsFetchErrorHeader',
+      workerUpdateErrorHeader: 'components.toast.workerUpdateErrorHeader',
       clientsFetchErrorContext: 'components.toast.clientsFetchErrorContext',
+      workerUpdateErrorContext: 'components.toast.workerUpdateErrorContext',
     },
   },
   addressForm: {

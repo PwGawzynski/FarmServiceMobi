@@ -29,15 +29,41 @@ import {
   WorkerIdResponseBase,
   WorkerResponseBase,
 } from '../FarmServiceApiTypes/Worker/Responses';
-import { CreateWorkerReqI } from '../FarmServiceApiTypes/Worker/Requests';
+import {
+  CreateWorkerReqI,
+  UpdateWorkerStatusOrPositionReqI,
+} from '../FarmServiceApiTypes/Worker/Requests';
+/* ---------------------------------------DECORATOR_USED_TO_DELAY_RES--------------------------------------- */
 
+const IsDelayed = () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return (target: any, key: string, descriptor: PropertyDescriptor) => {
+    const originalMethod = descriptor.value;
+
+    // eslint-disable-next-line no-param-reassign,@typescript-eslint/no-explicit-any,func-names
+    descriptor.value = async function (...args: any[]) {
+      const delayStart = Date.now();
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
+      await ApiSelf.delayRes();
+      const delayEnd = Date.now();
+      console.log(
+        `\n \n Method ${key} has been delayed about ~ ${
+          delayEnd - delayStart
+        } ms \n \n `,
+      );
+      return originalMethod.apply(this, args);
+    };
+
+    return descriptor;
+  };
+};
+/* ---------------------------------------API_CLASS--------------------------------------- */
 export interface sseAsyncListenerParams {
   open?: ListenerCallback;
   message: ListenerCallback;
   error?: ListenerCallback;
 }
-
-export class Api {
+export class ApiSelf {
   /**
    * This var is used to store access token and use it in axios instance
    * @private
@@ -69,12 +95,12 @@ export class Api {
    * @private
    */
   private static async initAxios() {
-    Api.axiosInstance = axios.create({
+    ApiSelf.axiosInstance = axios.create({
       baseURL: `http://${Constants.expoConfig?.extra?.apiUrl}:3006`,
       timeout: 5000,
       withCredentials: true,
       headers: {
-        Authorization: `Bearer ${Api.access_token}`,
+        Authorization: `Bearer ${ApiSelf.access_token}`,
         'Content-Type': 'application/json',
         Accept: 'application/json',
       },
@@ -102,22 +128,24 @@ export class Api {
   }
 
   /**
-   * Driver to init Api instance, init tokens, init axios, restore sessions Tokens
+   * Driver to init ApiSelf instance, init tokens, init axios, restore sessions Tokens
    * @return TRUE if session has been correctly restored, FALSE if session expired and can't be restored
    */
   static async init() {
     try {
-      await Api.initTokens();
-      await Api.initAxios();
-      return (await Api.checkCurrentSession()) || (await Api.restoreTokens());
+      await ApiSelf.initTokens();
+      await ApiSelf.initAxios();
+      return (
+        (await ApiSelf.checkCurrentSession()) || (await ApiSelf.restoreTokens())
+      );
     } catch (e) {
-      await Api.initAxios();
+      await ApiSelf.initAxios();
       return false;
     }
   }
 
   static async session() {
-    return (await Api.checkCurrentSession()) || Api.restoreTokens();
+    return (await ApiSelf.checkCurrentSession()) || ApiSelf.restoreTokens();
   }
 
   /**
@@ -128,14 +156,14 @@ export class Api {
     const stored = await SecureStore.getItemAsync('Tokens');
     if (!stored) throw Error('Cannot get tokens');
     const tokens: IdentityAuthTokenLoginStored = await JSON.parse(stored);
-    Api.access_token = tokens.access_token;
-    Api.refresh_token = tokens.refresh_token;
+    ApiSelf.access_token = tokens.access_token;
+    ApiSelf.refresh_token = tokens.refresh_token;
   }
 
   static async getUserData(): Promise<
     AxiosResponse<ResponseObject<UserResponseBase>>
   > {
-    return Api.axiosInstance.get('/user/me');
+    return ApiSelf.axiosInstance.get('/user/me');
   }
 
   /**
@@ -144,18 +172,18 @@ export class Api {
    * @throws AxiosError when req went wrong, Error when saving operation went wrong
    */
   static async restoreTokens() {
-    await Api.initTokens();
+    await ApiSelf.initTokens();
     const response = (
-      await Api.axiosInstance.post('/auth/refresh', undefined, {
+      await ApiSelf.axiosInstance.post('/auth/refresh', undefined, {
         headers: {
-          Authorization: `Bearer ${Api.refresh_token}`,
+          Authorization: `Bearer ${ApiSelf.refresh_token}`,
           'Content-Type': 'application/json',
           Accept: 'application/json',
         },
       })
     ).data as ResponseObject<IdentityAuthTokenLoginRaw>;
     console.log('TOKENS_RESTORED');
-    return Api.saveTokensToSecureStoreFromResPayload(response);
+    return ApiSelf.saveTokensToSecureStoreFromResPayload(response);
   }
 
   /**
@@ -174,9 +202,9 @@ export class Api {
         last_updated_access_token_at: new Date(),
         last_updated_refresh_token_at: new Date(),
       };
-      // updating tokens connected with Api instance
-      Api.access_token = storedData.access_token;
-      Api.refresh_token = storedData.refresh_token;
+      // updating tokens connected with ApiSelf instance
+      ApiSelf.access_token = storedData.access_token;
+      ApiSelf.refresh_token = storedData.refresh_token;
       await SecureStore.setItemAsync(
         'Tokens',
         await JSON.stringify(storedData),
@@ -186,7 +214,7 @@ export class Api {
        * but in axios instances still, those are old tokens,
        * so we need to update axios instances
        */
-      await Api.initAxios();
+      await ApiSelf.initAxios();
       return true;
     }
     throw new Error('cannot access data payload from response');
@@ -195,7 +223,7 @@ export class Api {
   /* ----------------------------------------API-CALS---------------------------------------------*/
   // TODO add types for user data
   /**
-   * Register new user in Api
+   * Register new user in ApiSelf
    * @param userData : userData
    * @returns ResponseObject when operation went correct
    * @throws AxiosError return by axios
@@ -223,12 +251,12 @@ export class Api {
       },
       role: userData.role,
     } as CreateUserReqI;
-    return Api.axiosInstance.post('/user', serializedData);
+    return ApiSelf.axiosInstance.post('/user', serializedData);
   }
 
   static async me() {
     return (
-      (await Api.axiosInstance.get('/user/me')) as AxiosResponse<
+      (await ApiSelf.axiosInstance.get('/user/me')) as AxiosResponse<
         ResponseObject<UserResponseBase>
       >
     ).data;
@@ -236,7 +264,7 @@ export class Api {
 
   static async workerData() {
     return (
-      (await Api.axiosInstance.get('/worker')) as AxiosResponse<
+      (await ApiSelf.axiosInstance.get('/worker')) as AxiosResponse<
         ResponseObject<WorkerIdResponseBase>
       >
     ).data;
@@ -251,10 +279,10 @@ export class Api {
   // eslint-disable-next-line consistent-return
   static async loginUser(loginData: LoginUser) {
     const response: ResponseObject<IdentityAuthTokenLoginRaw> = (
-      await Api.axiosInstance.post('/auth/login', loginData)
+      await ApiSelf.axiosInstance.post('/auth/login', loginData)
     ).data;
-    if (await Api.saveTokensToSecureStoreFromResPayload(response))
-      return Api.me();
+    if (await ApiSelf.saveTokensToSecureStoreFromResPayload(response))
+      return ApiSelf.me();
   }
 
   // eslint-disable-next-line no-underscore-dangle
@@ -263,23 +291,22 @@ export class Api {
       ? new Promise(resolve => {
           setTimeout(() => {
             resolve(true);
-          }, 1000);
+          }, 2000);
         })
       : true;
   }
 
   static async resetPassword(data: UserResetPasswordReqI) {
     return (
-      (await Api.axiosInstance.put('/user/reset-password', undefined, {
+      (await ApiSelf.axiosInstance.put('/user/reset-password', undefined, {
         params: { email: data?.email },
       })) as AxiosResponse<ResponseObject>
     ).data;
   }
 
   static async createCompany(data: CreateCompanyReqI) {
-    await Api.session();
     return (
-      (await Api.axiosInstance.post(
+      (await ApiSelf.axiosInstance.post(
         '/company',
         data,
       )) as AxiosResponse<ResponseObject>
@@ -287,9 +314,8 @@ export class Api {
   }
 
   static async createClient(data: CreateClientReqI) {
-    await Api.session();
     return (
-      (await Api.axiosInstance.post(
+      (await ApiSelf.axiosInstance.post(
         '/clients',
         data,
       )) as AxiosResponse<ResponseObject>
@@ -297,9 +323,8 @@ export class Api {
   }
 
   static async assignWorker(data: CreateWorkerReqI) {
-    await Api.session();
     return (
-      (await Api.axiosInstance.post(
+      (await ApiSelf.axiosInstance.post(
         '/worker',
         data,
       )) as AxiosResponse<WorkerResponseBase>
@@ -307,43 +332,70 @@ export class Api {
   }
 
   static async updateClient(data: UpdateClientReqI) {
-    await Api.session();
     return (
-      (await Api.axiosInstance.put(
+      (await ApiSelf.axiosInstance.put(
         '/clients',
         data,
       )) as AxiosResponse<ResponseObject>
     ).data.payload as ClientResponseBase | undefined;
   }
 
+  @IsDelayed()
+  static async updateWorkerStatusOrPosition(
+    data: UpdateWorkerStatusOrPositionReqI,
+  ) {
+    // throw new Error('kurewka');
+    return (
+      (await ApiSelf.axiosInstance.put(
+        '/worker/update-status-or-position',
+        data,
+      )) as AxiosResponse<ResponseObject>
+    ).data.payload as WorkerResponseBase | undefined;
+  }
+
   static async assignCompanyToClient(data: CreateClientsCompanyReqI) {
-    await Api.session();
     return (
-      (await Api.axiosInstance.post(
+      (await ApiSelf.axiosInstance.post(
         '/clients-company',
         data,
       )) as AxiosResponse<ResponseObject>
     ).data.payload as ClientsCompanyResponseBase | undefined;
   }
 
+  @IsDelayed()
   static async updateClientsCompany(data: UpdateClientsCompanyReqI) {
-    await Api.session();
     return (
-      (await Api.axiosInstance.put(
+      (await ApiSelf.axiosInstance.put(
         '/clients-company',
         data,
       )) as AxiosResponse<ResponseObject>
     ).data.payload as ClientsCompanyResponseBase | undefined;
   }
 
+  @IsDelayed()
   static async getClients() {
-    await Api.delayRes();
-    await Api.session();
     return (
-      (await Api.axiosInstance.get(
+      (await ApiSelf.axiosInstance.get(
         '/clients/all',
       )) as AxiosResponse<ResponseObject>
     ).data.payload as Array<ClientResponseBase> | undefined;
+  }
+
+  @IsDelayed()
+  static async getWorkers() {
+    return (
+      (await ApiSelf.axiosInstance.get(
+        '/worker/all',
+      )) as AxiosResponse<ResponseObject>
+    ).data.payload as Array<WorkerResponseBase> | undefined;
+  }
+
+  static async getClientFields(id: string) {
+    return (
+      (await ApiSelf.axiosInstance.get('/field/all', {
+        params: { client: id },
+      })) as AxiosResponse<ResponseObject>
+    ).data.payload;
   }
 
   static workerAssignedListener({
@@ -353,7 +405,7 @@ export class Api {
   }: sseAsyncListenerParams) {
     const eventSource = new RNEventSource(
       `http://${Constants.expoConfig?.extra?.apiUrl}:3006/worker/sse/info`,
-      { headers: { Authorization: `Bearer ${Api.access_token}` } },
+      { headers: { Authorization: `Bearer ${ApiSelf.access_token}` } },
     );
 
     eventSource.addEventListener('message', data => {
@@ -369,3 +421,42 @@ export class Api {
     eventSource.addEventListener('open', open || (() => {}));
   }
 }
+/* ---------------------------------------AUTO_REFRESH_TOKENS--------------------------------------- */
+function methodDecorator(
+  // eslint-disable-next-line no-param-reassign,@typescript-eslint/no-explicit-any
+  target: any,
+  key: string,
+  descriptor: PropertyDescriptor,
+) {
+  const originalMethod = descriptor.value;
+
+  // eslint-disable-next-line no-param-reassign,@typescript-eslint/no-explicit-any,func-names
+  descriptor.value = async function (...args: any[]) {
+    const tokenRestorationStart = Date.now();
+    const tokens = await ApiSelf.session();
+    const tokenRestorationEnd = Date.now();
+    console.log(
+      ` \n \n During execution ${key}, determined tokens as ${
+        tokens ? 'actual' : 'stale(system executed Api.restoreTokens)'
+      }, operation has been processed in  ~ ${
+        tokenRestorationEnd - tokenRestorationStart
+      } ms \n \n `,
+    );
+    return originalMethod.apply(this, args);
+  };
+
+  return descriptor;
+}
+
+const handlers = {
+  // eslint-disable-next-line no-param-reassign,@typescript-eslint/no-explicit-any
+  get(target: any, property: string, receiver: any) {
+    const descriptor = Object.getOwnPropertyDescriptor(target, property);
+    if (descriptor && typeof descriptor.value === 'function') {
+      return methodDecorator(target, property, descriptor).value;
+    }
+    return Reflect.get(target, property, receiver);
+  },
+};
+
+export const Api = new Proxy(ApiSelf, handlers);

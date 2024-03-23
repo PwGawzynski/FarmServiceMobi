@@ -3,7 +3,7 @@ import { QueryClient } from '@tanstack/react-query';
 import { MutableRefObject } from 'react';
 import { t } from 'i18next';
 import {
-  MIN_QUERY_RETRY_COUNT,
+  EXPO_PUBLIC_CLIENTS_QUERY_STALE_TIME,
   QUERY_RETRY_DELAY_MULTIPLICATION,
 } from '../settings/query/querySettings';
 import {
@@ -23,10 +23,13 @@ export function fetchClientDriver(
     queryClient.current
       .fetchQuery({
         queryKey: ['clients'],
-        retry: MIN_QUERY_RETRY_COUNT,
+        staleTime: EXPO_PUBLIC_CLIENTS_QUERY_STALE_TIME,
+        gcTime: EXPO_PUBLIC_CLIENTS_QUERY_STALE_TIME,
         retryDelay: retryCount => retryCount * QUERY_RETRY_DELAY_MULTIPLICATION,
       })
-      .then()
+      .then(data => {
+        queryClient.current.setQueryData(['clients'], data);
+      })
       .catch(() => {
         dispatch(
           setQueryFetchLogs({
