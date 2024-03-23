@@ -19,7 +19,7 @@ import { LandingLogo } from '../../../../atoms/LandingLogo';
 import { TranslationNames } from '../../../../../locales/TranslationNames';
 import { matchesAny } from '../../../../../helepers/StateMachines/MatchesAny';
 import { LandingMachine } from '../../../../../helepers/StateMachines/LandingMachine';
-import { EXPO_PUBLIC_CLIENTS_QUERY_STALE_TIME } from '../../../../../settings/query/querySettings';
+import { EXPO_PUBLIC_QUERY_STALE_TIME } from '../../../../../settings/query/querySettings';
 
 function provideActionsBaseOnStates(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -84,8 +84,8 @@ export default function Landing({ navigation }: AuthDriverProps<'landing'>) {
           queryFn: getClients,
           refetchOnWindowFocus: false,
           refetchOnMount: false,
-          staleTime: EXPO_PUBLIC_CLIENTS_QUERY_STALE_TIME,
-          gcTime: EXPO_PUBLIC_CLIENTS_QUERY_STALE_TIME,
+          staleTime: EXPO_PUBLIC_QUERY_STALE_TIME,
+          gcTime: EXPO_PUBLIC_QUERY_STALE_TIME,
           retry: 1,
         },
       },

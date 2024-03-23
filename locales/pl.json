@@ -154,6 +154,14 @@
       "workerUpdateErrorHeader": "Błąd aktualizacji pracownika",
       "clientsFetchErrorContext": "Nie udało się pobrać listy klientów. Spróbuj ponownie później.",
       "workerUpdateErrorContext": "Nie udało sie zaktualizować danych."
+    },
+    "filedBottomSheet": {
+      "showOnMapButton": "Pokaż na mapie",
+      "editButton": "Edytuj",
+      "deleteButton": "Usuń",
+      "addButton": "Przypisz do zamówienia",
+      "historyButton": "Historia",
+      "address": "Adres"
     }
   },
   "addressForm": {
@@ -165,7 +173,9 @@
       "apartmentNumber": "Numer mieszkania",
       "postalCode": "Kod pocztowy",
       "country": "Kraj",
-      "voivodeship": "Województwo"
+      "voivodeship": "Województwo",
+      "latitude": "X",
+      "longitude": "Y"
     },
     "validation": {
       "city": "Miasto jest wymagane",

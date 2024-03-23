@@ -153,6 +153,14 @@
       "workerUpdateErrorHeader": "Worker update error",
       "clientsFetchErrorContext": "Sorry we cannot fetch clients",
       "workerUpdateErrorContext": "Sorry we cannot update worker"
+    },
+    "filedBottomSheet": {
+      "showOnMapButton": "Show on map",
+      "editButton": "Edit",
+      "deleteButton": "Delete",
+      "addButton": "Add to order",
+      "historyButton": "History",
+      "address": "Address"
     }
   },
   "addressForm": {
@@ -164,7 +172,9 @@
       "apartmentNumber": "Apartment number",
       "postalCode": "Postal code",
       "country": "Country",
-      "voivodeship": "Voivodeship"
+      "voivodeship": "Voivodeship",
+      "latitude": "Latitude",
+      "longitude": "Longitude"
     },
     "validation": {
       "city": "City is required",

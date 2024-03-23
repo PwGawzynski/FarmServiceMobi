@@ -154,7 +154,7 @@ export class ApiSelf {
    */
   private static async initTokens(): Promise<void> {
     const stored = await SecureStore.getItemAsync('Tokens');
-    if (!stored) throw Error('Cannot get tokens');
+    if (!stored) throw Error('Cannot get tokens [InitTokens]');
     const tokens: IdentityAuthTokenLoginStored = await JSON.parse(stored);
     ApiSelf.access_token = tokens.access_token;
     ApiSelf.refresh_token = tokens.refresh_token;
@@ -432,6 +432,8 @@ function methodDecorator(
 
   // eslint-disable-next-line no-param-reassign,@typescript-eslint/no-explicit-any,func-names
   descriptor.value = async function (...args: any[]) {
+    // to allow user login when tokens are stale or not exist
+    if (key === 'loginUser') return originalMethod.apply(this, args);
     const tokenRestorationStart = Date.now();
     const tokens = await ApiSelf.session();
     const tokenRestorationEnd = Date.now();

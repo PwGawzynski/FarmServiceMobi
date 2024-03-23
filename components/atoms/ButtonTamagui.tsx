@@ -1,10 +1,12 @@
 import { Button, ButtonProps } from 'tamagui';
 
 export type IconButtonProps = {
-  icon: React.ReactNode;
+  icon?: React.ReactNode;
   text: string;
   buttonProps?: ButtonProps;
   textProps?: ButtonProps['textProps'];
+  bgColor?: string;
+  elementColor?: string;
 };
 
 export function ButtonTamagui({
@@ -12,14 +14,19 @@ export function ButtonTamagui({
   text,
   buttonProps,
   textProps,
+  bgColor,
+  elementColor,
 }: IconButtonProps) {
   return (
     <Button
       pressStyle={
         {
-          color: '$color4',
+          color: bgColor || '$color4',
+          borderColor: bgColor || '$color4',
         } as never
       }
+      backgroundColor={bgColor || '$color4'}
+      color={elementColor}
       {...buttonProps}
     >
       <Button.Icon>{icon}</Button.Icon>

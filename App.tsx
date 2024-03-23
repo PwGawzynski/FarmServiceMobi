@@ -9,6 +9,7 @@ import { I18nextProvider } from 'react-i18next';
 import { RootSiblingParent } from 'react-native-root-siblings';
 import { useFonts } from 'expo-font';
 import { DevToolsBubble } from 'react-native-react-query-devtools';
+import { useColorScheme } from 'nativewind';
 import AuthDriver from './components/navigators/AuthDriver';
 import store from './src/redux/app/Store';
 import { setUpUser } from './src/redux/feature/userSlice';
@@ -18,10 +19,11 @@ import {
 } from './settings/query/querySettings';
 
 export default function App() {
+  const theme = useColorScheme();
   useEffect(() => {
     // Api init is moved to redux store, if store will be moved, api init should be here
-    store.dispatch(setUpUser());
-  }, []);
+    store.dispatch(setUpUser(theme.colorScheme));
+  }, [theme]);
 
   const queryClient = new QueryClient({
     defaultOptions: {
@@ -35,6 +37,8 @@ export default function App() {
   useFonts({
     Helvetica: require('./helvetica/Helvetica/Helvetica.ttf'),
   });
+  if (!theme) return null;
+
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <QueryClientProvider client={queryClient}>
