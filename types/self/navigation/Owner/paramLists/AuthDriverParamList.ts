@@ -15,6 +15,7 @@ export type AuthDriverParamList = {
   loginByEmail: undefined;
   chooseRegisterType: undefined;
   passwordReset: undefined;
+  addField: undefined;
   ownerRootDriver: NavigatorScreenParams<OwnerRootDriverParamList>;
   workerRootDriver: NavigatorScreenParams<WorkerRootDriverParamList>;
   OperationConfirmed: {

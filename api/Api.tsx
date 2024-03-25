@@ -87,6 +87,8 @@ export class ApiSelf {
    */
   private static axiosInstance: AxiosInstance;
 
+  private static restoreFlag = false;
+
   /* ----------------------------------------SETTINGS---------------------------------------------*/
 
   /**
@@ -113,7 +115,7 @@ export class ApiSelf {
    * @throws Error when can't get tokens from store
    */
   static async checkCurrentSession(): Promise<boolean> {
-    const ACCESS_TOKEN_LIVE_TIME = 850000;
+    const ACCESS_TOKEN_LIVE_TIME = 850_000;
     try {
       const session = await SecureStore.getItemAsync('Tokens');
       if (!session) return false;
@@ -121,6 +123,7 @@ export class ApiSelf {
       const now = new Date();
       const tokenDate = new Date(token.last_updated_access_token_at);
       // time is minute reduced to prevent logout after loading desktop and to give time to restore tokens
+      console.log(now.getTime() - tokenDate.getTime() < ACCESS_TOKEN_LIVE_TIME);
       return now.getTime() - tokenDate.getTime() < ACCESS_TOKEN_LIVE_TIME;
     } catch (e) {
       return false;
@@ -140,7 +143,7 @@ export class ApiSelf {
       );
     } catch (e) {
       await ApiSelf.initAxios();
-      return false;
+      throw e;
     }
   }
 
@@ -172,18 +175,23 @@ export class ApiSelf {
    * @throws AxiosError when req went wrong, Error when saving operation went wrong
    */
   static async restoreTokens() {
+    console.log('Calling restoreTokens method');
     await ApiSelf.initTokens();
-    const response = (
-      await ApiSelf.axiosInstance.post('/auth/refresh', undefined, {
-        headers: {
-          Authorization: `Bearer ${ApiSelf.refresh_token}`,
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-      })
-    ).data as ResponseObject<IdentityAuthTokenLoginRaw>;
-    console.log('TOKENS_RESTORED');
-    return ApiSelf.saveTokensToSecureStoreFromResPayload(response);
+    if (!ApiSelf.restoreFlag) {
+      ApiSelf.restoreFlag = true;
+      console.log('RESTORING_TOKENS_FLAG TRUE');
+      const response = (
+        await ApiSelf.axiosInstance.post('/auth/refresh', undefined, {
+          headers: {
+            Authorization: `Bearer ${ApiSelf.refresh_token}`,
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+        })
+      ).data as ResponseObject<IdentityAuthTokenLoginRaw>;
+      return ApiSelf.saveTokensToSecureStoreFromResPayload(response);
+    }
+    return undefined;
   }
 
   /**
@@ -215,6 +223,8 @@ export class ApiSelf {
        * so we need to update axios instances
        */
       await ApiSelf.initAxios();
+      ApiSelf.restoreFlag = false;
+      console.log('TOKENS_RESTORED', ApiSelf.access_token);
       return true;
     }
     throw new Error('cannot access data payload from response');
@@ -291,7 +301,7 @@ export class ApiSelf {
       ? new Promise(resolve => {
           setTimeout(() => {
             resolve(true);
-          }, 2000);
+          }, 20000);
         })
       : true;
   }
@@ -433,7 +443,8 @@ function methodDecorator(
   // eslint-disable-next-line no-param-reassign,@typescript-eslint/no-explicit-any,func-names
   descriptor.value = async function (...args: any[]) {
     // to allow user login when tokens are stale or not exist
-    if (key === 'loginUser') return originalMethod.apply(this, args);
+    if (['loginUser', 'init'].includes(key))
+      return originalMethod.apply(this, args);
     const tokenRestorationStart = Date.now();
     const tokens = await ApiSelf.session();
     const tokenRestorationEnd = Date.now();

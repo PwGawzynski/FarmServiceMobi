@@ -1,6 +1,5 @@
 /* eslint-disable no-param-reassign */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { AxiosError } from 'axios';
 import { ColorSchemeName } from 'react-native';
 import { UserResponseBase } from '../../../FarmServiceApiTypes/User/Responses';
 import { UserRole } from '../../../FarmServiceApiTypes/User/Enums';
@@ -79,17 +78,14 @@ export const setUpUser = createAsyncThunk(
       };
     } catch (error) {
       console.info(error, "Couldn't fetch user in userSlice");
-      if (error instanceof AxiosError) {
-        return {
-          ...initUserData,
-          initializationStatus: InitializationStatus.REJECTED,
-          account: { theme: await getThemeFromStorage() },
-        };
-      }
-      await setThemeToStorage(shameName === 'dark' ? Theme.dark : Theme.light);
       return {
         ...initUserData,
-        account: { theme: await getThemeFromStorage() },
+        account: {
+          theme:
+            (await getThemeFromStorage()) || shameName === 'dark'
+              ? Theme.dark
+              : Theme.light,
+        },
         initializationStatus: InitializationStatus.REJECTED,
       };
     }
