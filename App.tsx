@@ -22,8 +22,10 @@ export default function App() {
   const theme = useColorScheme();
   useEffect(() => {
     // Api init is moved to redux store, if store will be moved, api init should be here
-    store.dispatch(setUpUser(theme.colorScheme));
-  }, [theme]);
+    if (theme) {
+      store.dispatch(setUpUser(theme.colorScheme));
+    }
+  }, []);
 
   const queryClient = new QueryClient({
     defaultOptions: {
@@ -37,6 +39,7 @@ export default function App() {
   useFonts({
     Helvetica: require('./helvetica/Helvetica/Helvetica.ttf'),
   });
+
   if (!theme) return null;
 
   return (
