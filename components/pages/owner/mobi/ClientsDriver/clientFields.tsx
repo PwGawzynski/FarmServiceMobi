@@ -16,6 +16,7 @@ import { FieldBottomSheetContent } from '../../../../molecules/FieldBottomSheetC
 
 export function ClientFields({
   route,
+  navigation,
 }: ClientsDriverScreenProps<
   'clientFields',
   'clientsDriver',
@@ -67,7 +68,7 @@ export function ClientFields({
           icon={<PlusIco />}
           text="Add Filed"
           buttonProps={{
-            onPress: () => modalRef?.current?.expand(),
+            onPress: () => navigation.navigate('addField'),
           }}
         />
       </YStack>
