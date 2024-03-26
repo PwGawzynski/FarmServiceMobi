@@ -49,6 +49,11 @@
         "screenTitle": "Utwórz nową firmę",
         "submitButton": "Utwórz firmę",
         "successMessage": "Zrobione! Twoja firma została utworzona pomyślnie, pora brac sie do roboty!"
+      },
+      "createField": {
+        "screenTitle": "Create field",
+        "submitButton": "Create",
+        "successMessage": "It's done, new field has been added"
       }
     },
     "clientDriver": {
@@ -188,7 +193,9 @@
       "voivodeship": "Województwo jest wymagane",
       "validationAtLeast": "must have at least ",
       "validationMaximum ": "nie może być dłuższy niż ",
-      "validationCharacters": "znaków"
+      "validationCharacters": "znaków",
+      "latitude": "X jest wymagane",
+      "longitude": "Y jest wymagane"
     }
   },
   "createCompanyForm":{
@@ -225,5 +232,23 @@
       "validationMaximum ": "nie może być dłuższy niż ",
       "validationCharacters": "znaków"
     }
+  },
+  "createFieldForm":{
+  "formPlaceholder": {
+    "nameLabel": "Nazwa pola",
+    "area": "Obszar",
+    "polishSystemId": "Id w systemie polskim"
+  },
+  "validation": {
+    "nameLabel": "Nazwa pola jest wymagana",
+    "polishSystemId": "Id w systemie polskim jest wymagane",
+    "polishSystemIdPattern": "PL_ID musi być w formacie XX-XXX",
+    "area": "Obszar jest wymagany",
+    "validationAtLeast": "musi być co najmniej ",
+    "validationMaximum ": "może mieć maksimum ",
+    "validationCharacters": "znaków",
+    "moreThan": "Obszar musi być większy niż",
+    "lessThan": "Obszar nie może być mniejszy niż"
   }
+}
 }
