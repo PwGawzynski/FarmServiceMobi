@@ -53,7 +53,12 @@
       "createField": {
         "screenTitle": "Add field",
         "submitButton": "Add",
-        "successMessage": "It's done, new field has been added"
+        "successMessage": "It's done, new field has been added",
+        "gpsConnecting": "Connecting to GPS...",
+        "gpsAccess": "To use this feature, you need to give us access to your location, please go to settings and enable location",
+        "gpsMoreInfo": "Location Usage Policy",
+        "gpsError": "Error occurred while connecting to GPS, please try again later",
+        "serverError": "Hmmm something went wrong, please try again later"
       }
     },
     "clientDriver": {
