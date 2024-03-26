@@ -1,13 +1,16 @@
 import { useForm } from 'react-hook-form';
 import { useEffect, useMemo } from 'react';
 import { LocationObject } from 'expo-location';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { t } from 'i18next';
 import { View } from 'react-native';
 import { YStack } from 'tamagui';
 import { FormCreator } from '../atoms/FormCreator';
 import { createFieldSetup } from '../../helepers/FormSetups/CreateFieldSetup';
-import { DataFromXMLRes } from '../../FarmServiceApiTypes/Field/Ressponses';
+import {
+  DataFromXMLRes,
+  FieldResponseBase,
+} from '../../FarmServiceApiTypes/Field/Ressponses';
 import { ClientResponseBase } from '../../FarmServiceApiTypes/Clients/Responses';
 import { AuthDriverNavigationProps } from '../../types/self/navigation/Owner/props/AuthDriverProps';
 import { createField } from '../../api/field/Field';
@@ -36,9 +39,18 @@ export function AddFieldForm({
   client,
   navigation,
 }: Props) {
+  const queryClient = useQueryClient();
   const { mutate, isSuccess, error, isPending } = useMutation({
     mutationKey: ['createField'],
     mutationFn: createField,
+    onSuccess: (sth, variables) => {
+      queryClient.setQueryData(
+        ['clientFields', client.id],
+        (oldData: Array<FieldResponseBase>) => {
+          return oldData ? [...oldData, variables] : [variables];
+        },
+      );
+    },
   });
   useEffect(() => {
     if (isSuccess)
