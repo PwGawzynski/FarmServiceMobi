@@ -61,6 +61,11 @@ export const TranslationNames = {
         submitButton: 'screens.AuthDriver.createCompany.submitButton',
         successMessage: 'screens.AuthDriver.createCompany.successMessage',
       },
+      createField: {
+        screenTitle: 'screens.AuthDriver.createField.screenTitle',
+        submitButton: 'screens.AuthDriver.createField.submitButton',
+        successMessage: 'screens.AuthDriver.createField.successMessage',
+      },
     },
     clientDriver: {
       assignCompanyToClient: {
@@ -223,6 +228,8 @@ export const TranslationNames = {
       validationAtLeast: 'addressForm.validation.validationAtLeast',
       validationMaximum: 'addressForm.validation.validationMaximum',
       validationCharacters: 'addressForm.validation.validationCharacters',
+      latitude: 'addressForm.validation.latitude',
+      longitude: 'addressForm.validation.longitude',
     },
   },
   createCompanyForm: {
@@ -260,6 +267,24 @@ export const TranslationNames = {
       validationAtLeast: 'createClientForm.validation.validationAtLeast',
       validationMaximum: 'createClientForm.validation.validationMaximum',
       validationCharacters: 'createClientForm.validation.validationCharacters',
+    },
+  },
+  createFieldForm: {
+    formPlaceholder: {
+      nameLabel: 'createFieldForm.formPlaceholder.nameLabel',
+      area: 'createFieldForm.formPlaceholder.area',
+      polishSystemId: 'createFieldForm.formPlaceholder.polishSystemId',
+    },
+    validation: {
+      nameLabel: 'createFieldForm.validation.nameLabel',
+      polishSystemId: 'createFieldForm.validation.polishSystemId',
+      polishSystemIdPattern: 'createFieldForm.validation.polishSystemIdPattern',
+      area: 'createFieldForm.validation.area',
+      validationAtLeast: 'createFieldForm.validation.validationAtLeast',
+      validationMaximum: 'createFieldForm.validation.validationMaximum ',
+      validationCharacters: 'createFieldForm.validation.validationCharacters',
+      moreThan: 'createFieldForm.validation.moreThan',
+      lessThan: 'createFieldForm.validation.lessThan',
     },
   },
 };
