@@ -15,6 +15,7 @@ import { ButtonTamagui } from '../atoms/ButtonTamagui';
 import { PendingInfo } from '../atoms/PendingInfo';
 import { TranslationNames } from '../../locales/TranslationNames';
 import { FormErrorInfo } from '../atoms/FormErrorInfo';
+import PlusIco from '../../assets/plus.svg';
 
 interface Props {
   transformedData: DataFromXMLRes;
@@ -101,6 +102,7 @@ export function AddFieldForm({
         errors={errors}
       />
       <ButtonTamagui
+        icon={<PlusIco />}
         text={t(TranslationNames.screens.authDriver.createField.submitButton)}
         buttonProps={{
           onPress: handleSubmit(onSubmitted),
