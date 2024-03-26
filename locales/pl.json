@@ -53,7 +53,12 @@
       "createField": {
         "screenTitle": "Create field",
         "submitButton": "Create",
-        "successMessage": "It's done, new field has been added"
+        "successMessage": "It's done, new field has been added",
+        "gpsConnecting": "Łączenie z GPS...",
+        "gpsAccess": "Aby używać tej funkcji, musisz wyrazić zgode na używanie lokalizacji twojego urządzenia",
+        "gpsMoreInfo": "Zobacz więcej",
+        "gpsError": "Nie udało się połączyć z GPS, spróbuj ponownie później",
+        "serverError": "Hhmm, coś poszło nie tak, spróbuj ponownie później"
       }
     },
     "clientDriver": {
