@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react';
 import * as Location from 'expo-location';
 import { useMutation } from '@tanstack/react-query';
 import { t } from 'i18next';
+import { SizableText, Spinner, XStack, YStack } from 'tamagui';
 import { ScreenBase } from '../common/ScreenBase';
 import { getDataFromCords } from '../../../../../api/geoportal/Geoportal';
 import { DataFromXMLRes } from '../../../../../FarmServiceApiTypes/Field/Ressponses';
 import { AddFieldForm } from '../../../../organisms/AddFieldForm';
 import { AuthDriverProps } from '../../../../../types/self/navigation/Owner/props/AuthDriverProps';
 import { TranslationNames } from '../../../../../locales/TranslationNames';
+import { AppLinkButton } from '../../../../atoms/AppLinkButton';
 
 enum State {
   WaitingForPermissionGrant = 0.222,
@@ -89,6 +91,45 @@ export function AddFiled({
     <ScreenBase
       name={t(TranslationNames.screens.authDriver.createField.screenTitle)}
     >
+      {!transformedData && (
+        <XStack f={1} ai="center" jc="center">
+          <Spinner color="$color4" size="large" />
+          <SizableText className="ml-4 font-bold text-lg ">
+            {t(TranslationNames.screens.authDriver.createField.gpsConnecting)}
+          </SizableText>
+        </XStack>
+      )}
+      {machineState === State.PermissionErr && (
+        <YStack f={1} ai="center" jc="center">
+          <SizableText className="ml-4 font-bold text-lg text-error-red text-center">
+            {t(TranslationNames.screens.authDriver.createField.gpsAccess)}
+          </SizableText>
+          <XStack className="items-center justify-center mt-2">
+            <AppLinkButton
+              className="items-center justify-center"
+              textClassName=" text-dark-blue dark:text-white"
+              title={t(
+                TranslationNames.screens.authDriver.createField.gpsMoreInfo,
+              )}
+              onPress={() => ''}
+            />
+          </XStack>
+        </YStack>
+      )}
+      {machineState === State.GPSError && (
+        <XStack f={1} ai="center" jc="center">
+          <SizableText className="ml-4 font-bold text-lg text-error-red">
+            {t(TranslationNames.screens.authDriver.createField.gpsError)}
+          </SizableText>
+        </XStack>
+      )}
+      {machineState === State.ConvertErr && (
+        <XStack f={1} ai="center" jc="center">
+          <SizableText className="ml-4 font-bold text-lg text-error-red">
+            {t(TranslationNames.screens.authDriver.createField.serverError)}
+          </SizableText>
+        </XStack>
+      )}
       {transformedData && locationData && (
         <AddFieldForm
           transformedData={transformedData}
