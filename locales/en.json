@@ -58,7 +58,10 @@
         "gpsAccess": "To use this feature, you need to give us access to your location, please go to settings and enable location",
         "gpsMoreInfo": "Location Usage Policy",
         "gpsError": "Error occurred while connecting to GPS, please try again later",
-        "serverError": "Hmmm something went wrong, please try again later"
+        "serverError": "Hmmm something went wrong, please try again later",
+        "locationPolicyTitle": "Location Usage Policy",
+        "locationPolicyDescription": "We use your location to provide you with the best possible experience, we don't store your location data, we use it only to get the coordinates of the field",
+        "locationPolicyButton": "I understand"
       }
     },
     "clientDriver": {
