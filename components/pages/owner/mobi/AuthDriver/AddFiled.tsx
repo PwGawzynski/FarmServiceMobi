@@ -10,6 +10,7 @@ import { AddFieldForm } from '../../../../organisms/AddFieldForm';
 import { AuthDriverProps } from '../../../../../types/self/navigation/Owner/props/AuthDriverProps';
 import { TranslationNames } from '../../../../../locales/TranslationNames';
 import { AppLinkButton } from '../../../../atoms/AppLinkButton';
+import { AlertI, TwoOptionAlert } from '../../../../molecules/TwoOptionAlert';
 
 enum State {
   WaitingForPermissionGrant = 0.222,
@@ -22,6 +23,20 @@ enum State {
   ConvertErr = 0.999,
   DataTransformed = 1,
 }
+
+const initAlert: AlertI = {
+  status: false,
+  title: t(TranslationNames.screens.authDriver.createField.locationPolicyTitle),
+  description: t(
+    TranslationNames.screens.authDriver.createField.locationPolicyDescription,
+  ),
+  leftButtonText: t(
+    TranslationNames.screens.authDriver.createField.locationPolicyButton,
+  ),
+  rightButtonText: undefined,
+  onLeftButtonClick: undefined,
+  onRightButtonClick: undefined,
+};
 
 export function AddFiled({
   navigation,
@@ -87,10 +102,23 @@ export function AddFiled({
     if (data) setTransformedData(data);
   }, [isSuccess, isPending, isError, data]);
   console.log(data, transformedData, locationData);
+
+  const [alert, setAlert] = useState<AlertI>({
+    ...initAlert,
+  });
   return (
     <ScreenBase
       name={t(TranslationNames.screens.authDriver.createField.screenTitle)}
     >
+      <TwoOptionAlert
+        open={alert.status}
+        title={alert.title}
+        description={alert.description}
+        leftButtonText={alert.leftButtonText}
+        rightButtonText={alert.rightButtonText}
+        onLeftButtonClick={() => setAlert({ ...initAlert, status: false })}
+        onRightButtonClick={alert.onRightButtonClick}
+      />
       {!transformedData && (
         <XStack f={1} ai="center" jc="center">
           <Spinner color="$color4" size="large" />
@@ -111,7 +139,7 @@ export function AddFiled({
               title={t(
                 TranslationNames.screens.authDriver.createField.gpsMoreInfo,
               )}
-              onPress={() => ''}
+              onPress={() => setAlert({ ...initAlert, status: true })}
             />
           </XStack>
         </YStack>
