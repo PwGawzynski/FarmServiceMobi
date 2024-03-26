@@ -1,10 +1,10 @@
 import { t } from 'i18next';
 import { FormRulesType } from './FormRulesType';
-import { CreateClientForm } from '../../components/pages/mobi/ClientsDesktopDriver/CreateClient';
 import { TranslationNames } from '../../locales/TranslationNames';
 import { creteMinLenMessage } from './FormRulesHelper';
 import { UserPersonalDataConstants } from '../../FarmServiceApiTypes/UserPersonalData/Constants';
 import { AddressRules, CommonRules } from './CommonRules';
+import { CreateClientForm } from '../../components/pages/owner/mobi/ClientsDesktopDriver/CreateClient';
 
 export const rules: FormRulesType<CreateClientForm> = {
   email: CommonRules.email,
