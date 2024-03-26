@@ -65,6 +65,11 @@ export const TranslationNames = {
         screenTitle: 'screens.AuthDriver.createField.screenTitle',
         submitButton: 'screens.AuthDriver.createField.submitButton',
         successMessage: 'screens.AuthDriver.createField.successMessage',
+        gpsConnecting: 'screens.AuthDriver.createField.gpsConnecting',
+        gpsAccess: 'screens.AuthDriver.createField.gpsAccess',
+        gpsMoreInfo: 'screens.AuthDriver.createField.gpsMoreInfo',
+        gpsError: 'screens.AuthDriver.createField.gpsError',
+        serverError: 'screens.AuthDriver.createField.serverError',
       },
     },
     clientDriver: {
