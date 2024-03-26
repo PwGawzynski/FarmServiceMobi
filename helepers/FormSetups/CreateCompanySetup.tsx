@@ -3,8 +3,8 @@ import { t } from 'i18next';
 import { FormControllerSetup } from '../../components/atoms/FormCreator';
 import { rules } from '../FormRules/CreateCompanyFormRules';
 import { TranslationNames } from '../../locales/TranslationNames';
-import { CreateClientsCompanyForm } from '../../components/pages/mobi/ClientsDriver/AssignCompanyToClient';
-import { CreateCompanyForm } from '../../components/pages/mobi/AuthDriver/CreateCompany';
+import { CreateClientsCompanyForm } from '../../components/pages/owner/mobi/ClientsDriver/AssignCompanyToClient';
+import { CreateCompanyForm } from '../../components/pages/owner/mobi/AuthDriver/CreateCompany';
 
 export const createCompanySetupBase = <T, M>(control: T): M =>
   [
