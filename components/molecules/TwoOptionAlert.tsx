@@ -9,6 +9,15 @@ export type Props = {
   onLeftButtonClick?: () => void;
   onRightButtonClick?: () => void;
 };
+export interface AlertI {
+  status: boolean;
+  title: string | undefined;
+  description: string | undefined;
+  leftButtonText: string | undefined;
+  rightButtonText: string | undefined;
+  onLeftButtonClick?: () => void;
+  onRightButtonClick?: () => void;
+}
 
 export function TwoOptionAlert(props: Props) {
   return (
@@ -31,7 +40,7 @@ export function TwoOptionAlert(props: Props) {
           <AlertDialog.Description mt="$4" mb="$4" textAlign="justify">
             {props.description}
           </AlertDialog.Description>
-          <XStack jc="space-between">
+          <XStack jc={props.rightButtonText ? 'space-between' : 'center'}>
             <Button onPress={props.onLeftButtonClick} size="$3">
               <Button.Text
                 adjustsFontSizeToFit
@@ -42,16 +51,18 @@ export function TwoOptionAlert(props: Props) {
                 {props.leftButtonText}
               </Button.Text>
             </Button>
-            <Button onPress={props.onRightButtonClick} size="$3" ml="$4">
-              <Button.Text
-                adjustsFontSizeToFit
-                numberOfLines={1}
-                textTransform="uppercase"
-                fontWeight="bold"
-              >
-                {props.rightButtonText}
-              </Button.Text>
-            </Button>
+            {props.rightButtonText && (
+              <Button onPress={props.onRightButtonClick} size="$3" ml="$4">
+                <Button.Text
+                  adjustsFontSizeToFit
+                  numberOfLines={1}
+                  textTransform="uppercase"
+                  fontWeight="bold"
+                >
+                  {props.rightButtonText}
+                </Button.Text>
+              </Button>
+            )}
           </XStack>
         </AlertDialog.Content>
       </AlertDialog.Portal>
