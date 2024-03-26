@@ -70,6 +70,12 @@ export const TranslationNames = {
         gpsMoreInfo: 'screens.AuthDriver.createField.gpsMoreInfo',
         gpsError: 'screens.AuthDriver.createField.gpsError',
         serverError: 'screens.AuthDriver.createField.serverError',
+        locationPolicyTitle:
+          'screens.AuthDriver.createField.locationPolicyTitle',
+        locationPolicyDescription:
+          'screens.AuthDriver.createField.locationPolicyDescription',
+        locationPolicyButton:
+          'screens.AuthDriver.createField.locationPolicyButton',
       },
     },
     clientDriver: {
