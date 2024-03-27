@@ -1,6 +1,8 @@
 import { SizableText, XStack, YStack } from 'tamagui';
 import { useMemo } from 'react';
 import { t } from 'i18next';
+import { Linking, Platform } from 'react-native';
+import Toast from 'react-native-toast-message';
 import { FieldResponseBase } from '../../FarmServiceApiTypes/Field/Ressponses';
 import { KeyValuePair } from '../atoms/KeyValuePair';
 import { ButtonTamagui } from '../atoms/ButtonTamagui';
@@ -34,6 +36,24 @@ export function FieldBottomSheetContent({ field }: FieldBottomSheetProps) {
       )),
     [],
   );
+  const openAddressOnMap = (label: string, lat: string, lng: string) => {
+    const scheme = Platform.select({
+      ios: 'maps:0,0?q=',
+      android: 'geo:0,0?q=',
+    });
+    const latLng = `${lat},${lng}`;
+    const url = Platform.select({
+      ios: `${scheme}${label}@${latLng}`,
+      android: `${scheme}${latLng}(${label})`,
+    });
+    Linking.openURL(url || '').catch(() => {
+      Toast.show({
+        type: 'error',
+        text1: t(TranslationNames.components.toast.openMapErrorHeader),
+        text2: t(TranslationNames.components.toast.openMapErrorDescription),
+      });
+    });
+  };
   return (
     <YStack f={1} ml="$4" mr="$4">
       <YStack f={1}>
@@ -55,6 +75,12 @@ export function FieldBottomSheetContent({ field }: FieldBottomSheetProps) {
           icon={<LocationIco />}
           buttonProps={{
             mt: '$4',
+            onPress: () =>
+              openAddressOnMap(
+                field.nameLabel,
+                field.address.latitude,
+                field.address.longitude,
+              ),
           }}
         />
         <ButtonTamagui
