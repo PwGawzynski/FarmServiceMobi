@@ -28,3 +28,14 @@ export async function editField(data: updateFieldReqI) {
     data,
   ) as unknown as FieldResponseBase | undefined;
 }
+
+export async function delField(data: FieldResponseBase) {
+  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
+  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
+  return apiHandler<FieldResponseBase, FieldResponseBase | undefined>(
+    UNAUTHORIZED_MSG,
+    DEFAULT_MSG,
+    Api.deleteField,
+    data,
+  ) as unknown as FieldResponseBase | undefined;
+}
