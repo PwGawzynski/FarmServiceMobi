@@ -87,11 +87,11 @@ export function AddFieldForm({
   const { mutate, isSuccess, error, isPending } = useMutation({
     mutationKey: ['createField'],
     mutationFn: createField,
-    onSuccess: (sth, variables) => {
+    onSuccess: sth => {
       queryClient.setQueryData(
         ['clientFields', client.id],
         (oldData: Array<FieldResponseBase>) => {
-          return oldData ? [...oldData, variables] : [variables];
+          return oldData ? [...oldData, sth] : [sth];
         },
       );
     },
