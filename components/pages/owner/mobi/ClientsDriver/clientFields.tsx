@@ -68,7 +68,7 @@ export function ClientFields({
           icon={<PlusIco />}
           text="Add Filed"
           buttonProps={{
-            onPress: () => navigation.navigate('addField'),
+            onPress: () => navigation.navigate('addField', { client }),
           }}
         />
       </YStack>

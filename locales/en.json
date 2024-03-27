@@ -49,6 +49,19 @@
           "screenTitle": "Create company",
           "submitButton": "Create",
           "successMessage": "It's done, you ready to go, let's start working with pleasure"
+      },
+      "createField": {
+        "screenTitle": "Add field",
+        "submitButton": "Add",
+        "successMessage": "It's done, new field has been added",
+        "gpsConnecting": "Connecting to GPS...",
+        "gpsAccess": "To use this feature, you need to give us access to your location, please go to settings and enable location",
+        "gpsMoreInfo": "Location Usage Policy",
+        "gpsError": "Error occurred while connecting to GPS, please try again later",
+        "serverError": "Hmmm something went wrong, please try again later",
+        "locationPolicyTitle": "Location Usage Policy",
+        "locationPolicyDescription": "We use your location to provide you with the best possible experience, we don't store your location data, we use it only to get the coordinates of the field",
+        "locationPolicyButton": "I understand"
       }
     },
     "clientDriver": {
@@ -187,7 +200,9 @@
       "voivodeship": "Voivodeship is required",
       "validationAtLeast": "must be at least ",
       "validationMaximum ": "can have maximum ",
-      "validationCharacters": "characters"
+      "validationCharacters": "characters",
+      "latitude": "Latitude is required",
+      "longitude": "Longitude is required"
     }
   },
   "createCompanyForm":{
@@ -231,6 +246,24 @@
       "validationAtLeast": "must be at least ",
       "validationMaximum ": "can have maximum ",
       "validationCharacters": "characters"
+    }
+  },
+  "createFieldForm":{
+    "formPlaceholder": {
+      "nameLabel": "Name",
+      "area": "Area",
+      "polishSystemId": "Polish system id"
+    },
+    "validation": {
+      "nameLabel": "Name is required",
+      "polishSystemId": "Polish system id is required",
+      "polishSystemIdPattern": "PL_ID mus be in format XX-XXX",
+      "area": "Area is required",
+      "validationAtLeast": "must be at least ",
+      "validationMaximum ": "can have maximum ",
+      "validationCharacters": "characters",
+      "moreThan": "Area must be more than",
+      "lessThan": "Area can't be less than"
     }
   }
 }

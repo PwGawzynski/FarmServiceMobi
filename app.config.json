@@ -42,6 +42,13 @@
         }
       ],
       [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow FarmService to use your location."
+        }
+      ],
+
+      [
         "expo-camera",
         {
           "cameraPermission": "Allow FarmService to access your camera"

@@ -16,7 +16,7 @@ export function FormErrorInfo({
   error,
   disappearingDuration,
 }: FormErrorInfoProps) {
-  const opacity = useSharedValue(1);
+  const opacity = useSharedValue(0);
   const animatedStyle = useAnimatedStyle(() => ({ opacity: opacity.value }));
   if (error) opacity.value = withTiming(1, { duration: APPEARING_DURATION });
   useEffect(() => {
@@ -29,7 +29,7 @@ export function FormErrorInfo({
   }, []);
   return (
     <Animated.Text
-      className="ml-2 text-error-red flex-1 text-center"
+      className="w-full h-full text-error-red text-center"
       style={[animatedStyle]}
     >
       {error}

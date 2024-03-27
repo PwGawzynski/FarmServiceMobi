@@ -33,6 +33,8 @@ import {
   CreateWorkerReqI,
   UpdateWorkerStatusOrPositionReqI,
 } from '../FarmServiceApiTypes/Worker/Requests';
+import { CreateFieldReqI } from '../FarmServiceApiTypes/Field/Requests';
+import { FieldResponseBase } from '../FarmServiceApiTypes/Field/Ressponses';
 /* ---------------------------------------DECORATOR_USED_TO_DELAY_RES--------------------------------------- */
 
 const IsDelayed = () => {
@@ -301,7 +303,7 @@ export class ApiSelf {
       ? new Promise(resolve => {
           setTimeout(() => {
             resolve(true);
-          }, 20000);
+          }, 2000);
         })
       : true;
   }
@@ -330,6 +332,15 @@ export class ApiSelf {
         data,
       )) as AxiosResponse<ResponseObject>
     ).data.payload as ClientResponseBase | undefined;
+  }
+
+  static async createField(data: CreateFieldReqI) {
+    return (
+      (await ApiSelf.axiosInstance.post(
+        '/field',
+        data,
+      )) as AxiosResponse<ResponseObject>
+    ).data.payload as FieldResponseBase | undefined;
   }
 
   static async assignWorker(data: CreateWorkerReqI) {
@@ -406,6 +417,10 @@ export class ApiSelf {
         params: { client: id },
       })) as AxiosResponse<ResponseObject>
     ).data.payload;
+  }
+
+  static async getDataFromXLM(data: string) {
+    return ApiSelf.axiosInstance.post('field/xmlTranslate', { data });
   }
 
   static workerAssignedListener({

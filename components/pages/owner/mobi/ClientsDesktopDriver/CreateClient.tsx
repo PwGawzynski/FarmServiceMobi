@@ -13,22 +13,12 @@ import { TranslationNames } from '../../../../../locales/TranslationNames';
 import { ClientResponseBase } from '../../../../../FarmServiceApiTypes/Clients/Responses';
 import { ClientsDesktopDriverScreenProps } from '../../../../../types/self/navigation/Owner/props/clients/ClientsDesktopDriverProps';
 import { createClient, updateClient } from '../../../../../api/clients/Client';
-import { TwoOptionAlert } from '../../../../molecules/TwoOptionAlert';
+import { AlertI, TwoOptionAlert } from '../../../../molecules/TwoOptionAlert';
 import { PendingInfo } from '../../../../atoms/PendingInfo';
 import { FormErrorInfo } from '../../../../atoms/FormErrorInfo';
 import { FormCreator } from '../../../../atoms/FormCreator';
 import { createClientSetup } from '../../../../../helepers/FormSetups/CreateClientSetup';
 import { AppButton } from '../../../../atoms/AppButton';
-
-interface AlertI {
-  status: boolean;
-  title: string | undefined;
-  description: string | undefined;
-  leftButtonText: string | undefined;
-  rightButtonText: string | undefined;
-  onLeftButtonClick?: () => void;
-  onRightButtonClick?: () => void;
-}
 
 export type CreateClientForm = Pick<CreateClientReqI['user'], 'email'> &
   CreateUserReqI['personal_data'] &

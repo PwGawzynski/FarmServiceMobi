@@ -49,6 +49,19 @@
         "screenTitle": "Utwórz nową firmę",
         "submitButton": "Utwórz firmę",
         "successMessage": "Zrobione! Twoja firma została utworzona pomyślnie, pora brac sie do roboty!"
+      },
+      "createField": {
+        "screenTitle": "Create field",
+        "submitButton": "Create",
+        "successMessage": "It's done, new field has been added",
+        "gpsConnecting": "Łączenie z GPS...",
+        "gpsAccess": "Aby używać tej funkcji, musisz wyrazić zgode na używanie lokalizacji twojego urządzenia",
+        "gpsMoreInfo": "Zobacz więcej",
+        "gpsError": "Nie udało się połączyć z GPS, spróbuj ponownie później",
+        "serverError": "Hhmm, coś poszło nie tak, spróbuj ponownie później",
+        "locationPolicyTitle": "Polityka używania lokalizacji",
+        "locationPolicyDescription": "Używamy lokalizacji, aby zapewnić Ci najlepsze wrażenia z korzystania z naszej aplikacji. Dzięki temu możemy ustawić twoją lokalizację na mapie, abyś mógł łatwo dodawać pola. Możesz wyłączyć tę funkcję w każdej chwili w ustawieniach aplikacji.",
+        "locationPolicyButton": "Rozumiem"
       }
     },
     "clientDriver": {
@@ -188,7 +201,9 @@
       "voivodeship": "Województwo jest wymagane",
       "validationAtLeast": "must have at least ",
       "validationMaximum ": "nie może być dłuższy niż ",
-      "validationCharacters": "znaków"
+      "validationCharacters": "znaków",
+      "latitude": "X jest wymagane",
+      "longitude": "Y jest wymagane"
     }
   },
   "createCompanyForm":{
@@ -225,5 +240,23 @@
       "validationMaximum ": "nie może być dłuższy niż ",
       "validationCharacters": "znaków"
     }
+  },
+  "createFieldForm":{
+  "formPlaceholder": {
+    "nameLabel": "Nazwa pola",
+    "area": "Obszar",
+    "polishSystemId": "Id w systemie polskim"
+  },
+  "validation": {
+    "nameLabel": "Nazwa pola jest wymagana",
+    "polishSystemId": "Id w systemie polskim jest wymagane",
+    "polishSystemIdPattern": "PL_ID musi być w formacie XX-XXX",
+    "area": "Obszar jest wymagany",
+    "validationAtLeast": "musi być co najmniej ",
+    "validationMaximum ": "może mieć maksimum ",
+    "validationCharacters": "znaków",
+    "moreThan": "Obszar musi być większy niż",
+    "lessThan": "Obszar nie może być mniejszy niż"
   }
+}
 }

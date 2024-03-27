@@ -3,7 +3,7 @@ import { Control } from 'react-hook-form/dist/types/form';
 import { FormControllerSetup } from '../../components/atoms/FormCreator';
 import { rules } from '../FormRules/CreateClientFormRules';
 import { TranslationNames } from '../../locales/TranslationNames';
-import { CreateClientForm } from '../../components/pages/mobi/ClientsDesktopDriver/CreateClient';
+import { CreateClientForm } from '../../components/pages/owner/mobi/ClientsDesktopDriver/CreateClient';
 
 export const createClientSetup = (
   control: Control<CreateClientForm>,
