@@ -355,6 +355,14 @@ export class ApiSelf {
     ).data.payload as FieldResponseBase | undefined;
   }
 
+  static async deleteField(data: FieldResponseBase) {
+    return (
+      (await ApiSelf.axiosInstance.delete('/field', {
+        params: { id: data.id },
+      })) as AxiosResponse<ResponseObject>
+    ).data.code;
+  }
+
   static async assignWorker(data: CreateWorkerReqI) {
     return (
       (await ApiSelf.axiosInstance.post(
