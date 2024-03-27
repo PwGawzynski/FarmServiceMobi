@@ -204,6 +204,8 @@ export const TranslationNames = {
       workerUpdateErrorHeader: 'components.toast.workerUpdateErrorHeader',
       clientsFetchErrorContext: 'components.toast.clientsFetchErrorContext',
       workerUpdateErrorContext: 'components.toast.workerUpdateErrorContext',
+      openMapErrorHeader: 'components.toast.openMapErrorHeader',
+      openMapErrorDescription: 'components.toast.openMapErrorDescription',
     },
     filedBottomSheet: {
       showOnMapButton: 'components.filedBottomSheet.showOnMapButton',
