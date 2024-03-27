@@ -40,7 +40,7 @@ export function MainBottomSheet({
   const theme = useSelector(selectTheme);
 
   return (
-    <Portal handleOnMount={data => console.log(data, 'kuraw')}>
+    <Portal>
       <BottomSheetModal
         backgroundStyle={styles(theme).container}
         style={styles(theme).container}
