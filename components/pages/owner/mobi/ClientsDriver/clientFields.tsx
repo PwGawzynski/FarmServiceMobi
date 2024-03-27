@@ -28,7 +28,6 @@ export function ClientFields({
     queryFn: keys => getClientFields(keys.queryKey[1] as string),
     staleTime: EXPO_PUBLIC_QUERY_STALE_TIME,
   });
-  console.log(data);
 
   const renderItem = useCallback(
     (
@@ -39,7 +38,11 @@ export function ClientFields({
         <FieldListItem
           onPress={() => {
             bottomSheetRef.current?.present(
-              <FieldBottomSheetContent field={item} />,
+              <FieldBottomSheetContent
+                field={item}
+                client={client}
+                bottomSheetRef={bottomSheetRef}
+              />,
             );
           }}
           field={item}

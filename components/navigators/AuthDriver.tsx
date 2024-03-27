@@ -21,6 +21,7 @@ import { PasswordReset } from '../pages/owner/mobi/AuthDriver/PasswordReset';
 import { OperationConfirmedAnimation } from '../pages/owner/mobi/AuthDriver/OperationConfirmedAnimation';
 import { WorkerRootDriver } from './worker/WorkerRootDriver';
 import { AddFiled } from '../pages/owner/mobi/AuthDriver/AddFiled';
+import { EditField } from '../pages/owner/mobi/AuthDriver/EditField';
 
 const Stack = createNativeStackNavigator<AuthDriverParamList>();
 
@@ -133,6 +134,15 @@ export default function AuthDriver() {
           }}
           name="addField"
           component={AddFiled}
+        />
+        <Stack.Screen
+          options={{
+            ...NativeStackScreenOptionsBase,
+            animation: 'fade',
+            gestureDirection: 'horizontal',
+          }}
+          name="editField"
+          component={EditField}
         />
       </Stack.Navigator>
       {/* If there is any error in toast, start by moving it to app.tsx */}

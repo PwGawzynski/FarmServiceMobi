@@ -53,6 +53,8 @@
       "createField": {
         "screenTitle": "Add field",
         "submitButton": "Add",
+        "editSubmitButton": "Save",
+        "editScreenTitle": "Edit field",
         "successMessage": "It's done, new field has been added",
         "gpsConnecting": "Connecting to GPS...",
         "gpsAccess": "To use this feature, you need to give us access to your location, please go to settings and enable location",
@@ -165,7 +167,11 @@
       "clientsFetchErrorHeader": "Clients fetch error",
       "workerUpdateErrorHeader": "Worker update error",
       "clientsFetchErrorContext": "Sorry we cannot fetch clients",
-      "workerUpdateErrorContext": "Sorry we cannot update worker"
+      "workerUpdateErrorContext": "Sorry we cannot update worker",
+      "openMapErrorHeader":  "Sorry we cannot open map",
+      "openMapErrorDescription": "To use this function you need to have Maps  installed",
+      "cantDeleteFieldHeader": "Cannot delete field",
+        "cantDeleteFieldDescription": "Sorry we cannot delete field, try later"
     },
     "filedBottomSheet": {
       "showOnMapButton": "Show on map",
@@ -173,7 +179,11 @@
       "deleteButton": "Delete",
       "addButton": "Add to order",
       "historyButton": "History",
-      "address": "Address"
+      "address": "Address",
+      "deleteFieldAlertTitle": "Are you sure?",
+      "deleteFieldAlertDescription": "Are you sure you want to delete this field? This action cannot be undone",
+      "deleteFieldAlertDeleteButton": "Delete",
+      "deleteFieldAlertCancelButton": "Cancel",
     }
   },
   "addressForm": {

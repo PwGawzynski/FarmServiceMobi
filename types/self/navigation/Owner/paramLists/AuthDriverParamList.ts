@@ -8,6 +8,7 @@ import { ActivityDriverParamList } from './activities/ActivityDriverParamList';
 import { ActivityDesktopDriverParamList } from './activities/ActivityDesktopDriverParamList';
 import { WorkerRootDriverParamList } from '../../Worker/paramList/WorkerRootDriverParamList';
 import { ClientResponseBase } from '../../../../../FarmServiceApiTypes/Clients/Responses';
+import { FieldResponseBase } from '../../../../../FarmServiceApiTypes/Field/Ressponses';
 
 export type AuthDriverParamList = {
   createCompany: undefined;
@@ -17,6 +18,7 @@ export type AuthDriverParamList = {
   chooseRegisterType: undefined;
   passwordReset: undefined;
   addField: { client: ClientResponseBase };
+  editField: { client: ClientResponseBase; field: FieldResponseBase };
   ownerRootDriver: NavigatorScreenParams<OwnerRootDriverParamList>;
   workerRootDriver: NavigatorScreenParams<WorkerRootDriverParamList>;
   OperationConfirmed: {

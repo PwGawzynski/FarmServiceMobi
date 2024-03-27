@@ -1,4 +1,6 @@
 import { AlertDialog, Button, Text, XStack } from 'tamagui';
+import DangerIco from '../../assets/danger.svg';
+import { Colors } from '../../settings/styles/colors';
 
 export type Props = {
   open: boolean;
@@ -8,6 +10,7 @@ export type Props = {
   rightButtonText?: string;
   onLeftButtonClick?: () => void;
   onRightButtonClick?: () => void;
+  isDanger?: boolean;
 };
 export interface AlertI {
   status: boolean;
@@ -17,6 +20,7 @@ export interface AlertI {
   rightButtonText: string | undefined;
   onLeftButtonClick?: () => void;
   onRightButtonClick?: () => void;
+  isDanger?: boolean;
 }
 
 export function TwoOptionAlert(props: Props) {
@@ -25,8 +29,14 @@ export function TwoOptionAlert(props: Props) {
       <AlertDialog.Portal>
         <AlertDialog.Overlay key={Math.random()} />
         <AlertDialog.Content p="$6" m="$8">
+          <XStack ai="center" jc="center" pb="$4">
+            {props.isDanger && (
+              <DangerIco height={50} width={50} color={Colors.ERROR_RED} />
+            )}
+          </XStack>
           <Text
             fontWeight="bold"
+            color={props.isDanger ? Colors.ERROR_RED : '$color4'}
             textTransform="uppercase"
             textAlign="center"
             adjustsFontSizeToFit
@@ -37,11 +47,20 @@ export function TwoOptionAlert(props: Props) {
           >
             {props.title}
           </Text>
-          <AlertDialog.Description mt="$4" mb="$4" textAlign="justify">
+          <AlertDialog.Description
+            color={props.isDanger ? Colors.ERROR_RED : '$color4'}
+            mt="$4"
+            mb="$4"
+            textAlign="center"
+          >
             {props.description}
           </AlertDialog.Description>
           <XStack jc={props.rightButtonText ? 'space-between' : 'center'}>
-            <Button onPress={props.onLeftButtonClick} size="$3">
+            <Button
+              backgroundColor={props.isDanger ? Colors.ERROR_RED : '$color4'}
+              onPress={props.onLeftButtonClick}
+              size="$3"
+            >
               <Button.Text
                 adjustsFontSizeToFit
                 numberOfLines={1}
