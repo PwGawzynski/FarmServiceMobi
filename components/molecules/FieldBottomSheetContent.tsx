@@ -1,10 +1,11 @@
 import { SizableText, XStack, YStack } from 'tamagui';
-import { RefObject, useMemo } from 'react';
+import { RefObject, useEffect, useMemo, useState } from 'react';
 import { t } from 'i18next';
 import { Linking, Platform } from 'react-native';
 import Toast from 'react-native-toast-message';
 import { useNavigation } from '@react-navigation/native';
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { FieldResponseBase } from '../../FarmServiceApiTypes/Field/Ressponses';
 import { KeyValuePair } from '../atoms/KeyValuePair';
 import { ButtonTamagui } from '../atoms/ButtonTamagui';
@@ -16,6 +17,8 @@ import Trash from '../../assets/trash.svg';
 import { FieldAddressResponseBase } from '../../FarmServiceApiTypes/FiledAddress/Ressponses';
 import { TranslationNames } from '../../locales/TranslationNames';
 import { ClientResponseBase } from '../../FarmServiceApiTypes/Clients/Responses';
+import { AlertI, TwoOptionAlert } from './TwoOptionAlert';
+import { delField } from '../../api/field/Field';
 
 export type FieldBottomSheetProps = {
   field: FieldResponseBase;
@@ -28,6 +31,23 @@ const names: Record<keyof FieldAddressResponseBase, string> = {
   voivodeship: t(TranslationNames.addressForm.formPlaceholder.voivodeship),
   longitude: t(TranslationNames.addressForm.formPlaceholder.longitude),
   latitude: t(TranslationNames.addressForm.formPlaceholder.latitude),
+};
+
+const initAlert: AlertI = {
+  status: false,
+  isDanger: true,
+  title: t(TranslationNames.components.filedBottomSheet.deleteFieldAlertTitle),
+  description: t(
+    TranslationNames.components.filedBottomSheet.deleteFieldAlertDescription,
+  ),
+  leftButtonText: t(
+    TranslationNames.components.filedBottomSheet.deleteFieldAlertDeleteButton,
+  ),
+  rightButtonText: t(
+    TranslationNames.components.filedBottomSheet.deleteFieldAlertCancelButton,
+  ),
+  onLeftButtonClick: undefined,
+  onRightButtonClick: undefined,
 };
 export function FieldBottomSheetContent({
   field,
@@ -68,8 +88,49 @@ export function FieldBottomSheetContent({
     });
   };
 
+  const queryClient = useQueryClient();
+  const { mutate, isError } = useMutation({
+    mutationKey: ['deleteField', field.id],
+    mutationFn: delField,
+    onSuccess: (sth, variables) => {
+      bottomSheetRef?.current?.dismiss();
+      queryClient.setQueryData(
+        ['clientFields', client?.id],
+        (oldData: Array<FieldResponseBase>) => {
+          console.log(variables.id, 'test', field.id);
+          if (variables)
+            return [...oldData.filter(_field => _field.id !== field.id)];
+          return oldData;
+        },
+      );
+    },
+  });
+
+  const [alert, setAlert] = useState<AlertI>({
+    ...initAlert,
+  });
+
+  useEffect(() => {
+    if (isError)
+      Toast.show({
+        type: 'error',
+        text1: t(TranslationNames.components.toast.cantDeleteFieldHeader),
+        text2: t(TranslationNames.components.toast.cantDeleteFieldDescription),
+      });
+  }, [isError]);
+
   return (
     <YStack f={1} ml="$4" mr="$4">
+      <TwoOptionAlert
+        open={alert.status}
+        isDanger={alert.isDanger}
+        title={alert.title}
+        description={alert.description}
+        leftButtonText={alert.leftButtonText}
+        rightButtonText={alert.rightButtonText}
+        onLeftButtonClick={alert.onLeftButtonClick}
+        onRightButtonClick={alert.onRightButtonClick}
+      />
       <YStack f={1}>
         <XStack ai="center" jc="space-between">
           <SizableText color="$color10" className="uppercase text-xl font-bold">
@@ -127,6 +188,17 @@ export function FieldBottomSheetContent({
           icon={<Trash />}
           buttonProps={{
             mt: '$4',
+            onPress: () =>
+              setAlert({
+                ...initAlert,
+                status: true,
+                onLeftButtonClick: () => {
+                  setAlert({ ...initAlert, status: false });
+                  mutate(field);
+                },
+                onRightButtonClick: () =>
+                  setAlert({ ...initAlert, status: false }),
+              }),
           }}
           bgColor="$color7"
           elementColor="#fff"
