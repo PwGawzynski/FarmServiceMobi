@@ -31,7 +31,7 @@ export const rules: FormRulesType<ExtendedFormData> = {
   polishSystemId: {
     required: t(TranslationNames.createFieldForm.validation.polishSystemId),
     pattern: {
-      value: /^\d{5,8}_\d+\.\d{4}\.\d{3}(\/\d+_BUD)?$/,
+      value: /^\d{5,8}_\d+\.\d{4}\.\d{1,4}(\/\d+_BUD)?$/,
       message: t(
         TranslationNames.createFieldForm.validation.polishSystemIdPattern,
       ),
