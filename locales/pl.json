@@ -166,7 +166,9 @@
       "clientsFetchErrorHeader": "Błąd pobierania klientów",
       "workerUpdateErrorHeader": "Błąd aktualizacji pracownika",
       "clientsFetchErrorContext": "Nie udało się pobrać listy klientów. Spróbuj ponownie później.",
-      "workerUpdateErrorContext": "Nie udało sie zaktualizować danych."
+      "workerUpdateErrorContext": "Nie udało sie zaktualizować danych.",
+      "openMapErrorHeader": "Błąd otwierania mapy",
+      "openMapErrorDescription": "Aby korzystać z tej funkcji, musisz zainstalować aplikację Map",
     },
     "filedBottomSheet": {
       "showOnMapButton": "Pokaż na mapie",
