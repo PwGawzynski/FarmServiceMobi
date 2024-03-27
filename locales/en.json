@@ -53,6 +53,8 @@
       "createField": {
         "screenTitle": "Add field",
         "submitButton": "Add",
+        "editSubmitButton": "Save",
+        "editScreenTitle": "Edit field",
         "successMessage": "It's done, new field has been added",
         "gpsConnecting": "Connecting to GPS...",
         "gpsAccess": "To use this feature, you need to give us access to your location, please go to settings and enable location",
@@ -167,7 +169,7 @@
       "clientsFetchErrorContext": "Sorry we cannot fetch clients",
       "workerUpdateErrorContext": "Sorry we cannot update worker",
       "openMapErrorHeader":  "Sorry we cannot open map",
-      "openMapErrorDescription": "To use this function you need to have Maps  installed",
+      "openMapErrorDescription": "To use this function you need to have Maps  installed"
     },
     "filedBottomSheet": {
       "showOnMapButton": "Show on map",

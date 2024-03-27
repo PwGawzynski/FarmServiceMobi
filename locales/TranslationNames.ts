@@ -64,6 +64,8 @@ export const TranslationNames = {
       createField: {
         screenTitle: 'screens.AuthDriver.createField.screenTitle',
         submitButton: 'screens.AuthDriver.createField.submitButton',
+        editSubmitButton: 'screens.AuthDriver.createField.editSubmitButton',
+        editScreenTitle: 'screens.AuthDriver.createField.editScreenTitle',
         successMessage: 'screens.AuthDriver.createField.successMessage',
         gpsConnecting: 'screens.AuthDriver.createField.gpsConnecting',
         gpsAccess: 'screens.AuthDriver.createField.gpsAccess',

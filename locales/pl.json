@@ -51,9 +51,11 @@
         "successMessage": "Zrobione! Twoja firma została utworzona pomyślnie, pora brac sie do roboty!"
       },
       "createField": {
-        "screenTitle": "Create field",
-        "submitButton": "Create",
-        "successMessage": "It's done, new field has been added",
+        "screenTitle": "Utwórz nowe pole",
+        "submitButton": "Dodaj",
+        "editSubmitButton": "Zapisz zmiany",
+        "editScreenTitle": "Edytuj pole",
+        "successMessage": "Zrobione! Pole zostało utworzone pomyślnie",
         "gpsConnecting": "Łączenie z GPS...",
         "gpsAccess": "Aby używać tej funkcji, musisz wyrazić zgode na używanie lokalizacji twojego urządzenia",
         "gpsMoreInfo": "Zobacz więcej",
