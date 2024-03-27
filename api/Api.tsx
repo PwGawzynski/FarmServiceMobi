@@ -33,7 +33,10 @@ import {
   CreateWorkerReqI,
   UpdateWorkerStatusOrPositionReqI,
 } from '../FarmServiceApiTypes/Worker/Requests';
-import { CreateFieldReqI } from '../FarmServiceApiTypes/Field/Requests';
+import {
+  CreateFieldReqI,
+  updateFieldReqI,
+} from '../FarmServiceApiTypes/Field/Requests';
 import { FieldResponseBase } from '../FarmServiceApiTypes/Field/Ressponses';
 /* ---------------------------------------DECORATOR_USED_TO_DELAY_RES--------------------------------------- */
 
@@ -338,6 +341,15 @@ export class ApiSelf {
     return (
       (await ApiSelf.axiosInstance.post(
         '/field',
+        data,
+      )) as AxiosResponse<ResponseObject>
+    ).data.payload as FieldResponseBase | undefined;
+  }
+
+  static async editField(data: updateFieldReqI) {
+    return (
+      (await ApiSelf.axiosInstance.put(
+        '/field/edit',
         data,
       )) as AxiosResponse<ResponseObject>
     ).data.payload as FieldResponseBase | undefined;
