@@ -171,7 +171,9 @@ export function AddFieldForm({
             )}
           />
         )}
-        {error && editError && <FormErrorInfo error={error.message} />}
+        {(error || editError) && (
+          <FormErrorInfo error={error?.message || editError?.message} />
+        )}
       </View>
       <FormCreator
         controllerSetups={createFieldSetup(control)}
