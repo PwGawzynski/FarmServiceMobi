@@ -1,8 +1,10 @@
 import { SizableText, XStack, YStack } from 'tamagui';
-import { useMemo } from 'react';
+import { RefObject, useMemo } from 'react';
 import { t } from 'i18next';
 import { Linking, Platform } from 'react-native';
 import Toast from 'react-native-toast-message';
+import { useNavigation } from '@react-navigation/native';
+import { BottomSheetModal } from '@gorhom/bottom-sheet';
 import { FieldResponseBase } from '../../FarmServiceApiTypes/Field/Ressponses';
 import { KeyValuePair } from '../atoms/KeyValuePair';
 import { ButtonTamagui } from '../atoms/ButtonTamagui';
@@ -13,9 +15,12 @@ import History from '../../assets/history.svg';
 import Trash from '../../assets/trash.svg';
 import { FieldAddressResponseBase } from '../../FarmServiceApiTypes/FiledAddress/Ressponses';
 import { TranslationNames } from '../../locales/TranslationNames';
+import { ClientResponseBase } from '../../FarmServiceApiTypes/Clients/Responses';
 
 export type FieldBottomSheetProps = {
   field: FieldResponseBase;
+  client?: ClientResponseBase;
+  bottomSheetRef?: RefObject<BottomSheetModal>;
 };
 const names: Record<keyof FieldAddressResponseBase, string> = {
   city: t(TranslationNames.addressForm.formPlaceholder.city),
@@ -24,7 +29,14 @@ const names: Record<keyof FieldAddressResponseBase, string> = {
   longitude: t(TranslationNames.addressForm.formPlaceholder.longitude),
   latitude: t(TranslationNames.addressForm.formPlaceholder.latitude),
 };
-export function FieldBottomSheetContent({ field }: FieldBottomSheetProps) {
+export function FieldBottomSheetContent({
+  field,
+  client,
+  bottomSheetRef,
+}: FieldBottomSheetProps) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const navigation = useNavigation<any>();
+
   const address = useMemo(
     () =>
       Object.keys(field.address).map(key => (
@@ -36,6 +48,7 @@ export function FieldBottomSheetContent({ field }: FieldBottomSheetProps) {
       )),
     [],
   );
+
   const openAddressOnMap = (label: string, lat: string, lng: string) => {
     const scheme = Platform.select({
       ios: 'maps:0,0?q=',
@@ -54,6 +67,7 @@ export function FieldBottomSheetContent({ field }: FieldBottomSheetProps) {
       });
     });
   };
+
   return (
     <YStack f={1} ml="$4" mr="$4">
       <YStack f={1}>
@@ -88,6 +102,10 @@ export function FieldBottomSheetContent({ field }: FieldBottomSheetProps) {
           icon={<PenIco />}
           buttonProps={{
             mt: '$4',
+            onPress: () => {
+              navigation.navigate('editField', { field, client });
+              bottomSheetRef?.current?.dismiss();
+            },
           }}
         />
         <ButtonTamagui
