@@ -208,6 +208,8 @@ export const TranslationNames = {
       workerUpdateErrorContext: 'components.toast.workerUpdateErrorContext',
       openMapErrorHeader: 'components.toast.openMapErrorHeader',
       openMapErrorDescription: 'components.toast.openMapErrorDescription',
+      cantDeleteFieldHeader: 'components.toast.cantDeleteFieldHeader',
+      cantDeleteFieldDescription: 'components.toast.cantDeleteFieldDescription',
     },
     filedBottomSheet: {
       showOnMapButton: 'components.filedBottomSheet.showOnMapButton',
@@ -216,6 +218,14 @@ export const TranslationNames = {
       addButton: 'components.filedBottomSheet.addButton',
       historyButton: 'components.filedBottomSheet.historyButton',
       address: 'components.filedBottomSheet.address',
+      deleteFieldAlertTitle:
+        'components.filedBottomSheet.deleteFieldAlertTitle',
+      deleteFieldAlertDescription:
+        'components.filedBottomSheet.deleteFieldAlertDescription',
+      deleteFieldAlertDeleteButton:
+        'components.filedBottomSheet.deleteFieldAlertDeleteButton',
+      deleteFieldAlertCancelButton:
+        'components.filedBottomSheet.deleteFieldAlertCancelButton',
     },
   },
   addressForm: {

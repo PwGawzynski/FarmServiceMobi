@@ -63,7 +63,7 @@
         "serverError": "Hhmm, coś poszło nie tak, spróbuj ponownie później",
         "locationPolicyTitle": "Polityka używania lokalizacji",
         "locationPolicyDescription": "Używamy lokalizacji, aby zapewnić Ci najlepsze wrażenia z korzystania z naszej aplikacji. Dzięki temu możemy ustawić twoją lokalizację na mapie, abyś mógł łatwo dodawać pola. Możesz wyłączyć tę funkcję w każdej chwili w ustawieniach aplikacji.",
-        "locationPolicyButton": "Rozumiem"
+        "locationPolicyButton": "Rozumiem",
       }
     },
     "clientDriver": {
@@ -171,6 +171,8 @@
       "workerUpdateErrorContext": "Nie udało sie zaktualizować danych.",
       "openMapErrorHeader": "Błąd otwierania mapy",
       "openMapErrorDescription": "Aby korzystać z tej funkcji, musisz zainstalować aplikację Map",
+      "cantDeleteFieldHeader": "Cannot delete field",
+      "cantDeleteFieldDescription": "Sorry we cannot delete field, try later"
     },
     "filedBottomSheet": {
       "showOnMapButton": "Pokaż na mapie",
@@ -178,7 +180,11 @@
       "deleteButton": "Usuń",
       "addButton": "Przypisz do zamówienia",
       "historyButton": "Historia",
-      "address": "Adres"
+      "address": "Adres",
+      "deleteFieldAlertTitle": "Jeseś pewien?",
+      "deleteFieldAlertDescription": "Czy na pewno chcesz usunąć to pole? Ta operacja jest nieodwracalna.",
+      "deleteFieldAlertDeleteButton": "Usuń",
+      "deleteFieldAlertCancelButton": "Anuluj"
     }
   },
   "addressForm": {
