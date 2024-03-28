@@ -60,6 +60,12 @@ export function TwoOptionAlert(props: Props) {
               backgroundColor={props.isDanger ? Colors.ERROR_RED : '$color4'}
               onPress={props.onLeftButtonClick}
               size="$3"
+              pressStyle={
+                {
+                  color: props.isDanger ? Colors.ERROR_RED : '$color4',
+                  borderColor: props.isDanger ? Colors.ERROR_RED : '$color4',
+                } as never
+              }
             >
               <Button.Text
                 adjustsFontSizeToFit
@@ -71,7 +77,17 @@ export function TwoOptionAlert(props: Props) {
               </Button.Text>
             </Button>
             {props.rightButtonText && (
-              <Button onPress={props.onRightButtonClick} size="$3" ml="$4">
+              <Button
+                pressStyle={
+                  {
+                    color: '$color4',
+                    borderColor: '$color4',
+                  } as never
+                }
+                onPress={props.onRightButtonClick}
+                size="$3"
+                ml="$4"
+              >
                 <Button.Text
                   adjustsFontSizeToFit
                   numberOfLines={1}
