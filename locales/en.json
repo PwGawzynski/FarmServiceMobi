@@ -111,6 +111,18 @@
         "searchPlaceholder": "Find a client"
       }
     },
+    "ordersDesktopDriver":{
+        "addOrder": {
+            "screenTitle": "Create  order",
+            "submitButton": "Create",
+            "step1Communicat": "Step 1: Choose client",
+            "step2Communicat": "Step 2: Fill in order details"
+        },
+        "orderDesktop": {
+            "title": "Orders",
+            "searchPlaceholder": "Find an order"
+        }
+    },
     "ownerRootDriver": {
       "workerAssignation": {
         "qrCodeScanCommunication": "Let the owner scan the QR code to assign you to the company",
@@ -133,7 +145,8 @@
         "Position": "Position",
         "editButton": "Edit",
         "choose": "Choose"
-      }
+      },
+
     }
   },
   "serviceDefaults": {

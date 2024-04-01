@@ -90,6 +90,18 @@
         "clientFieldsButton": "Pola klienta"
       }
     },
+    "ordersDesktopDriver":{
+      "addOrder": {
+        "screenTitle": "Dodaj  zamówienie",
+        "submitButton": "Dodaj zamówienie",
+        "step1Communicat": "Krok 1: Wybierz klienta",
+        "step2Communicat": "Krok 2: Wypełnij dane"
+      },
+      "orderDesktop": {
+        "title": "Orders",
+        "searchPlaceholder": "Find an order"
+      }
+    },
     "clientDesktopDriver": {
       "createClient": {
         "screenTitle": "Utwórz nowego klienta",

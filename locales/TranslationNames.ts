@@ -144,6 +144,19 @@ export const TranslationNames = {
           'screens.clientDesktopDriver.clientsDesktop.searchPlaceholder',
       },
     },
+    ordersDesktopDriver: {
+      addOrder: {
+        screenTitle: 'screens.ordersDesktopDriver.addOrder.screenTitle',
+        submitButton: 'screens.ordersDesktopDriver.addOrder.submitButton',
+        step1Communicat: 'screens.ordersDesktopDriver.addOrder.step1Communicat',
+        step2Communicat: 'screens.ordersDesktopDriver.addOrder.step2Communicat',
+      },
+      orderDesktop: {
+        title: 'screens.ordersDesktopDriver.orderDesktop.title',
+        searchPlaceholder:
+          'screens.ordersDesktopDriver.orderDesktop.searchPlaceholder',
+      },
+    },
     ownerRootDriver: {
       workerAssignation: {
         qrCodeScanCommunication:
