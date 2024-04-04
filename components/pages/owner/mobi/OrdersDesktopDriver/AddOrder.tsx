@@ -15,6 +15,7 @@ import { ClientList } from '../../../../organisms/ClientList';
 import { addOrderMachine } from '../../../../../helepers/StateMachines/AddOrderMachine';
 import { OrdersDesktopDriverScreenProps } from '../../../../../types/self/navigation/Owner/props/orders/OrdersDesktopDriverProps';
 import { TranslationNames } from '../../../../../locales/TranslationNames';
+import { OrderForm } from '../../../../molecules/OrderForm';
 
 const ANIMATION_DURATION = 1000;
 
@@ -103,6 +104,7 @@ export function AddOrder({
                   .step2Communicat,
               )}
             </SizableText>
+            <OrderForm />
           </YStack>
         </Animated.View>
       )}
