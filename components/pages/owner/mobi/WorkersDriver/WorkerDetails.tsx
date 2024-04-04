@@ -24,11 +24,7 @@ import { AddressResponseBase } from '../../../../../FarmServiceApiTypes/Address/
 import { AsAny, EnumType } from '../../../../../helepers/typing';
 import { TranslationNames } from '../../../../../locales/TranslationNames';
 import { PersonalDataBase } from '../../../../../FarmServiceApiTypes/UserPersonalData/Responses';
-
-const makeArray = (e: EnumType) =>
-  Object.keys(e)
-    .map(key => e[key])
-    .filter(_e => typeof _e === 'string') as Array<string>;
+import { makeArray } from '../../../../../helepers/MakeArray';
 
 const findEnumVal = (e: EnumType, value: string) =>
   Object.keys(e)
