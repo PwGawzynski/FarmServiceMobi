@@ -145,7 +145,7 @@
         "Position": "Position",
         "editButton": "Edit",
         "choose": "Choose"
-      },
+      }
 
     }
   },
@@ -196,7 +196,7 @@
       "deleteFieldAlertTitle": "Are you sure?",
       "deleteFieldAlertDescription": "Are you sure you want to delete this field? This action cannot be undone",
       "deleteFieldAlertDeleteButton": "Delete",
-      "deleteFieldAlertCancelButton": "Cancel",
+      "deleteFieldAlertCancelButton": "Cancel"
     }
   },
   "addressForm": {
@@ -287,6 +287,18 @@
       "validationCharacters": "characters",
       "moreThan": "Area must be more than",
       "lessThan": "Area can't be less than"
+    }
+  },
+  "createOrderForm": {
+    "formPlaceholder": {
+      "name": "Order name",
+      "additionalInfo": "Additional info",
+      "performanceDate": "Performance date"
+    },
+    "validation": {
+      "name": "Name is required",
+      "performanceDate": "Performance date is required"
+
     }
   }
 }

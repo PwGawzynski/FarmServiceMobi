@@ -279,6 +279,18 @@
     "validationCharacters": "znaków",
     "moreThan": "Obszar musi być większy niż",
     "lessThan": "Obszar nie może być mniejszy niż"
+    }
+  },
+  "createOrderForm": {
+    "formPlaceholder": {
+      "name": "Nazwa",
+      "additionalInfo": "Dodatkowe informacje",
+      "performanceDate": "Data wykonania"
+    },
+    "validation": {
+      "name": "Nazwa jest wymagana",
+      "performanceDate": "Data wykonania jest wymagana"
+
+    }
   }
-}
 }

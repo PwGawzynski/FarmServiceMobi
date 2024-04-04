@@ -325,4 +325,15 @@ export const TranslationNames = {
       lessThan: 'createFieldForm.validation.lessThan',
     },
   },
+  createOrderForm: {
+    formPlaceholder: {
+      name: 'createOrderForm.formPlaceholder.name',
+      additionalInfo: 'createOrderForm.formPlaceholder.additionalInfo',
+      performanceDate: 'createOrderForm.formPlaceholder.performanceDate',
+    },
+    validation: {
+      name: 'createOrderForm.validation.name',
+      performanceDate: 'createOrderForm.validation.performanceDate',
+    },
+  },
 };
