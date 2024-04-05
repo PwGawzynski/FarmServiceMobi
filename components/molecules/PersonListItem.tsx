@@ -30,8 +30,9 @@ export default function PersonListItem({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const navigation = useNavigation<any>();
   const handlePress = () => {
-    if (!onPress) navigation.navigate(onPressNavigateTo, navigationParams);
-    else onPress();
+    if (onPress) onPress();
+    if (onPressNavigateTo)
+      navigation.navigate(onPressNavigateTo, navigationParams);
   };
   return (
     <Card onPress={handlePress}>
