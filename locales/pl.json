@@ -184,7 +184,9 @@
       "openMapErrorHeader": "Błąd otwierania mapy",
       "openMapErrorDescription": "Aby korzystać z tej funkcji, musisz zainstalować aplikację Map",
       "cantDeleteFieldHeader": "Cannot delete field",
-      "cantDeleteFieldDescription": "Sorry we cannot delete field, try later"
+      "cantDeleteFieldDescription": "Sorry we cannot delete field, try later",
+      "cantCreateOrderHeader": "Cannot create order",
+      "cantCreateOrderDescription": "Sorry we cannot create order, try later"
     },
     "filedBottomSheet": {
       "showOnMapButton": "Pokaż na mapie",
