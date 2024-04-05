@@ -2,7 +2,7 @@ import { t } from 'i18next';
 import { FormRulesType } from './FormRulesType';
 
 import { creteMaxMessage, creteMinMessage } from './FormRulesHelper';
-import { OrderFormData } from '../../components/molecules/OrderForm';
+import { OrderFormData } from '../../components/organisms/OrderForm';
 import OrderConstants from '../../FarmServiceApiTypes/Order/Constants';
 import { TranslationNames } from '../../locales/TranslationNames';
 
