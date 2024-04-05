@@ -223,6 +223,8 @@ export const TranslationNames = {
       openMapErrorDescription: 'components.toast.openMapErrorDescription',
       cantDeleteFieldHeader: 'components.toast.cantDeleteFieldHeader',
       cantDeleteFieldDescription: 'components.toast.cantDeleteFieldDescription',
+      cantCreateOrderHeader: 'components.toast.cantCreateOrderHeader',
+      cantCreateOrderDescription: 'components.toast.cantCreateOrderDescription',
     },
     filedBottomSheet: {
       showOnMapButton: 'components.filedBottomSheet.showOnMapButton',
