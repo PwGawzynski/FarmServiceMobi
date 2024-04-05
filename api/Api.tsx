@@ -38,6 +38,8 @@ import {
   updateFieldReqI,
 } from '../FarmServiceApiTypes/Field/Requests';
 import { FieldResponseBase } from '../FarmServiceApiTypes/Field/Ressponses';
+import { CreateOrderReqI } from '../FarmServiceApiTypes/Order/Requests';
+import { OrderResponseBase } from '../FarmServiceApiTypes/Order/Ressponses';
 /* ---------------------------------------DECORATOR_USED_TO_DELAY_RES--------------------------------------- */
 
 const IsDelayed = () => {
@@ -344,6 +346,25 @@ export class ApiSelf {
         data,
       )) as AxiosResponse<ResponseObject>
     ).data.payload as FieldResponseBase | undefined;
+  }
+
+  static async createOrder(data: CreateOrderReqI) {
+    /* throw new Error('kurewka'); */
+    return (
+      (await ApiSelf.axiosInstance.post(
+        '/order',
+        data,
+      )) as AxiosResponse<ResponseObject>
+    ).data;
+  }
+
+  static async getAllOrders() {
+    /* throw new Error('kurewka'); */
+    return (
+      (await ApiSelf.axiosInstance.get(
+        '/order/all',
+      )) as AxiosResponse<ResponseObject>
+    ).data.payload as Array<OrderResponseBase> | undefined;
   }
 
   static async editField(data: updateFieldReqI) {
