@@ -64,7 +64,6 @@ export function FormCreator<T extends FieldValues>({
                     value={value}
                     error={errors[setup.name]?.message as string}
                     onBlur={onBlur}
-                    ref={ref}
                     disabled={disabled}
                     onChange={onChange}
                     placeholderName={setup.placeholderName ?? name}
