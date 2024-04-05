@@ -43,7 +43,13 @@ export function OrderList({ bottomSheetRef }: Props) {
       /* const handleOnPress = () => {
           if (optionalOnPress) optionalOnPress(item);
         }; */
-      return <OrderListItem order={item} />;
+      return (
+        <OrderListItem
+          onPressNavigateTo="orderDetails"
+          navigationParams={{ order: item }}
+          order={item}
+        />
+      );
     },
     [],
   );
