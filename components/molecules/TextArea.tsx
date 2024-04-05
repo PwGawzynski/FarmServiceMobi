@@ -3,7 +3,6 @@ import {
   NativeSyntheticEvent,
   TextInputTextInputEventData,
 } from 'react-native';
-import { RefCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { ValidationError } from '../atoms/ValidationError';
 import { selectTheme } from '../../src/redux/feature/userSlice';
@@ -16,7 +15,6 @@ export interface TextAreaProps {
   placeholderName?: string;
   error: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  ref: RefCallback<any>;
   disabled?: boolean;
 }
 
@@ -26,7 +24,6 @@ export function TextArea({
   value,
   placeholderName,
   error,
-  ref,
   disabled,
 }: TextAreaProps) {
   const theme = useSelector(selectTheme);
@@ -47,7 +44,6 @@ export function TextArea({
         placeholder={placeholderName}
         backgroundColor="$color6"
         height={120}
-        ref={ref}
         disabled={disabled}
       />
       <ValidationError>{error}</ValidationError>
