@@ -5,7 +5,7 @@ import {
   InputType,
 } from '../../components/atoms/FormCreator';
 import { TranslationNames } from '../../locales/TranslationNames';
-import { OrderFormData } from '../../components/molecules/OrderForm';
+import { OrderFormData } from '../../components/organisms/OrderForm';
 import { orderRules } from '../FormRules/CreateOrderRules';
 
 export const createOrderSetup = (
