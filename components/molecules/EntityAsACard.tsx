@@ -11,6 +11,7 @@ export type EntityAsACardProps<T extends Record<string, any>> = {
   onTopRightBtnPress?: () => void;
   cardName?: string;
   topRightButtonName?: string;
+  topRightButtonIcon?: JSX.Element;
 };
 
 export function EntityAsACard<
@@ -23,6 +24,7 @@ export function EntityAsACard<
   cardName,
   topRightButtonName,
   omittedKeys,
+  topRightButtonIcon,
 }: EntityAsACardProps<T>) {
   return (
     <Card bordered p="$2" mt="$4">
@@ -32,7 +34,7 @@ export function EntityAsACard<
         </SizableText>
         {onTopRightBtnPress && (
           <ButtonTamagui
-            icon={<PenIco height="70%" />}
+            icon={topRightButtonIcon || <PenIco height="70%" />}
             text={topRightButtonName || ''}
             buttonProps={{
               size: '$2',
