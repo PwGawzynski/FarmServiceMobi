@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Animated, {
   useSharedValue,
   withRepeat,
@@ -15,7 +15,7 @@ import { ClientList } from '../../../../organisms/ClientList';
 import { addOrderMachine } from '../../../../../helepers/StateMachines/AddOrderMachine';
 import { OrdersDesktopDriverScreenProps } from '../../../../../types/self/navigation/Owner/props/orders/OrdersDesktopDriverProps';
 import { TranslationNames } from '../../../../../locales/TranslationNames';
-import { OrderForm } from '../../../../molecules/OrderForm';
+import { OrderForm } from '../../../../organisms/OrderForm';
 
 const ANIMATION_DURATION = 1000;
 
@@ -28,7 +28,6 @@ export function AddOrder({
   'ownerRootDriver'
 >) {
   const [client, setClient] = useState<ClientResponseBase>();
-  const stepOneStatus = useRef(true);
   const fadeAnim = useSharedValue(0);
   const fadeOutAnim = useSharedValue(1);
   const fadeInAnim = useSharedValue(0);
@@ -75,7 +74,14 @@ export function AddOrder({
     };
   });
 
-  console.log(stepOneStatus.current);
+  const onAddOrderSuccess = () => {
+    fadeOutAnim.value = withTiming(1, {
+      duration: ANIMATION_DURATION,
+    });
+    setClient(undefined);
+    send({ type: 'reset', data: undefined });
+  };
+
   return (
     <ScreenBase
       name={t(
@@ -95,7 +101,7 @@ export function AddOrder({
           <ClientList optionalOnPress={setClient} />
         </YStack>
       </Animated.View>
-      {state.value === 'ClientGiven' && (
+      {state.value === 'ClientGiven' && client && (
         <Animated.View style={[fadeInStyle, { flex: 1 }]}>
           <YStack f={1}>
             <SizableText color="$color10" className="uppercase text-lg mt-4">
@@ -104,7 +110,7 @@ export function AddOrder({
                   .step2Communicat,
               )}
             </SizableText>
-            <OrderForm />
+            <OrderForm client={client} onSuccess={onAddOrderSuccess} />
           </YStack>
         </Animated.View>
       )}
