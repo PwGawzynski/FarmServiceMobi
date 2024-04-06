@@ -7,6 +7,7 @@ import { ClientsDriverScreenProps } from '../../../../../types/self/navigation/O
 import { ButtonTamagui } from '../../../../atoms/ButtonTamagui';
 import UserIco from '../../../../../assets/user.svg';
 import MapIco from '../../../../../assets/map.svg';
+import PlusIco from '../../../../../assets/plus.svg';
 
 export function ClientControlPanel({
   route,
@@ -49,6 +50,26 @@ export function ClientControlPanel({
             text={t(
               TranslationNames.screens.clientDriver.clientControlPanel
                 .clientFieldsButton,
+            )}
+          />
+          <ButtonTamagui
+            buttonProps={{
+              mt: '$4',
+              onPress: () =>
+                navigation.navigate('ordersDriver', {
+                  screen: 'ordersDesktopRoot',
+                  params: {
+                    screen: 'addOrder',
+                    params: {
+                      client: route.params.client,
+                    },
+                  },
+                }),
+            }}
+            icon={<PlusIco />}
+            text={t(
+              TranslationNames.screens.clientDriver.clientControlPanel
+                .clientOrdersButton,
             )}
           />
         </YStack>
