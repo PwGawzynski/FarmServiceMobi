@@ -87,7 +87,8 @@
       "clientControlPanel": {
         "title": "Client control panel",
         "clientDataButton": "Info",
-        "clientFieldsButton": "Fields"
+        "clientFieldsButton": "Fields",
+        "clientOrdersButton": "Start new order"
       }
     },
     "clientDesktopDriver": {

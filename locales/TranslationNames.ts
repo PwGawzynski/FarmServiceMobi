@@ -111,6 +111,8 @@ export const TranslationNames = {
           'screens.clientDriver.clientControlPanel.clientDataButton',
         clientFieldsButton:
           'screens.clientDriver.clientControlPanel.clientFieldsButton',
+        clientOrdersButton:
+          'screens.clientDriver.clientControlPanel.clientOrdersButton',
       },
     },
     clientDesktopDriver: {

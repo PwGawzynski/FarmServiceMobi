@@ -87,7 +87,8 @@
       "clientControlPanel": {
         "title": "Panel klienta",
         "clientDataButton": "Informacje",
-        "clientFieldsButton": "Pola klienta"
+        "clientFieldsButton": "Pola klienta",
+        "clientOrdersButton": "Dodaj nowe zamówienie"
       }
     },
     "orderDriver": {
