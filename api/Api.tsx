@@ -38,7 +38,10 @@ import {
   updateFieldReqI,
 } from '../FarmServiceApiTypes/Field/Requests';
 import { FieldResponseBase } from '../FarmServiceApiTypes/Field/Ressponses';
-import { CreateOrderReqI } from '../FarmServiceApiTypes/Order/Requests';
+import {
+  CreateOrderReqI,
+  UpdateOrder,
+} from '../FarmServiceApiTypes/Order/Requests';
 import { OrderResponseBase } from '../FarmServiceApiTypes/Order/Ressponses';
 /* ---------------------------------------DECORATOR_USED_TO_DELAY_RES--------------------------------------- */
 
@@ -365,6 +368,15 @@ export class ApiSelf {
         '/order/all',
       )) as AxiosResponse<ResponseObject>
     ).data.payload as Array<OrderResponseBase> | undefined;
+  }
+
+  static async updateOrder(data: UpdateOrder) {
+    return (
+      (await ApiSelf.axiosInstance.put(
+        '/order',
+        data,
+      )) as AxiosResponse<ResponseObject>
+    ).data.payload;
   }
 
   static async editField(data: updateFieldReqI) {
