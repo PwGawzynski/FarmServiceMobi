@@ -24,7 +24,7 @@ export async function apiHandler<M, T = undefined>(
   try {
     const data = await apiCall(payload as M);
     /* console.info(
-      typeof data,
+      data,
       `DATA TYPE RETURNED FROM API HANDLER:  ${
         apiCall.name
       } AT: ${new Date().toLocaleTimeString()}`,
