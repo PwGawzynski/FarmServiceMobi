@@ -2,7 +2,6 @@ import { t } from 'i18next';
 import { TranslationNames } from '../../locales/TranslationNames';
 import { apiHandler } from '../services/User';
 import { Api } from '../Api';
-import { ResponseObject } from '../../FarmServiceApiTypes/Respnse/responseGeneric';
 import {
   CreateOrderReqI,
   UpdateOrder,
@@ -17,7 +16,7 @@ export async function createOrder(data: CreateOrderReqI) {
     DEFAULT_MSG,
     Api.createOrder,
     data,
-  ) as unknown as ResponseObject<OrderResponseBase>;
+  ) as unknown as OrderResponseBase | undefined;
 }
 
 export async function getAllOrders() {
