@@ -3,6 +3,7 @@ import { NativeStackScreenOptionsBase } from '../../../../settings/navigators/Na
 import { OrdersDesktopDriver } from './OrdersDesktopDriver';
 import { OrdersDriverParamList } from '../../../../types/self/navigation/Owner/paramLists/orders/OrdersDriverParamList';
 import { OrderDetails } from '../../../pages/owner/mobi/OrderDriver/OrderDetails';
+import { EditOrder } from '../../../pages/owner/mobi/OrderDriver/EditOrder';
 
 const Stack = createNativeStackNavigator<OrdersDriverParamList>();
 
@@ -20,6 +21,14 @@ export function OrdersDriver() {
         }}
         name="orderDetails"
         component={OrderDetails}
+      />
+      <Stack.Screen
+        options={{
+          animation: 'fade',
+          gestureDirection: 'horizontal',
+        }}
+        name="editOrder"
+        component={EditOrder}
       />
     </Stack.Navigator>
   );
