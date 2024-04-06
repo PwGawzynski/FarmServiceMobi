@@ -10,7 +10,7 @@ const SCREEN_NAME = t(
 export function ClientsDesktop() {
   return (
     <ScreenBase name={SCREEN_NAME}>
-      <ClientList />
+      <ClientList defaultBehavior />
     </ScreenBase>
   );
 }
