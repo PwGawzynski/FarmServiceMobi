@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { YStack } from 'tamagui';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import Toast from 'react-native-toast-message';
 import { t } from 'i18next';
@@ -11,6 +11,7 @@ import { ButtonTamagui } from '../atoms/ButtonTamagui';
 import { createOrder } from '../../api/Order/Order';
 import { PendingInfo } from '../atoms/PendingInfo';
 import { TranslationNames } from '../../locales/TranslationNames';
+import { OrderResponseBase } from '../../FarmServiceApiTypes/Order/Ressponses';
 
 export interface Props {
   client: ClientResponseBase;
@@ -31,9 +32,22 @@ export function OrderForm({ client, onSuccess }: Props) {
     reset,
   } = useForm<OrderFormData>();
 
+  const queryClient = useQueryClient();
   const { mutate, isPending, isSuccess, error } = useMutation({
     mutationKey: ['createOrder', client.id],
     mutationFn: createOrder,
+    onSuccess: (sth, variables) => {
+      console.log(sth, 'bo');
+      queryClient.setQueryData(
+        ['orders'],
+        (oldData: Array<OrderResponseBase>) => {
+          if (variables) {
+            return [...oldData, sth];
+          }
+          return oldData;
+        },
+      );
+    },
   });
 
   useEffect(() => {
