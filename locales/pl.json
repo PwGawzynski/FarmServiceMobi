@@ -90,6 +90,36 @@
         "clientFieldsButton": "Pola klienta"
       }
     },
+    "orderDriver": {
+      "editOrder": {
+        "screenTitle": "Edytuj zamówienie",
+        "submitButton": "Zapisz zmiany",
+      },
+      "orderDetails": {
+        "screenName": "Szczegóły zamówienia",
+        "detailsCard": {
+          "cardName": "Szczegóły",
+          "fields": {
+            "name": "Nazwa",
+            "performanceDate": "Data wykonania",
+            "creationDate": "Data utworzenia",
+            "openedAt": "Otwarte o",
+            "pricePerUnit": "Cena za jednostkę"
+          },
+          "topRightButtonName": "Edytuj"
+        },
+        "additionalInfo": "Dodatkowe informacje",
+        "clientCard": {
+          "cardName": "Klient",
+          "topRightButtonName": "Więcej",
+          "fields": {
+            "name": "Imię",
+            "surname": "Nazwisko"
+          }
+        },
+        "tasksButton": "Zadania"
+      }
+    },
     "ordersDesktopDriver":{
       "addOrder": {
         "screenTitle": "Dodaj  zamówienie",
@@ -158,6 +188,9 @@
     }
   },
   "components": {
+    "buttonTamagui": {
+      "processing": "Przetwarzanie..."
+    },
     "sendMail": {
       "title": "Wyślij e-mail",
       "cannotSendAlertTitle": "Błąd wysyłania e-maila",
@@ -186,7 +219,9 @@
       "cantDeleteFieldHeader": "Cannot delete field",
       "cantDeleteFieldDescription": "Sorry we cannot delete field, try later",
       "cantCreateOrderHeader": "Cannot create order",
-      "cantCreateOrderDescription": "Sorry we cannot create order, try later"
+      "cantCreateOrderDescription": "Sorry we cannot create order, try later",
+      "canUpdateOrderHeader": "Cannot update order",
+      "canUpdateOrderDescription": "Sorry we cannot update order, try later"
     },
     "filedBottomSheet": {
       "showOnMapButton": "Pokaż na mapie",
@@ -287,7 +322,8 @@
     "formPlaceholder": {
       "name": "Nazwa",
       "additionalInfo": "Dodatkowe informacje",
-      "performanceDate": "Data wykonania"
+      "performanceDate": "Data wykonania",
+      "pricePerUnit": "Cena za jednostkę"
     },
     "validation": {
       "name": "Nazwa jest wymagana",

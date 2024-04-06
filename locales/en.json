@@ -111,6 +111,36 @@
         "searchPlaceholder": "Find a client"
       }
     },
+    "orderDriver": {
+      "editOrder": {
+        "screenTitle": "Edit order",
+        "submitButton": "Save"
+      },
+      "orderDetails": {
+        "screenName": "order Details",
+        "detailsCard": {
+          "cardName": "Details",
+          "fields": {
+            "name": "Name",
+            "performanceDate": "Performance Date",
+            "creationDate": "Creation Date",
+            "openedAt": "Opened At",
+            "pricePerUnit": "Price Per Unit"
+          },
+          "topRightButtonName": "Edit"
+        },
+        "additionalInfo": "Additional Info",
+        "clientCard": {
+          "cardName": "Client",
+          "topRightButtonName": "More",
+          "fields": {
+            "name": "Name",
+            "surname": "Surname"
+          }
+        },
+        "tasksButton": "Tasks"
+      }
+    },
     "ordersDesktopDriver":{
         "addOrder": {
             "screenTitle": "Create  order",
@@ -159,6 +189,9 @@
     }
   },
   "components": {
+    "buttonTamagui": {
+      "processing": "Processing..."
+    },
     "sendMail": {
       "title": "Send E-mail",
       "cannotSendAlertTitle": "Cannot send e-mail",
@@ -186,7 +219,9 @@
       "cantDeleteFieldHeader": "Cannot delete field",
       "cantDeleteFieldDescription": "Sorry we cannot delete field, try later",
       "cantCreateOrderHeader": "Cannot create order",
-      "cantCreateOrderDescription": "Sorry we cannot create order, try later"
+      "cantCreateOrderDescription": "Sorry we cannot create order, try later",
+      "canUpdateOrderHeader": "Cannot update order",
+      "canUpdateOrderDescription": "Sorry we cannot update order, try later"
     },
     "filedBottomSheet": {
       "showOnMapButton": "Show on map",
@@ -295,12 +330,12 @@
     "formPlaceholder": {
       "name": "Order name",
       "additionalInfo": "Additional info",
-      "performanceDate": "Performance date"
+      "performanceDate": "Performance date",
+      "pricePerUnit": "Price per unit"
     },
     "validation": {
       "name": "Name is required",
       "performanceDate": "Performance date is required"
-
     }
   }
 }

@@ -144,6 +144,43 @@ export const TranslationNames = {
           'screens.clientDesktopDriver.clientsDesktop.searchPlaceholder',
       },
     },
+    orderDriver: {
+      editOrder: {
+        screenTitle: 'screens.orderDriver.editOrder.screenTitle',
+        submitButton: 'screens.orderDriver.editOrder.submitButton',
+      },
+      orderDetails: {
+        screenName: 'screens.orderDriver.orderDetails.screenName',
+        detailsCard: {
+          cardName: 'screens.orderDriver.orderDetails.detailsCard.cardName',
+          fields: {
+            name: 'screens.orderDriver.orderDetails.detailsCard.fields.name',
+            performanceDate:
+              'screens.orderDriver.orderDetails.detailsCard.fields.performanceDate',
+            creationDate:
+              'screens.orderDriver.orderDetails.detailsCard.fields.creationDate',
+            openedAt:
+              'screens.orderDriver.orderDetails.detailsCard.fields.openedAt',
+            pricePerUnit:
+              'screens.orderDriver.orderDetails.detailsCard.fields.pricePerUnit',
+          },
+          topRightButtonName:
+            'screens.orderDriver.orderDetails.detailsCard.topRightButtonName',
+        },
+        additionalInfo: 'screens.orderDriver.orderDetails.additionalInfo',
+        clientCard: {
+          cardName: 'screens.orderDriver.orderDetails.clientCard.cardName',
+          topRightButtonName:
+            'screens.orderDriver.orderDetails.clientCard.topRightButtonName',
+          fields: {
+            name: 'screens.orderDriver.orderDetails.clientCard.fields.name',
+            surname:
+              'screens.orderDriver.orderDetails.clientCard.fields.surname',
+          },
+        },
+        tasksButton: 'screens.orderDriver.orderDetails.tasksButton',
+      },
+    },
     ordersDesktopDriver: {
       addOrder: {
         screenTitle: 'screens.ordersDesktopDriver.addOrder.screenTitle',
@@ -197,6 +234,9 @@ export const TranslationNames = {
     },
   },
   components: {
+    buttonTamagui: {
+      processing: 'components.buttonTamagui.processing',
+    },
     sendMail: {
       title: 'components.sendMail.title',
       cannotSendAlertTitle: 'components.sendMail.cannotSendAlertTitle',
@@ -225,6 +265,8 @@ export const TranslationNames = {
       cantDeleteFieldDescription: 'components.toast.cantDeleteFieldDescription',
       cantCreateOrderHeader: 'components.toast.cantCreateOrderHeader',
       cantCreateOrderDescription: 'components.toast.cantCreateOrderDescription',
+      canUpdateOrderHeader: 'components.toast.canUpdateOrderHeader',
+      canUpdateOrderDescription: 'components.toast.canUpdateOrderDescription',
     },
     filedBottomSheet: {
       showOnMapButton: 'components.filedBottomSheet.showOnMapButton',
@@ -332,6 +374,7 @@ export const TranslationNames = {
       name: 'createOrderForm.formPlaceholder.name',
       additionalInfo: 'createOrderForm.formPlaceholder.additionalInfo',
       performanceDate: 'createOrderForm.formPlaceholder.performanceDate',
+      pricePerUnit: 'createOrderForm.formPlaceholder.pricePerUnit',
     },
     validation: {
       name: 'createOrderForm.validation.name',
