@@ -358,7 +358,7 @@ export class ApiSelf {
         '/order',
         data,
       )) as AxiosResponse<ResponseObject>
-    ).data;
+    ).data.payload as OrderResponseBase | undefined;
   }
 
   static async getAllOrders() {
