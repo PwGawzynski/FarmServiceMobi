@@ -13,9 +13,10 @@ import { UniversalList } from './UniversalList';
 
 export interface Props {
   optionalOnPress?: (client: ClientResponseBase) => void;
+  defaultBehavior?: boolean;
 }
 
-export function ClientList({ optionalOnPress }: Props) {
+export function ClientList({ optionalOnPress, defaultBehavior }: Props) {
   const { data, isFetching, isError } = useQuery({
     queryKey: ['clients'],
     queryFn: getClients,
@@ -53,7 +54,7 @@ export function ClientList({ optionalOnPress }: Props) {
           name={item.user.personal_data.name}
           surname={item.user.personal_data.surname}
           bottomRightText={item.user.address.city}
-          onPressNavigateTo="clientControlPanel"
+          onPressNavigateTo={defaultBehavior ? 'clientControlPanel' : undefined}
           navigationParams={{ client: item }}
           onPress={handleOnPress}
         />
