@@ -21,20 +21,22 @@ const ANIMATION_DURATION = 1000;
 
 export function AddOrder({
   route: { params },
+  navigation,
 }: OrdersDesktopDriverScreenProps<
   'addOrder',
   'ordersDesktopRoot',
   'ordersDriver',
   'ownerRootDriver'
 >) {
-  const [client, setClient] = useState<ClientResponseBase>();
   const fadeAnim = useSharedValue(0);
   const fadeOutAnim = useSharedValue(1);
   const fadeInAnim = useSharedValue(0);
   const [state, send] = useMachine(addOrderMachine);
-  console.log(state, 'state');
-
+  const [client, setClient] = useState<ClientResponseBase | undefined>(
+    params?.client,
+  );
   useEffect(() => {
+    if (params?.client) send({ type: 'init', data: params.client });
     if (state.value === 'Idle') send({ type: 'init', data: params?.client });
     if (state.value === 'WaitingTillClientIsGiven')
       fadeAnim.value = withRepeat(
@@ -51,7 +53,7 @@ export function AddOrder({
     if (state.value === 'ClientGiven') {
       fadeInAnim.value = withTiming(1, { duration: ANIMATION_DURATION / 1.3 });
     }
-  }, [state.value]);
+  }, [state.value, params?.client]);
 
   useEffect(() => {
     if (client) send({ type: 'setClient', data: client });
@@ -75,6 +77,7 @@ export function AddOrder({
   });
 
   const onAddOrderSuccess = () => {
+    navigation.navigate('ordersDesktop');
     fadeOutAnim.value = withTiming(1, {
       duration: ANIMATION_DURATION,
     });
@@ -88,19 +91,21 @@ export function AddOrder({
         TranslationNames.screens.ordersDesktopDriver.addOrder.screenTitle,
       )}
     >
-      <Animated.View style={[fadeOutStyle, { flex: 1 }]}>
-        <YStack f={1}>
-          <Animated.View style={animatedStyle}>
-            <SizableText color="$color10" className="uppercase text-lg mt-4">
-              {t(
-                TranslationNames.screens.ordersDesktopDriver.addOrder
-                  .step1Communicat,
-              )}
-            </SizableText>
-          </Animated.View>
-          <ClientList optionalOnPress={setClient} />
-        </YStack>
-      </Animated.View>
+      {state.value !== 'ClientGiven' && (
+        <Animated.View style={[fadeOutStyle, { flex: 1 }]}>
+          <YStack f={1}>
+            <Animated.View style={animatedStyle}>
+              <SizableText color="$color10" className="uppercase text-lg mt-4">
+                {t(
+                  TranslationNames.screens.ordersDesktopDriver.addOrder
+                    .step1Communicat,
+                )}
+              </SizableText>
+            </Animated.View>
+            <ClientList optionalOnPress={setClient} />
+          </YStack>
+        </Animated.View>
+      )}
       {state.value === 'ClientGiven' && client && (
         <Animated.View style={[fadeInStyle, { flex: 1 }]}>
           <YStack f={1}>
