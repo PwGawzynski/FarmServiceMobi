@@ -5,4 +5,5 @@ import { OrderResponseBase } from '../../../../../../FarmServiceApiTypes/Order/R
 export type OrdersDriverParamList = {
   ordersDesktopRoot: NavigatorScreenParams<OrdersDesktopDriverParamList>;
   orderDetails: { order: OrderResponseBase };
+  editOrder: { order: OrderResponseBase };
 };
