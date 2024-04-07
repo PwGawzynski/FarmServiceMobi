@@ -1,8 +1,8 @@
-import { CreateMachineReqI } from '../../../../../../FarmServiceApiTypes/Machine/Requests';
+import { MachineResponseBase } from '../../../../../../FarmServiceApiTypes/Machine/Responses';
 
 export type MachinesDesktopDriverParamList = {
   machinesDesktop: undefined;
   addMachine: {
-    machine?: CreateMachineReqI | undefined;
+    machine?: MachineResponseBase | undefined;
   };
 };
