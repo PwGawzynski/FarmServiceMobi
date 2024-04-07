@@ -16,6 +16,7 @@ import { Theme } from '../../../../FarmServiceApiTypes/Account/Constants';
 import { Colors } from '../../../../settings/styles/colors';
 import { OrdersDriverScreenProps } from '../../../../types/self/navigation/Owner/props/orders/OrdersDriverProps';
 import { OrderDesktop } from '../../../pages/owner/mobi/OrdersDesktopDriver/OrderDesktop';
+import { AddOrder } from '../../../pages/owner/mobi/OrdersDesktopDriver/AddOrder';
 
 const TopTab = createMaterialTopTabNavigator<OrdersDesktopDriverParamList>();
 
@@ -45,6 +46,7 @@ export function OrdersDesktopDriver({
         screenOptions={MaterialTopTabScreenOptions}
         initialRouteName="ordersDesktop"
       >
+        <TopTab.Screen name="addOrder" component={AddOrder} />
         <TopTab.Screen name="ordersDesktop" component={OrderDesktop} />
       </TopTab.Navigator>
     </GestureDetector>

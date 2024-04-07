@@ -32,7 +32,6 @@ export default function FieldListItem({
   onPressNavigateTo,
   navigationParams,
 }: Props) {
-  console.log(field, 'KUREWKA');
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const navigation = useNavigation<any>();
   const handlePress = () => {

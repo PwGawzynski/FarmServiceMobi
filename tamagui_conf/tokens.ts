@@ -98,7 +98,7 @@ const color = {
   dark9: '#081e3f',
   dark10: '#7119ee',
   // color -> for button this is bg
-  dark11: '#d7df71',
+  dark11: '#939292',
   // input text color
   dark12: '#d7df71',
 
