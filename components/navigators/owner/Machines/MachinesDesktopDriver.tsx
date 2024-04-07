@@ -16,6 +16,7 @@ import { Colors } from '../../../../settings/styles/colors';
 import { MachinesDesktopDriverParamList } from '../../../../types/self/navigation/Owner/paramLists/machines/MachinesDesktopDriverParamList';
 import { MachinesDriverScreenProps } from '../../../../types/self/navigation/Owner/props/machines/MachinesDriverProps';
 import { MachineDesktop } from '../../../pages/owner/mobi/MachineDesktopDriver/MachineDesktop';
+import { AddMachine } from '../../../pages/owner/mobi/MachineDesktopDriver/AddMachine';
 
 const TopTab = createMaterialTopTabNavigator<MachinesDesktopDriverParamList>();
 
@@ -45,6 +46,7 @@ export function MachinesDesktopDriver({
         screenOptions={MaterialTopTabScreenOptions}
         initialRouteName="machinesDesktop"
       >
+        <TopTab.Screen name="addMachine" component={AddMachine} />
         <TopTab.Screen name="machinesDesktop" component={MachineDesktop} />
       </TopTab.Navigator>
     </GestureDetector>
