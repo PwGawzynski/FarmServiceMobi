@@ -5,7 +5,8 @@ export const addOrderMachine = setup({
   types: {} as {
     events:
       | { type: 'setClient'; data: ClientResponseBase | undefined }
-      | { type: 'init'; data: ClientResponseBase | undefined };
+      | { type: 'init'; data: ClientResponseBase | undefined }
+      | { type: 'reset'; data: ClientResponseBase | undefined };
     context: {
       client: ClientResponseBase | undefined;
     };
@@ -38,7 +39,13 @@ export const addOrderMachine = setup({
         ],
       },
     },
-    ClientGiven: {},
+    ClientGiven: {
+      on: {
+        reset: {
+          target: 'WaitingTillClientIsGiven',
+        },
+      },
+    },
     WaitingTillClientIsGiven: {
       on: {
         setClient: [

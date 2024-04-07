@@ -19,6 +19,9 @@ export type FormControllerSetup<T extends FieldValues> = Array<
     textInputProp?: TextInputProps;
     inputType?: InputType;
     placeholderName?: string;
+    inputStyle?: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    valuePreprocessor?: (value: any) => any;
   }
 >;
 
@@ -53,7 +56,16 @@ export function FormCreator<T extends FieldValues>({
                   <DateSelector
                     placeholderName={setup.placeholderName ?? name}
                     controllers={{
-                      field: { onChange, onBlur, value, ref, disabled, name },
+                      field: {
+                        onChange,
+                        onBlur,
+                        value: setup.valuePreprocessor
+                          ? setup.valuePreprocessor(value)
+                          : value,
+                        ref,
+                        disabled,
+                        name,
+                      },
                     }}
                     errors={errors[setup.name]?.message as string}
                   />
@@ -61,13 +73,18 @@ export function FormCreator<T extends FieldValues>({
               case InputType.TEXT_AREA:
                 return (
                   <TextArea
-                    value={value}
+                    value={
+                      setup.valuePreprocessor
+                        ? setup.valuePreprocessor(value)
+                        : value
+                    }
                     error={errors[setup.name]?.message as string}
                     onBlur={onBlur}
-                    ref={ref}
                     disabled={disabled}
                     onChange={onChange}
+                    abs={setup.inputStyle}
                     placeholderName={setup.placeholderName ?? name}
+                    textInputProps={setup.textInputProp}
                   />
                 );
               default:
@@ -78,12 +95,24 @@ export function FormCreator<T extends FieldValues>({
                     textInputProps={{
                       autoComplete: 'email',
                       keyboardType: 'email-address',
-                      // can be name cause it's overridden by setup
-                      placeholder: name,
                       ...setup.textInputProp,
+                      placeholder: setup.placeholderName ?? name,
                     }}
                     controllers={{
-                      field: { onChange, onBlur, value, ref, disabled, name },
+                      field: {
+                        onChange: (e: string) =>
+                          onChange(
+                            setup.valuePreprocessor
+                              ? setup.valuePreprocessor(e)
+                              : e,
+                          ),
+                        onBlur,
+                        value:
+                          typeof value === 'number' ? value.toString() : value,
+                        ref,
+                        disabled,
+                        name,
+                      },
                     }}
                   />
                 );

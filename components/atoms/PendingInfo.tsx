@@ -12,6 +12,7 @@ export type PendingInfoProps = {
   infoText?: string;
   column?: boolean;
   size?: ActivityIndicatorProps['size'];
+  addClassName?: string;
 };
 
 export function PendingInfo({
@@ -19,6 +20,7 @@ export function PendingInfo({
   isVisible,
   column,
   size,
+  addClassName,
 }: PendingInfoProps) {
   const opacity = useSharedValue(0);
   const animatedStyle = useAnimatedStyle(() => ({ opacity: opacity.value }));
@@ -36,7 +38,7 @@ export function PendingInfo({
       style={[animatedStyle]}
       className={`flex-1 min-w-[100%] ${
         column ? 'flex-col' : 'flex-row'
-      } items-center justify-center`}
+      } items-center justify-center ${addClassName}`}
     >
       <ActivityIndicator size={size} color={color?.val} />
       <SizableText

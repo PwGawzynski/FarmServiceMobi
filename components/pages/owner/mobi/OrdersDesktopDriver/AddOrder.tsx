@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Animated, {
   useSharedValue,
   withRepeat,
@@ -15,27 +15,47 @@ import { ClientList } from '../../../../organisms/ClientList';
 import { addOrderMachine } from '../../../../../helepers/StateMachines/AddOrderMachine';
 import { OrdersDesktopDriverScreenProps } from '../../../../../types/self/navigation/Owner/props/orders/OrdersDesktopDriverProps';
 import { TranslationNames } from '../../../../../locales/TranslationNames';
-import { OrderForm } from '../../../../molecules/OrderForm';
+import { OrderForm } from '../../../../organisms/OrderForm';
+import { ButtonTamagui } from '../../../../atoms/ButtonTamagui';
 
 const ANIMATION_DURATION = 1000;
 
+const TRANSLATIONS = {
+  screenName: t(
+    TranslationNames.screens.ordersDesktopDriver.addOrder.screenTitle,
+  ),
+  step1Communicat: t(
+    TranslationNames.screens.ordersDesktopDriver.addOrder.step1Communicat,
+  ),
+  step2Communicat: t(
+    TranslationNames.screens.ordersDesktopDriver.addOrder.step2Communicat,
+  ),
+  listEmptyText: t(
+    TranslationNames.screens.ordersDesktopDriver.addOrder.emptyList,
+  ),
+  createClientButton: t(
+    TranslationNames.screens.ordersDesktopDriver.addOrder.createClientButton,
+  ),
+};
+
 export function AddOrder({
   route: { params },
+  navigation,
 }: OrdersDesktopDriverScreenProps<
   'addOrder',
   'ordersDesktopRoot',
   'ordersDriver',
   'ownerRootDriver'
 >) {
-  const [client, setClient] = useState<ClientResponseBase>();
-  const stepOneStatus = useRef(true);
   const fadeAnim = useSharedValue(0);
   const fadeOutAnim = useSharedValue(1);
   const fadeInAnim = useSharedValue(0);
   const [state, send] = useMachine(addOrderMachine);
-  console.log(state, 'state');
-
+  const [client, setClient] = useState<ClientResponseBase | undefined>(
+    params?.client,
+  );
   useEffect(() => {
+    if (params?.client) send({ type: 'init', data: params.client });
     if (state.value === 'Idle') send({ type: 'init', data: params?.client });
     if (state.value === 'WaitingTillClientIsGiven')
       fadeAnim.value = withRepeat(
@@ -52,7 +72,7 @@ export function AddOrder({
     if (state.value === 'ClientGiven') {
       fadeInAnim.value = withTiming(1, { duration: ANIMATION_DURATION / 1.3 });
     }
-  }, [state.value]);
+  }, [state.value, params?.client]);
 
   useEffect(() => {
     if (client) send({ type: 'setClient', data: client });
@@ -75,36 +95,71 @@ export function AddOrder({
     };
   });
 
-  console.log(stepOneStatus.current);
+  const onAddOrderSuccess = () => {
+    navigation.navigate('ordersDesktop');
+    fadeOutAnim.value = withTiming(1, {
+      duration: ANIMATION_DURATION,
+    });
+    setClient(undefined);
+    send({ type: 'reset', data: undefined });
+  };
+
+  const emptyListComponent = useCallback(
+    () => (
+      <YStack f={1}>
+        <SizableText
+          adjustsFontSizeToFit
+          numberOfLines={1}
+          className="text-lg mb-4"
+        >
+          {TRANSLATIONS.listEmptyText}
+        </SizableText>
+        <ButtonTamagui
+          text={TRANSLATIONS.createClientButton}
+          buttonProps={{
+            className: 'mt-4',
+            onPress: () =>
+              navigation.navigate('clientsDriver', {
+                screen: 'clientsDesktopRoot',
+                params: {
+                  screen: 'createClient',
+                  params: {
+                    client: undefined,
+                  },
+                },
+              }),
+          }}
+        />
+      </YStack>
+    ),
+    [],
+  ) as unknown as JSX.Element;
+
   return (
-    <ScreenBase
-      name={t(
-        TranslationNames.screens.ordersDesktopDriver.addOrder.screenTitle,
+    <ScreenBase name={TRANSLATIONS.screenName}>
+      {state.value !== 'ClientGiven' && (
+        <Animated.View style={[fadeOutStyle, { flex: 1 }]}>
+          <YStack f={1}>
+            <Animated.View style={animatedStyle}>
+              <SizableText color="$color10" className="uppercase text-lg mt-4">
+                {TRANSLATIONS.step1Communicat}
+              </SizableText>
+            </Animated.View>
+            <ClientList
+              emptyListComponent={emptyListComponent}
+              listEmptyText={TRANSLATIONS.listEmptyText}
+              optionalOnPress={setClient}
+            />
+          </YStack>
+        </Animated.View>
       )}
-    >
-      <Animated.View style={[fadeOutStyle, { flex: 1 }]}>
-        <YStack f={1}>
-          <Animated.View style={animatedStyle}>
-            <SizableText color="$color10" className="uppercase text-lg mt-4">
-              {t(
-                TranslationNames.screens.ordersDesktopDriver.addOrder
-                  .step1Communicat,
-              )}
-            </SizableText>
-          </Animated.View>
-          <ClientList optionalOnPress={setClient} />
-        </YStack>
-      </Animated.View>
-      {state.value === 'ClientGiven' && (
+      {state.value === 'ClientGiven' && client && (
         <Animated.View style={[fadeInStyle, { flex: 1 }]}>
           <YStack f={1}>
             <SizableText color="$color10" className="uppercase text-lg mt-4">
-              {t(
-                TranslationNames.screens.ordersDesktopDriver.addOrder
-                  .step2Communicat,
-              )}
+              {TRANSLATIONS.step2Communicat}
             </SizableText>
-            <OrderForm />
+            <OrderForm client={client} onSuccess={onAddOrderSuccess} />
           </YStack>
         </Animated.View>
       )}

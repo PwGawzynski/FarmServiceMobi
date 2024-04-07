@@ -1,4 +1,10 @@
+import { ActivityIndicator } from 'react-native';
 import { Button, ButtonProps } from 'tamagui';
+import { useSelector } from 'react-redux';
+import { t } from 'i18next';
+import { selectTheme } from '../../src/redux/feature/userSlice';
+import { Theme } from '../../FarmServiceApiTypes/Account/Constants';
+import { TranslationNames } from '../../locales/TranslationNames';
 
 export type IconButtonProps = {
   icon?: React.ReactNode;
@@ -7,6 +13,7 @@ export type IconButtonProps = {
   textProps?: ButtonProps['textProps'];
   bgColor?: string;
   elementColor?: string;
+  isPending?: boolean;
 };
 
 export function ButtonTamagui({
@@ -14,9 +21,11 @@ export function ButtonTamagui({
   text,
   buttonProps,
   textProps,
+  isPending,
   bgColor,
   elementColor,
 }: IconButtonProps) {
+  const theme = useSelector(selectTheme);
   return (
     <Button
       pressStyle={
@@ -27,12 +36,37 @@ export function ButtonTamagui({
       }
       backgroundColor={bgColor || '$color4'}
       color={elementColor}
+      disabled={isPending}
       {...buttonProps}
     >
-      <Button.Icon>{icon}</Button.Icon>
-      <Button.Text {...textProps} textTransform="uppercase" fontWeight="bold">
-        {text}
-      </Button.Text>
+      {!isPending && (
+        <>
+          <Button.Icon>{icon}</Button.Icon>
+          <Button.Text
+            {...textProps}
+            textTransform="uppercase"
+            fontWeight="bold"
+          >
+            {text}
+          </Button.Text>
+        </>
+      )}
+      {isPending && (
+        <>
+          <ActivityIndicator
+            size="small"
+            color={theme === Theme.dark ? '#000' : '$color8'}
+          />
+          <Button.Text
+            {...textProps}
+            textTransform="uppercase"
+            fontWeight="bold"
+            ml="$2"
+          >
+            {t(TranslationNames.components.buttonTamagui.processing)}
+          </Button.Text>
+        </>
+      )}
     </Button>
   );
 }

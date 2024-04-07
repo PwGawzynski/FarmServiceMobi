@@ -87,7 +87,8 @@
       "clientControlPanel": {
         "title": "Client control panel",
         "clientDataButton": "Info",
-        "clientFieldsButton": "Fields"
+        "clientFieldsButton": "Fields",
+        "clientOrdersButton": "Start new order"
       }
     },
     "clientDesktopDriver": {
@@ -108,7 +109,38 @@
       },
       "clientsDesktop": {
         "title": "Clients",
-        "searchPlaceholder": "Find a client"
+        "searchPlaceholder": "Find a client",
+        "emptyList": "No clients to display, swipe right and add new one"
+      }
+    },
+    "orderDriver": {
+      "editOrder": {
+        "screenTitle": "Edit order",
+        "submitButton": "Save"
+      },
+      "orderDetails": {
+        "screenName": "order Details",
+        "detailsCard": {
+          "cardName": "Details",
+          "fields": {
+            "name": "Name",
+            "performanceDate": "Performance Date",
+            "creationDate": "Creation Date",
+            "openedAt": "Opened At",
+            "pricePerUnit": "Price Per Unit"
+          },
+          "topRightButtonName": "Edit"
+        },
+        "additionalInfo": "Additional Info",
+        "clientCard": {
+          "cardName": "Client",
+          "topRightButtonName": "More",
+          "fields": {
+            "name": "Name",
+            "surname": "Surname"
+          }
+        },
+        "tasksButton": "Tasks"
       }
     },
     "ordersDesktopDriver":{
@@ -116,7 +148,9 @@
             "screenTitle": "Create  order",
             "submitButton": "Create",
             "step1Communicat": "Step 1: Choose client",
-            "step2Communicat": "Step 2: Fill in order details"
+            "step2Communicat": "Step 2: Fill in order details",
+            "emptyList": "Cannot find given client, click below to create new one",
+            "createClientButton": "Create new client"
         },
         "orderDesktop": {
             "title": "Orders",
@@ -159,6 +193,9 @@
     }
   },
   "components": {
+    "buttonTamagui": {
+      "processing": "Processing..."
+    },
     "sendMail": {
       "title": "Send E-mail",
       "cannotSendAlertTitle": "Cannot send e-mail",
@@ -184,7 +221,11 @@
       "openMapErrorHeader":  "Sorry we cannot open map",
       "openMapErrorDescription": "To use this function you need to have Maps  installed",
       "cantDeleteFieldHeader": "Cannot delete field",
-        "cantDeleteFieldDescription": "Sorry we cannot delete field, try later"
+      "cantDeleteFieldDescription": "Sorry we cannot delete field, try later",
+      "cantCreateOrderHeader": "Cannot create order",
+      "cantCreateOrderDescription": "Sorry we cannot create order, try later",
+      "canUpdateOrderHeader": "Cannot update order",
+      "canUpdateOrderDescription": "Sorry we cannot update order, try later"
     },
     "filedBottomSheet": {
       "showOnMapButton": "Show on map",
@@ -293,12 +334,12 @@
     "formPlaceholder": {
       "name": "Order name",
       "additionalInfo": "Additional info",
-      "performanceDate": "Performance date"
+      "performanceDate": "Performance date",
+      "pricePerUnit": "Price per unit"
     },
     "validation": {
       "name": "Name is required",
       "performanceDate": "Performance date is required"
-
     }
   }
 }

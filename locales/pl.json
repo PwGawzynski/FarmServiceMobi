@@ -87,7 +87,38 @@
       "clientControlPanel": {
         "title": "Panel klienta",
         "clientDataButton": "Informacje",
-        "clientFieldsButton": "Pola klienta"
+        "clientFieldsButton": "Pola klienta",
+        "clientOrdersButton": "Dodaj nowe zamówienie"
+      }
+    },
+    "orderDriver": {
+      "editOrder": {
+        "screenTitle": "Edytuj zamówienie",
+        "submitButton": "Zapisz zmiany"
+      },
+      "orderDetails": {
+        "screenName": "Szczegóły zamówienia",
+        "detailsCard": {
+          "cardName": "Szczegóły",
+          "fields": {
+            "name": "Nazwa",
+            "performanceDate": "Data wykonania",
+            "creationDate": "Data utworzenia",
+            "openedAt": "Otwarte o",
+            "pricePerUnit": "Cena za jednostkę"
+          },
+          "topRightButtonName": "Edytuj"
+        },
+        "additionalInfo": "Dodatkowe informacje",
+        "clientCard": {
+          "cardName": "Klient",
+          "topRightButtonName": "Więcej",
+          "fields": {
+            "name": "Imię",
+            "surname": "Nazwisko"
+          }
+        },
+        "tasksButton": "Zadania"
       }
     },
     "ordersDesktopDriver":{
@@ -95,7 +126,9 @@
         "screenTitle": "Dodaj  zamówienie",
         "submitButton": "Dodaj zamówienie",
         "step1Communicat": "Krok 1: Wybierz klienta",
-        "step2Communicat": "Krok 2: Wypełnij dane"
+        "step2Communicat": "Krok 2: Wypełnij dane",
+        "emptyList": "Brak klientów do wyświetlenia, kliknij przycisk poniżej aby dodać nowego",
+        "createClientButton": "Utwórz nowego klienta"
       },
       "orderDesktop": {
         "title": "Orders",
@@ -120,7 +153,8 @@
       },
       "clientsDesktop": {
         "title": "Klienci",
-        "searchPlaceholder": "Znajdź klienta"
+        "searchPlaceholder": "Znajdź klienta",
+        "emptyList": "Brak klientów do wyświetlenia, przeciągni w prawo aby dodać nowego"
       }
     },
     "ownerRootDriver": {
@@ -158,6 +192,9 @@
     }
   },
   "components": {
+    "buttonTamagui": {
+      "processing": "Przetwarzanie..."
+    },
     "sendMail": {
       "title": "Wyślij e-mail",
       "cannotSendAlertTitle": "Błąd wysyłania e-maila",
@@ -184,7 +221,11 @@
       "openMapErrorHeader": "Błąd otwierania mapy",
       "openMapErrorDescription": "Aby korzystać z tej funkcji, musisz zainstalować aplikację Map",
       "cantDeleteFieldHeader": "Cannot delete field",
-      "cantDeleteFieldDescription": "Sorry we cannot delete field, try later"
+      "cantDeleteFieldDescription": "Sorry we cannot delete field, try later",
+      "cantCreateOrderHeader": "Cannot create order",
+      "cantCreateOrderDescription": "Sorry we cannot create order, try later",
+      "canUpdateOrderHeader": "Cannot update order",
+      "canUpdateOrderDescription": "Sorry we cannot update order, try later"
     },
     "filedBottomSheet": {
       "showOnMapButton": "Pokaż na mapie",
@@ -285,7 +326,8 @@
     "formPlaceholder": {
       "name": "Nazwa",
       "additionalInfo": "Dodatkowe informacje",
-      "performanceDate": "Data wykonania"
+      "performanceDate": "Data wykonania",
+      "pricePerUnit": "Cena za jednostkę"
     },
     "validation": {
       "name": "Nazwa jest wymagana",

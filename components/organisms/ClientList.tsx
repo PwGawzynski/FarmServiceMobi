@@ -13,9 +13,19 @@ import { UniversalList } from './UniversalList';
 
 export interface Props {
   optionalOnPress?: (client: ClientResponseBase) => void;
+  defaultBehavior?: boolean;
+  swipeRightAnimation?: boolean;
+  listEmptyText?: string;
+  emptyListComponent?: JSX.Element;
 }
 
-export function ClientList({ optionalOnPress }: Props) {
+export function ClientList({
+  optionalOnPress,
+  defaultBehavior,
+  swipeRightAnimation,
+  listEmptyText,
+  emptyListComponent,
+}: Props) {
   const { data, isFetching, isError } = useQuery({
     queryKey: ['clients'],
     queryFn: getClients,
@@ -53,7 +63,7 @@ export function ClientList({ optionalOnPress }: Props) {
           name={item.user.personal_data.name}
           surname={item.user.personal_data.surname}
           bottomRightText={item.user.address.city}
-          onPressNavigateTo="clientControlPanel"
+          onPressNavigateTo={defaultBehavior ? 'clientControlPanel' : undefined}
           navigationParams={{ client: item }}
           onPress={handleOnPress}
         />
@@ -74,9 +84,11 @@ export function ClientList({ optionalOnPress }: Props) {
       </YStack>
       <YStack f={1}>
         <UniversalList
+          listEmptyComponent={emptyListComponent}
           renderItem={renderItem}
           data={sorted}
-          swipeRightAnimation
+          listEmptyText={listEmptyText}
+          swipeRightAnimation={swipeRightAnimation}
           listSetup={{ isLoading: isFetching, isLoadingError: isError }}
         />
       </YStack>
