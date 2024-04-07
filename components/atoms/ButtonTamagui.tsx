@@ -43,6 +43,7 @@ export function ButtonTamagui({
         <>
           <Button.Icon>{icon}</Button.Icon>
           <Button.Text
+            ml={icon ? '$2' : '0'}
             {...textProps}
             textTransform="uppercase"
             fontWeight="bold"
