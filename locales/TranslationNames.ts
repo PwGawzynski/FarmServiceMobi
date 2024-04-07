@@ -95,7 +95,7 @@ export const TranslationNames = {
       machinesDesktop: {
         title: 'screens.machineDesktopDriver.machinesDesktop.title',
         searchPlaceholder:
-          'screens.machineDesktopDriver.machinesDesktop.search',
+          'screens.machineDesktopDriver.machinesDesktop.searchPlaceholder',
         emptyList: 'screens.machineDesktopDriver.machinesDesktop.emptyList',
       },
     },
