@@ -1,19 +1,34 @@
+import { t } from 'i18next';
 import { FormRulesType } from './FormRulesType';
 import { CreateMachineReqI } from '../../FarmServiceApiTypes/Machine/Requests';
+import { MachineConstants } from '../../FarmServiceApiTypes/Machine/Constants';
+import { TranslationNames } from '../../locales/TranslationNames';
 
 export const CreateMachineRules: FormRulesType<CreateMachineReqI> = {
   name: {
-    required: 'Name is required',
+    required: t(TranslationNames.createMachineForm.validation.name),
     maxLength: {
-      value: 100,
-      message: 'Name is too long',
+      value: MachineConstants.NAME_MAX_LEN,
+      message: t(TranslationNames.createMachineForm.validation.nameMaxLength),
+    },
+    minLength: {
+      value: MachineConstants.NAME_MIN_LEN,
+      message: t(TranslationNames.createMachineForm.validation.nameMinLength),
     },
   },
   licensePlate: {
-    required: 'License plate is required',
+    required: t(TranslationNames.createMachineForm.validation.licensePlate),
     maxLength: {
-      value: 10,
-      message: 'License plate is too long',
+      value: MachineConstants.LICENCE_PLATE_MAX_LEN,
+      message: t(
+        TranslationNames.createMachineForm.validation.licensePlateMaxLength,
+      ),
+    },
+    minLength: {
+      value: MachineConstants.LICENCE_PLATE_MIN_LEN,
+      message: t(
+        TranslationNames.createMachineForm.validation.licensePlateMinLength,
+      ),
     },
   },
 };
