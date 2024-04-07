@@ -44,6 +44,7 @@ import {
 } from '../FarmServiceApiTypes/Order/Requests';
 import { OrderResponseBase } from '../FarmServiceApiTypes/Order/Ressponses';
 import { MachineResponseBase } from '../FarmServiceApiTypes/Machine/Responses';
+import { UpdateMachineReqI } from '../FarmServiceApiTypes/Machine/Requests';
 /* ---------------------------------------DECORATOR_USED_TO_DELAY_RES--------------------------------------- */
 
 const IsDelayed = () => {
@@ -360,6 +361,17 @@ export class ApiSelf {
         data,
       )) as AxiosResponse<ResponseObject>
     ).data.payload as OrderResponseBase | undefined;
+  }
+
+  @IsDelayed()
+  static async updateMachine(data: UpdateMachineReqI) {
+    /* throw new Error('kurewka'); */
+    return (
+      (await ApiSelf.axiosInstance.put(
+        '/machine',
+        data,
+      )) as AxiosResponse<ResponseObject>
+    ).data.payload as MachineResponseBase | undefined;
   }
 
   @IsDelayed()
