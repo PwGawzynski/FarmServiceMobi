@@ -66,6 +66,35 @@
         "locationPolicyButton": "I understand"
       }
     },
+    "machineDesktopDriver": {
+      "addMachineScreen": {
+        "screenTitle": "Add machine",
+        "screenEditTitle": "Edit machine",
+        "button": {
+          "creating": "Create",
+          "save": "Save"
+        }
+      },
+        "machinesDesktop": {
+            "title": "Machines",
+            "searchPlaceholder": "Find a machine",
+            "emptyList": "No machines to display, swipe right and add new one"
+        }
+    },
+    "machineDriver": {
+      "machineDetailsScreen": {
+        "screenBaseName": "Machine Details",
+        "entityAsACard": {
+          "topRightButtonName": "Edit",
+          "cardName": "Details",
+          "names": {
+            "id": "ID",
+            "name": "Name",
+            "licensePlate": "License Plate"
+          }
+        }
+      }
+    },
     "clientDriver": {
       "assignCompanyToClient": {
         "screenTitle": "Assign company",
@@ -225,7 +254,11 @@
       "cantCreateOrderHeader": "Cannot create order",
       "cantCreateOrderDescription": "Sorry we cannot create order, try later",
       "canUpdateOrderHeader": "Cannot update order",
-      "canUpdateOrderDescription": "Sorry we cannot update order, try later"
+      "canUpdateOrderDescription": "Sorry we cannot update order, try later",
+      "cantAddMachine": "Cannot add machine",
+      "cantAddMachineDescription": "Sorry we cannot add machine, try later",
+      "cantUpdateMachine": "Cannot update machine",
+      "cantUpdateMachineDescription": "Sorry we cannot update machine, try later"
     },
     "filedBottomSheet": {
       "showOnMapButton": "Show on map",
@@ -340,6 +373,20 @@
     "validation": {
       "name": "Name is required",
       "performanceDate": "Performance date is required"
+    }
+  },
+  "createMachineForm": {
+    "formPlaceholder": {
+      "name": "Machine name",
+      "licensePlate": "License plate"
+    },
+    "validation": {
+      "name": "Name is required",
+      "nameMinLength": "Name too short",
+      "nameMaxLength": "Name too long",
+      "licensePlate": "License plate is required",
+      "licensePlateMinLength": "License plate too short",
+      "licensePlateMaxLength": "License plate too long",
     }
   }
 }

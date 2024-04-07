@@ -80,6 +80,43 @@ export const TranslationNames = {
           'screens.AuthDriver.createField.locationPolicyButton',
       },
     },
+    machineDesktopDriver: {
+      addMachineScreen: {
+        screenTitle:
+          'screens.machineDesktopDriver.addMachineScreen.screenTitle',
+        screenEditTitle:
+          'screens.machineDesktopDriver.addMachineScreen.screenEditTitle',
+        button: {
+          creating:
+            'screens.machineDesktopDriver.addMachineScreen.button.creating',
+          save: 'screens.machineDesktopDriver.addMachineScreen.button.save',
+        },
+      },
+      machinesDesktop: {
+        title: 'screens.machineDesktopDriver.machinesDesktop.title',
+        searchPlaceholder:
+          'screens.machineDesktopDriver.machinesDesktop.search',
+        emptyList: 'screens.machineDesktopDriver.machinesDesktop.emptyList',
+      },
+    },
+    machineDriver: {
+      machineDetailsScreen: {
+        screenBaseName:
+          'screens.machineDriver.machineDetailsScreen.screenBaseName',
+        entityAsACard: {
+          topRightButtonName:
+            'screens.machineDriver.machineDetailsScreen.entityAsACard.topRightButtonName',
+          cardName:
+            'screens.machineDriver.machineDetailsScreen.entityAsACard.cardName',
+          names: {
+            id: 'screens.machineDriver.machineDetailsScreen.entityAsACard.names.id',
+            name: 'screens.machineDriver.machineDetailsScreen.entityAsACard.names.name',
+            licensePlate:
+              'screens.machineDriver.machineDetailsScreen.entityAsACard.names.licensePlate',
+          },
+        },
+      },
+    },
     clientDriver: {
       assignCompanyToClient: {
         screenTitle: 'screens.clientDriver.assignCompanyToClient.screenTitle',
@@ -273,6 +310,11 @@ export const TranslationNames = {
       cantCreateOrderDescription: 'components.toast.cantCreateOrderDescription',
       canUpdateOrderHeader: 'components.toast.canUpdateOrderHeader',
       canUpdateOrderDescription: 'components.toast.canUpdateOrderDescription',
+      cantAddMachine: 'components.toast.cantAddMachine',
+      cantAddMachineDescription: 'components.toast.cantAddMachineDescription',
+      cantUpdateMachine: 'components.toast.cantUpdateMachine',
+      cantUpdateMachineDescription:
+        'components.toast.cantUpdateMachineDescription',
     },
     filedBottomSheet: {
       showOnMapButton: 'components.filedBottomSheet.showOnMapButton',
@@ -385,6 +427,22 @@ export const TranslationNames = {
     validation: {
       name: 'createOrderForm.validation.name',
       performanceDate: 'createOrderForm.validation.performanceDate',
+    },
+  },
+  createMachineForm: {
+    formPlaceholder: {
+      name: 'createMachineForm.formPlaceholder.name',
+      licensePlate: 'createMachineForm.formPlaceholder.licensePlate',
+    },
+    validation: {
+      name: 'createMachineForm.validation.name',
+      nameMinLength: 'createMachineForm.validation.nameMinLength',
+      nameMaxLength: 'createMachineForm.validation.nameMaxLength',
+      licensePlate: 'createMachineForm.validation.licensePlate',
+      licensePlateMinLength:
+        'createMachineForm.validation.licensePlateMinLength',
+      licensePlateMaxLength:
+        'createMachineForm.validation.licensePlateMaxLength',
     },
   },
 };
