@@ -109,7 +109,8 @@
       },
       "clientsDesktop": {
         "title": "Clients",
-        "searchPlaceholder": "Find a client"
+        "searchPlaceholder": "Find a client",
+        "emptyList": "No clients to display, swipe right and add new one"
       }
     },
     "orderDriver": {
@@ -147,7 +148,9 @@
             "screenTitle": "Create  order",
             "submitButton": "Create",
             "step1Communicat": "Step 1: Choose client",
-            "step2Communicat": "Step 2: Fill in order details"
+            "step2Communicat": "Step 2: Fill in order details",
+            "emptyList": "Cannot find given client, click below to create new one",
+            "createClientButton": "Create new client"
         },
         "orderDesktop": {
             "title": "Orders",

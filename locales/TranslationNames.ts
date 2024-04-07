@@ -144,6 +144,7 @@ export const TranslationNames = {
         title: 'screens.clientDesktopDriver.clientsDesktop.title',
         searchClient:
           'screens.clientDesktopDriver.clientsDesktop.searchPlaceholder',
+        emptyList: 'screens.clientDesktopDriver.clientsDesktop.emptyList',
       },
     },
     orderDriver: {
@@ -189,6 +190,9 @@ export const TranslationNames = {
         submitButton: 'screens.ordersDesktopDriver.addOrder.submitButton',
         step1Communicat: 'screens.ordersDesktopDriver.addOrder.step1Communicat',
         step2Communicat: 'screens.ordersDesktopDriver.addOrder.step2Communicat',
+        emptyList: 'screens.ordersDesktopDriver.addOrder.emptyList',
+        createClientButton:
+          'screens.ordersDesktopDriver.addOrder.createClientButton',
       },
       orderDesktop: {
         title: 'screens.ordersDesktopDriver.orderDesktop.title',

@@ -94,7 +94,7 @@
     "orderDriver": {
       "editOrder": {
         "screenTitle": "Edytuj zamówienie",
-        "submitButton": "Zapisz zmiany",
+        "submitButton": "Zapisz zmiany"
       },
       "orderDetails": {
         "screenName": "Szczegóły zamówienia",
@@ -126,7 +126,9 @@
         "screenTitle": "Dodaj  zamówienie",
         "submitButton": "Dodaj zamówienie",
         "step1Communicat": "Krok 1: Wybierz klienta",
-        "step2Communicat": "Krok 2: Wypełnij dane"
+        "step2Communicat": "Krok 2: Wypełnij dane",
+        "emptyList": "Brak klientów do wyświetlenia, kliknij przycisk poniżej aby dodać nowego",
+        "createClientButton": "Utwórz nowego klienta"
       },
       "orderDesktop": {
         "title": "Orders",
@@ -151,7 +153,8 @@
       },
       "clientsDesktop": {
         "title": "Klienci",
-        "searchPlaceholder": "Znajdź klienta"
+        "searchPlaceholder": "Znajdź klienta",
+        "emptyList": "Brak klientów do wyświetlenia, przeciągni w prawo aby dodać nowego"
       }
     },
     "ownerRootDriver": {
