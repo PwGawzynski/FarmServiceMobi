@@ -1,11 +1,13 @@
-import { setup } from 'xstate';
+import { assign, setup } from 'xstate';
 import { CreateMachineReqI } from '../../FarmServiceApiTypes/Machine/Requests';
 
 export const AddMachineMachine = setup({
   types: {} as {
     events:
       | { type: 'init'; data: CreateMachineReqI | undefined }
-      | { type: 'reset'; data: CreateMachineReqI | undefined };
+      | { type: 'reset'; data: CreateMachineReqI | undefined }
+      | { type: 'done'; data: CreateMachineReqI | undefined }
+      | { type: 'edit'; data: CreateMachineReqI | undefined };
     context: {
       machine: CreateMachineReqI | undefined;
     };
@@ -19,9 +21,11 @@ export const AddMachineMachine = setup({
     },
   },
 }).createMachine({
-  context: ({ input }) => ({
-    machine: input.data,
-  }),
+  context: ({ input }) => {
+    return {
+      machine: input.data,
+    };
+  },
   id: 'AddMachineMachine',
   initial: 'Idle',
   states: {
@@ -40,13 +44,46 @@ export const AddMachineMachine = setup({
     },
     Creating: {
       on: {
-        reset: 'ClearData',
+        reset: {
+          target: 'ClearData',
+          actions: assign({
+            machine: incoming => {
+              return incoming.event.data;
+            },
+          }),
+        },
+        edit: {
+          target: 'Edit',
+          actions: assign({
+            machine: incoming => {
+              return incoming.event.data;
+            },
+          }),
+        },
       },
     },
-    Edit: {},
+    Edit: {
+      on: {
+        reset: {
+          target: 'ClearData',
+          actions: assign({
+            machine: incoming => {
+              return incoming.event.data;
+            },
+          }),
+        },
+      },
+    },
     ClearData: {
-      always: {
-        target: 'Idle',
+      on: {
+        done: {
+          target: 'Idle',
+          actions: assign({
+            machine: incoming => {
+              return incoming.event.data;
+            },
+          }),
+        },
       },
     },
   },
