@@ -5,6 +5,7 @@ import { ActivityDriver } from './activities/ActivitiesDriver';
 import { OrdersDriver } from './orders/OrdersDriver';
 import { ClientsDriver } from './clients/ClientsDirver';
 import { WorkersDriver } from './workers/WorkersDriver';
+import { MachinesDriver } from './Machines/MachinesDriver';
 
 const Stack = createNativeStackNavigator<OwnerRootDriverParamList>();
 
@@ -19,6 +20,7 @@ export function OwnerRootDriver() {
       <Stack.Screen name="ordersDriver" component={OrdersDriver} />
       <Stack.Screen name="activityDriver" component={ActivityDriver} />
       <Stack.Screen name="workersDriver" component={WorkersDriver} />
+      <Stack.Screen name="machinesDriver" component={MachinesDriver} />
     </Stack.Navigator>
   );
 }
