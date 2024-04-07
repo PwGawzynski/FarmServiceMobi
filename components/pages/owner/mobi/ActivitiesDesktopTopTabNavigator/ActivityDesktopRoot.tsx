@@ -40,6 +40,14 @@ export function ActivityDesktopRoot({
           params: { screen: 'clientsDesktop' },
         }),
     },
+    {
+      title: 'Machines',
+      onPress: () =>
+        navigation.navigate('machinesDriver', {
+          screen: 'machinesDesktopRoot',
+          params: { screen: 'machinesDesktop' },
+        }),
+    },
   ];
 
   return (
