@@ -33,7 +33,6 @@ export function MachineList({ bottomSheetRef }: Props) {
         : true,
     )
     .sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1));
-  console.log(filter, sorted);
 
   const renderItem = useCallback(
     ({ item }: ListRenderItemInfo<MachineResponseBase>) => {
