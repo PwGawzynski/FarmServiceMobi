@@ -115,6 +115,9 @@ export const TranslationNames = {
               'screens.machineDriver.machineDetailsScreen.entityAsACard.names.licensePlate',
           },
         },
+        deleteButton: 'screens.machineDriver.machineDetailsScreen.deleteButton',
+        deleteAlertDescription:
+          'screens.machineDriver.machineDetailsScreen.deleteAlertDescription',
       },
     },
     clientDriver: {
@@ -315,6 +318,9 @@ export const TranslationNames = {
       cantUpdateMachine: 'components.toast.cantUpdateMachine',
       cantUpdateMachineDescription:
         'components.toast.cantUpdateMachineDescription',
+      cantDeleteMachine: 'components.toast.cantDeleteMachine',
+      cantDeleteMachineDescription:
+        'components.toast.cantDeleteMachineDescription',
     },
     filedBottomSheet: {
       showOnMapButton: 'components.filedBottomSheet.showOnMapButton',

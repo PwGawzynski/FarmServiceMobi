@@ -91,7 +91,8 @@
             "id": "ID",
             "name": "Nazwa",
             "licensePlate": "Numer rejestracyjny"
-          }
+          },
+          "deleteButton": "Usuń Bezpiecznie"
         }
       }
     },
@@ -259,6 +260,8 @@
       "cantAddMachineDescription": "Przepraszamy, nie można dodać maszyny, spróbuj ponownie później",
       "cantUpdateMachine": "Nie można zaktualizować maszyny",
       "cantUpdateMachineDescription": "Przepraszamy, nie można zaktualizować maszyny, spróbuj ponownie później",
+      "cantDeleteMachine": "Nie można usunąć maszyny",
+      "cantDeleteMachineDescription": "Przepraszamy, nie można usunąć maszyny, spróbuj ponownie później"
     },
     "filedBottomSheet": {
       "showOnMapButton": "Pokaż na mapie",

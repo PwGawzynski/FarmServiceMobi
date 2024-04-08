@@ -92,7 +92,8 @@
             "name": "Name",
             "licensePlate": "License Plate"
           }
-        }
+        },
+        "deleteButton": "Safely delete",
       }
     },
     "clientDriver": {
@@ -258,7 +259,9 @@
       "cantAddMachine": "Cannot add machine",
       "cantAddMachineDescription": "Sorry we cannot add machine, try later",
       "cantUpdateMachine": "Cannot update machine",
-      "cantUpdateMachineDescription": "Sorry we cannot update machine, try later"
+      "cantUpdateMachineDescription": "Sorry we cannot update machine, try later",
+      "cantDeleteMachine": "Cannot delete machine",
+      "cantDeleteMachineDescription": "Sorry we cannot delete machine, try later"
     },
     "filedBottomSheet": {
       "showOnMapButton": "Show on map",
