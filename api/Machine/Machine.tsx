@@ -30,6 +30,17 @@ export async function updateMachine(data: UpdateMachineReqI) {
   ) as unknown as MachineResponseBase | undefined;
 }
 
+export async function safelyDeleteMachine(data: UpdateMachineReqI) {
+  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
+  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
+  return apiHandler<UpdateMachineReqI>(
+    UNAUTHORIZED_MSG,
+    DEFAULT_MSG,
+    Api.safelyDeleteMachine,
+    data,
+  ) as unknown as MachineResponseBase | undefined;
+}
+
 export async function getAllMachines() {
   const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
   const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
