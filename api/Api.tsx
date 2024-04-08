@@ -375,6 +375,17 @@ export class ApiSelf {
   }
 
   @IsDelayed()
+  static async safelyDeleteMachine(data: UpdateMachineReqI) {
+    /* throw new Error('kurewka'); */
+    return (
+      (await ApiSelf.axiosInstance.post(
+        '/machine/safely-delete',
+        data,
+      )) as AxiosResponse<ResponseObject>
+    ).data.payload as MachineResponseBase | undefined;
+  }
+
+  @IsDelayed()
   static async createMachine(data: CreateOrderReqI) {
     /* throw new Error('kurewka'); */
     return (
