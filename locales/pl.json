@@ -66,6 +66,36 @@
         "locationPolicyButton": "Rozumiem",
       }
     },
+    "machineDesktopDriver": {
+      "addMachineScreen": {
+        "screenTitle": "Dodaj maszynę",
+        "screenEditTitle": "Edytuj maszynę",
+        "button": {
+          "creating": "Utwórz maszynę",
+          "save": "Zapisz zmiany"
+        }
+      },
+      "machinesDesktop": {
+        "title": "Maszyny",
+        "searchPlaceholder": "Znajdź maszynę",
+        "emptyList": "Brak maszyn do wyświetlenia, przeciągnij w prawo aby dodać nową"
+      }
+    },
+    "machineDriver": {
+      "machineDetailsScreen": {
+        "screenBaseName": "Szczegóły maszyny",
+        "entityAsACard": {
+          "topRightButtonName": "Edytuj",
+          "cardName": "Szczegóły",
+          "names": {
+            "id": "ID",
+            "name": "Nazwa",
+            "licensePlate": "Numer rejestracyjny"
+          },
+          "deleteButton": "Usuń Bezpiecznie"
+        }
+      }
+    },
     "clientDriver": {
       "assignCompanyToClient": {
         "screenTitle": "Przypisz firmę",
@@ -225,7 +255,13 @@
       "cantCreateOrderHeader": "Cannot create order",
       "cantCreateOrderDescription": "Sorry we cannot create order, try later",
       "canUpdateOrderHeader": "Cannot update order",
-      "canUpdateOrderDescription": "Sorry we cannot update order, try later"
+      "canUpdateOrderDescription": "Sorry we cannot update order, try later",
+      "cantAddMachine": "Nie można dodać maszyny",
+      "cantAddMachineDescription": "Przepraszamy, nie można dodać maszyny, spróbuj ponownie później",
+      "cantUpdateMachine": "Nie można zaktualizować maszyny",
+      "cantUpdateMachineDescription": "Przepraszamy, nie można zaktualizować maszyny, spróbuj ponownie później",
+      "cantDeleteMachine": "Nie można usunąć maszyny",
+      "cantDeleteMachineDescription": "Przepraszamy, nie można usunąć maszyny, spróbuj ponownie później"
     },
     "filedBottomSheet": {
       "showOnMapButton": "Pokaż na mapie",
@@ -333,6 +369,20 @@
       "name": "Nazwa jest wymagana",
       "performanceDate": "Data wykonania jest wymagana"
 
+    }
+  },
+  "createMachineForm": {
+    "formPlaceholder": {
+      "name": "Nazwa",
+      "licensePlate": "Numer rejestracyjny"
+    },
+    "validation": {
+      "name": "Nazwa jest wymagana",
+      "nameMinLength": "Nazwa za krótka",
+      "nameMaxLength": "Nazwa za długa",
+      "licensePlate": "Numer rejestracyjny jest wymagany",
+      "licensePlateMinLength": "Numer rejestracyjny za krótki",
+      "licensePlateMaxLength": "Numer rejestracyjny za długi"
     }
   }
 }

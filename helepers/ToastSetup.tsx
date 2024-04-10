@@ -1,4 +1,8 @@
-import { BaseToast, ErrorToast, ToastConfig } from 'react-native-toast-message';
+import Toast, {
+  BaseToast,
+  ErrorToast,
+  ToastConfig,
+} from 'react-native-toast-message';
 import { BaseToastProps } from 'react-native-toast-message/lib/src/types';
 import { Colors } from '../settings/styles/colors';
 import { Theme } from '../FarmServiceApiTypes/Account/Constants';
@@ -65,3 +69,15 @@ export const ToastSetup = (theme: Theme) =>
       />
     ),
   }) as ToastConfig;
+
+export const showErrorToast = (
+  error: Error | null,
+  header: string,
+  description: string,
+) => {
+  Toast.show({
+    type: 'error',
+    text1: header,
+    text2: error?.message ?? description,
+  });
+};
