@@ -15,7 +15,7 @@ import Animated, {
   withSequence,
   withTiming,
 } from 'react-native-reanimated';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { FieldResponseBase } from '../../FarmServiceApiTypes/Field/Ressponses';
 import InfoIco from '../../assets/info.svg';
 
@@ -24,6 +24,8 @@ export type Props = {
   onPress?: () => void;
   onPressNavigateTo?: string;
   navigationParams?: Record<string, unknown>;
+  onSelected?: (field: FieldResponseBase) => void;
+  onDeselected?: (field: FieldResponseBase) => void;
 };
 
 export default function FieldListItem({
@@ -31,13 +33,29 @@ export default function FieldListItem({
   onPress,
   onPressNavigateTo,
   navigationParams,
+  onSelected,
+  onDeselected,
 }: Props) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const navigation = useNavigation<any>();
+
+  const [selected, setSelected] = useState(false);
+
   const handlePress = () => {
-    if (!onPress) navigation.navigate(onPressNavigateTo, navigationParams);
-    else onPress();
+    if (!onSelected && !onDeselected) {
+      if (!onPress && !onSelected)
+        navigation.navigate(onPressNavigateTo, navigationParams);
+      else if (!onSelected && onPress) onPress();
+    }
+    if (onSelected && !selected) {
+      onSelected(field);
+      setSelected(true);
+    } else if (onDeselected && selected) {
+      onDeselected(field);
+      setSelected(false);
+    }
   };
+
   const {
     polishSystemId,
     address: { city },
@@ -50,6 +68,13 @@ export default function FieldListItem({
   return (
     <Card onPress={handlePress}>
       <XStack p="$2" ai="center" justifyContent="flex-start">
+        <YStack>
+          <Circle height={25} width={25} bordered borderColor="$color11">
+            {selected && (
+              <Circle height={15} width={15} backgroundColor={val} />
+            )}
+          </Circle>
+        </YStack>
         <YStack ml="$2">
           <SizableText
             fontWeight="bold"
