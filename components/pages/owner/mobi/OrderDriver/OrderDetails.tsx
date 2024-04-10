@@ -78,6 +78,14 @@ export function OrderDetails({
       params: { client: client as ClientResponseBase },
     });
 
+  const handleCreateTask = () => {
+    if (client)
+      navigation.navigate('createTask', {
+        order,
+        client: client as ClientResponseBase,
+      });
+  };
+
   return (
     <ScreenBase
       name={t(TranslationNames.screens.orderDriver.orderDetails.screenName)}
@@ -120,6 +128,9 @@ export function OrderDetails({
       <YStack f={1} />
       <ButtonTamagui
         text={t(TranslationNames.screens.orderDriver.orderDetails.tasksButton)}
+        buttonProps={{
+          onPress: handleCreateTask,
+        }}
       />
     </ScreenBase>
   );
