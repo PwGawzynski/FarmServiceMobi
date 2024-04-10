@@ -4,6 +4,7 @@ import { OrdersDesktopDriver } from './OrdersDesktopDriver';
 import { OrdersDriverParamList } from '../../../../types/self/navigation/Owner/paramLists/orders/OrdersDriverParamList';
 import { OrderDetails } from '../../../pages/owner/mobi/OrderDriver/OrderDetails';
 import { EditOrder } from '../../../pages/owner/mobi/OrderDriver/EditOrder';
+import { CreateTask } from '../../../pages/owner/mobi/OrderDriver/CreateTask';
 
 const Stack = createNativeStackNavigator<OrdersDriverParamList>();
 
@@ -29,6 +30,14 @@ export function OrdersDriver() {
         }}
         name="editOrder"
         component={EditOrder}
+      />
+      <Stack.Screen
+        options={{
+          animation: 'default',
+          gestureDirection: 'horizontal',
+        }}
+        name="createTask"
+        component={CreateTask}
       />
     </Stack.Navigator>
   );
