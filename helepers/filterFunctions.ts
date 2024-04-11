@@ -1,3 +1,5 @@
+import { FieldResponseBase } from '../FarmServiceApiTypes/Field/Ressponses';
+
 export const searchEngineNameSurnameFilter = <
   T extends { personalData: { name: string; surname: string } },
 >(
@@ -17,4 +19,20 @@ export const searchEngineNameSurnameFilter = <
       b.personalData.surname.toLowerCase()
         ? 1
         : -1,
+    );
+
+export const clientFieldsFilter = (
+  data: FieldResponseBase[] | undefined,
+  filter: string | undefined,
+) =>
+  data
+    ?.filter(f =>
+      filter
+        ? f.nameLabel
+            .toLowerCase()
+            .includes(filter.toLowerCase().replace(' ', ''))
+        : true,
+    )
+    .sort((a, b) =>
+      a.nameLabel.toLowerCase() > b.nameLabel.toLowerCase() ? 1 : -1,
     );
