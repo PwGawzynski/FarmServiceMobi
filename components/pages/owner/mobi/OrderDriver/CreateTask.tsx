@@ -1,15 +1,12 @@
 import { useRef, useState } from 'react';
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
-import { Card, SizableText, XStack, YStack } from 'tamagui';
-import { useSelector } from 'react-redux';
+import { YStack } from 'tamagui';
 import { ScreenBase } from '../common/ScreenBase';
 import { OrdersDriverScreenProps } from '../../../../../types/self/navigation/Owner/props/orders/OrdersDriverProps';
 import { FieldResponseBase } from '../../../../../FarmServiceApiTypes/Field/Ressponses';
 import { ClientFieldsList } from '../../../../organisms/ClientFieldsList';
-import InfoIcon from '../../../../../assets/info.svg';
-import { selectTheme } from '../../../../../src/redux/feature/userSlice';
-import { Theme } from '../../../../../FarmServiceApiTypes/Account/Constants';
-import { Colors } from '../../../../../settings/styles/colors';
+import { BlinkingHeader } from '../../../../atoms/BlinkingHeader';
+import { GuideCard } from '../../../../atoms/GuideCard';
 
 export function CreateTask({
   route: { params },
@@ -18,7 +15,6 @@ export function CreateTask({
   const { order, client } = params;
   const [fields, setFields] = useState<FieldResponseBase[] | []>([]);
   const modalRef = useRef<BottomSheetModal>(null);
-  const theme = useSelector(selectTheme);
 
   const handleFieldSelection = (field: FieldResponseBase) =>
     setFields(p => [...p, field]);
@@ -38,38 +34,16 @@ export function CreateTask({
         <>
           <YStack className="mt-2 ">
             <YStack className="mt-2">
-              <Card bordered borderColor="$color11" p="$3">
-                <XStack>
-                  <YStack f={1}>
-                    <SizableText
-                      fontSize="$4"
-                      className="uppercase font-bold mb-3 text-light-blue dark:text-dark-gray"
-                    >
-                      Hint
-                    </SizableText>
-                    <SizableText className="text-light-blue dark:text-dark-gray">
-                      You can choose multiple fields, each field will be
-                      considered as a separate task
-                    </SizableText>
-                  </YStack>
-                  <YStack ai="flex-end">
-                    <InfoIcon
-                      color={
-                        theme === Theme.dark
-                          ? Colors.DARK_GRAY
-                          : Colors.LIGHT_BLUE
-                      }
-                    />
-                  </YStack>
-                </XStack>
-              </Card>
+              <GuideCard
+                header="Hint"
+                text="You can choose multiple fields, each field will be considered as a separate task"
+              />
+              <BlinkingHeader
+                isPlayed={fields.length === 0}
+                cName="mt-4"
+                text="Step one: choose fields"
+              />
             </YStack>
-            <SizableText
-              color="$color10"
-              className="uppercase font-bold text-lg mt-4 text-center"
-            >
-              Step One: Choose Field
-            </SizableText>
           </YStack>
           <ClientFieldsList
             onItemSelected={handleFieldSelection}
