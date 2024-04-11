@@ -8,7 +8,7 @@ import { TranslationNames } from '../../locales/TranslationNames';
 
 export type IconButtonProps = {
   icon?: React.ReactNode;
-  text: string;
+  text?: string;
   buttonProps?: ButtonProps;
   textProps?: ButtonProps['textProps'];
   bgColor?: string;
