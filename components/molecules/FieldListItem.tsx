@@ -15,7 +15,7 @@ import Animated, {
   withSequence,
   withTiming,
 } from 'react-native-reanimated';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { FieldResponseBase } from '../../FarmServiceApiTypes/Field/Ressponses';
 import InfoIco from '../../assets/info.svg';
 
@@ -41,20 +41,16 @@ export default function FieldListItem({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const navigation = useNavigation<any>();
 
-  const [selected, setSelected] = useState(isSelected);
-
   const handlePress = () => {
     if (!onSelected && !onDeselected) {
       if (!onPress && !onSelected)
         navigation.navigate(onPressNavigateTo, navigationParams);
       else if (!onSelected && onPress) onPress();
     }
-    if (onSelected && !selected) {
+    if (onSelected && !isSelected) {
       onSelected(field);
-      setSelected(true);
-    } else if (onDeselected && selected) {
+    } else if (onDeselected && isSelected) {
       onDeselected(field);
-      setSelected(false);
     }
   };
 
@@ -72,7 +68,7 @@ export default function FieldListItem({
       <XStack p="$2" ai="center" justifyContent="flex-start">
         <YStack>
           <Circle height={25} width={25} bordered borderColor="$color11">
-            {selected && (
+            {isSelected && (
               <Circle height={15} width={15} backgroundColor={val} />
             )}
           </Circle>

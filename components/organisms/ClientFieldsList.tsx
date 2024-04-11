@@ -17,6 +17,7 @@ export interface Props {
   modalRef: RefObject<BottomSheetModal>;
   onItemSelected?: (field: FieldResponseBase) => void;
   onItemDeselected?: (field: FieldResponseBase) => void;
+  fields?: FieldResponseBase[];
 }
 
 export function ClientFieldsList({
@@ -24,6 +25,7 @@ export function ClientFieldsList({
   modalRef,
   onItemSelected,
   onItemDeselected,
+  fields,
 }: Props) {
   const [filter, setFilter] = useState<string | undefined>(undefined);
 
@@ -40,6 +42,7 @@ export function ClientFieldsList({
     ) => {
       return (
         <FieldListItem
+          isSelected={!!fields?.find(f => f.id === item.id)}
           onSelected={onItemSelected}
           onDeselected={onItemDeselected}
           onPress={() => {
@@ -55,7 +58,7 @@ export function ClientFieldsList({
         />
       );
     },
-    [],
+    [fields],
   );
 
   const sorted = data
