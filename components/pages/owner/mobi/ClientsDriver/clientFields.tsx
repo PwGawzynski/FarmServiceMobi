@@ -5,7 +5,7 @@ import { ScreenBase } from '../common/ScreenBase';
 import { ClientsDriverScreenProps } from '../../../../../types/self/navigation/Owner/props/clients/ClientsDriverProps';
 import { ButtonTamagui } from '../../../../atoms/ButtonTamagui';
 import PlusIco from '../../../../../assets/plus.svg';
-import { ClientFieldsList } from '../../../../organisms/ClientFieldsList';
+import ClientFieldsList from '../../../../organisms/ClientFieldsList';
 
 export function ClientFields({
   route,
