@@ -26,6 +26,7 @@ export type Props = {
   navigationParams?: Record<string, unknown>;
   onSelected?: (field: FieldResponseBase) => void;
   onDeselected?: (field: FieldResponseBase) => void;
+  isSelected?: boolean;
 };
 
 export default function FieldListItem({
@@ -35,11 +36,12 @@ export default function FieldListItem({
   navigationParams,
   onSelected,
   onDeselected,
+  isSelected,
 }: Props) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const navigation = useNavigation<any>();
 
-  const [selected, setSelected] = useState(false);
+  const [selected, setSelected] = useState(isSelected);
 
   const handlePress = () => {
     if (!onSelected && !onDeselected) {
