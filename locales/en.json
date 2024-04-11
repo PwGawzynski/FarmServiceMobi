@@ -223,6 +223,9 @@
     }
   },
   "components": {
+    "clientsFieldsList": {
+      "searchPlaceholder": "Find a field"
+    },
     "buttonTamagui": {
       "processing": "Processing..."
     },

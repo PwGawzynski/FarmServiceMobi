@@ -280,6 +280,9 @@ export const TranslationNames = {
     },
   },
   components: {
+    clientsFieldsList: {
+      searchPlaceholder: 'components.clientsFieldsList.searchPlaceholder',
+    },
     buttonTamagui: {
       processing: 'components.buttonTamagui.processing',
     },
