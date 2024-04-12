@@ -155,10 +155,15 @@
         "submitButton": "Utwórz zadanie",
         "pendingStatus": "Tworzenie...",
         "selectWorkers": {
-          "stepSelectWorkers": "Select workers"
+          "stepSelectWorkers": "Select workers",
+          "hintHeader": "Hint",
+          "hintDescription": "Choose a worker, that will perform the task"
+
         },
         "selectMachines": {
-          "stepSelectMachine": "Select machine"
+          "stepSelectMachine": "Select machine",
+          "hintHeader": "Hint",
+          "hintDescription": "Choose a machine, that will be used to perform the task"
         },
         "selectFields": {
           "stepSelectFields": "Wybierz pola",

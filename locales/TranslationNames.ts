@@ -230,10 +230,17 @@ export const TranslationNames = {
         selectWorkers: {
           stepSelectWorkers:
             'screens.orderDriver.createTask.selectWorkers.stepSelectWorkers',
+          hintHeader: 'screens.orderDriver.createTask.selectWorkers.hintHeader',
+          hintDescription:
+            'screens.orderDriver.createTask.selectWorkers.hintDescription',
         },
         selectMachines: {
           selectMachine:
             'screens.orderDriver.createTask.selectMachines.stepSelectMachine',
+          hintHeader:
+            'screens.orderDriver.createTask.selectMachines.hintHeader',
+          hintDescription:
+            'screens.orderDriver.createTask.selectMachines.hintDescription',
         },
         selectFields: {
           stepSelectFields:

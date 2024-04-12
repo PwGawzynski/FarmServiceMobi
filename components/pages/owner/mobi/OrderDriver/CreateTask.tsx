@@ -24,6 +24,11 @@ interface SelectFieldsProps {
   setScreenState: React.Dispatch<React.SetStateAction<ScreenState>>;
 }
 
+type HintCardObject = {
+  header: string;
+  text: string;
+};
+
 const TRANSLATIONS = {
   SELECT_FIELDS: {
     next_step_button: t(
@@ -38,7 +43,48 @@ const TRANSLATIONS = {
         .hintDescription,
     ),
   },
+  SELECT_WORKER: {
+    next_step_button: t(
+      TranslationNames.screens.orderDriver.createTask.selectFields
+        .stepSelectFields,
+    ),
+    hintHeader: t(
+      TranslationNames.screens.orderDriver.createTask.selectWorkers.hintHeader,
+    ),
+    hintText: t(
+      TranslationNames.screens.orderDriver.createTask.selectWorkers
+        .hintDescription,
+    ),
+  },
+  SELECT_MACHINE: {
+    next_step_button: t(
+      TranslationNames.screens.orderDriver.createTask.selectFields
+        .stepSelectFields,
+    ),
+    hintHeader: t(
+      TranslationNames.screens.orderDriver.createTask.selectMachines.hintHeader,
+    ),
+    hintText: t(
+      TranslationNames.screens.orderDriver.createTask.selectMachines
+        .hintDescription,
+    ),
+  },
 };
+
+const hintCard: Array<HintCardObject> = [
+  {
+    header: TRANSLATIONS.SELECT_FIELDS.hintHeader,
+    text: TRANSLATIONS.SELECT_FIELDS.hintText,
+  },
+  {
+    header: TRANSLATIONS.SELECT_WORKER.next_step_button,
+    text: TRANSLATIONS.SELECT_WORKER.hintText,
+  },
+  {
+    header: TRANSLATIONS.SELECT_MACHINE.hintHeader,
+    text: TRANSLATIONS.SELECT_MACHINE.hintText,
+  },
+];
 
 function SelectFields({ client, modalRef, setScreenState }: SelectFieldsProps) {
   const fieldListRef = useRef<ClientFieldsListRef>(null);
@@ -78,6 +124,7 @@ export function CreateTask({
   const modalRef = useRef<BottomSheetModal>(null);
 
   const [screenState, setScreenState] = useState(ScreenState.SelectField);
+
   return (
     <ScreenBase
       name="createTask"
@@ -89,8 +136,8 @@ export function CreateTask({
       <YStack f={1} className="mt-2">
         <YStack className="mt-2">
           <GuideCard
-            header={TRANSLATIONS.SELECT_FIELDS.hintHeader}
-            text={TRANSLATIONS.SELECT_FIELDS.hintText}
+            header={hintCard[screenState].header}
+            text={hintCard[screenState].text}
           >
             <GuideCardElement
               isCurent={screenState === ScreenState.SelectField}
@@ -100,9 +147,11 @@ export function CreateTask({
             <GuideCardElement
               isCurent={screenState === ScreenState.SelectWorker}
               isDone={screenState !== ScreenState.SelectField}
-              text="Select worker"
+              text={TRANSLATIONS.SELECT_WORKER.next_step_button}
             />
-            <GuideCardElement text="Select machine" />
+            <GuideCardElement
+              text={TRANSLATIONS.SELECT_MACHINE.next_step_button}
+            />
           </GuideCard>
         </YStack>
         {screenState === ScreenState.SelectField && (
