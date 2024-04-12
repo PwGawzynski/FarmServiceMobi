@@ -124,7 +124,7 @@
     "orderDriver": {
       "editOrder": {
         "screenTitle": "Edytuj zamówienie",
-        "submitButton": "Zapisz zmiany"
+        "submitButton": "Zapisz zmiany",
       },
       "orderDetails": {
         "screenName": "Szczegóły zamówienia",
@@ -149,6 +149,23 @@
           }
         },
         "tasksButton": "Zadania"
+      },
+      "createTask": {
+        "screenTitle": "Dodaj zadanie",
+        "submitButton": "Utwórz zadanie",
+        "pendingStatus": "Tworzenie...",
+        "selectWorkers": {
+          "stepSelectWorkers": "Select workers"
+        },
+        "selectMachines": {
+          "stepSelectMachine": "Select machine"
+        },
+        "selectFields": {
+          "stepSelectFields": "Wybierz pola",
+          "submitButton": "Kolejny Krok",
+          "hintHeader": "Wskazówka",
+          "hintDescription": "Możesz wybrać wiele pól na raz, dla każdego z nich pojawi się osobne zadanie"
+        }
       }
     },
     "ordersDesktopDriver":{

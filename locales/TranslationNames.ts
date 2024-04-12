@@ -223,6 +223,28 @@ export const TranslationNames = {
         },
         tasksButton: 'screens.orderDriver.orderDetails.tasksButton',
       },
+      createTask: {
+        screenTitle: 'screens.orderDriver.createTask.screenTitle',
+        submitButton: 'screens.orderDriver.createTask.submitButton',
+        pendingStatus: 'screens.orderDriver.createTask.pendingStatus',
+        selectWorkers: {
+          stepSelectWorkers:
+            'screens.orderDriver.createTask.selectWorkers.stepSelectWorkers',
+        },
+        selectMachines: {
+          selectMachine:
+            'screens.orderDriver.createTask.selectMachines.stepSelectMachine',
+        },
+        selectFields: {
+          stepSelectFields:
+            'screens.orderDriver.createTask.selectFields.stepSelectFields',
+          hintHeader: 'screens.orderDriver.createTask.selectFields.hintHeader',
+          hintDescription:
+            'screens.orderDriver.createTask.selectFields.hintDescription',
+          submitButton:
+            'screens.orderDriver.createTask.selectFields.submitButton',
+        },
+      },
     },
     ordersDesktopDriver: {
       addOrder: {

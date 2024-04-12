@@ -1,6 +1,7 @@
 import { RefObject, useRef, useState } from 'react';
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
 import { YStack } from 'tamagui';
+import { t } from 'i18next';
 import { ScreenBase } from '../common/ScreenBase';
 import { OrdersDriverScreenProps } from '../../../../../types/self/navigation/Owner/props/orders/OrdersDriverProps';
 import ClientFieldsList, {
@@ -9,6 +10,7 @@ import ClientFieldsList, {
 import { GuideCard, GuideCardElement } from '../../../../atoms/GuideCard';
 import { ButtonTamagui } from '../../../../atoms/ButtonTamagui';
 import { ClientResponseBase } from '../../../../../FarmServiceApiTypes/Clients/Responses';
+import { TranslationNames } from '../../../../../locales/TranslationNames';
 
 enum ScreenState {
   SelectField,
@@ -21,6 +23,22 @@ interface SelectFieldsProps {
   modalRef: RefObject<BottomSheetModal>;
   setScreenState: React.Dispatch<React.SetStateAction<ScreenState>>;
 }
+
+const TRANSLATIONS = {
+  SELECT_FIELDS: {
+    next_step_button: t(
+      TranslationNames.screens.orderDriver.createTask.selectFields
+        .stepSelectFields,
+    ),
+    hintHeader: t(
+      TranslationNames.screens.orderDriver.createTask.selectFields.hintHeader,
+    ),
+    hintText: t(
+      TranslationNames.screens.orderDriver.createTask.selectFields
+        .hintDescription,
+    ),
+  },
+};
 
 function SelectFields({ client, modalRef, setScreenState }: SelectFieldsProps) {
   const fieldListRef = useRef<ClientFieldsListRef>(null);
@@ -38,7 +56,7 @@ function SelectFields({ client, modalRef, setScreenState }: SelectFieldsProps) {
       />
       {canSubmit && (
         <ButtonTamagui
-          text="Create Task"
+          text={TRANSLATIONS.SELECT_FIELDS.next_step_button}
           buttonProps={{
             onPress: () => {
               setScreenState(ScreenState.SelectWorker);
@@ -71,13 +89,13 @@ export function CreateTask({
       <YStack f={1} className="mt-2">
         <YStack className="mt-2">
           <GuideCard
-            header="Hint"
-            text="You can choose multiple fields, each field will be considered as a separate task"
+            header={TRANSLATIONS.SELECT_FIELDS.hintHeader}
+            text={TRANSLATIONS.SELECT_FIELDS.hintText}
           >
             <GuideCardElement
               isCurent={screenState === ScreenState.SelectField}
               isDone={screenState !== ScreenState.SelectField}
-              text="Select fields"
+              text={TRANSLATIONS.SELECT_FIELDS.next_step_button}
             />
             <GuideCardElement
               isCurent={screenState === ScreenState.SelectWorker}

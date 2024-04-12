@@ -93,7 +93,7 @@
             "licensePlate": "License Plate"
           }
         },
-        "deleteButton": "Safely delete",
+        "deleteButton": "Safely delete"
       }
     },
     "clientDriver": {
@@ -171,6 +171,23 @@
           }
         },
         "tasksButton": "Tasks"
+      },
+      "createTask": {
+        "screenTitle": "Create task",
+        "submitButton": "Create",
+        "pendingStatus": "Creating...",
+        "selectWorkers": {
+          "stepSelectWorkers": "Select workers"
+        },
+        "selectMachines": {
+          "stepSelectMachine": "Select machine"
+        },
+        "selectFields": {
+          "stepSelectFields": "Select fields",
+          "submitButton": "Next step",
+          "hintHeader": "Hint",
+          "hintDescription": "You can choose multiple fields, each field will be considered as a separate task"
+        }
       }
     },
     "ordersDesktopDriver":{
@@ -392,7 +409,7 @@
       "nameMaxLength": "Name too long",
       "licensePlate": "License plate is required",
       "licensePlateMinLength": "License plate too short",
-      "licensePlateMaxLength": "License plate too long",
+      "licensePlateMaxLength": "License plate too long"
     }
   }
 }
