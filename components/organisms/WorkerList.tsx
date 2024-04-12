@@ -3,7 +3,9 @@ import {
   ForwardedRef,
   forwardRef,
   memo,
+  RefObject,
   useCallback,
+  useEffect,
   useImperativeHandle,
   useMemo,
   useState,
@@ -11,6 +13,7 @@ import {
 import { ListRenderItemInfo } from '@shopify/flash-list';
 import { t } from 'i18next';
 import { XStack, YStack } from 'tamagui';
+import { BottomSheetModal } from '@gorhom/bottom-sheet';
 import { allWorkers } from '../../api/worker/Worker';
 import { EXPO_PUBLIC_QUERY_STALE_TIME } from '../../settings/query/querySettings';
 import { searchEngineNameSurnameFilter } from '../../helepers/filterFunctions';
@@ -40,8 +43,21 @@ function EmptyComponent() {
   );
 }
 export interface WorkerListProps {
-  // eslint-disable-next-line react/no-unused-prop-types
+  /* eslint-disable react/no-unused-prop-types */
+  /**
+   * Reference to the bottom sheet modal
+   */
+  modalRef: RefObject<BottomSheetModal>;
+  /**
+   * Changes the list to selectable mode
+   */
   isSelectable?: boolean;
+  /**
+   * Callback triggered when the selected fields change
+   * @param isEmpty
+   */
+  triggerOnSelectedChange?: (isEmpty: boolean) => void;
+  /* eslint-enable react/no-unused-prop-types */
 }
 
 export interface WorkerListRef {
@@ -49,7 +65,10 @@ export interface WorkerListRef {
 }
 export const WorkerList = memo(
   forwardRef(
-    ({ isSelectable }: WorkerListProps, ref: ForwardedRef<WorkerListRef>) => {
+    (
+      { isSelectable, triggerOnSelectedChange }: WorkerListProps,
+      ref: ForwardedRef<WorkerListRef>,
+    ) => {
       const { data, isFetching, isError } = useQuery({
         queryKey: ['workers'],
         queryFn: allWorkers,
@@ -61,6 +80,11 @@ export const WorkerList = memo(
       const [selectedWorkers, setSelectedWorkers] = useState<
         WorkerResponseBase[] | []
       >([]);
+
+      useEffect(() => {
+        if (triggerOnSelectedChange)
+          triggerOnSelectedChange(!selectedWorkers.length);
+      }, [selectedWorkers]);
 
       /**
        * Exposes the fields selected
@@ -96,10 +120,10 @@ export const WorkerList = memo(
             bottomRightText={
               item.status !== undefined ? Status[item.status] : undefined
             }
-            onPressNavigateTo={isSelectable ? 'workerDetails' : undefined}
-            navigationParams={isSelectable ? { worker: item } : undefined}
-            onSelected={handleFieldSelection}
-            onDeselected={handleFieldDeselection}
+            onPressNavigateTo={!isSelectable ? 'workerDetails' : undefined}
+            navigationParams={!isSelectable ? { worker: item } : undefined}
+            onSelected={isSelectable ? handleFieldSelection : undefined}
+            onDeselected={isSelectable ? handleFieldDeselection : undefined}
             isSelected={!!selectedWorkers?.find(f => f.id === item.id)}
           />
         ),
