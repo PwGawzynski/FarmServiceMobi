@@ -11,6 +11,10 @@ import { GuideCard, GuideCardElement } from '../../../../atoms/GuideCard';
 import { ButtonTamagui } from '../../../../atoms/ButtonTamagui';
 import { ClientResponseBase } from '../../../../../FarmServiceApiTypes/Clients/Responses';
 import { TranslationNames } from '../../../../../locales/TranslationNames';
+import { WorkerList, WorkerListRef } from '../../../../organisms/WorkerList';
+import { FieldResponseBase } from '../../../../../FarmServiceApiTypes/Field/Ressponses';
+import { WorkerResponseBase } from '../../../../../FarmServiceApiTypes/Worker/Responses';
+import { MachineResponseBase } from '../../../../../FarmServiceApiTypes/Machine/Responses';
 
 enum ScreenState {
   SelectField,
@@ -21,12 +25,25 @@ enum ScreenState {
 interface SelectFieldsProps {
   client: ClientResponseBase;
   modalRef: RefObject<BottomSheetModal>;
-  setScreenState: React.Dispatch<React.SetStateAction<ScreenState>>;
+  onSetAction: () => void;
+  fieldListRef: RefObject<ClientFieldsListRef>;
+}
+
+interface SelectWorkerProps {
+  modalRef: RefObject<BottomSheetModal>;
+  onSetAction: () => void;
+  workerListRef: RefObject<WorkerListRef>;
 }
 
 type HintCardObject = {
   header: string;
   text: string;
+};
+
+type TaskData = {
+  fields: FieldResponseBase[] | undefined;
+  worker: WorkerResponseBase | undefined;
+  machines: MachineResponseBase | undefined;
 };
 
 const TRANSLATIONS = {
@@ -86,8 +103,12 @@ const hintCard: Array<HintCardObject> = [
   },
 ];
 
-function SelectFields({ client, modalRef, setScreenState }: SelectFieldsProps) {
-  const fieldListRef = useRef<ClientFieldsListRef>(null);
+function FieldSelector({
+  client,
+  modalRef,
+  onSetAction,
+  fieldListRef,
+}: SelectFieldsProps) {
   const [canSubmit, setCanSubmit] = useState(false);
   return (
     <YStack f={1}>
@@ -104,10 +125,35 @@ function SelectFields({ client, modalRef, setScreenState }: SelectFieldsProps) {
         <ButtonTamagui
           text={TRANSLATIONS.SELECT_FIELDS.next_step_button}
           buttonProps={{
-            onPress: () => {
-              setScreenState(ScreenState.SelectWorker);
-              console.log(fieldListRef.current?.fields);
-            },
+            onPress: () => onSetAction(),
+          }}
+        />
+      )}
+    </YStack>
+  );
+}
+
+function WorkerSelector({
+  modalRef,
+  onSetAction,
+  workerListRef,
+}: SelectWorkerProps) {
+  const [canSubmit, setCanSubmit] = useState(false);
+  return (
+    <YStack f={1}>
+      <WorkerList
+        modalRef={modalRef}
+        isSelectable
+        ref={workerListRef}
+        triggerOnSelectedChange={isEmpty => {
+          setCanSubmit(!isEmpty);
+        }}
+      />
+      {canSubmit && (
+        <ButtonTamagui
+          text={TRANSLATIONS.SELECT_FIELDS.next_step_button}
+          buttonProps={{
+            onPress: () => onSetAction(),
           }}
         />
       )}
@@ -122,6 +168,9 @@ export function CreateTask({
   const { order, client } = params;
 
   const modalRef = useRef<BottomSheetModal>(null);
+  const fieldListRef = useRef<ClientFieldsListRef>(null);
+  const workerListRef = useRef<WorkerListRef>(null);
+  const [taskData, setTaskData] = useState<TaskData | undefined>();
 
   const [screenState, setScreenState] = useState(ScreenState.SelectField);
 
@@ -141,12 +190,12 @@ export function CreateTask({
           >
             <GuideCardElement
               isCurent={screenState === ScreenState.SelectField}
-              isDone={screenState !== ScreenState.SelectField}
+              isDone={!!taskData?.fields?.length}
               text={TRANSLATIONS.SELECT_FIELDS.next_step_button}
             />
             <GuideCardElement
               isCurent={screenState === ScreenState.SelectWorker}
-              isDone={screenState !== ScreenState.SelectField}
+              isDone={!!taskData?.worker}
               text={TRANSLATIONS.SELECT_WORKER.next_step_button}
             />
             <GuideCardElement
@@ -155,10 +204,32 @@ export function CreateTask({
           </GuideCard>
         </YStack>
         {screenState === ScreenState.SelectField && (
-          <SelectFields
+          <FieldSelector
             client={client}
             modalRef={modalRef}
-            setScreenState={setScreenState}
+            onSetAction={() => {
+              setTaskData({
+                fields: fieldListRef.current?.fields,
+                worker: undefined,
+                machines: undefined,
+              });
+              setScreenState(ScreenState.SelectWorker);
+            }}
+            fieldListRef={fieldListRef}
+          />
+        )}
+        {screenState === ScreenState.SelectWorker && (
+          <WorkerSelector
+            modalRef={modalRef}
+            workerListRef={workerListRef}
+            onSetAction={() => {
+              setTaskData(p => ({
+                fields: p?.fields,
+                worker: workerListRef.current?.workers[0],
+                machines: undefined,
+              }));
+              setScreenState(ScreenState.SelectMachine);
+            }}
           />
         )}
       </YStack>
