@@ -1,5 +1,13 @@
 import { useNavigation } from '@react-navigation/native';
-import { Card, SizableText, View, XStack, YStack, Circle } from 'tamagui';
+import {
+  Card,
+  SizableText,
+  View,
+  XStack,
+  YStack,
+  Circle,
+  useTheme,
+} from 'tamagui';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
@@ -10,34 +18,68 @@ import Animated, {
 import { useEffect } from 'react';
 import { UserAvatar } from './UserAvatar';
 
-export type Props = {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type Props<T extends Record<string, any>> = {
+  item: T;
   name: string;
   surname: string;
   onPress?: () => void;
   bottomRightText?: string;
   onPressNavigateTo?: string;
   navigationParams?: Record<string, unknown>;
+  isSelected?: boolean;
+  onSelected?: (item: T) => void;
+  onDeselected?: (item: T) => void;
 };
-
-export default function PersonListItem({
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default function PersonListItem<T extends Record<string, any>>({
   name,
   surname,
   onPress,
   bottomRightText,
   onPressNavigateTo,
   navigationParams,
-}: Props) {
+  isSelected,
+  onSelected,
+  onDeselected,
+  item,
+}: Props<T>) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const navigation = useNavigation<any>();
   const handlePress = () => {
-    if (onPress) onPress();
-    if (onPressNavigateTo)
-      navigation.navigate(onPressNavigateTo, navigationParams);
+    if (!onSelected && !onDeselected) {
+      if (!onPress) navigation.navigate(onPressNavigateTo, navigationParams);
+      else if (onPress) onPress();
+    }
+    if (onSelected && !isSelected) {
+      onSelected(item);
+    } else if (onDeselected && isSelected) {
+      onDeselected(item);
+    }
   };
+
+  const {
+    color4: { val },
+  } = useTheme();
+
   return (
     <Card onPress={handlePress}>
       <XStack p="$2" ai="center" justifyContent="space-between">
-        <UserAvatar nameFirstLetter={name[0]} surnameFirstLetter={surname[0]} />
+        {onSelected && onDeselected && (
+          <YStack>
+            <Circle height={25} width={25} bordered borderColor="$color11">
+              {isSelected && (
+                <Circle height={15} width={15} backgroundColor={val} />
+              )}
+            </Circle>
+          </YStack>
+        )}
+        {!onSelected && !onDeselected && (
+          <UserAvatar
+            nameFirstLetter={name[0]}
+            surnameFirstLetter={surname[0]}
+          />
+        )}
         <YStack ml="$2">
           <SizableText
             fontWeight="bold"
