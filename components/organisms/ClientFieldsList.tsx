@@ -30,6 +30,9 @@ import { clientFieldsFilter } from '../../helepers/filterFunctions';
 export interface Props {
   /* eslint-disable react/no-unused-prop-types */
   client: ClientResponseBase;
+  /**
+   * Reference to the bottom sheet modal
+   */
   modalRef: RefObject<BottomSheetModal>;
   /**
    * Callback triggered when the selected fields change
