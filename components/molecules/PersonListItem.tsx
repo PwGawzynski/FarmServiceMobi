@@ -48,7 +48,8 @@ export default function PersonListItem<T extends Record<string, any>>({
   const navigation = useNavigation<any>();
   const handlePress = () => {
     if (!onSelected && !onDeselected) {
-      if (!onPress) navigation.navigate(onPressNavigateTo, navigationParams);
+      if (onPressNavigateTo && navigationParams)
+        navigation.navigate(onPressNavigateTo, navigationParams);
       else if (onPress) onPress();
     }
     if (onSelected && !isSelected) {
