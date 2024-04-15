@@ -154,7 +154,6 @@ export function AddFieldForm({
     }, []),
   });
   const onSubmitted = (data: ExtendedFormData) => {
-    console.log('tests', client);
     if (field) edit(prepareDataEdit(data, field, client));
     else if (transformedData && gpsCords)
       mutate(prepareData(transformedData, data, client, gpsCords));
