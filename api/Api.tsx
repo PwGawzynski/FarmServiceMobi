@@ -45,6 +45,11 @@ import {
 import { OrderResponseBase } from '../FarmServiceApiTypes/Order/Ressponses';
 import { MachineResponseBase } from '../FarmServiceApiTypes/Machine/Responses';
 import { UpdateMachineReqI } from '../FarmServiceApiTypes/Machine/Requests';
+import { CreateTaskCollection } from '../FarmServiceApiTypes/Task/Requests';
+import {
+  TaskResponseBase,
+  TaskResponseCollection,
+} from '../FarmServiceApiTypes/Task/Responses';
 /* ---------------------------------------DECORATOR_USED_TO_DELAY_RES--------------------------------------- */
 
 const IsDelayed = () => {
@@ -187,7 +192,6 @@ export class ApiSelf {
    * @throws AxiosError when req went wrong, Error when saving operation went wrong
    */
   static async restoreTokens() {
-    console.log('Calling restoreTokens method');
     await ApiSelf.initTokens();
     if (!ApiSelf.restoreFlag) {
       ApiSelf.restoreFlag = true;
@@ -456,6 +460,23 @@ export class ApiSelf {
         data,
       )) as AxiosResponse<ResponseObject>
     ).data.payload as ClientResponseBase | undefined;
+  }
+
+  static async createTasks(data: CreateTaskCollection) {
+    return (
+      (await ApiSelf.axiosInstance.post(
+        '/task',
+        data,
+      )) as AxiosResponse<ResponseObject>
+    ).data.payload as TaskResponseCollection | undefined;
+  }
+
+  static async getTaskByOrder(orderId: string) {
+    return (
+      (await ApiSelf.axiosInstance.get('/task', {
+        params: { 'order-id': orderId },
+      })) as AxiosResponse<ResponseObject>
+    ).data.payload as TaskResponseBase | undefined;
   }
 
   @IsDelayed()
