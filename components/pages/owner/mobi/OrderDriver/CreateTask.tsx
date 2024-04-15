@@ -243,6 +243,7 @@ export function CreateTask({
           <WorkerSelector
             modalRef={modalRef}
             workerListRef={workerListRef}
+            maxSelectedItems={1}
             onSetAction={() => {
               setTaskData(p => ({
                 ...p,
@@ -258,6 +259,7 @@ export function CreateTask({
           <MachineSelector
             modalRef={modalRef}
             machineListRef={machineListRef}
+            maxSelectedItems={1}
             onSetAction={() => {
               setTaskData(p => ({
                 ...p,

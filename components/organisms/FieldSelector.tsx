@@ -18,6 +18,7 @@ export interface SelectFieldsProps {
   modalRef: RefObject<BottomSheetModal>;
   onSetAction: () => void;
   fieldListRef: ForwardedRef<ListRef<FieldResponseBase>>;
+  maxSelectedItems?: number;
 }
 const TRANSLATIONS = {
   searchPlaceholder: t(
@@ -30,6 +31,7 @@ export function FieldSelector({
   modalRef,
   onSetAction,
   fieldListRef,
+  maxSelectedItems,
 }: SelectFieldsProps) {
   const [canSubmit, setCanSubmit] = useState(false);
   const { data, isError, isFetching } = useQuery({
@@ -47,6 +49,7 @@ export function FieldSelector({
         ref={fieldListRef}
         isFetching={isFetching}
         isError={isError}
+        maxSelectedItems={maxSelectedItems}
         data={data}
         modalRef={modalRef}
         listStyleSettings={item => ({

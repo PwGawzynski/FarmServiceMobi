@@ -157,7 +157,7 @@ function ListMemo<T extends Record<string, any>>(
                 placeholder={searchEnginePlaceholder ?? 'Search'}
               />
             </YStack>
-            {isSelectable && (
+            {isSelectable && !maxSelectedItems && (
               <ButtonTamagui
                 icon={selectedItems.length ? <DeselectIco /> : <SelectAllIco />}
                 buttonProps={{

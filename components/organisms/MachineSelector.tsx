@@ -14,6 +14,7 @@ export interface SelectMachineProps {
   modalRef: RefObject<BottomSheetModal>;
   onSetAction: () => void;
   machineListRef: ForwardedRef<ListRef<MachineResponseBase>>;
+  maxSelectedItems?: number;
 }
 
 const TRANSLATIONS = {
@@ -29,6 +30,7 @@ export function MachineSelector({
   modalRef,
   onSetAction,
   machineListRef,
+  maxSelectedItems,
 }: SelectMachineProps) {
   const [canSubmit, setCanSubmit] = useState(false);
   const { data, isLoading, isFetching, isError } = useQuery({
@@ -42,7 +44,7 @@ export function MachineSelector({
         triggerOnSelectedChange={isEmpty => {
           setCanSubmit(!isEmpty);
         }}
-        maxSelectedItems={1}
+        maxSelectedItems={maxSelectedItems}
         ref={machineListRef}
         isFetching={isFetching}
         isError={isError}

@@ -16,6 +16,7 @@ export interface SelectWorkerProps {
   modalRef: RefObject<BottomSheetModal>;
   onSetAction: () => void;
   workerListRef: ForwardedRef<ListRef<WorkerResponseBase>>;
+  maxSelectedItems?: number;
 }
 const TRANSLATIONS = {
   searchPlaceholder: t(
@@ -27,6 +28,7 @@ export function WorkerSelector({
   modalRef,
   onSetAction,
   workerListRef,
+  maxSelectedItems,
 }: SelectWorkerProps) {
   const [canSubmit, setCanSubmit] = useState(false);
   const { data, isFetching, isError } = useQuery({
@@ -46,6 +48,7 @@ export function WorkerSelector({
         isFetching={isFetching}
         isError={isError}
         data={data}
+        maxSelectedItems={maxSelectedItems}
         modalRef={modalRef}
         listStyleSettings={item => ({
           header: `${item.personalData.name} ${item.personalData.surname}`,
