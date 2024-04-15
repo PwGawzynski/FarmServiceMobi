@@ -198,14 +198,13 @@ export function CreateTask({
   const { mutate, isPending, isSuccess } = useMutation({
     mutationKey: ['createTask'],
     mutationFn: createTask,
-    onSuccess: responseData => {
+    onSuccess: responseData =>
       queryClient.setQueryData(
         ['orderTasks', order.id],
         (old: Array<TaskResponseBase>) => {
           return responseData ? [...old, ...responseData] : responseData;
         },
-      );
-    },
+      ),
   });
   useEffect(() => {
     if (isSuccess) {
