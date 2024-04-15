@@ -151,25 +151,43 @@
         "tasksButton": "Zadania"
       },
       "createTask": {
-        "screenTitle": "Dodaj zadanie",
+        "screenTitle": "Utwórz zadanie",
+        "screenSummaryTitle": "Podsumowanie",
+        "ha": "Ha",
         "submitButton": "Utwórz zadanie",
         "pendingStatus": "Tworzenie...",
         "selectWorkers": {
-          "stepSelectWorkers": "Select workers",
-          "hintHeader": "Hint",
-          "hintDescription": "Choose a worker, that will perform the task"
-
+          "stepSelectWorkers": "Wybierz pracowników",
+          "hintHeader": "Wskazówka",
+          "hintDescription": "Wybierz pracownika, który wykona zadanie",
+          "searchPlaceholder": "Znajdź pracownika"
         },
         "selectMachines": {
-          "stepSelectMachine": "Select machine",
-          "hintHeader": "Hint",
-          "hintDescription": "Choose a machine, that will be used to perform the task"
+          "stepSelectMachine": "Wybierz maszynę",
+          "hintHeader": "Wskazówka",
+          "hintDescription": "Wybierz maszynę, która będzie używana do wykonania zadania",
+          "searchPlaceholder": "Znajdź maszynę"
         },
         "selectFields": {
           "stepSelectFields": "Wybierz pola",
-          "submitButton": "Kolejny Krok",
+          "submitButton": "Następny krok",
           "hintHeader": "Wskazówka",
-          "hintDescription": "Możesz wybrać wiele pól na raz, dla każdego z nich pojawi się osobne zadanie"
+          "hintDescription": "Wybierz pola, na których ma być wykonane zadanie, każde pole będzie traktowane jako osobne zadanie",
+          "searchPlaceholder": "Znajdź pole"
+        },
+        "summary": {
+          "summaryCard": {
+            "fields": "Pola",
+            "workers": "Pracownicy",
+            "machines": "Maszyny",
+            "type": "Typ",
+            "totalArea": "Całkowity obszar"
+          },
+          "typeSelector": {
+            "label": "Typ zadania",
+            "description": "Wybierz typ zadania, które chcesz utworzyć",
+            "creatingTasks": "Zadania które zostaną utworzone"
+          }
         }
       }
     },
@@ -244,6 +262,18 @@
     }
   },
   "components": {
+    "fieldSelector": {
+      "title": "Wybierz pola",
+      "searchPlaceholder": "Znajdź pole"
+    },
+    "workerSelector":{
+      "title": "Wybierz pracownika",
+      "searchPlaceholder": "Znajdź pracownika"
+    },
+    "machineSelector": {
+      "title": "Wybierz maszynę",
+      "searchPlaceholder": "Znajdź maszynę"
+    },
     "clientsFieldsList": {
       "searchPlaceholder": "Znajdź pole"
     },

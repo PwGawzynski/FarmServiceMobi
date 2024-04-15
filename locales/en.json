@@ -174,23 +174,42 @@
       },
       "createTask": {
         "screenTitle": "Create task",
+        "screenSummaryTitle": "Task summary",
+        "ha": "Ha",
         "submitButton": "Create",
         "pendingStatus": "Creating...",
         "selectWorkers": {
           "stepSelectWorkers": "Select workers",
           "hintHeader": "Hint",
-          "hintDescription": "Choose a worker, that will perform the task"
+          "hintDescription": "Choose a worker, that will perform the task",
+          "searchPlaceholder": "Find a worker"
         },
         "selectMachines": {
           "stepSelectMachine": "Select machine",
           "hintHeader": "Hint",
-          "hintDescription": "Choose a machine, that will be used to perform the task"
+          "hintDescription": "Choose a machine, that will be used to perform the task",
+            "searchPlaceholder": "Find a machine"
         },
         "selectFields": {
           "stepSelectFields": "Select fields",
           "submitButton": "Next step",
           "hintHeader": "Hint",
-          "hintDescription": "You can choose multiple fields, each field will be considered as a separate task"
+          "hintDescription": "You can choose multiple fields, each field will be considered as a separate task",
+            "searchPlaceholder": "Find a field"
+        },
+        "summary": {
+          "summaryCard": {
+            "fields": "Fields",
+            "workers": "Workers",
+            "machines": "Machines",
+            "type": "Type",
+            "totalArea": "Total area"
+          },
+          "typeSelector": {
+            "label": "Task Type",
+            "description": "Task Type",
+            "creatingTasks": "Tasks that will be created"
+          }
         }
       }
     },
@@ -244,6 +263,18 @@
     }
   },
   "components": {
+    "fieldSelector": {
+      "title": "Select fields",
+      "searchPlaceholder": "Find a field"
+    },
+    "workerSelector":{
+        "title": "Select workers",
+        "searchPlaceholder": "Find a worker"
+    },
+    "machineSelector": {
+      "title": "Select machines",
+      "searchPlaceholder": "Find a machine"
+    },
     "clientsFieldsList": {
       "searchPlaceholder": "Find a field"
     },

@@ -225,6 +225,8 @@ export const TranslationNames = {
       },
       createTask: {
         screenTitle: 'screens.orderDriver.createTask.screenTitle',
+        screenSummaryTitle: 'screens.orderDriver.createTask.screenSummaryTitle',
+        ha: 'screens.orderDriver.createTask.ha',
         submitButton: 'screens.orderDriver.createTask.submitButton',
         pendingStatus: 'screens.orderDriver.createTask.pendingStatus',
         selectWorkers: {
@@ -235,7 +237,7 @@ export const TranslationNames = {
             'screens.orderDriver.createTask.selectWorkers.hintDescription',
         },
         selectMachines: {
-          selectMachine:
+          stepSelectMachine:
             'screens.orderDriver.createTask.selectMachines.stepSelectMachine',
           hintHeader:
             'screens.orderDriver.createTask.selectMachines.hintHeader',
@@ -250,6 +252,25 @@ export const TranslationNames = {
             'screens.orderDriver.createTask.selectFields.hintDescription',
           submitButton:
             'screens.orderDriver.createTask.selectFields.submitButton',
+        },
+        summary: {
+          summaryCard: {
+            fields: 'screens.orderDriver.createTask.summary.summaryCard.fields',
+            workers:
+              'screens.orderDriver.createTask.summary.summaryCard.workers',
+            machines:
+              'screens.orderDriver.createTask.summary.summaryCard.machines',
+            type: 'screens.orderDriver.createTask.summary.summaryCard.type',
+            totalArea:
+              'screens.orderDriver.createTask.summary.summaryCard.totalArea',
+          },
+          typeSelector: {
+            label: 'screens.orderDriver.createTask.summary.typeSelector.label',
+            description:
+              'screens.orderDriver.createTask.summary.typeSelector.description',
+            creatingTasks:
+              'screens.orderDriver.createTask.summary.typeSelector.creatingTasks',
+          },
         },
       },
     },
@@ -309,6 +330,18 @@ export const TranslationNames = {
     },
   },
   components: {
+    fieldSelector: {
+      subbmitButton: 'components.fieldSelector.title',
+      searchPlaceholder: 'components.fieldSelector.searchPlaceholder',
+    },
+    workerSelector: {
+      subbmitButton: 'components.workerSelector.title',
+      searchPlaceholder: 'components.workerSelector.searchPlaceholder',
+    },
+    machineSelector: {
+      subbmitButton: 'components.machineSelector.title',
+      searchPlaceholder: 'components.machineSelector.searchPlaceholder',
+    },
     clientsFieldsList: {
       searchPlaceholder: 'components.clientsFieldsList.searchPlaceholder',
     },
