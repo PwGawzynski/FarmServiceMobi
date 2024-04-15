@@ -37,7 +37,6 @@ export function OrderForm({ client, onSuccess }: Props) {
     mutationKey: ['createOrder', client.id],
     mutationFn: createOrder,
     onSuccess: (sth, variables) => {
-      console.log(sth, 'bo');
       queryClient.setQueryData(
         ['orders'],
         (oldData: Array<OrderResponseBase>) => {
