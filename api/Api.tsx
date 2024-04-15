@@ -479,6 +479,14 @@ export class ApiSelf {
     ).data.payload as TaskResponseBase | undefined;
   }
 
+  static async deleteTask(taskId: string) {
+    return (
+      (await ApiSelf.axiosInstance.delete('/task', {
+        params: { 'task-id': taskId },
+      })) as AxiosResponse<ResponseObject>
+    ).data;
+  }
+
   @IsDelayed()
   static async updateWorkerStatusOrPosition(
     data: UpdateWorkerStatusOrPositionReqI,
