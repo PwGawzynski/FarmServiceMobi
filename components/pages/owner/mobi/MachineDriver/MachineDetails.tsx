@@ -117,6 +117,7 @@ export function MachineDetails({
         icon={<DangerIco />}
         bgColor={Colors.ERROR_RED}
         text="Safely delete"
+        isPending={isPending}
         buttonProps={{
           onPress: handleDeletePress,
           disabled: isPending,
