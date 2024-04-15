@@ -21,15 +21,10 @@ import { ClientResponseBase } from '../../../../../FarmServiceApiTypes/Clients/R
 import { WorkerResponseBase } from '../../../../../FarmServiceApiTypes/Worker/Responses';
 import { UpdateWorkerStatusOrPositionReqI } from '../../../../../FarmServiceApiTypes/Worker/Requests';
 import { AddressResponseBase } from '../../../../../FarmServiceApiTypes/Address/Ressponses';
-import { AsAny, EnumType } from '../../../../../helepers/typing';
+import { AsAny } from '../../../../../helepers/typing';
 import { TranslationNames } from '../../../../../locales/TranslationNames';
 import { PersonalDataBase } from '../../../../../FarmServiceApiTypes/UserPersonalData/Responses';
-import { makeArray } from '../../../../../helepers/MakeArray';
-
-const findEnumVal = (e: EnumType, value: string) =>
-  Object.keys(e)
-    .filter(k => Number.isNaN(Number(k)))
-    .findIndex(key => key.toLowerCase() === value.toLowerCase());
+import { findEnumVal, makeArray } from '../../../../../helepers/MakeArray';
 
 const cacheResponse = (
   response: WorkerResponseBase | undefined,
@@ -157,7 +152,6 @@ export function WorkerDetails({
                 TranslationNames.screens.ownerRootDriver.workerDetails.status,
               )}:`}
               onValueChange={v => {
-                console.log(findEnumVal(Status, v));
                 mutate({ status: findEnumVal(Status, v), worker: worker.id });
               }}
             />
