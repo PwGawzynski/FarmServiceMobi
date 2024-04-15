@@ -97,7 +97,6 @@ export function FieldBottomSheetContent({
       queryClient.setQueryData(
         ['clientFields', client?.id],
         (oldData: Array<FieldResponseBase>) => {
-          console.log(variables.id, 'test', field.id);
           if (variables)
             return [...oldData.filter(_field => _field.id !== field.id)];
           return oldData;
