@@ -43,6 +43,8 @@ export interface Props<T extends Record<string, any>> {
   ref?: ForwardedRef<ListRef<T>>;
   maxSelectedItems?: number;
   cName?: string;
+  listEmptyComponent?: JSX.Element;
+  swipeRightAnimation?: boolean;
   /* eslint-enable react/no-unused-prop-types */
 }
 export interface ListRef<T> {
@@ -69,6 +71,8 @@ function ListMemo<T extends Record<string, any>>(
     searchEnginePlaceholder,
     maxSelectedItems,
     cName,
+    listEmptyComponent,
+    swipeRightAnimation,
   }: Props<T>,
   ref: ForwardedRef<ListRef<T>>,
 ) {
@@ -171,10 +175,11 @@ function ListMemo<T extends Record<string, any>>(
       </YStack>
       <YStack f={1}>
         <UniversalList<T>
+          listEmptyComponent={listEmptyComponent}
           listEmptyText={listEmptyText}
           renderItem={renderItem}
           data={sorted}
-          swipeRightAnimation
+          swipeRightAnimation={swipeRightAnimation}
           listSetup={{
             isLoading: isFetching || isLoading,
             isLoadingError: isError,
