@@ -273,6 +273,7 @@
       "closedAt": "Closed at",
       "fieldArea": "Field Area",
       "ha": "Ha",
+      "deleteButton": "Delete"
     },
     "fieldSelector": {
       "title": "Select fields",

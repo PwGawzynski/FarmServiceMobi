@@ -271,7 +271,8 @@
       "openedAt": "Otwarte dnia",
       "closedAt": "Zamknięte dnia",
       "fieldArea": "Obszar pola",
-      "ha": "Ha"
+      "ha": "Ha",
+      "deleteButton": "Usuń"
     },
     "fieldSelector": {
       "title": "Wybierz pola",
