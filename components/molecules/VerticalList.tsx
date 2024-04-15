@@ -5,7 +5,6 @@ import {
 } from '@shopify/flash-list';
 import { useCallback, useEffect, useRef } from 'react';
 import { View } from 'react-native';
-import Empty from '../../assets/empty.svg';
 import X from '../../assets/x.svg';
 import { ListInfo } from '../atoms/ListInfo';
 import { Colors } from '../../settings/styles/colors';
@@ -43,10 +42,7 @@ export function VerticalList<T>({
     [],
   );
   const divider = useCallback(() => <View className="h-4" />, []);
-  const ListEmpty = useCallback(
-    () => <ListInfo Ico={Empty} text="There's nothing to se here" />,
-    [],
-  );
+
   const DataUndefinedInfo = useCallback(() => <ListInfo Ico={X} />, []);
   const LoadingErrorInfo = useCallback(
     () => (
@@ -68,7 +64,7 @@ export function VerticalList<T>({
       ItemSeparatorComponent={divider}
       estimatedItemSize={estimatedSize}
       data={data}
-      ListEmptyComponent={ListEmptyComponent ?? ListEmpty}
+      ListEmptyComponent={ListEmptyComponent}
       renderItem={renderItem}
       onBlankArea={onBlankArea}
       onLoad={onLoadListener}
