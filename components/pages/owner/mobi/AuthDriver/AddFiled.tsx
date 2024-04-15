@@ -101,7 +101,6 @@ export function AddFiled({
     if (isSuccess) setMachineState(State.DataTransformed);
     if (data) setTransformedData(data);
   }, [isSuccess, isPending, isError, data]);
-  console.log(data, transformedData, locationData);
 
   const [alert, setAlert] = useState<AlertI>({
     ...initAlert,
