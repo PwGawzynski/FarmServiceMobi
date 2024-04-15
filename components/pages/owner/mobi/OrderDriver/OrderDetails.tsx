@@ -1,6 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import { Card, ScrollView, SizableText, YStack } from 'tamagui';
 import { t } from 'i18next';
+import { useRef } from 'react';
+import { BottomSheetModal } from '@gorhom/bottom-sheet';
 import { ScreenBase } from '../common/ScreenBase';
 import { OrdersDriverScreenProps } from '../../../../../types/self/navigation/Owner/props/orders/OrdersDriverProps';
 import { EntityAsACard } from '../../../../molecules/EntityAsACard';
@@ -10,10 +12,66 @@ import InfoIcon from '../../../../../assets/info.svg';
 import { ButtonTamagui } from '../../../../atoms/ButtonTamagui';
 import { TranslationNames } from '../../../../../locales/TranslationNames';
 import { OrderResponseBase } from '../../../../../FarmServiceApiTypes/Order/Ressponses';
+import { getTaskByOrder } from '../../../../../api/Task/Task';
+import List from '../../../../organisms/List';
+import { TaskResponseBase } from '../../../../../FarmServiceApiTypes/Task/Responses';
+import { TaskType } from '../../../../../FarmServiceApiTypes/Task/Enums';
+import { KeyValuePair } from '../../../../atoms/KeyValuePair';
 
 function findClientById(clients: ClientResponseBase[] | undefined, id: string) {
   if (clients) return clients.find(client => client.id === id);
   return undefined;
+}
+
+const TaskInfoCardNames = {
+  type: t(TranslationNames.components.taskInfoCard.type),
+  worker: t(TranslationNames.components.taskInfoCard.worker),
+  machine: t(TranslationNames.components.taskInfoCard.machine),
+  createdAt: t(TranslationNames.components.taskInfoCard.createdAt),
+  openedAt: t(TranslationNames.components.taskInfoCard.openedAt),
+  closedAt: t(TranslationNames.components.taskInfoCard.closedAt),
+  fieldArea: t(TranslationNames.components.taskInfoCard.fieldArea),
+};
+
+function TaskInfo({ task }: { task: TaskResponseBase }) {
+  return (
+    <YStack f={1} p="$3">
+      <SizableText color="$color4" className="text-xl uppercase font-bold mb-2">
+        {task.field.nameLabel}
+      </SizableText>
+      <KeyValuePair name={TaskInfoCardNames.type} value={TaskType[task.type]} />
+      <KeyValuePair
+        name={TaskInfoCardNames.worker}
+        value={`${task.worker.personalData.name} ${task.worker.personalData.surname}`}
+      />
+      <KeyValuePair
+        name={TaskInfoCardNames.machine}
+        value={task.machine.name}
+      />
+      <KeyValuePair
+        name={TaskInfoCardNames.createdAt}
+        value={new Date(task.createdAt).toLocaleDateString()}
+      />
+      {task.openedAt && (
+        <KeyValuePair
+          name={TaskInfoCardNames.openedAt}
+          value={new Date(task.openedAt).toLocaleDateString()}
+        />
+      )}
+      {task.closedAt && (
+        <KeyValuePair
+          name={TaskInfoCardNames.closedAt}
+          value={new Date(task.closedAt).toLocaleDateString()}
+        />
+      )}
+      <KeyValuePair
+        name={TaskInfoCardNames.fieldArea}
+        value={`${Number(task.field.area).toFixed(2).toString()} ${t(
+          TranslationNames.components.taskInfoCard.ha,
+        )}`}
+      />
+    </YStack>
+  );
 }
 
 const detailsCardNames = {
@@ -66,6 +124,7 @@ export function OrderDetails({
   navigation,
 }: OrdersDriverScreenProps<'orderDetails', 'ordersDriver', 'ownerRootDriver'>) {
   const { order } = params;
+  const modalRef = useRef<BottomSheetModal>(null);
   const { data } = useQuery({
     queryKey: ['clients'],
     queryFn: getClients,
@@ -85,9 +144,23 @@ export function OrderDetails({
         client: client as ClientResponseBase,
       });
   };
-
+  const handleTaskPress = (task: TaskResponseBase) => {
+    modalRef.current?.present(<TaskInfo task={task} />);
+  };
+  const {
+    data: tasks,
+    isPending,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ['orderTasks', order.id],
+    queryFn: context => getTaskByOrder(context.queryKey[1]),
+  });
   return (
     <ScreenBase
+      bottomSheetsProps={{
+        modalRef,
+      }}
       name={t(TranslationNames.screens.orderDriver.orderDetails.screenName)}
     >
       <EntityAsACard
@@ -117,18 +190,44 @@ export function OrderDetails({
       )}
       {client && (
         <EntityAsACard
-          cardName="Client"
-          topRightButtonName="More"
+          cardName={t(
+            TranslationNames.screens.orderDriver.orderDetails.clientCard
+              .cardName,
+          )}
+          topRightButtonName={t(
+            TranslationNames.screens.orderDriver.orderDetails.clientCard
+              .topRightButtonName,
+          )}
           onTopRightBtnPress={handleClientMore}
           topRightButtonIcon={<InfoIcon />}
           data={clientDataObject(client)}
           names={clientCardNames}
         />
       )}
-      <YStack f={1} />
+      <SizableText className="uppercase font-bold text-xl mt-4 ">
+        {t(TranslationNames.screens.orderDriver.orderDetails.taskListHeader)}
+      </SizableText>
+      <List<TaskResponseBase>
+        // we have to set margin top to 0 and margin bottom to 0, because we use forwardRef in a List component,
+        // sand its gets those styles
+        cName="mt-0 mb-0"
+        modalRef={modalRef}
+        data={tasks as unknown as TaskResponseBase[]}
+        listStyleSettings={item => ({
+          header: item.field.nameLabel,
+          bottomRightText: TaskType[item.type],
+          alignment: 'left',
+          infoIco: true,
+        })}
+        handleOnItemPress={handleTaskPress}
+        isFetching={isPending}
+        isError={isError}
+        isLoading={isLoading}
+      />
       <ButtonTamagui
         text={t(TranslationNames.screens.orderDriver.orderDetails.tasksButton)}
         buttonProps={{
+          mt: '$4',
           onPress: handleCreateTask,
         }}
       />
