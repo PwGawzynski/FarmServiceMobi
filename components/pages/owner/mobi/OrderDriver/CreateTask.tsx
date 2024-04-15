@@ -1,7 +1,8 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
 import { SizableText, YStack } from 'tamagui';
 import { t } from 'i18next';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { ScreenBase } from '../common/ScreenBase';
 import { OrdersDriverScreenProps } from '../../../../../types/self/navigation/Owner/props/orders/OrdersDriverProps';
 import { GuideCard, GuideCardElement } from '../../../../atoms/GuideCard';
@@ -18,6 +19,10 @@ import { EntityAsACard } from '../../../../molecules/EntityAsACard';
 import { FieldSelector } from '../../../../organisms/FieldSelector';
 import { WorkerSelector } from '../../../../organisms/WorkerSelector';
 import { MachineSelector } from '../../../../organisms/MachineSelector';
+import { createTask } from '../../../../../api/Task/Task';
+import { CreateTaskReqI } from '../../../../../FarmServiceApiTypes/Task/Requests';
+import { OrderResponseBase } from '../../../../../FarmServiceApiTypes/Order/Ressponses';
+import { TaskResponseBase } from '../../../../../FarmServiceApiTypes/Task/Responses';
 
 enum ScreenState {
   SelectField,
@@ -145,7 +150,7 @@ const hintCard: Array<HintCardObject> = [
   },
 ];
 
-/* const beTask = (
+const beTask = (
   taskData: TaskData,
   order: OrderResponseBase,
 ): CreateTaskReqI[] | undefined =>
@@ -158,7 +163,7 @@ const hintCard: Array<HintCardObject> = [
         machine: taskData.machines?.id,
         type: taskData.type,
       }) as CreateTaskReqI,
-  ); */
+  );
 
 const beTaskListItem = (taskData: TaskData) =>
   taskData.fields?.map(
@@ -172,6 +177,7 @@ const beTaskListItem = (taskData: TaskData) =>
 
 export function CreateTask({
   route: { params },
+  navigation,
 }: OrdersDriverScreenProps<'createTask', 'ordersDriver', 'ownerRootDriver'>) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { order, client } = params;
@@ -187,6 +193,35 @@ export function CreateTask({
     type: TaskType.Harvesting,
   });
   const [screenState, setScreenState] = useState(ScreenState.SelectField);
+
+  const queryClient = useQueryClient();
+  const { mutate, isPending, isSuccess } = useMutation({
+    mutationKey: ['createTask'],
+    mutationFn: createTask,
+    onSuccess: responseData => {
+      queryClient.setQueryData(
+        ['orderTasks', order.id],
+        (old: Array<TaskResponseBase>) => {
+          return responseData ? [...old, ...responseData] : responseData;
+        },
+      );
+    },
+  });
+  useEffect(() => {
+    if (isSuccess) {
+      navigation.navigate('orderDetails', { order });
+    }
+  }, [isSuccess]);
+
+  const handleSubmit = () => {
+    if (taskData.fields) {
+      const tasks = beTask(taskData, order);
+      if (tasks)
+        mutate({
+          tasks,
+        });
+    }
+  };
 
   return (
     <ScreenBase
@@ -331,7 +366,13 @@ export function CreateTask({
                 cName="mt-0"
               />
             </YStack>
-            <ButtonTamagui text={TRANSLATIONS.submitButton} />
+            <ButtonTamagui
+              text={TRANSLATIONS.submitButton}
+              isPending={isPending}
+              buttonProps={{
+                onPress: handleSubmit,
+              }}
+            />
           </YStack>
         )}
       </YStack>
