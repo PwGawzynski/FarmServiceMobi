@@ -340,6 +340,7 @@ export const TranslationNames = {
       closedAt: 'components.taskInfoCard.closedAt',
       fieldArea: 'components.taskInfoCard.fieldArea',
       ha: 'components.taskInfoCard.ha',
+      deleteButton: 'components.taskInfoCard.deleteButton',
     },
     fieldSelector: {
       subbmitButton: 'components.fieldSelector.title',
