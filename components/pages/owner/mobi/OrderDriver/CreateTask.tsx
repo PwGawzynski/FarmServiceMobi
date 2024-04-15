@@ -1,53 +1,29 @@
-import { ForwardedRef, RefObject, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
-import { YStack } from 'tamagui';
+import { SizableText, YStack } from 'tamagui';
 import { t } from 'i18next';
-import { useQuery } from '@tanstack/react-query';
 import { ScreenBase } from '../common/ScreenBase';
 import { OrdersDriverScreenProps } from '../../../../../types/self/navigation/Owner/props/orders/OrdersDriverProps';
 import { GuideCard, GuideCardElement } from '../../../../atoms/GuideCard';
 import { ButtonTamagui } from '../../../../atoms/ButtonTamagui';
-import { ClientResponseBase } from '../../../../../FarmServiceApiTypes/Clients/Responses';
 import { TranslationNames } from '../../../../../locales/TranslationNames';
 import { FieldResponseBase } from '../../../../../FarmServiceApiTypes/Field/Ressponses';
 import { WorkerResponseBase } from '../../../../../FarmServiceApiTypes/Worker/Responses';
 import { MachineResponseBase } from '../../../../../FarmServiceApiTypes/Machine/Responses';
-import { getClientFields } from '../../../../../api/clients/Client';
-import { EXPO_PUBLIC_QUERY_STALE_TIME } from '../../../../../settings/query/querySettings';
-import {
-  clientFieldsFilter,
-  machineFilter,
-  searchEngineNameSurnameFilter,
-} from '../../../../../helepers/filterFunctions';
 import List, { ListRef } from '../../../../organisms/List';
-import { createFieldBottomSign } from '../ClientsDriver/clientFields';
-import { Status } from '../../../../../FarmServiceApiTypes/Worker/Enums';
-import { allWorkers } from '../../../../../api/worker/Worker';
-import { getAllMachines } from '../../../../../api/Machine/Machine';
+import { Selector } from '../../../../molecules/Selector';
+import { TaskType } from '../../../../../FarmServiceApiTypes/Task/Enums';
+import { findEnumVal, makeArray } from '../../../../../helepers/MakeArray';
+import { EntityAsACard } from '../../../../molecules/EntityAsACard';
+import { FieldSelector } from '../../../../organisms/FieldSelector';
+import { WorkerSelector } from '../../../../organisms/WorkerSelector';
+import { MachineSelector } from '../../../../organisms/MachineSelector';
 
 enum ScreenState {
   SelectField,
   SelectWorker,
   SelectMachine,
   AllSelected,
-}
-
-interface SelectFieldsProps {
-  client: ClientResponseBase;
-  modalRef: RefObject<BottomSheetModal>;
-  onSetAction: () => void;
-  fieldListRef: ForwardedRef<ListRef<FieldResponseBase>>;
-}
-
-interface SelectWorkerProps {
-  modalRef: RefObject<BottomSheetModal>;
-  onSetAction: () => void;
-  workerListRef: ForwardedRef<ListRef<WorkerResponseBase>>;
-}
-interface SelectMachineProps {
-  modalRef: RefObject<BottomSheetModal>;
-  onSetAction: () => void;
-  machineListRef: ForwardedRef<ListRef<MachineResponseBase>>;
 }
 
 type HintCardObject = {
@@ -59,9 +35,22 @@ type TaskData = {
   fields: FieldResponseBase[] | undefined;
   worker: WorkerResponseBase | undefined;
   machines: MachineResponseBase | undefined;
+  type: TaskType;
+};
+
+type TaskListItem = {
+  field: string;
+  type: string;
+  area: number;
 };
 
 const TRANSLATIONS = {
+  screenTitle: t(TranslationNames.screens.orderDriver.createTask.screenTitle),
+  screenSummaryTitle: t(
+    TranslationNames.screens.orderDriver.createTask.screenSummaryTitle,
+  ),
+  submitButton: t(TranslationNames.screens.orderDriver.createTask.submitButton),
+  ha: t(TranslationNames.screens.orderDriver.createTask.ha),
   SELECT_FIELDS: {
     next_step_button: t(
       TranslationNames.screens.orderDriver.createTask.selectFields
@@ -77,8 +66,8 @@ const TRANSLATIONS = {
   },
   SELECT_WORKER: {
     next_step_button: t(
-      TranslationNames.screens.orderDriver.createTask.selectFields
-        .stepSelectFields,
+      TranslationNames.screens.orderDriver.createTask.selectWorkers
+        .stepSelectWorkers,
     ),
     hintHeader: t(
       TranslationNames.screens.orderDriver.createTask.selectWorkers.hintHeader,
@@ -90,8 +79,8 @@ const TRANSLATIONS = {
   },
   SELECT_MACHINE: {
     next_step_button: t(
-      TranslationNames.screens.orderDriver.createTask.selectFields
-        .stepSelectFields,
+      TranslationNames.screens.orderDriver.createTask.selectMachines
+        .stepSelectMachine,
     ),
     hintHeader: t(
       TranslationNames.screens.orderDriver.createTask.selectMachines.hintHeader,
@@ -100,6 +89,44 @@ const TRANSLATIONS = {
       TranslationNames.screens.orderDriver.createTask.selectMachines
         .hintDescription,
     ),
+  },
+  TASK_SUMMATION: {
+    SUMMARY_CARD: {
+      fields: t(
+        TranslationNames.screens.orderDriver.createTask.summary.summaryCard
+          .fields,
+      ),
+      worker: t(
+        TranslationNames.screens.orderDriver.createTask.summary.summaryCard
+          .workers,
+      ),
+      machine: t(
+        TranslationNames.screens.orderDriver.createTask.summary.summaryCard
+          .machines,
+      ),
+      type: t(
+        TranslationNames.screens.orderDriver.createTask.summary.summaryCard
+          .type,
+      ),
+      totalArea: t(
+        TranslationNames.screens.orderDriver.createTask.summary.summaryCard
+          .totalArea,
+      ),
+    },
+    TYPE_SELECTOR: {
+      label: t(
+        TranslationNames.screens.orderDriver.createTask.summary.typeSelector
+          .label,
+      ),
+      description: t(
+        TranslationNames.screens.orderDriver.createTask.summary.typeSelector
+          .description,
+      ),
+      creatingTasks: t(
+        TranslationNames.screens.orderDriver.createTask.summary.typeSelector
+          .creatingTasks,
+      ),
+    },
   },
 };
 
@@ -118,139 +145,31 @@ const hintCard: Array<HintCardObject> = [
   },
 ];
 
-function FieldSelector({
-  client,
-  modalRef,
-  onSetAction,
-  fieldListRef,
-}: SelectFieldsProps) {
-  const [canSubmit, setCanSubmit] = useState(false);
-  const { data, isError, isFetching } = useQuery({
-    queryKey: ['clientFields', client.id],
-    queryFn: keys => getClientFields(keys.queryKey[1] as string),
-    staleTime: EXPO_PUBLIC_QUERY_STALE_TIME,
-  });
-  return (
-    <YStack f={1}>
-      <List<FieldResponseBase>
-        isSelectable
-        triggerOnSelectedChange={isEmpty => {
-          setCanSubmit(!isEmpty);
-        }}
-        ref={fieldListRef}
-        isFetching={isFetching}
-        isError={isError}
-        data={data}
-        modalRef={modalRef}
-        listStyleSettings={item => ({
-          header: item.nameLabel,
-          bottomRightText: createFieldBottomSign(item),
-          alignment: 'left',
-          infoIco: true,
-        })}
-        filterFunction={clientFieldsFilter}
-        searchEnginePlaceholder="Search Field"
-      />
-      {canSubmit && (
-        <ButtonTamagui
-          text={TRANSLATIONS.SELECT_FIELDS.next_step_button}
-          buttonProps={{
-            onPress: () => onSetAction(),
-          }}
-        />
-      )}
-    </YStack>
-  );
-}
+/* const beTask = (
+  taskData: TaskData,
+  order: OrderResponseBase,
+): CreateTaskReqI[] | undefined =>
+  taskData.fields?.map(
+    field =>
+      ({
+        order: order.id,
+        field: field.id,
+        worker: taskData.worker?.id,
+        machine: taskData.machines?.id,
+        type: taskData.type,
+      }) as CreateTaskReqI,
+  ); */
 
-function WorkerSelector({
-  modalRef,
-  onSetAction,
-  workerListRef,
-}: SelectWorkerProps) {
-  const [canSubmit, setCanSubmit] = useState(false);
-  const { data, isFetching, isError } = useQuery({
-    queryKey: ['workers'],
-    queryFn: allWorkers,
-    staleTime: EXPO_PUBLIC_QUERY_STALE_TIME,
-    gcTime: EXPO_PUBLIC_QUERY_STALE_TIME,
-  });
-  return (
-    <YStack f={1}>
-      <List<WorkerResponseBase>
-        isSelectable
-        triggerOnSelectedChange={isEmpty => {
-          setCanSubmit(!isEmpty);
-        }}
-        ref={workerListRef}
-        isFetching={isFetching}
-        isError={isError}
-        data={data}
-        modalRef={modalRef}
-        listStyleSettings={item => ({
-          header: `${item.personalData.name} ${item.personalData.surname}`,
-          bottomRightText:
-            item.status !== undefined ? Status[item.status] : undefined,
-          alignment: 'right',
-        })}
-        filterFunction={searchEngineNameSurnameFilter}
-        searchEnginePlaceholder="Search by name or surname"
-      />
-      {canSubmit && (
-        <ButtonTamagui
-          text={TRANSLATIONS.SELECT_FIELDS.next_step_button}
-          buttonProps={{
-            onPress: () => onSetAction(),
-          }}
-        />
-      )}
-    </YStack>
+const beTaskListItem = (taskData: TaskData) =>
+  taskData.fields?.map(
+    f =>
+      ({
+        field: f.nameLabel,
+        type: TaskType[taskData.type],
+        area: f.area,
+      }) as TaskListItem,
   );
-}
 
-function MachineSelector({
-  modalRef,
-  onSetAction,
-  machineListRef,
-}: SelectMachineProps) {
-  const [canSubmit, setCanSubmit] = useState(false);
-  const { data, isLoading, isFetching, isError } = useQuery({
-    queryKey: ['machines'],
-    queryFn: getAllMachines,
-  });
-  return (
-    <YStack f={1}>
-      <List<MachineResponseBase>
-        isSelectable
-        triggerOnSelectedChange={isEmpty => {
-          setCanSubmit(!isEmpty);
-        }}
-        ref={machineListRef}
-        isFetching={isFetching}
-        isError={isError}
-        isLoading={isLoading}
-        data={data}
-        modalRef={modalRef}
-        listStyleSettings={item => ({
-          header: item.name,
-          bottomRightText: item.licensePlate,
-          alignment: 'left',
-          infoIco: true,
-        })}
-        filterFunction={machineFilter}
-        searchEnginePlaceholder="Search machine"
-      />
-      {canSubmit && (
-        <ButtonTamagui
-          text={TRANSLATIONS.SELECT_FIELDS.next_step_button}
-          buttonProps={{
-            onPress: () => onSetAction(),
-          }}
-        />
-      )}
-    </YStack>
-  );
-}
 export function CreateTask({
   route: { params },
 }: OrdersDriverScreenProps<'createTask', 'ordersDriver', 'ownerRootDriver'>) {
@@ -261,13 +180,21 @@ export function CreateTask({
   const fieldListRef = useRef<ListRef<FieldResponseBase>>(null);
   const workerListRef = useRef<ListRef<WorkerResponseBase>>(null);
   const machineListRef = useRef<ListRef<MachineResponseBase>>(null);
-  const [taskData, setTaskData] = useState<TaskData | undefined>();
-
+  const [taskData, setTaskData] = useState<TaskData>({
+    fields: undefined,
+    worker: undefined,
+    machines: undefined,
+    type: TaskType.Harvesting,
+  });
   const [screenState, setScreenState] = useState(ScreenState.SelectField);
-  console.log(taskData, 'Tests');
+
   return (
     <ScreenBase
-      name="createTask"
+      name={
+        screenState === ScreenState.AllSelected
+          ? TRANSLATIONS.screenTitle
+          : TRANSLATIONS.screenSummaryTitle
+      }
       bottomSheetsProps={{
         modalRef,
         snapPoints: ['50%', '70%'],
@@ -301,11 +228,12 @@ export function CreateTask({
             client={client}
             modalRef={modalRef}
             onSetAction={() => {
-              setTaskData({
+              setTaskData(p => ({
+                ...p,
                 fields: fieldListRef.current?.items,
                 worker: undefined,
                 machines: undefined,
-              });
+              }));
               setScreenState(ScreenState.SelectWorker);
             }}
             fieldListRef={fieldListRef}
@@ -317,6 +245,7 @@ export function CreateTask({
             workerListRef={workerListRef}
             onSetAction={() => {
               setTaskData(p => ({
+                ...p,
                 fields: p?.fields,
                 worker: workerListRef.current?.items[0],
                 machines: undefined,
@@ -331,6 +260,7 @@ export function CreateTask({
             machineListRef={machineListRef}
             onSetAction={() => {
               setTaskData(p => ({
+                ...p,
                 fields: p?.fields,
                 worker: p?.worker,
                 machines: machineListRef.current?.items[0],
@@ -338,6 +268,69 @@ export function CreateTask({
               setScreenState(ScreenState.AllSelected);
             }}
           />
+        )}
+        {screenState === ScreenState.AllSelected && (
+          <YStack f={1} jc="space-between">
+            <YStack mb="$4">
+              <EntityAsACard
+                data={{
+                  fields: taskData.fields?.length.toString(),
+                  worker: `${taskData.worker?.personalData.name} ${taskData.worker?.personalData.surname}`,
+                  machine: taskData.machines?.name,
+                  type: TaskType[taskData.type].toUpperCase(),
+                  totalArea: `${taskData.fields
+                    ?.reduce(
+                      (acc, field) => Number(acc) + Number(field.area),
+                      0,
+                    )
+                    .toFixed(2)
+                    .toString()} Ha`,
+                }}
+                names={{
+                  fields: TRANSLATIONS.TASK_SUMMATION.SUMMARY_CARD.fields,
+                  worker: TRANSLATIONS.TASK_SUMMATION.SUMMARY_CARD.worker,
+                  machine: TRANSLATIONS.TASK_SUMMATION.SUMMARY_CARD.machine,
+                  type: TRANSLATIONS.TASK_SUMMATION.SUMMARY_CARD.type,
+                  totalArea: TRANSLATIONS.TASK_SUMMATION.SUMMARY_CARD.totalArea,
+                }}
+              />
+            </YStack>
+            <Selector
+              itemListLabel={TRANSLATIONS.TASK_SUMMATION.TYPE_SELECTOR.label}
+              description={
+                TRANSLATIONS.TASK_SUMMATION.TYPE_SELECTOR.description
+              }
+              onValueChange={v =>
+                setTaskData(p => ({ ...p, type: findEnumVal(TaskType, v) }))
+              }
+              value={
+                taskData.type !== undefined
+                  ? TaskType[taskData.type].toLowerCase()
+                  : ''
+              }
+              items={makeArray(TaskType).map(e => ({ name: e }))}
+            />
+            <SizableText className="font-bold uppercase text-xl mt-4">
+              {TRANSLATIONS.TASK_SUMMATION.TYPE_SELECTOR.creatingTasks}
+            </SizableText>
+            <YStack f={1}>
+              <List
+                data={beTaskListItem(taskData)}
+                listStyleSettings={item => ({
+                  header: item.field,
+                  bottomRightText: `${
+                    item.type !== undefined ? item.type : ''
+                  } ${Number(item.area)?.toFixed(2)} ${TRANSLATIONS.ha}`,
+                  alignment: 'left',
+                })}
+                isSelectable={false}
+                isFetching={false}
+                modalRef={modalRef}
+                cName="mt-0"
+              />
+            </YStack>
+            <ButtonTamagui text={TRANSLATIONS.submitButton} />
+          </YStack>
         )}
       </YStack>
     </ScreenBase>
