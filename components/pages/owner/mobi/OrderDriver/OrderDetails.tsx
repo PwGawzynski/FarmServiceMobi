@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { Card, ScrollView, SizableText, YStack } from 'tamagui';
+import { Card, ScrollView, SizableText } from 'tamagui';
 import { t } from 'i18next';
 import { useRef } from 'react';
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
@@ -16,62 +16,11 @@ import { getTaskByOrder } from '../../../../../api/Task/Task';
 import List from '../../../../organisms/List';
 import { TaskResponseBase } from '../../../../../FarmServiceApiTypes/Task/Responses';
 import { TaskType } from '../../../../../FarmServiceApiTypes/Task/Enums';
-import { KeyValuePair } from '../../../../atoms/KeyValuePair';
+import { TaskInfo } from '../../../../atoms/TaskInfo';
 
 function findClientById(clients: ClientResponseBase[] | undefined, id: string) {
   if (clients) return clients.find(client => client.id === id);
   return undefined;
-}
-
-const TaskInfoCardNames = {
-  type: t(TranslationNames.components.taskInfoCard.type),
-  worker: t(TranslationNames.components.taskInfoCard.worker),
-  machine: t(TranslationNames.components.taskInfoCard.machine),
-  createdAt: t(TranslationNames.components.taskInfoCard.createdAt),
-  openedAt: t(TranslationNames.components.taskInfoCard.openedAt),
-  closedAt: t(TranslationNames.components.taskInfoCard.closedAt),
-  fieldArea: t(TranslationNames.components.taskInfoCard.fieldArea),
-};
-
-function TaskInfo({ task }: { task: TaskResponseBase }) {
-  return (
-    <YStack f={1} p="$3">
-      <SizableText color="$color4" className="text-xl uppercase font-bold mb-2">
-        {task.field.nameLabel}
-      </SizableText>
-      <KeyValuePair name={TaskInfoCardNames.type} value={TaskType[task.type]} />
-      <KeyValuePair
-        name={TaskInfoCardNames.worker}
-        value={`${task.worker.personalData.name} ${task.worker.personalData.surname}`}
-      />
-      <KeyValuePair
-        name={TaskInfoCardNames.machine}
-        value={task.machine.name}
-      />
-      <KeyValuePair
-        name={TaskInfoCardNames.createdAt}
-        value={new Date(task.createdAt).toLocaleDateString()}
-      />
-      {task.openedAt && (
-        <KeyValuePair
-          name={TaskInfoCardNames.openedAt}
-          value={new Date(task.openedAt).toLocaleDateString()}
-        />
-      )}
-      {task.closedAt && (
-        <KeyValuePair
-          name={TaskInfoCardNames.closedAt}
-          value={new Date(task.closedAt).toLocaleDateString()}
-        />
-      )}
-      <KeyValuePair
-        name={TaskInfoCardNames.fieldArea}
-        value={`${Number(task.field.area).toFixed(2).toString()} ${t(
-          TranslationNames.components.taskInfoCard.ha,
-        )}`}
-      />
-    </YStack>
-  );
 }
 
 const detailsCardNames = {
@@ -145,7 +94,13 @@ export function OrderDetails({
       });
   };
   const handleTaskPress = (task: TaskResponseBase) => {
-    modalRef.current?.present(<TaskInfo task={task} />);
+    modalRef.current?.present(
+      <TaskInfo
+        order={order}
+        onDeleteProcessed={modalRef.current.dismiss}
+        task={task}
+      />,
+    );
   };
   const {
     data: tasks,
@@ -160,6 +115,7 @@ export function OrderDetails({
     <ScreenBase
       bottomSheetsProps={{
         modalRef,
+        snapPoints: ['40%', '60%'],
       }}
       name={t(TranslationNames.screens.orderDriver.orderDetails.screenName)}
     >
