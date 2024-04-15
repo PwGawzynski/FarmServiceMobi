@@ -150,6 +150,7 @@
       },
       "orderDetails": {
         "screenName": "order Details",
+        "taskListHeader": "Tasks",
         "detailsCard": {
           "cardName": "Details",
           "fields": {
@@ -208,7 +209,7 @@
           "typeSelector": {
             "label": "Task Type",
             "description": "Task Type",
-            "creatingTasks": "Tasks that will be created"
+            "creatingTasks": "Will be created: "
           }
         }
       }
@@ -263,6 +264,16 @@
     }
   },
   "components": {
+    "taskInfoCard": {
+      "type": "Type",
+      "worker": "Worker",
+      "machine": "Machine",
+      "createdAt": "Created at",
+      "openedAt": "Opened at",
+      "closedAt": "Closed at",
+      "fieldArea": "Field Area",
+      "ha": "Ha",
+    },
     "fieldSelector": {
       "title": "Select fields",
       "searchPlaceholder": "Find a field"

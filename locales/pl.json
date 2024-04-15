@@ -124,10 +124,11 @@
     "orderDriver": {
       "editOrder": {
         "screenTitle": "Edytuj zamówienie",
-        "submitButton": "Zapisz zmiany",
+        "submitButton": "Zapisz zmiany"
       },
       "orderDetails": {
         "screenName": "Szczegóły zamówienia",
+        "taskListHeader": "Tasks",
         "detailsCard": {
           "cardName": "Szczegóły",
           "fields": {
@@ -186,7 +187,7 @@
           "typeSelector": {
             "label": "Typ zadania",
             "description": "Wybierz typ zadania, które chcesz utworzyć",
-            "creatingTasks": "Zadania które zostaną utworzone"
+            "creatingTasks": "Zostaną utworzone: "
           }
         }
       }
@@ -262,6 +263,16 @@
     }
   },
   "components": {
+    "taskInfoCard": {
+      "type": "Typ",
+      "worker": "Pracownik",
+      "machine": "Maszyna",
+      "createdAt": "Utworzono dnia",
+      "openedAt": "Otwarte dnia",
+      "closedAt": "Zamknięte dnia",
+      "fieldArea": "Obszar pola",
+      "ha": "Ha"
+    },
     "fieldSelector": {
       "title": "Wybierz pola",
       "searchPlaceholder": "Znajdź pole"

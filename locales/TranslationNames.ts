@@ -194,6 +194,7 @@ export const TranslationNames = {
       },
       orderDetails: {
         screenName: 'screens.orderDriver.orderDetails.screenName',
+        taskListHeader: 'screens.orderDriver.orderDetails.taskListHeader',
         detailsCard: {
           cardName: 'screens.orderDriver.orderDetails.detailsCard.cardName',
           fields: {
@@ -330,6 +331,16 @@ export const TranslationNames = {
     },
   },
   components: {
+    taskInfoCard: {
+      type: 'components.taskInfoCard.type',
+      worker: 'components.taskInfoCard.worker',
+      machine: 'components.taskInfoCard.machine',
+      createdAt: 'components.taskInfoCard.createdAt',
+      openedAt: 'components.taskInfoCard.openedAt',
+      closedAt: 'components.taskInfoCard.closedAt',
+      fieldArea: 'components.taskInfoCard.fieldArea',
+      ha: 'components.taskInfoCard.ha',
+    },
     fieldSelector: {
       subbmitButton: 'components.fieldSelector.title',
       searchPlaceholder: 'components.fieldSelector.searchPlaceholder',
