@@ -11,6 +11,7 @@ import {
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
 import { XStack, YStack } from 'tamagui';
 import { ListRenderItemInfo } from '@shopify/flash-list';
+import Toast from 'react-native-toast-message';
 import { SearchBox } from '../molecules/SearchBox';
 import { ButtonTamagui } from '../atoms/ButtonTamagui';
 import DeselectIco from '../../assets/list-x.svg';
@@ -22,11 +23,11 @@ import { ListItem, ListItemStyleSettings } from './ListItem';
 export interface Props<T extends Record<string, any>> {
   /* eslint-disable react/no-unused-prop-types */
   modalRef: RefObject<BottomSheetModal>;
-  searchEnginePlaceholder: string;
+  searchEnginePlaceholder?: string;
   isSelectable?: boolean;
   triggerOnSelectedChange?: (isEmpty: boolean) => void;
   data: T[] | undefined;
-  filterFunction: (
+  filterFunction?: (
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     data: any[] | undefined,
     filter: string | undefined,
@@ -40,6 +41,8 @@ export interface Props<T extends Record<string, any>> {
   navigationParamName?: string;
   listEmptyText?: string;
   ref?: ForwardedRef<ListRef<T>>;
+  maxSelectedItems?: number;
+  cName?: string;
   /* eslint-enable react/no-unused-prop-types */
 }
 export interface ListRef<T> {
@@ -64,14 +67,27 @@ function ListMemo<T extends Record<string, any>>(
     onPressNavigateTo,
     listEmptyText,
     searchEnginePlaceholder,
+    maxSelectedItems,
+    cName,
   }: Props<T>,
   ref: ForwardedRef<ListRef<T>>,
 ) {
   const [filter, setFilter] = useState<string | undefined>(undefined);
   const [selectedItems, setSelectedItems] = useState<T[] | []>([]);
-  const sorted = filterFunction(data, filter);
+  const sorted = filterFunction ? filterFunction(data, filter) : data;
+  const maxSelected = maxSelectedItems ?? data?.length;
 
-  const handleFieldSelection = (item: T) => setSelectedItems(p => [...p, item]);
+  const handleFieldSelection = (item: T) => {
+    setSelectedItems(p => (p.length === maxSelected ? p : [...p, item]));
+    if (maxSelected && selectedItems.length === maxSelected)
+      Toast.show({
+        type: 'info',
+        text1: 'Cannot select more items',
+        text2: 'You have reached the maximum number of selected items',
+        autoHide: true,
+        visibilityTime: 1500,
+      });
+  };
   const handleFieldDeselection = (item: T) =>
     setSelectedItems(prevState => prevState.filter(i => i.id !== item.id));
   const handleSelectBtn = () => {
@@ -132,24 +148,26 @@ function ListMemo<T extends Record<string, any>>(
 
   return (
     <>
-      <YStack mt="$4" mb="$4">
-        <XStack ai="center">
-          <YStack f={1}>
-            <SearchBox
-              onTextChange={text => setFilter(text)}
-              placeholder={searchEnginePlaceholder}
-            />
-          </YStack>
-          {isSelectable && (
-            <ButtonTamagui
-              icon={selectedItems.length ? <DeselectIco /> : <SelectAllIco />}
-              buttonProps={{
-                onPress: handleSelectBtn,
-                ml: '$2',
-              }}
-            />
-          )}
-        </XStack>
+      <YStack mt="$4" mb="$4" className={cName}>
+        {filterFunction && (
+          <XStack ai="center">
+            <YStack f={1}>
+              <SearchBox
+                onTextChange={text => setFilter(text)}
+                placeholder={searchEnginePlaceholder ?? 'Search'}
+              />
+            </YStack>
+            {isSelectable && (
+              <ButtonTamagui
+                icon={selectedItems.length ? <DeselectIco /> : <SelectAllIco />}
+                buttonProps={{
+                  onPress: handleSelectBtn,
+                  ml: '$2',
+                }}
+              />
+            )}
+          </XStack>
+        )}
       </YStack>
       <YStack f={1}>
         <UniversalList<T>
