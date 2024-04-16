@@ -29,6 +29,7 @@ interface Props {
   gpsCords?: LocationObject;
   client: ClientResponseBase;
   field?: FieldResponseBase;
+  goBack?: boolean;
 }
 
 export interface ExtendedFormData extends DataFromXMLRes {
@@ -82,6 +83,7 @@ export function AddFieldForm({
   client,
   field,
   navigation,
+  goBack,
 }: Props) {
   const queryClient = useQueryClient();
   const { mutate, isSuccess, error, isPending } = useMutation({
@@ -119,14 +121,18 @@ export function AddFieldForm({
 
   useEffect(() => {
     if (isSuccess || isEditSuccess)
-      navigation.navigate('OperationConfirmed', {
-        redirectScreenName: 'clientFields',
-        shownMessage: t(
-          TranslationNames.screens.authDriver.createField.successMessage,
-        ),
-        payload: { client },
-        goBack: true,
-      });
+      if (goBack) {
+        navigation.goBack();
+      } else {
+        navigation.navigate('OperationConfirmed', {
+          redirectScreenName: 'clientFields',
+          shownMessage: t(
+            TranslationNames.screens.authDriver.createField.successMessage,
+          ),
+          payload: { client },
+          goBack: true,
+        });
+      }
   }, [isSuccess, isEditSuccess]);
   const {
     control,
