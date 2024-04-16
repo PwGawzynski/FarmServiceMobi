@@ -1,4 +1,4 @@
-import { ForwardedRef, RefObject, useState } from 'react';
+import { ForwardedRef, RefObject, useMemo, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { YStack } from 'tamagui';
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
@@ -15,6 +15,7 @@ export interface SelectMachineProps {
   onSetAction: () => void;
   machineListRef: ForwardedRef<ListRef<MachineResponseBase>>;
   maxSelectedItems?: number;
+  ListEmptyComponent?: JSX.Element;
 }
 
 const TRANSLATIONS = {
@@ -31,12 +32,14 @@ export function MachineSelector({
   onSetAction,
   machineListRef,
   maxSelectedItems,
+  ListEmptyComponent,
 }: SelectMachineProps) {
   const [canSubmit, setCanSubmit] = useState(false);
   const { data, isLoading, isFetching, isError } = useQuery({
     queryKey: ['machines'],
     queryFn: getAllMachines,
   });
+  const listEmptyComponent = useMemo(() => ListEmptyComponent, []);
   return (
     <YStack f={1}>
       <List<MachineResponseBase>
@@ -47,6 +50,7 @@ export function MachineSelector({
         maxSelectedItems={maxSelectedItems}
         ref={machineListRef}
         isFetching={isFetching}
+        listEmptyComponent={listEmptyComponent}
         isError={isError}
         isLoading={isLoading}
         data={data}

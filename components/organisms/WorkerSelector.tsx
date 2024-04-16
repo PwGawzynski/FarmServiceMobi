@@ -1,4 +1,4 @@
-import { ForwardedRef, RefObject, useState } from 'react';
+import { ForwardedRef, RefObject, useMemo, useState } from 'react';
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
 import { useQuery } from '@tanstack/react-query';
 import { YStack } from 'tamagui';
@@ -17,6 +17,7 @@ export interface SelectWorkerProps {
   onSetAction: () => void;
   workerListRef: ForwardedRef<ListRef<WorkerResponseBase>>;
   maxSelectedItems?: number;
+  ListEmptyComponent?: JSX.Element;
 }
 const TRANSLATIONS = {
   searchPlaceholder: t(
@@ -29,6 +30,7 @@ export function WorkerSelector({
   onSetAction,
   workerListRef,
   maxSelectedItems,
+  ListEmptyComponent,
 }: SelectWorkerProps) {
   const [canSubmit, setCanSubmit] = useState(false);
   const { data, isFetching, isError } = useQuery({
@@ -37,10 +39,13 @@ export function WorkerSelector({
     staleTime: EXPO_PUBLIC_QUERY_STALE_TIME,
     gcTime: EXPO_PUBLIC_QUERY_STALE_TIME,
   });
+  const listEmptyComponent = useMemo(() => ListEmptyComponent, []);
+
   return (
     <YStack f={1}>
       <List<WorkerResponseBase>
         isSelectable
+        listEmptyComponent={listEmptyComponent}
         triggerOnSelectedChange={isEmpty => {
           setCanSubmit(!isEmpty);
         }}
