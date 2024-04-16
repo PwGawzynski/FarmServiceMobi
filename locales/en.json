@@ -211,7 +211,10 @@
             "description": "Task Type",
             "creatingTasks": "Will be created: "
           }
-        }
+        },
+        "fieldSelectorEmptyList": "No fields to display, click below to create new one",
+        "workerSelectorEmptyList": "No workers to display, click below to create new one",
+        "machineSelectorEmptyList": "No machines to display, click below to create new one"
       }
     },
     "ordersDesktopDriver":{
@@ -264,6 +267,10 @@
     }
   },
   "components": {
+    "list": {
+      "cannotSelectMore": "Cannot select more items",
+      "cannotSelectMoreDescription": "You have reached the maximum number of selected items"
+    },
     "taskInfoCard": {
       "type": "Type",
       "worker": "Worker",

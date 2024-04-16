@@ -189,7 +189,10 @@
             "description": "Wybierz typ zadania, które chcesz utworzyć",
             "creatingTasks": "Zostaną utworzone: "
           }
-        }
+        },
+        "fieldSelectorEmptyList": "Brak pól do wyświetlenia, kliknij poniżej aby dodać nowe",
+        "workerSelectorEmptyList": "Brak pracowników do wyświetlenia, kliknij poniżej aby dodać nowego",
+        "machineSelectorEmptyList": "Brak maszyn do wyświetlenia, kliknij poniżej aby dodać nową"
       }
     },
     "ordersDesktopDriver":{
@@ -263,6 +266,10 @@
     }
   },
   "components": {
+    "list": {
+      "cannotSelectMore": "Nie można wybrać więcej elementów",
+      "cannotSelectMoreDescription": "Osiągnięto maksymalną liczbę wybranych elementów"
+    },
     "taskInfoCard": {
       "type": "Typ",
       "worker": "Pracownik",

@@ -273,6 +273,12 @@ export const TranslationNames = {
               'screens.orderDriver.createTask.summary.typeSelector.creatingTasks',
           },
         },
+        fieldSelectorEmptyList:
+          'screens.orderDriver.createTask.fieldSelectorEmptyList',
+        workerSelectorEmptyList:
+          'screens.orderDriver.createTask.workerSelectorEmptyList',
+        machineSelectorEmptyList:
+          'screens.orderDriver.createTask.machineSelectorEmptyList',
       },
     },
     ordersDesktopDriver: {
@@ -331,6 +337,11 @@ export const TranslationNames = {
     },
   },
   components: {
+    list: {
+      cannotSelectMore: 'components.list.cannotSelectMore',
+      cannotSelectMoreDescription:
+        'components.list.cannotSelectMoreDescription',
+    },
     taskInfoCard: {
       type: 'components.taskInfoCard.type',
       worker: 'components.taskInfoCard.worker',
