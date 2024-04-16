@@ -17,6 +17,7 @@ const WELCOME_ANIMATION_DURATION = 3000;
 
 export function AddWorker({
   navigation,
+  route: { params },
 }: WorkersDesktopDriverScreenProps<
   'addWorker',
   'workersDesktopRoot',
@@ -52,11 +53,14 @@ export function AddWorker({
       resetWorker();
     }
     let timeout: NodeJS.Timeout;
-    if (worker)
-      setTimeout(
+    if (worker && !params?.goBack) {
+      timeout = setTimeout(
         () => navigation.navigate('workersDesktop'),
         WELCOME_ANIMATION_DURATION,
       );
+    } else if (worker && params?.goBack) {
+      navigation.goBack();
+    }
     return () => clearTimeout(timeout);
   }, [isFocused, worker]);
 
