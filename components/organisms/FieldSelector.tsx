@@ -1,4 +1,4 @@
-import { ForwardedRef, RefObject, useState } from 'react';
+import { ForwardedRef, RefObject, useMemo, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { YStack } from 'tamagui';
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
@@ -19,6 +19,7 @@ export interface SelectFieldsProps {
   onSetAction: () => void;
   fieldListRef: ForwardedRef<ListRef<FieldResponseBase>>;
   maxSelectedItems?: number;
+  ListEmptyComponent?: JSX.Element;
 }
 const TRANSLATIONS = {
   searchPlaceholder: t(
@@ -32,6 +33,7 @@ export function FieldSelector({
   onSetAction,
   fieldListRef,
   maxSelectedItems,
+  ListEmptyComponent,
 }: SelectFieldsProps) {
   const [canSubmit, setCanSubmit] = useState(false);
   const { data, isError, isFetching } = useQuery({
@@ -39,10 +41,13 @@ export function FieldSelector({
     queryFn: keys => getClientFields(keys.queryKey[1] as string),
     staleTime: EXPO_PUBLIC_QUERY_STALE_TIME,
   });
+  const listEmptyComponent = useMemo(() => ListEmptyComponent, []);
+
   return (
     <YStack f={1}>
       <List<FieldResponseBase>
         isSelectable
+        listEmptyComponent={listEmptyComponent}
         triggerOnSelectedChange={isEmpty => {
           setCanSubmit(!isEmpty);
         }}
