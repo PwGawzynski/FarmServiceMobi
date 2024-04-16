@@ -4,5 +4,6 @@ export type MachinesDesktopDriverParamList = {
   machinesDesktop: undefined;
   addMachine: {
     machine?: MachineResponseBase | undefined;
+    goBack?: boolean;
   };
 };

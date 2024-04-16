@@ -1,4 +1,6 @@
 export type WorkersDesktopDriverParamList = {
   workersDesktop: undefined;
-  addWorker: undefined;
+  addWorker: {
+    goBack?: boolean;
+  };
 };
