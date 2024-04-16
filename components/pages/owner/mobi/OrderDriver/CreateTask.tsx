@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
 import { SizableText, YStack } from 'tamagui';
 import { t } from 'i18next';
@@ -23,6 +23,7 @@ import { createTask } from '../../../../../api/Task/Task';
 import { CreateTaskReqI } from '../../../../../FarmServiceApiTypes/Task/Requests';
 import { OrderResponseBase } from '../../../../../FarmServiceApiTypes/Order/Ressponses';
 import { TaskResponseBase } from '../../../../../FarmServiceApiTypes/Task/Responses';
+import { EmptyListItemCreator } from '../../../../atoms/EmptyListItemCreator';
 
 enum ScreenState {
   SelectField,
@@ -133,6 +134,17 @@ const TRANSLATIONS = {
       ),
     },
   },
+  LIST_EMPTY: {
+    fieldList: t(
+      TranslationNames.screens.orderDriver.createTask.fieldSelectorEmptyList,
+    ),
+    workerList: t(
+      TranslationNames.screens.orderDriver.createTask.workerSelectorEmptyList,
+    ),
+    machineList: t(
+      TranslationNames.screens.orderDriver.createTask.machineSelectorEmptyList,
+    ),
+  },
 };
 
 const hintCard: Array<HintCardObject> = [
@@ -222,6 +234,56 @@ export function CreateTask({
     }
   };
 
+  const FieldSelectorEmpty = useMemo(
+    () => (
+      <EmptyListItemCreator
+        onCreate={() =>
+          navigation.navigate('addField', {
+            client,
+            goBack: true,
+          })
+        }
+        infoText={TRANSLATIONS.LIST_EMPTY.fieldList}
+      />
+    ),
+    [],
+  );
+  const WorkerSelectorEmpty = useMemo(
+    () => (
+      <EmptyListItemCreator
+        onCreate={() =>
+          navigation.navigate('workersDriver', {
+            screen: 'workersDesktopRoot',
+            params: {
+              screen: 'addWorker',
+              params: {
+                goBack: true,
+              },
+            },
+          })
+        }
+        infoText={TRANSLATIONS.LIST_EMPTY.workerList}
+      />
+    ),
+    [],
+  );
+  const MachineSelectorEmpty = useMemo(
+    () => (
+      <EmptyListItemCreator
+        onCreate={() =>
+          navigation.navigate('machinesDriver', {
+            screen: 'machinesDesktopRoot',
+            params: {
+              screen: 'addMachine',
+              params: { machine: undefined, goBack: true },
+            },
+          })
+        }
+        infoText={TRANSLATIONS.LIST_EMPTY.machineList}
+      />
+    ),
+    [],
+  );
   return (
     <ScreenBase
       name={
@@ -259,6 +321,7 @@ export function CreateTask({
         </YStack>
         {screenState === ScreenState.SelectField && (
           <FieldSelector
+            ListEmptyComponent={FieldSelectorEmpty}
             client={client}
             modalRef={modalRef}
             onSetAction={() => {
@@ -275,6 +338,7 @@ export function CreateTask({
         )}
         {screenState === ScreenState.SelectWorker && (
           <WorkerSelector
+            ListEmptyComponent={WorkerSelectorEmpty}
             modalRef={modalRef}
             workerListRef={workerListRef}
             maxSelectedItems={1}
@@ -291,6 +355,7 @@ export function CreateTask({
         )}
         {screenState === ScreenState.SelectMachine && (
           <MachineSelector
+            ListEmptyComponent={MachineSelectorEmpty}
             modalRef={modalRef}
             machineListRef={machineListRef}
             maxSelectedItems={1}
@@ -320,7 +385,7 @@ export function CreateTask({
                       0,
                     )
                     .toFixed(2)
-                    .toString()} Ha`,
+                    .toString()} ${TRANSLATIONS.ha}`,
                 }}
                 names={{
                   fields: TRANSLATIONS.TASK_SUMMATION.SUMMARY_CARD.fields,
