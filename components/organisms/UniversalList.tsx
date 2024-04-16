@@ -16,6 +16,7 @@ export type Props<T> = {
   listEmptyComponent?: JSX.Element;
   listEmptyText?: string;
   swipeRightAnimation?: boolean;
+  beFlex?: boolean;
 };
 
 const EL_HEIGHT = 100;
@@ -28,10 +29,12 @@ export function UniversalList<T>({
   listEmptyComponent,
   listEmptyText,
   swipeRightAnimation,
+  beFlex,
 }: Props<T>) {
   const ListEmptyComponent = useMemo(
     () => (
       <ListInfo
+        beFlex={beFlex}
         Ico={Empty}
         text={
           listEmptyText ||
