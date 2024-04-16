@@ -162,7 +162,8 @@ export function AddMachine({
     }
     if (isSuccess || editIsSuccess) {
       resetMachine();
-      navigation.navigate('machinesDesktop');
+      if (params?.goBack) navigation.navigate('machinesDesktop');
+      else navigation.goBack();
     }
   }, [isSuccess, error, editIsSuccess, editError]);
 
