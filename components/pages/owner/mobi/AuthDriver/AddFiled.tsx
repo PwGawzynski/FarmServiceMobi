@@ -41,7 +41,7 @@ const initAlert: AlertI = {
 export function AddFiled({
   navigation,
   route: {
-    params: { client },
+    params: { client, goBack },
   },
 }: AuthDriverProps<'addField'>) {
   const [machineState, setMachineState] = useState<State>(
@@ -163,6 +163,7 @@ export function AddFiled({
           gpsCords={locationData}
           client={client}
           navigation={navigation}
+          goBack={goBack}
         />
       )}
     </ScreenBase>
