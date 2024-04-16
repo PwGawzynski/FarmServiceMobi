@@ -17,7 +17,7 @@ export type AuthDriverParamList = {
   loginByEmail: undefined;
   chooseRegisterType: undefined;
   passwordReset: undefined;
-  addField: { client: ClientResponseBase };
+  addField: { client: ClientResponseBase; goBack?: boolean };
   editField: { client: ClientResponseBase; field: FieldResponseBase };
   ownerRootDriver: NavigatorScreenParams<OwnerRootDriverParamList>;
   workerRootDriver: NavigatorScreenParams<WorkerRootDriverParamList>;
