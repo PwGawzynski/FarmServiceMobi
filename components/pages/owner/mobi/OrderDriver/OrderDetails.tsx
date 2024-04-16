@@ -179,6 +179,7 @@ export function OrderDetails({
         isFetching={isPending}
         isError={isError}
         isLoading={isLoading}
+        beFlex
       />
       <ButtonTamagui
         text={t(TranslationNames.screens.orderDriver.orderDetails.tasksButton)}
