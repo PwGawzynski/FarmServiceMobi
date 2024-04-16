@@ -140,7 +140,6 @@ export class ApiSelf {
       const now = new Date();
       const tokenDate = new Date(token.last_updated_access_token_at);
       // time is minute reduced to prevent logout after loading desktop and to give time to restore tokens
-      console.log(now.getTime() - tokenDate.getTime() < ACCESS_TOKEN_LIVE_TIME);
       return now.getTime() - tokenDate.getTime() < ACCESS_TOKEN_LIVE_TIME;
     } catch (e) {
       return false;
@@ -192,6 +191,7 @@ export class ApiSelf {
    * @throws AxiosError when req went wrong, Error when saving operation went wrong
    */
   static async restoreTokens() {
+    console.log('RESTORE CALL FLAG', ApiSelf.restoreFlag);
     await ApiSelf.initTokens();
     if (!ApiSelf.restoreFlag) {
       ApiSelf.restoreFlag = true;
