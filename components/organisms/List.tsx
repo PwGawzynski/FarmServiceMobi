@@ -12,12 +12,14 @@ import { BottomSheetModal } from '@gorhom/bottom-sheet';
 import { XStack, YStack } from 'tamagui';
 import { ListRenderItemInfo } from '@shopify/flash-list';
 import Toast from 'react-native-toast-message';
+import { t } from 'i18next';
 import { SearchBox } from '../molecules/SearchBox';
 import { ButtonTamagui } from '../atoms/ButtonTamagui';
 import DeselectIco from '../../assets/list-x.svg';
 import SelectAllIco from '../../assets/list-checks.svg';
 import { UniversalList } from './UniversalList';
 import { ListItem, ListItemStyleSettings } from './ListItem';
+import { TranslationNames } from '../../locales/TranslationNames';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export interface Props<T extends Record<string, any>> {
@@ -45,6 +47,7 @@ export interface Props<T extends Record<string, any>> {
   cName?: string;
   listEmptyComponent?: JSX.Element;
   swipeRightAnimation?: boolean;
+  beFlex?: boolean;
   /* eslint-enable react/no-unused-prop-types */
 }
 export interface ListRef<T> {
@@ -73,6 +76,7 @@ function ListMemo<T extends Record<string, any>>(
     cName,
     listEmptyComponent,
     swipeRightAnimation,
+    beFlex,
   }: Props<T>,
   ref: ForwardedRef<ListRef<T>>,
 ) {
@@ -86,8 +90,8 @@ function ListMemo<T extends Record<string, any>>(
     if (maxSelected && selectedItems.length === maxSelected)
       Toast.show({
         type: 'info',
-        text1: 'Cannot select more items',
-        text2: 'You have reached the maximum number of selected items',
+        text1: t(TranslationNames.components.list.cannotSelectMore),
+        text2: t(TranslationNames.components.list.cannotSelectMoreDescription),
         autoHide: true,
         visibilityTime: 1500,
       });
@@ -175,6 +179,7 @@ function ListMemo<T extends Record<string, any>>(
       </YStack>
       <YStack f={1}>
         <UniversalList<T>
+          beFlex={beFlex}
           listEmptyComponent={listEmptyComponent}
           listEmptyText={listEmptyText}
           renderItem={renderItem}
