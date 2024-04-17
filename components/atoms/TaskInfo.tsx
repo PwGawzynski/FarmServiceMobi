@@ -48,6 +48,7 @@ export function TaskInfo({ task, onDeleteProcessed, order }: Props) {
   const handleOnDelete = () => {
     mutate(task.id);
   };
+
   return (
     <YStack f={1} p="$3">
       <XStack justifyContent="space-between">
