@@ -1,6 +1,8 @@
 import { Dimensions, View } from 'react-native';
 import { SizableText, useTheme, YStack } from 'tamagui';
 import React from 'react';
+import { t } from 'i18next';
+import { TranslationNames } from '../../locales/TranslationNames';
 
 export type ListEmptyProps = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -10,6 +12,10 @@ export type ListEmptyProps = {
   children?: React.ReactElement | React.ReactElement[] | boolean;
   color?: string;
   beFlex?: boolean;
+};
+
+const TRANSLATIONS = {
+  unknownError: t(TranslationNames.components.listInfo.unknownError),
 };
 
 export function ListInfo({
@@ -41,7 +47,7 @@ export function ListInfo({
           className="mt-8  text-center"
           fontSize="$5"
         >
-          {text ?? 'Unknown Error Occurred!'}
+          {text ?? TRANSLATIONS.unknownError}
         </SizableText>
         {children}
       </YStack>
