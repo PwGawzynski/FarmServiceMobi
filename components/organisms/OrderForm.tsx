@@ -24,6 +24,11 @@ export interface OrderFormData {
   additionalInfo?: string;
 }
 
+const TRANSLATIONS = {
+  pendingInfo: t(TranslationNames.components.orderForm.pendingStatus),
+  submitButton: t(TranslationNames.components.orderForm.submitButton),
+};
+
 export function OrderForm({ client, onSuccess }: Props) {
   const {
     control,
@@ -82,11 +87,11 @@ export function OrderForm({ client, onSuccess }: Props) {
         <PendingInfo
           addClassName="mt-4 max-h-6"
           isVisible={isPending}
-          infoText="Creating order"
+          infoText={TRANSLATIONS.pendingInfo}
         />
       </YStack>
       <ButtonTamagui
-        text="Submit"
+        text={TRANSLATIONS.submitButton}
         buttonProps={{
           onPress: handleSubmit(onSubmit),
         }}
