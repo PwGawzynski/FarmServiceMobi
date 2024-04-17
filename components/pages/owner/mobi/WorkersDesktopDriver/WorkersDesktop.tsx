@@ -11,6 +11,13 @@ import { WorkerResponseBase } from '../../../../../FarmServiceApiTypes/Worker/Re
 import List from '../../../../organisms/List';
 import { Status } from '../../../../../FarmServiceApiTypes/Worker/Enums';
 
+const TRANSLATIONS = {
+  title: t(TranslationNames.screens.ownerRootDriver.workersDesktop.title),
+  searchWorker: t(
+    TranslationNames.screens.ownerRootDriver.workersDesktop.searchPlaceholder,
+  ),
+};
+
 export function WorkersDesktop() {
   const modalRef = useRef<BottomSheetModal>(null);
   const { data, isFetching, isError } = useQuery({
@@ -21,7 +28,7 @@ export function WorkersDesktop() {
   });
   return (
     <ScreenBase
-      name={t(TranslationNames.screens.ownerRootDriver.workersDesktop.title)}
+      name={TRANSLATIONS.title}
       bottomSheetsProps={{
         modalRef,
       }}
@@ -46,7 +53,7 @@ export function WorkersDesktop() {
           };
         }}
         filterFunction={searchEngineNameSurnameFilter}
-        searchEnginePlaceholder="Search by name or surname"
+        searchEnginePlaceholder={TRANSLATIONS.searchWorker}
       />
     </ScreenBase>
   );
