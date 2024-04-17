@@ -119,6 +119,11 @@
         "clientDataButton": "Informacje",
         "clientFieldsButton": "Pola klienta",
         "clientOrdersButton": "Dodaj nowe zamówienie"
+      },
+      "clientFields": {
+        "title": "Fields",
+        "searchPlaceholder": "Find a field",
+        "submitButton": "Add field"
       }
     },
     "orderDriver": {
@@ -232,6 +237,13 @@
       }
     },
     "ownerRootDriver": {
+      "addWorker": {
+        "screenTitle": "Add worker",
+        "scanQrCode": "Scan QR code from worker's app",
+        "pendingStatus": "Adding worker...",
+        "welcomeAnimationStartText": "Worker",
+        "welcomeAnimationEndText": "has been added"
+      },
       "workerAssignation": {
         "qrCodeScanCommunication": "Pokaż właścicielowi kod QR, aby zeskanował go za pomocą swojej aplikacji FarmService",
         "qrCodeTimeOut": "Zeskanuj kod QR w ciągu 60 sekund",
@@ -266,6 +278,19 @@
     }
   },
   "components": {
+    "orderForm": {
+      "pendingStatus": "Tworzenie zamówienia...",
+      "submitButtonText": "Utwórz zamówienie"
+    },
+    "verticalList": {
+      "problemOccurred": "Coś poszło nie tak, spróbuj ponownie później"
+    },
+    "listInfo": {
+      "unknownError": "Coś poszło nie tak"
+    },
+    "emptyListItemCreator": {
+      "button": "Dodaj nowy"
+    },
     "list": {
       "cannotSelectMore": "Nie można wybrać więcej elementów",
       "cannotSelectMoreDescription": "Osiągnięto maksymalną liczbę wybranych elementów"
@@ -347,7 +372,8 @@
       "deleteFieldAlertTitle": "Jeseś pewien?",
       "deleteFieldAlertDescription": "Czy na pewno chcesz usunąć to pole? Ta operacja jest nieodwracalna.",
       "deleteFieldAlertDeleteButton": "Usuń",
-      "deleteFieldAlertCancelButton": "Anuluj"
+      "deleteFieldAlertCancelButton": "Anuluj",
+      "ha": "Ha"
     }
   },
   "addressForm": {

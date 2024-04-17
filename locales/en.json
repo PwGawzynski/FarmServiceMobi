@@ -119,6 +119,11 @@
         "clientDataButton": "Info",
         "clientFieldsButton": "Fields",
         "clientOrdersButton": "Start new order"
+      },
+      "clientFields": {
+        "title": "Fields",
+        "searchPlaceholder": "Find a field",
+        "submitButton": "Add field"
       }
     },
     "clientDesktopDriver": {
@@ -232,6 +237,13 @@
         }
     },
     "ownerRootDriver": {
+      "addWorker": {
+        "screenTitle": "Add worker",
+        "scanQrCode": "Scan QR code from worker's app",
+        "pendingStatus": "Adding worker...",
+        "welcomeAnimationStartText": "Worker",
+        "welcomeAnimationEndText": "has been added"
+      },
       "workerAssignation": {
         "qrCodeScanCommunication": "Let the owner scan the QR code to assign you to the company",
         "qrCodeTimeOut": "Scan this code before the timer runs out",
@@ -267,6 +279,19 @@
     }
   },
   "components": {
+    "orderForm": {
+      "pendingStatus": "Creating order...",
+      "submitButton": "Create"
+    },
+    "verticalList": {
+      "problemOccurred": "Problem occurred, please try again later"
+    },
+    "listInfo": {
+      "unknownError": "Unknown error occurred"
+    },
+    "emptyListItemCreator": {
+      "button": "Create"
+    },
     "list": {
       "cannotSelectMore": "Cannot select more items",
       "cannotSelectMoreDescription": "You have reached the maximum number of selected items"
@@ -347,7 +372,8 @@
       "deleteFieldAlertTitle": "Are you sure?",
       "deleteFieldAlertDescription": "Are you sure you want to delete this field? This action cannot be undone",
       "deleteFieldAlertDeleteButton": "Delete",
-      "deleteFieldAlertCancelButton": "Cancel"
+      "deleteFieldAlertCancelButton": "Cancel",
+      "ha": "Ha"
     }
   },
   "addressForm": {

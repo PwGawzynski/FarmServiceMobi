@@ -154,6 +154,12 @@ export const TranslationNames = {
         clientOrdersButton:
           'screens.clientDriver.clientControlPanel.clientOrdersButton',
       },
+      clientFields: {
+        title: 'screens.clientDriver.clientFields.title',
+        searchPlaceholder:
+          'screens.clientDriver.clientFields.searchPlaceholder',
+        submitButton: 'screens.clientDriver.clientFields.submitButton',
+      },
     },
     clientDesktopDriver: {
       createClient: {
@@ -298,6 +304,15 @@ export const TranslationNames = {
       },
     },
     ownerRootDriver: {
+      addWorker: {
+        screenTitle: 'screens.ownerRootDriver.addWorker.screenTitle',
+        scanQrCode: 'screens.ownerRootDriver.addWorker.scanQrCode',
+        pendingStatus: 'screens.ownerRootDriver.addWorker.pendingStatus',
+        welcomeAnimationStartText:
+          'screens.ownerRootDriver.addWorker.welcomeAnimationStartText',
+        welcomeAnimationEndText:
+          'screens.ownerRootDriver.addWorker.welcomeAnimationEndText',
+      },
       workerAssignation: {
         qrCodeScanCommunication:
           'screens.ownerRootDriver.workerAssignation.qrCodeScanCommunication',
@@ -337,6 +352,19 @@ export const TranslationNames = {
     },
   },
   components: {
+    orderForm: {
+      pendingStatus: 'components.orderForm.pendingStatus',
+      submitButton: 'components.orderForm.submitButton',
+    },
+    verticalList: {
+      problemOccurred: 'components.verticalList.problemOccurred',
+    },
+    listInfo: {
+      unknownError: 'components.listEmpty.unknownError',
+    },
+    emptyListItemCreator: {
+      button: 'components.emptyListItemCreator.button',
+    },
     list: {
       cannotSelectMore: 'components.list.cannotSelectMore',
       cannotSelectMoreDescription:
@@ -425,6 +453,7 @@ export const TranslationNames = {
         'components.filedBottomSheet.deleteFieldAlertDeleteButton',
       deleteFieldAlertCancelButton:
         'components.filedBottomSheet.deleteFieldAlertCancelButton',
+      ha: 'components.filedBottomSheet.ha',
     },
   },
   addressForm: {
