@@ -2,6 +2,7 @@ import { YStack } from 'tamagui';
 import { useRef } from 'react';
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
 import { useQuery } from '@tanstack/react-query';
+import { t } from 'i18next';
 import { ScreenBase } from '../common/ScreenBase';
 import { ClientsDriverScreenProps } from '../../../../../types/self/navigation/Owner/props/clients/ClientsDriverProps';
 import { ButtonTamagui } from '../../../../atoms/ButtonTamagui';
@@ -12,6 +13,7 @@ import List from '../../../../organisms/List';
 import { FieldResponseBase } from '../../../../../FarmServiceApiTypes/Field/Ressponses';
 import { clientFieldsFilter } from '../../../../../helepers/filterFunctions';
 import { FieldBottomSheetContent } from '../../../../molecules/FieldBottomSheetContent';
+import { TranslationNames } from '../../../../../locales/TranslationNames';
 
 export const createFieldBottomSign = (item: FieldResponseBase) =>
   `${
@@ -23,6 +25,16 @@ export const createFieldBottomSign = (item: FieldResponseBase) =>
   )}  ${
     Number.isNaN(Number(item.area)) ? '' : Number(item.area).toFixed(2)
   } Ha  (~${Math.random().toFixed(2)} Km)`;
+
+const TRANSLATIONS = {
+  fields: t(TranslationNames.screens.clientDriver.clientFields.title),
+  searchField: t(
+    TranslationNames.screens.clientDriver.clientFields.searchPlaceholder,
+  ),
+  submitButton: t(
+    TranslationNames.screens.clientDriver.clientFields.submitButton,
+  ),
+};
 
 export function ClientFields({
   route,
@@ -52,7 +64,7 @@ export function ClientFields({
 
   return (
     <ScreenBase
-      name="fields"
+      name={TRANSLATIONS.fields}
       bottomSheetsProps={{
         modalRef,
         snapPoints: ['50%', '70%'],
@@ -71,12 +83,12 @@ export function ClientFields({
           infoIco: true,
         })}
         filterFunction={clientFieldsFilter}
-        searchEnginePlaceholder="Search Field"
+        searchEnginePlaceholder={TRANSLATIONS.searchField}
       />
       <YStack mb="$2">
         <ButtonTamagui
           icon={<PlusIco />}
-          text="Add Filed"
+          text={TRANSLATIONS.submitButton}
           buttonProps={{
             onPress: () => navigation.navigate('addField', { client }),
           }}
