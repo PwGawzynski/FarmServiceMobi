@@ -93,6 +93,8 @@ export function WorkerDetails({
     },
   });
 
+  console.log(worker, worker.position, 'testPosition');
+
   if (!worker) return null;
   return (
     <ScreenBase
