@@ -21,6 +21,19 @@ import { FormErrorInfo } from '../atoms/FormErrorInfo';
 import PlusIco from '../../assets/plus.svg';
 import { updateFieldReqI } from '../../FarmServiceApiTypes/Field/Requests';
 
+const TRANSLATIONS = {
+  successMessage: t(
+    TranslationNames.screens.authDriver.createField.successMessage,
+  ),
+  submitButton: t(TranslationNames.screens.authDriver.createField.submitButton),
+  editSubmitButton: t(
+    TranslationNames.screens.authDriver.createField.editSubmitButton,
+  ),
+  pendingStatus: t(
+    TranslationNames.screens.clientDesktopDriver.createClient.pendingStatus,
+  ),
+};
+
 interface Props {
   navigation:
     | AuthDriverNavigationProps<'addField'>
@@ -126,9 +139,7 @@ export function AddFieldForm({
       } else {
         navigation.navigate('OperationConfirmed', {
           redirectScreenName: 'clientFields',
-          shownMessage: t(
-            TranslationNames.screens.authDriver.createField.successMessage,
-          ),
+          shownMessage: TRANSLATIONS.successMessage,
           payload: { client },
           goBack: true,
         });
@@ -170,10 +181,7 @@ export function AddFieldForm({
         {!error && !editError && (
           <PendingInfo
             isVisible={isPending || isEditPending}
-            infoText={t(
-              TranslationNames.screens.clientDesktopDriver.createClient
-                .pendingStatus,
-            )}
+            infoText={TRANSLATIONS.pendingStatus}
           />
         )}
         {(error || editError) && (
@@ -186,14 +194,7 @@ export function AddFieldForm({
       />
       <ButtonTamagui
         icon={<PlusIco />}
-        text={
-          field
-            ? t(
-                TranslationNames.screens.authDriver.createField
-                  .editSubmitButton,
-              )
-            : t(TranslationNames.screens.authDriver.createField.submitButton)
-        }
+        text={field ? TRANSLATIONS.editSubmitButton : TRANSLATIONS.submitButton}
         buttonProps={{
           onPress: handleSubmit(onSubmitted),
         }}
