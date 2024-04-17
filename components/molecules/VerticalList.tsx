@@ -5,9 +5,15 @@ import {
 } from '@shopify/flash-list';
 import { useCallback, useEffect, useRef } from 'react';
 import { View } from 'react-native';
+import { t } from 'i18next';
 import X from '../../assets/x.svg';
 import { ListInfo } from '../atoms/ListInfo';
 import { Colors } from '../../settings/styles/colors';
+import { TranslationNames } from '../../locales/TranslationNames';
+
+const TRANSLATIONS = {
+  problemOccurred: t(TranslationNames.components.verticalList.problemOccurred),
+};
 
 export type VerticalListProps<T> = {
   renderItem: ListRenderItem<T>;
@@ -49,7 +55,7 @@ export function VerticalList<T>({
       <ListInfo
         Ico={X}
         color={Colors.ERROR_RED}
-        text="Problem occurred when fetching clients, please try again letter"
+        text={TRANSLATIONS.problemOccurred}
       />
     ),
     [],
