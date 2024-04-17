@@ -29,9 +29,11 @@ export function EntityAsACard<
   return (
     <Card bordered p="$2" mt="$4">
       <XStack jc="space-between" ai="center">
-        <SizableText textTransform="uppercase" size="$7" fontWeight="bold">
-          {cardName}
-        </SizableText>
+        {cardName && (
+          <SizableText textTransform="uppercase" size="$7" fontWeight="bold">
+            {cardName}
+          </SizableText>
+        )}
         {onTopRightBtnPress && (
           <ButtonTamagui
             icon={topRightButtonIcon || <PenIco height="70%" />}

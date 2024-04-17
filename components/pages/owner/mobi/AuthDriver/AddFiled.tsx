@@ -24,6 +24,17 @@ enum State {
   DataTransformed = 1,
 }
 
+const TRANSLATIONS = {
+  gpsConnecting: t(
+    TranslationNames.screens.authDriver.createField.gpsConnecting,
+  ),
+  gpsAccess: t(TranslationNames.screens.authDriver.createField.gpsAccess),
+  gpsMoreInfo: t(TranslationNames.screens.authDriver.createField.gpsMoreInfo),
+  gpsError: t(TranslationNames.screens.authDriver.createField.gpsError),
+  serverError: t(TranslationNames.screens.authDriver.createField.serverError),
+  screenTitle: t(TranslationNames.screens.authDriver.createField.screenTitle),
+};
+
 const initAlert: AlertI = {
   status: false,
   title: t(TranslationNames.screens.authDriver.createField.locationPolicyTitle),
@@ -41,7 +52,7 @@ const initAlert: AlertI = {
 export function AddFiled({
   navigation,
   route: {
-    params: { client },
+    params: { client, goBack },
   },
 }: AuthDriverProps<'addField'>) {
   const [machineState, setMachineState] = useState<State>(
@@ -101,15 +112,12 @@ export function AddFiled({
     if (isSuccess) setMachineState(State.DataTransformed);
     if (data) setTransformedData(data);
   }, [isSuccess, isPending, isError, data]);
-  console.log(data, transformedData, locationData);
 
   const [alert, setAlert] = useState<AlertI>({
     ...initAlert,
   });
   return (
-    <ScreenBase
-      name={t(TranslationNames.screens.authDriver.createField.screenTitle)}
-    >
+    <ScreenBase name={TRANSLATIONS.screenTitle}>
       <TwoOptionAlert
         open={alert.status}
         title={alert.title}
@@ -123,22 +131,20 @@ export function AddFiled({
         <XStack f={1} ai="center" jc="center">
           <Spinner color="$color4" size="large" />
           <SizableText className="ml-4 font-bold text-lg ">
-            {t(TranslationNames.screens.authDriver.createField.gpsConnecting)}
+            {TRANSLATIONS.gpsConnecting}
           </SizableText>
         </XStack>
       )}
       {machineState === State.PermissionErr && (
         <YStack f={1} ai="center" jc="center">
           <SizableText className="ml-4 font-bold text-lg text-error-red text-center">
-            {t(TranslationNames.screens.authDriver.createField.gpsAccess)}
+            {TRANSLATIONS.gpsAccess}
           </SizableText>
           <XStack className="items-center justify-center mt-2">
             <AppLinkButton
               className="items-center justify-center"
               textClassName=" text-dark-blue dark:text-white"
-              title={t(
-                TranslationNames.screens.authDriver.createField.gpsMoreInfo,
-              )}
+              title={TRANSLATIONS.gpsMoreInfo}
               onPress={() => setAlert({ ...initAlert, status: true })}
             />
           </XStack>
@@ -147,14 +153,14 @@ export function AddFiled({
       {machineState === State.GPSError && (
         <XStack f={1} ai="center" jc="center">
           <SizableText className="ml-4 font-bold text-lg text-error-red">
-            {t(TranslationNames.screens.authDriver.createField.gpsError)}
+            {TRANSLATIONS.gpsError}
           </SizableText>
         </XStack>
       )}
       {machineState === State.ConvertErr && (
         <XStack f={1} ai="center" jc="center">
           <SizableText className="ml-4 font-bold text-lg text-error-red">
-            {t(TranslationNames.screens.authDriver.createField.serverError)}
+            {TRANSLATIONS.serverError}
           </SizableText>
         </XStack>
       )}
@@ -164,6 +170,7 @@ export function AddFiled({
           gpsCords={locationData}
           client={client}
           navigation={navigation}
+          goBack={goBack}
         />
       )}
     </ScreenBase>

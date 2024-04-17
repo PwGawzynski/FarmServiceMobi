@@ -60,6 +60,7 @@ export function ClientList({
       };
       return (
         <PersonListItem
+          item={item}
           name={item.user.personal_data.name}
           surname={item.user.personal_data.surname}
           bottomRightText={item.user.address.city}

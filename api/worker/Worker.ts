@@ -41,7 +41,6 @@ export async function updateWorkerStatusOrPosition(
 export async function allWorkers() {
   const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
   const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
-  console.log('Test');
   return (await apiHandler<undefined>(
     UNAUTHORIZED_MSG,
     DEFAULT_MSG,

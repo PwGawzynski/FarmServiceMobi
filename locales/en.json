@@ -119,6 +119,11 @@
         "clientDataButton": "Info",
         "clientFieldsButton": "Fields",
         "clientOrdersButton": "Start new order"
+      },
+      "clientFields": {
+        "title": "Fields",
+        "searchPlaceholder": "Find a field",
+        "submitButton": "Add field"
       }
     },
     "clientDesktopDriver": {
@@ -150,6 +155,7 @@
       },
       "orderDetails": {
         "screenName": "order Details",
+        "taskListHeader": "Tasks",
         "detailsCard": {
           "cardName": "Details",
           "fields": {
@@ -174,20 +180,46 @@
       },
       "createTask": {
         "screenTitle": "Create task",
+        "screenSummaryTitle": "Task summary",
+        "ha": "Ha",
         "submitButton": "Create",
         "pendingStatus": "Creating...",
         "selectWorkers": {
-          "stepSelectWorkers": "Select workers"
+          "stepSelectWorkers": "Select workers",
+          "hintHeader": "Hint",
+          "hintDescription": "Choose a worker, that will perform the task",
+          "searchPlaceholder": "Find a worker"
         },
         "selectMachines": {
-          "stepSelectMachine": "Select machine"
+          "stepSelectMachine": "Select machine",
+          "hintHeader": "Hint",
+          "hintDescription": "Choose a machine, that will be used to perform the task",
+            "searchPlaceholder": "Find a machine"
         },
         "selectFields": {
           "stepSelectFields": "Select fields",
           "submitButton": "Next step",
           "hintHeader": "Hint",
-          "hintDescription": "You can choose multiple fields, each field will be considered as a separate task"
-        }
+          "hintDescription": "You can choose multiple fields, each field will be considered as a separate task",
+            "searchPlaceholder": "Find a field"
+        },
+        "summary": {
+          "summaryCard": {
+            "fields": "Fields",
+            "workers": "Workers",
+            "machines": "Machines",
+            "type": "Type",
+            "totalArea": "Total area"
+          },
+          "typeSelector": {
+            "label": "Task Type",
+            "description": "Task Type",
+            "creatingTasks": "Will be created: "
+          }
+        },
+        "fieldSelectorEmptyList": "No fields to display, click below to create new one",
+        "workerSelectorEmptyList": "No workers to display, click below to create new one",
+        "machineSelectorEmptyList": "No machines to display, click below to create new one"
       }
     },
     "ordersDesktopDriver":{
@@ -205,6 +237,13 @@
         }
     },
     "ownerRootDriver": {
+      "addWorker": {
+        "screenTitle": "Add worker",
+        "scanQrCode": "Scan QR code from worker's app",
+        "pendingStatus": "Adding worker...",
+        "welcomeAnimationStartText": "Worker",
+        "welcomeAnimationEndText": "has been added"
+      },
       "workerAssignation": {
         "qrCodeScanCommunication": "Let the owner scan the QR code to assign you to the company",
         "qrCodeTimeOut": "Scan this code before the timer runs out",
@@ -240,6 +279,46 @@
     }
   },
   "components": {
+    "orderForm": {
+      "pendingStatus": "Creating order...",
+      "submitButton": "Create"
+    },
+    "verticalList": {
+      "problemOccurred": "Problem occurred, please try again later"
+    },
+    "listInfo": {
+      "unknownError": "Unknown error occurred"
+    },
+    "emptyListItemCreator": {
+      "button": "Create"
+    },
+    "list": {
+      "cannotSelectMore": "Cannot select more items",
+      "cannotSelectMoreDescription": "You have reached the maximum number of selected items"
+    },
+    "taskInfoCard": {
+      "type": "Type",
+      "worker": "Worker",
+      "machine": "Machine",
+      "createdAt": "Created at",
+      "openedAt": "Opened at",
+      "closedAt": "Closed at",
+      "fieldArea": "Field Area",
+      "ha": "Ha",
+      "deleteButton": "Delete"
+    },
+    "fieldSelector": {
+      "title": "Select fields",
+      "searchPlaceholder": "Find a field"
+    },
+    "workerSelector":{
+        "title": "Select workers",
+        "searchPlaceholder": "Find a worker"
+    },
+    "machineSelector": {
+      "title": "Select machines",
+      "searchPlaceholder": "Find a machine"
+    },
     "clientsFieldsList": {
       "searchPlaceholder": "Find a field"
     },
@@ -293,7 +372,8 @@
       "deleteFieldAlertTitle": "Are you sure?",
       "deleteFieldAlertDescription": "Are you sure you want to delete this field? This action cannot be undone",
       "deleteFieldAlertDeleteButton": "Delete",
-      "deleteFieldAlertCancelButton": "Cancel"
+      "deleteFieldAlertCancelButton": "Cancel",
+      "ha": "Ha"
     }
   },
   "addressForm": {

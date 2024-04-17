@@ -154,6 +154,12 @@ export const TranslationNames = {
         clientOrdersButton:
           'screens.clientDriver.clientControlPanel.clientOrdersButton',
       },
+      clientFields: {
+        title: 'screens.clientDriver.clientFields.title',
+        searchPlaceholder:
+          'screens.clientDriver.clientFields.searchPlaceholder',
+        submitButton: 'screens.clientDriver.clientFields.submitButton',
+      },
     },
     clientDesktopDriver: {
       createClient: {
@@ -194,6 +200,7 @@ export const TranslationNames = {
       },
       orderDetails: {
         screenName: 'screens.orderDriver.orderDetails.screenName',
+        taskListHeader: 'screens.orderDriver.orderDetails.taskListHeader',
         detailsCard: {
           cardName: 'screens.orderDriver.orderDetails.detailsCard.cardName',
           fields: {
@@ -225,15 +232,24 @@ export const TranslationNames = {
       },
       createTask: {
         screenTitle: 'screens.orderDriver.createTask.screenTitle',
+        screenSummaryTitle: 'screens.orderDriver.createTask.screenSummaryTitle',
+        ha: 'screens.orderDriver.createTask.ha',
         submitButton: 'screens.orderDriver.createTask.submitButton',
         pendingStatus: 'screens.orderDriver.createTask.pendingStatus',
         selectWorkers: {
           stepSelectWorkers:
             'screens.orderDriver.createTask.selectWorkers.stepSelectWorkers',
+          hintHeader: 'screens.orderDriver.createTask.selectWorkers.hintHeader',
+          hintDescription:
+            'screens.orderDriver.createTask.selectWorkers.hintDescription',
         },
         selectMachines: {
-          selectMachine:
+          stepSelectMachine:
             'screens.orderDriver.createTask.selectMachines.stepSelectMachine',
+          hintHeader:
+            'screens.orderDriver.createTask.selectMachines.hintHeader',
+          hintDescription:
+            'screens.orderDriver.createTask.selectMachines.hintDescription',
         },
         selectFields: {
           stepSelectFields:
@@ -244,6 +260,31 @@ export const TranslationNames = {
           submitButton:
             'screens.orderDriver.createTask.selectFields.submitButton',
         },
+        summary: {
+          summaryCard: {
+            fields: 'screens.orderDriver.createTask.summary.summaryCard.fields',
+            workers:
+              'screens.orderDriver.createTask.summary.summaryCard.workers',
+            machines:
+              'screens.orderDriver.createTask.summary.summaryCard.machines',
+            type: 'screens.orderDriver.createTask.summary.summaryCard.type',
+            totalArea:
+              'screens.orderDriver.createTask.summary.summaryCard.totalArea',
+          },
+          typeSelector: {
+            label: 'screens.orderDriver.createTask.summary.typeSelector.label',
+            description:
+              'screens.orderDriver.createTask.summary.typeSelector.description',
+            creatingTasks:
+              'screens.orderDriver.createTask.summary.typeSelector.creatingTasks',
+          },
+        },
+        fieldSelectorEmptyList:
+          'screens.orderDriver.createTask.fieldSelectorEmptyList',
+        workerSelectorEmptyList:
+          'screens.orderDriver.createTask.workerSelectorEmptyList',
+        machineSelectorEmptyList:
+          'screens.orderDriver.createTask.machineSelectorEmptyList',
       },
     },
     ordersDesktopDriver: {
@@ -263,6 +304,15 @@ export const TranslationNames = {
       },
     },
     ownerRootDriver: {
+      addWorker: {
+        screenTitle: 'screens.ownerRootDriver.addWorker.screenTitle',
+        scanQrCode: 'screens.ownerRootDriver.addWorker.scanQrCode',
+        pendingStatus: 'screens.ownerRootDriver.addWorker.pendingStatus',
+        welcomeAnimationStartText:
+          'screens.ownerRootDriver.addWorker.welcomeAnimationStartText',
+        welcomeAnimationEndText:
+          'screens.ownerRootDriver.addWorker.welcomeAnimationEndText',
+      },
       workerAssignation: {
         qrCodeScanCommunication:
           'screens.ownerRootDriver.workerAssignation.qrCodeScanCommunication',
@@ -302,6 +352,47 @@ export const TranslationNames = {
     },
   },
   components: {
+    orderForm: {
+      pendingStatus: 'components.orderForm.pendingStatus',
+      submitButton: 'components.orderForm.submitButton',
+    },
+    verticalList: {
+      problemOccurred: 'components.verticalList.problemOccurred',
+    },
+    listInfo: {
+      unknownError: 'components.listEmpty.unknownError',
+    },
+    emptyListItemCreator: {
+      button: 'components.emptyListItemCreator.button',
+    },
+    list: {
+      cannotSelectMore: 'components.list.cannotSelectMore',
+      cannotSelectMoreDescription:
+        'components.list.cannotSelectMoreDescription',
+    },
+    taskInfoCard: {
+      type: 'components.taskInfoCard.type',
+      worker: 'components.taskInfoCard.worker',
+      machine: 'components.taskInfoCard.machine',
+      createdAt: 'components.taskInfoCard.createdAt',
+      openedAt: 'components.taskInfoCard.openedAt',
+      closedAt: 'components.taskInfoCard.closedAt',
+      fieldArea: 'components.taskInfoCard.fieldArea',
+      ha: 'components.taskInfoCard.ha',
+      deleteButton: 'components.taskInfoCard.deleteButton',
+    },
+    fieldSelector: {
+      subbmitButton: 'components.fieldSelector.title',
+      searchPlaceholder: 'components.fieldSelector.searchPlaceholder',
+    },
+    workerSelector: {
+      subbmitButton: 'components.workerSelector.title',
+      searchPlaceholder: 'components.workerSelector.searchPlaceholder',
+    },
+    machineSelector: {
+      subbmitButton: 'components.machineSelector.title',
+      searchPlaceholder: 'components.machineSelector.searchPlaceholder',
+    },
     clientsFieldsList: {
       searchPlaceholder: 'components.clientsFieldsList.searchPlaceholder',
     },
@@ -362,6 +453,7 @@ export const TranslationNames = {
         'components.filedBottomSheet.deleteFieldAlertDeleteButton',
       deleteFieldAlertCancelButton:
         'components.filedBottomSheet.deleteFieldAlertCancelButton',
+      ha: 'components.filedBottomSheet.ha',
     },
   },
   addressForm: {

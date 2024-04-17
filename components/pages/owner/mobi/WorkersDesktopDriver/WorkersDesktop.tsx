@@ -1,81 +1,60 @@
-import { YStack } from 'tamagui';
-import { useCallback, useMemo, useState } from 'react';
 import { t } from 'i18next';
+import { useRef } from 'react';
+import { BottomSheetModal } from '@gorhom/bottom-sheet';
 import { useQuery } from '@tanstack/react-query';
-import { ListRenderItemInfo } from '@shopify/flash-list';
 import { ScreenBase } from '../common/ScreenBase';
-import { SearchBox } from '../../../../molecules/SearchBox';
 import { TranslationNames } from '../../../../../locales/TranslationNames';
-import { WorkerResponseBase } from '../../../../../FarmServiceApiTypes/Worker/Responses';
-import { UniversalList } from '../../../../organisms/UniversalList';
-import PersonListItem from '../../../../molecules/PersonListItem';
-import { Status } from '../../../../../FarmServiceApiTypes/Worker/Enums';
-import NoUser from '../../../../../assets/noUser.svg';
-import { ListInfo } from '../../../../atoms/ListInfo';
-import { SwipeRightAnimated } from '../../../../atoms/SwipeRightAnimated';
-import { searchEngineNameSurnameFilter } from '../../../../../helepers/filterFunctions';
 import { allWorkers } from '../../../../../api/worker/Worker';
 import { EXPO_PUBLIC_QUERY_STALE_TIME } from '../../../../../settings/query/querySettings';
+import { searchEngineNameSurnameFilter } from '../../../../../helepers/filterFunctions';
+import { WorkerResponseBase } from '../../../../../FarmServiceApiTypes/Worker/Responses';
+import List from '../../../../organisms/List';
+import { Status } from '../../../../../FarmServiceApiTypes/Worker/Enums';
+
+const TRANSLATIONS = {
+  title: t(TranslationNames.screens.ownerRootDriver.workersDesktop.title),
+  searchWorker: t(
+    TranslationNames.screens.ownerRootDriver.workersDesktop.searchPlaceholder,
+  ),
+};
 
 export function WorkersDesktop() {
+  const modalRef = useRef<BottomSheetModal>(null);
   const { data, isFetching, isError } = useQuery({
     queryKey: ['workers'],
     queryFn: allWorkers,
     staleTime: EXPO_PUBLIC_QUERY_STALE_TIME,
     gcTime: EXPO_PUBLIC_QUERY_STALE_TIME,
   });
-  console.log(data);
-  const [filter, setFilter] = useState<string | undefined>(undefined);
-
-  const sorted = searchEngineNameSurnameFilter(data, filter);
-  const renderItem = useCallback(
-    ({ item }: ListRenderItemInfo<WorkerResponseBase>) => (
-      <PersonListItem
-        name={item.personalData.name}
-        surname={item.personalData.surname}
-        bottomRightText={
-          item.status !== undefined ? Status[item.status] : undefined
-        }
-        onPressNavigateTo="workerDetails"
-        navigationParams={{ worker: item }}
-      />
-    ),
-    [],
-  );
-  const ListEmptyComponent = useMemo(
-    () => (
-      <ListInfo
-        Ico={NoUser}
-        text={t(
-          TranslationNames.screens.ownerRootDriver.workersDesktop.emptyList,
-        )}
-      >
-        <SwipeRightAnimated />
-      </ListInfo>
-    ),
-    [],
-  );
   return (
     <ScreenBase
-      name={t(TranslationNames.screens.ownerRootDriver.workersDesktop.title)}
+      name={TRANSLATIONS.title}
+      bottomSheetsProps={{
+        modalRef,
+      }}
     >
-      <YStack mt="$4" mb="$4">
-        <SearchBox
-          onTextChange={text => setFilter(text)}
-          placeholder={t(
-            TranslationNames.screens.ownerRootDriver.workersDesktop
-              .searchPlaceholder,
-          )}
-        />
-      </YStack>
-      <YStack f={1}>
-        <UniversalList
-          data={sorted}
-          renderItem={renderItem}
-          listSetup={{ isLoading: isFetching, isLoadingError: isError }}
-          listEmptyComponent={ListEmptyComponent}
-        />
-      </YStack>
+      <List<WorkerResponseBase>
+        isFetching={isFetching}
+        isError={isError}
+        data={data}
+        modalRef={modalRef}
+        onPressNavigateTo="workerDetails"
+        navigationParamName="worker"
+        listStyleSettings={item => {
+          return {
+            header: `${item.personalData.name} ${item.personalData.surname}`,
+            bottomRightText:
+              item.status !== undefined ? Status[item.status] : undefined,
+            alignment: 'right',
+            avatarChars: [
+              item.personalData.name[0],
+              item.personalData.surname[0],
+            ],
+          };
+        }}
+        filterFunction={searchEngineNameSurnameFilter}
+        searchEnginePlaceholder={TRANSLATIONS.searchWorker}
+      />
     </ScreenBase>
   );
 }

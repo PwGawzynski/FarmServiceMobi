@@ -5,10 +5,15 @@ import {
 } from '@shopify/flash-list';
 import { useCallback, useEffect, useRef } from 'react';
 import { View } from 'react-native';
-import Empty from '../../assets/empty.svg';
+import { t } from 'i18next';
 import X from '../../assets/x.svg';
 import { ListInfo } from '../atoms/ListInfo';
 import { Colors } from '../../settings/styles/colors';
+import { TranslationNames } from '../../locales/TranslationNames';
+
+const TRANSLATIONS = {
+  problemOccurred: t(TranslationNames.components.verticalList.problemOccurred),
+};
 
 export type VerticalListProps<T> = {
   renderItem: ListRenderItem<T>;
@@ -43,17 +48,14 @@ export function VerticalList<T>({
     [],
   );
   const divider = useCallback(() => <View className="h-4" />, []);
-  const ListEmpty = useCallback(
-    () => <ListInfo Ico={Empty} text="There's nothing to se here" />,
-    [],
-  );
+
   const DataUndefinedInfo = useCallback(() => <ListInfo Ico={X} />, []);
   const LoadingErrorInfo = useCallback(
     () => (
       <ListInfo
         Ico={X}
         color={Colors.ERROR_RED}
-        text="Problem occurred when fetching clients, please try again letter"
+        text={TRANSLATIONS.problemOccurred}
       />
     ),
     [],
@@ -68,7 +70,7 @@ export function VerticalList<T>({
       ItemSeparatorComponent={divider}
       estimatedItemSize={estimatedSize}
       data={data}
-      ListEmptyComponent={ListEmptyComponent ?? ListEmpty}
+      ListEmptyComponent={ListEmptyComponent}
       renderItem={renderItem}
       onBlankArea={onBlankArea}
       onLoad={onLoadListener}

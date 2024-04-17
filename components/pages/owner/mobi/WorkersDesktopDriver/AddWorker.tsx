@@ -2,6 +2,7 @@ import { SizableText, XStack, YStack } from 'tamagui';
 import { useEffect, useState } from 'react';
 import { useIsFocused } from '@react-navigation/native';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { t } from 'i18next';
 import { ScreenBase } from '../common/ScreenBase';
 import {
   handleBarCodeScannedData,
@@ -12,11 +13,30 @@ import { PendingInfo } from '../../../../atoms/PendingInfo';
 import { WelcomeAnimation } from '../../../../atoms/WelcomeAnimation';
 import { WorkersDesktopDriverScreenProps } from '../../../../../types/self/navigation/Owner/props/workers/WorkersDesktopDriverProps';
 import { WorkerResponseBase } from '../../../../../FarmServiceApiTypes/Worker/Responses';
+import { TranslationNames } from '../../../../../locales/TranslationNames';
 
 const WELCOME_ANIMATION_DURATION = 3000;
 
+const TRANSLATIONS = {
+  screenTitle: t(
+    TranslationNames.screens.ownerRootDriver.addWorker.screenTitle,
+  ),
+  scanQrCode: t(TranslationNames.screens.ownerRootDriver.addWorker.scanQrCode),
+  pendingStatus: t(
+    TranslationNames.screens.ownerRootDriver.addWorker.pendingStatus,
+  ),
+  welcomeAnimationStartText: t(
+    TranslationNames.screens.ownerRootDriver.addWorker
+      .welcomeAnimationStartText,
+  ),
+  welcomeAnimationEndText: t(
+    TranslationNames.screens.ownerRootDriver.addWorker.welcomeAnimationEndText,
+  ),
+};
+
 export function AddWorker({
   navigation,
+  route: { params },
 }: WorkersDesktopDriverScreenProps<
   'addWorker',
   'workersDesktopRoot',
@@ -52,16 +72,19 @@ export function AddWorker({
       resetWorker();
     }
     let timeout: NodeJS.Timeout;
-    if (worker)
-      setTimeout(
+    if (worker && !params?.goBack) {
+      timeout = setTimeout(
         () => navigation.navigate('workersDesktop'),
         WELCOME_ANIMATION_DURATION,
       );
+    } else if (worker && params?.goBack) {
+      navigation.goBack();
+    }
     return () => clearTimeout(timeout);
   }, [isFocused, worker]);
 
   return (
-    <ScreenBase name="Add Worker">
+    <ScreenBase name={TRANSLATIONS.screenTitle}>
       <YStack f={1} ai="center" jc="center">
         {!worker && (
           <XStack ai="center" jc="center" f={1}>
@@ -78,20 +101,20 @@ export function AddWorker({
         <XStack ai="center" jc="center" f={1}>
           {!scanned && (
             <SizableText className="mt-8 text-lg uppercase ">
-              Scan QR code from your worker
+              {TRANSLATIONS.scanQrCode}
             </SizableText>
           )}
           {isPending && (
             <PendingInfo
               isVisible
-              infoText="Adding Worker"
+              infoText={TRANSLATIONS.pendingStatus}
               size="large"
               column
             />
           )}
           <WelcomeAnimation
             played={!!worker}
-            welcomeText={`Worker ${worker?.personalData.name} has been added`}
+            welcomeText={`${TRANSLATIONS.welcomeAnimationStartText} ${worker?.personalData.name} ${TRANSLATIONS.welcomeAnimationEndText}`}
           />
         </XStack>
       </YStack>

@@ -119,15 +119,21 @@
         "clientDataButton": "Informacje",
         "clientFieldsButton": "Pola klienta",
         "clientOrdersButton": "Dodaj nowe zamówienie"
+      },
+      "clientFields": {
+        "title": "Fields",
+        "searchPlaceholder": "Find a field",
+        "submitButton": "Add field"
       }
     },
     "orderDriver": {
       "editOrder": {
         "screenTitle": "Edytuj zamówienie",
-        "submitButton": "Zapisz zmiany",
+        "submitButton": "Zapisz zmiany"
       },
       "orderDetails": {
         "screenName": "Szczegóły zamówienia",
+        "taskListHeader": "Tasks",
         "detailsCard": {
           "cardName": "Szczegóły",
           "fields": {
@@ -151,21 +157,47 @@
         "tasksButton": "Zadania"
       },
       "createTask": {
-        "screenTitle": "Dodaj zadanie",
+        "screenTitle": "Utwórz zadanie",
+        "screenSummaryTitle": "Podsumowanie",
+        "ha": "Ha",
         "submitButton": "Utwórz zadanie",
         "pendingStatus": "Tworzenie...",
         "selectWorkers": {
-          "stepSelectWorkers": "Select workers"
+          "stepSelectWorkers": "Wybierz pracowników",
+          "hintHeader": "Wskazówka",
+          "hintDescription": "Wybierz pracownika, który wykona zadanie",
+          "searchPlaceholder": "Znajdź pracownika"
         },
         "selectMachines": {
-          "stepSelectMachine": "Select machine"
+          "stepSelectMachine": "Wybierz maszynę",
+          "hintHeader": "Wskazówka",
+          "hintDescription": "Wybierz maszynę, która będzie używana do wykonania zadania",
+          "searchPlaceholder": "Znajdź maszynę"
         },
         "selectFields": {
           "stepSelectFields": "Wybierz pola",
-          "submitButton": "Kolejny Krok",
+          "submitButton": "Następny krok",
           "hintHeader": "Wskazówka",
-          "hintDescription": "Możesz wybrać wiele pól na raz, dla każdego z nich pojawi się osobne zadanie"
-        }
+          "hintDescription": "Wybierz pola, na których ma być wykonane zadanie, każde pole będzie traktowane jako osobne zadanie",
+          "searchPlaceholder": "Znajdź pole"
+        },
+        "summary": {
+          "summaryCard": {
+            "fields": "Pola",
+            "workers": "Pracownicy",
+            "machines": "Maszyny",
+            "type": "Typ",
+            "totalArea": "Całkowity obszar"
+          },
+          "typeSelector": {
+            "label": "Typ zadania",
+            "description": "Wybierz typ zadania, które chcesz utworzyć",
+            "creatingTasks": "Zostaną utworzone: "
+          }
+        },
+        "fieldSelectorEmptyList": "Brak pól do wyświetlenia, kliknij poniżej aby dodać nowe",
+        "workerSelectorEmptyList": "Brak pracowników do wyświetlenia, kliknij poniżej aby dodać nowego",
+        "machineSelectorEmptyList": "Brak maszyn do wyświetlenia, kliknij poniżej aby dodać nową"
       }
     },
     "ordersDesktopDriver":{
@@ -205,6 +237,13 @@
       }
     },
     "ownerRootDriver": {
+      "addWorker": {
+        "screenTitle": "Add worker",
+        "scanQrCode": "Scan QR code from worker's app",
+        "pendingStatus": "Adding worker...",
+        "welcomeAnimationStartText": "Worker",
+        "welcomeAnimationEndText": "has been added"
+      },
       "workerAssignation": {
         "qrCodeScanCommunication": "Pokaż właścicielowi kod QR, aby zeskanował go za pomocą swojej aplikacji FarmService",
         "qrCodeTimeOut": "Zeskanuj kod QR w ciągu 60 sekund",
@@ -239,6 +278,46 @@
     }
   },
   "components": {
+    "orderForm": {
+      "pendingStatus": "Tworzenie zamówienia...",
+      "submitButtonText": "Utwórz zamówienie"
+    },
+    "verticalList": {
+      "problemOccurred": "Coś poszło nie tak, spróbuj ponownie później"
+    },
+    "listInfo": {
+      "unknownError": "Coś poszło nie tak"
+    },
+    "emptyListItemCreator": {
+      "button": "Dodaj nowy"
+    },
+    "list": {
+      "cannotSelectMore": "Nie można wybrać więcej elementów",
+      "cannotSelectMoreDescription": "Osiągnięto maksymalną liczbę wybranych elementów"
+    },
+    "taskInfoCard": {
+      "type": "Typ",
+      "worker": "Pracownik",
+      "machine": "Maszyna",
+      "createdAt": "Utworzono dnia",
+      "openedAt": "Otwarte dnia",
+      "closedAt": "Zamknięte dnia",
+      "fieldArea": "Obszar pola",
+      "ha": "Ha",
+      "deleteButton": "Usuń"
+    },
+    "fieldSelector": {
+      "title": "Wybierz pola",
+      "searchPlaceholder": "Znajdź pole"
+    },
+    "workerSelector":{
+      "title": "Wybierz pracownika",
+      "searchPlaceholder": "Znajdź pracownika"
+    },
+    "machineSelector": {
+      "title": "Wybierz maszynę",
+      "searchPlaceholder": "Znajdź maszynę"
+    },
     "clientsFieldsList": {
       "searchPlaceholder": "Znajdź pole"
     },
@@ -293,7 +372,8 @@
       "deleteFieldAlertTitle": "Jeseś pewien?",
       "deleteFieldAlertDescription": "Czy na pewno chcesz usunąć to pole? Ta operacja jest nieodwracalna.",
       "deleteFieldAlertDeleteButton": "Usuń",
-      "deleteFieldAlertCancelButton": "Anuluj"
+      "deleteFieldAlertCancelButton": "Anuluj",
+      "ha": "Ha"
     }
   },
   "addressForm": {

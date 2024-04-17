@@ -116,7 +116,8 @@ export function MachineDetails({
       <ButtonTamagui
         icon={<DangerIco />}
         bgColor={Colors.ERROR_RED}
-        text="Safely delete"
+        text={TRANSLATIONS.deleteButton}
+        isPending={isPending}
         buttonProps={{
           onPress: handleDeletePress,
           disabled: isPending,
