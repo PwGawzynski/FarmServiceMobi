@@ -59,6 +59,20 @@ const PersonalDataTranslations = {
   phoneNumber: t(TranslationNames.createClientForm.formPlaceholder.phoneNumber),
 } as AsAny<PersonalDataBase>;
 
+const TRANSLATIONS = {
+  personalData: t(
+    TranslationNames.screens.ownerRootDriver.workerDetails.personalData,
+  ),
+  editButton: t(
+    TranslationNames.screens.ownerRootDriver.workerDetails.editButton,
+  ),
+  address: t(TranslationNames.screens.ownerRootDriver.workerDetails.address),
+  status: t(TranslationNames.screens.ownerRootDriver.workerDetails.status),
+  choose: t(TranslationNames.screens.ownerRootDriver.workerDetails.choose),
+  position: t(TranslationNames.screens.ownerRootDriver.workerDetails.position),
+  sign: t(TranslationNames.components.CallAndMailPanel.sign),
+};
+
 export function WorkerDetails({
   route: {
     params: { worker: givenWorker },
@@ -93,8 +107,6 @@ export function WorkerDetails({
     },
   });
 
-  console.log(worker, worker.position, 'testPosition');
-
   if (!worker) return null;
   return (
     <ScreenBase
@@ -109,13 +121,8 @@ export function WorkerDetails({
               surname: PersonalDataTranslations.surname,
               phoneNumber: PersonalDataTranslations.phoneNumber,
             }}
-            cardName={t(
-              TranslationNames.screens.ownerRootDriver.workerDetails
-                .personalData,
-            )}
-            topRightButtonName={t(
-              TranslationNames.screens.ownerRootDriver.workerDetails.editButton,
-            )}
+            cardName={TRANSLATIONS.personalData}
+            topRightButtonName={TRANSLATIONS.editButton}
             omittedKeys={['name', 'surname']}
           />
           <EntityAsACard
@@ -129,12 +136,8 @@ export function WorkerDetails({
               postalCode: AddressTranslations.postalCode,
               voivodeship: AddressTranslations.voivodeship,
             }}
-            cardName={t(
-              TranslationNames.screens.ownerRootDriver.workerDetails.address,
-            )}
-            topRightButtonName={t(
-              TranslationNames.screens.ownerRootDriver.workerDetails.editButton,
-            )}
+            cardName={TRANSLATIONS.address}
+            topRightButtonName={TRANSLATIONS.editButton}
           />
           <YStack className="mt-4 mb-4">
             <Selector
@@ -145,14 +148,8 @@ export function WorkerDetails({
               }
               pending={isPending && mutationData?.status !== undefined}
               items={makeArray(Status).map(e => ({ name: e }))}
-              description={t(
-                TranslationNames.screens.ownerRootDriver.workerDetails.status,
-              )}
-              itemListLabel={`${t(
-                TranslationNames.screens.ownerRootDriver.workerDetails.choose,
-              )} ${t(
-                TranslationNames.screens.ownerRootDriver.workerDetails.status,
-              )}:`}
+              description={TRANSLATIONS.status}
+              itemListLabel={`${TRANSLATIONS.choose} ${TRANSLATIONS.status}:`}
               onValueChange={v => {
                 mutate({ status: findEnumVal(Status, v), worker: worker.id });
               }}
@@ -167,14 +164,8 @@ export function WorkerDetails({
                   : ''
               }
               items={makeArray(Position).map(e => ({ name: e }))}
-              description={t(
-                TranslationNames.screens.ownerRootDriver.workerDetails.position,
-              )}
-              itemListLabel={`${t(
-                TranslationNames.screens.ownerRootDriver.workerDetails.choose,
-              )} ${t(
-                TranslationNames.screens.ownerRootDriver.workerDetails.position,
-              )}:`}
+              description={TRANSLATIONS.position}
+              itemListLabel={`${TRANSLATIONS.choose} ${TRANSLATIONS.position}:`}
               onValueChange={v => {
                 mutate({
                   position: findEnumVal(Position, v),
@@ -189,7 +180,7 @@ export function WorkerDetails({
             callButtonProps={{ phoneNumber: worker.personalData.phoneNumber }}
             mailButtonProps={{
               emailOptions: {
-                body: t(TranslationNames.components.CallAndMailPanel.sign),
+                body: TRANSLATIONS.sign,
                 recipients: [worker.email],
               },
             }}
