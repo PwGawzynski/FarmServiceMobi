@@ -17,6 +17,10 @@ const LIST_EMPTY_TEXT = t(
   TranslationNames.screens.clientDesktopDriver.clientsDesktop.emptyList,
 );
 
+const LIST_SEARCH_PLACEHOLDER = t(
+  TranslationNames.screens.clientDesktopDriver.clientsDesktop.searchClient,
+);
+
 export function ClientsDesktop() {
   const modalRef = useRef<BottomSheetModal>(null);
   const { data, isFetching, isError } = useQuery({
@@ -54,7 +58,7 @@ export function ClientsDesktop() {
         })}
         filterFunction={clientListFilter}
         listEmptyText={LIST_EMPTY_TEXT}
-        searchEnginePlaceholder="Search by name or surname"
+        searchEnginePlaceholder={LIST_SEARCH_PLACEHOLDER}
       />
     </ScreenBase>
   );
