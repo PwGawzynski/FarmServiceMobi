@@ -20,6 +20,20 @@ import { ClientResponseBase } from '../../FarmServiceApiTypes/Clients/Responses'
 import { AlertI, TwoOptionAlert } from './TwoOptionAlert';
 import { delField } from '../../api/field/Field';
 
+const IOS_MAPS_OPEN_MARK = 'maps:0,0?q=';
+const ANDROID_MAPS_OPEN_MARK = 'geo:0,0?q=';
+const TRANSLATIONS = {
+  ha: t(TranslationNames.components.filedBottomSheet.ha),
+  address: t(TranslationNames.components.filedBottomSheet.address),
+  showOnMapButton: t(
+    TranslationNames.components.filedBottomSheet.showOnMapButton,
+  ),
+  editButton: t(TranslationNames.components.filedBottomSheet.editButton),
+  addButton: t(TranslationNames.components.filedBottomSheet.addButton),
+  historyButton: t(TranslationNames.components.filedBottomSheet.historyButton),
+  deleteButton: t(TranslationNames.components.filedBottomSheet.deleteButton),
+};
+
 export type FieldBottomSheetProps = {
   field: FieldResponseBase;
   client?: ClientResponseBase;
@@ -69,24 +83,27 @@ export function FieldBottomSheetContent({
     [],
   );
 
-  const openAddressOnMap = (label: string, lat: string, lng: string) => {
-    const scheme = Platform.select({
-      ios: 'maps:0,0?q=',
-      android: 'geo:0,0?q=',
-    });
-    const latLng = `${lat},${lng}`;
-    const url = Platform.select({
-      ios: `${scheme}${label}@${latLng}`,
-      android: `${scheme}${latLng}(${label})`,
-    });
-    Linking.openURL(url || '').catch(() => {
-      Toast.show({
-        type: 'error',
-        text1: t(TranslationNames.components.toast.openMapErrorHeader),
-        text2: t(TranslationNames.components.toast.openMapErrorDescription),
+  const openAddressOnMap = useMemo(
+    () => (label: string, lat: string, lng: string) => {
+      const scheme = Platform.select({
+        ios: IOS_MAPS_OPEN_MARK,
+        android: ANDROID_MAPS_OPEN_MARK,
       });
-    });
-  };
+      const latLng = `${lat},${lng}`;
+      const url = Platform.select({
+        ios: `${scheme}${label}@${latLng}`,
+        android: `${scheme}${latLng}(${label})`,
+      });
+      Linking.openURL(url || '').catch(() => {
+        Toast.show({
+          type: 'error',
+          text1: t(TranslationNames.components.toast.openMapErrorHeader),
+          text2: t(TranslationNames.components.toast.openMapErrorDescription),
+        });
+      });
+    },
+    [],
+  );
 
   const queryClient = useQueryClient();
   const { mutate, isError } = useMutation({
@@ -141,11 +158,11 @@ export function FieldBottomSheetContent({
                 ? 'N/A'
                 : Number(field.area).toFixed(2)}{' '}
             </SizableText>
-            <SizableText>Ha</SizableText>
+            <SizableText>{TRANSLATIONS.ha}</SizableText>
           </XStack>
         </XStack>
         <ButtonTamagui
-          text={t(TranslationNames.components.filedBottomSheet.showOnMapButton)}
+          text={TRANSLATIONS.showOnMapButton}
           icon={<LocationIco />}
           buttonProps={{
             mt: '$4',
@@ -158,7 +175,7 @@ export function FieldBottomSheetContent({
           }}
         />
         <ButtonTamagui
-          text={t(TranslationNames.components.filedBottomSheet.editButton)}
+          text={TRANSLATIONS.editButton}
           icon={<PenIco />}
           buttonProps={{
             mt: '$4',
@@ -169,21 +186,21 @@ export function FieldBottomSheetContent({
           }}
         />
         <ButtonTamagui
-          text={t(TranslationNames.components.filedBottomSheet.addButton)}
+          text={TRANSLATIONS.addButton}
           icon={<PlusIco />}
           buttonProps={{
             mt: '$4',
           }}
         />
         <ButtonTamagui
-          text={t(TranslationNames.components.filedBottomSheet.historyButton)}
+          text={TRANSLATIONS.historyButton}
           icon={<History />}
           buttonProps={{
             mt: '$4',
           }}
         />
         <ButtonTamagui
-          text={t(TranslationNames.components.filedBottomSheet.deleteButton)}
+          text={TRANSLATIONS.deleteButton}
           icon={<Trash />}
           buttonProps={{
             mt: '$4',
@@ -207,7 +224,7 @@ export function FieldBottomSheetContent({
           mt="$4"
           className="uppercase text-xl font-bold"
         >
-          {t(TranslationNames.components.filedBottomSheet.address)}
+          {TRANSLATIONS.address}
         </SizableText>
         <YStack>{address}</YStack>
       </YStack>
