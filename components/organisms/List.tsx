@@ -162,7 +162,7 @@ function ListMemo<T extends Record<string, any>>(
             <YStack f={1}>
               <SearchBox
                 onTextChange={text => setFilter(text)}
-                placeholder={searchEnginePlaceholder ?? 'Search'}
+                placeholder={searchEnginePlaceholder ?? ''}
               />
             </YStack>
             {isSelectable && !maxSelectedItems && (
