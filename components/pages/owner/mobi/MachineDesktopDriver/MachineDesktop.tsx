@@ -13,6 +13,10 @@ const TRANSLATIONS = {
   screenTitle: t(
     TranslationNames.screens.machineDesktopDriver.machinesDesktop.title,
   ),
+  searchPlaceholder: t(
+    TranslationNames.screens.machineDesktopDriver.machinesDesktop
+      .searchPlaceholder,
+  ),
 };
 export function MachineDesktop() {
   const bottomSheetRef = useRef<BottomSheetModal>(null);
@@ -43,7 +47,7 @@ export function MachineDesktop() {
           infoIco: true,
         })}
         filterFunction={machineFilter}
-        searchEnginePlaceholder="Search machine"
+        searchEnginePlaceholder={TRANSLATIONS.searchPlaceholder}
       />
     </ScreenBase>
   );
