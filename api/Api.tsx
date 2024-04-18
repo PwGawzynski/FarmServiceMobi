@@ -258,10 +258,10 @@ export class ApiSelf {
     const serializedData = {
       email: userData.email,
       password: userData.password,
-      personal_data: {
-        name: userData.personal_data.name,
-        surname: userData.personal_data.surname,
-        phoneNumber: userData.personal_data.phoneNumber,
+      personalData: {
+        name: userData.personalData.name,
+        surname: userData.personalData.surname,
+        phoneNumber: userData.personalData.phoneNumber,
       },
       address: {
         city: userData.address.city,
@@ -303,7 +303,9 @@ export class ApiSelf {
    * @throws Error when save went wrong
    */
   // eslint-disable-next-line consistent-return
-  static async loginUser(loginData: LoginUser) {
+  static async loginUser(
+    loginData: LoginUser,
+  ): Promise<ResponseObject<UserResponseBase> | undefined> {
     const response: ResponseObject<IdentityAuthTokenLoginRaw> = (
       await ApiSelf.axiosInstance.post('/auth/login', loginData)
     ).data;
