@@ -1,7 +1,12 @@
 import Constants from 'expo-constants';
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import * as SecureStore from 'expo-secure-store';
-import RNEventSource, { ListenerCallback } from 'react-native-event-source';
+import EventSource, {
+  ExceptionEvent,
+  MessageEvent,
+  OpenEvent,
+  TimeoutEvent,
+} from 'react-native-sse';
 import {
   IdentityAuthTokenLoginRaw,
   IdentityAuthTokenLoginStored,
@@ -75,10 +80,14 @@ const IsDelayed = () => {
   };
 };
 /* ---------------------------------------API_CLASS--------------------------------------- */
+
+const WORKER_ASSIGNATION_SSE_TIMEOUT = 65000;
+
 export interface sseAsyncListenerParams {
-  open?: ListenerCallback;
-  message: ListenerCallback;
-  error?: ListenerCallback;
+  open?: (data?: OpenEvent) => void;
+  message: (data?: MessageEvent) => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  error?: (data?: ErrorEvent | TimeoutEvent | ExceptionEvent | any) => void;
 }
 export class ApiSelf {
   /**
@@ -556,22 +565,32 @@ export class ApiSelf {
     message,
     error,
   }: sseAsyncListenerParams) {
-    const eventSource = new RNEventSource(
+    const eventSource = new EventSource(
       `http://${Constants.expoConfig?.extra?.apiUrl}:3006/worker/sse/info`,
-      { headers: { Authorization: `Bearer ${ApiSelf.access_token}` } },
+      {
+        headers: {
+          Authorization: `Bearer ${ApiSelf.access_token}`,
+          timeout: WORKER_ASSIGNATION_SSE_TIMEOUT,
+        },
+      },
     );
+    eventSource.addEventListener('close', () => {
+      console.info('WORKER_ASSIGNED_LISTENER_CLOSE');
+    });
 
     eventSource.addEventListener('message', data => {
       message(data);
-      eventSource.removeAllListeners();
+      eventSource.removeAllEventListeners();
       eventSource.close();
     });
     eventSource.addEventListener('error', data => {
       if (error) error(data);
-      eventSource.removeAllListeners();
+      eventSource.removeAllEventListeners();
       eventSource.close();
     });
-    eventSource.addEventListener('open', open || (() => {}));
+    eventSource.addEventListener('open', data => {
+      if (open) open(data);
+    });
   }
 }
 /* ---------------------------------------AUTO_REFRESH_TOKENS--------------------------------------- */
