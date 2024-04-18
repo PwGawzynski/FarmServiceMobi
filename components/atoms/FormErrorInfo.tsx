@@ -3,7 +3,7 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import { useEffect } from 'react';
+import { memo, useEffect } from 'react';
 
 export type FormErrorInfoProps = {
   error?: string;
@@ -12,10 +12,7 @@ export type FormErrorInfoProps = {
 const APPEARING_DURATION = 300;
 const DISAPPEARING_DURATION_DEFAULT = 300;
 
-export function FormErrorInfo({
-  error,
-  disappearingDuration,
-}: FormErrorInfoProps) {
+function FormErrorInfoFn({ error, disappearingDuration }: FormErrorInfoProps) {
   const opacity = useSharedValue(0);
   const animatedStyle = useAnimatedStyle(() => ({ opacity: opacity.value }));
   if (error) opacity.value = withTiming(1, { duration: APPEARING_DURATION });
@@ -36,3 +33,8 @@ export function FormErrorInfo({
     </Animated.Text>
   );
 }
+
+export const FormErrorInfo = memo(
+  FormErrorInfoFn,
+  (p, n) => p.error === n.error,
+);
