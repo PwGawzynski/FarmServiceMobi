@@ -40,16 +40,16 @@ export function ClientList({
     ?.filter(client =>
       filter
         ? (
-            client.user.personal_data.name.trim() +
-            client.user.personal_data.surname.trim()
+            client.user.personalData.name.trim() +
+            client.user.personalData.surname.trim()
           )
             .toLowerCase()
             .includes(filter.toLowerCase().replace(' ', ''))
         : true,
     )
     .sort((a, b) =>
-      a.user.personal_data.surname.toLowerCase() >
-      b.user.personal_data.surname.toLowerCase()
+      a.user.personalData.surname.toLowerCase() >
+      b.user.personalData.surname.toLowerCase()
         ? 1
         : -1,
     );
@@ -61,8 +61,8 @@ export function ClientList({
       return (
         <PersonListItem
           item={item}
-          name={item.user.personal_data.name}
-          surname={item.user.personal_data.surname}
+          name={item.user.personalData.name}
+          surname={item.user.personalData.surname}
           bottomRightText={item.user.address.city}
           onPressNavigateTo={defaultBehavior ? 'clientControlPanel' : undefined}
           navigationParams={{ client: item }}

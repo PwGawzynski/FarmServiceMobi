@@ -20,7 +20,7 @@ export function ClientDetails({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const nav = useNavigation<any>();
 
-  const { personal_data: personalData, address } = route.params.client.user;
+  const { personalData, address } = route.params.client.user;
   const { company, email } = route.params.client;
   return (
     <ScreenBase name={`${personalData.name} ${personalData.surname}`}>

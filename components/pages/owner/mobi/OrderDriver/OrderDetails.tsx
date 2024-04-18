@@ -64,8 +64,8 @@ const orderDataObject = (order: OrderResponseBase) => ({
 });
 
 const clientDataObject = (client: ClientResponseBase) => ({
-  name: client.user.personal_data.name,
-  surname: client.user.personal_data.surname,
+  name: client.user.personalData.name,
+  surname: client.user.personalData.surname,
 });
 
 export function OrderDetails({

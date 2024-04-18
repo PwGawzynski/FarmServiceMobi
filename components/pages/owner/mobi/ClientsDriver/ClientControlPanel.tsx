@@ -17,7 +17,7 @@ export function ClientControlPanel({
   'clientsDriver',
   'ownerRootDriver'
 >) {
-  const personalData = route.params.client.user.personal_data;
+  const { personalData } = route.params.client.user;
   const { email } = route.params.client;
   return (
     <ScreenBase

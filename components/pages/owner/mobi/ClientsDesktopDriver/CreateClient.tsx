@@ -21,7 +21,7 @@ import { createClientSetup } from '../../../../../helepers/FormSetups/CreateClie
 import { AppButton } from '../../../../atoms/AppButton';
 
 export type CreateClientForm = Pick<CreateClientReqI['user'], 'email'> &
-  CreateUserReqI['personal_data'] &
+  CreateUserReqI['personalData'] &
   CreateClientReqI['user']['address'];
 
 const CLEAR_TIMEOUT = 500;
@@ -41,9 +41,9 @@ const EDIT_BUTTON_VALUE = t(
 function prepareDefaultValues(client?: ClientResponseBase): CreateClientForm {
   return {
     email: client?.email || '',
-    name: client?.user.personal_data.name || '',
-    surname: client?.user.personal_data.surname || '',
-    phoneNumber: client?.user.personal_data.phoneNumber || '',
+    name: client?.user.personalData.name || '',
+    surname: client?.user.personalData.surname || '',
+    phoneNumber: client?.user.personalData.phoneNumber || '',
     city: client?.user.address.city || '',
     county: client?.user.address.county || '',
     apartmentNumber: client?.user.address.apartmentNumber || '',
@@ -59,7 +59,7 @@ const convertFormDataToRequestType = (
 ): CreateClientReqI => ({
   user: {
     email: data.email,
-    personal_data: {
+    personalData: {
       name: data.name,
       surname: data.surname,
       phoneNumber: data.phoneNumber,
@@ -83,7 +83,7 @@ const convertFormDataToEditRequestType = (
 ): UpdateClientReqI => ({
   client: client.id,
   email: data.email,
-  personal_data: {
+  personalData: {
     name: data.name,
     surname: data.surname,
     phoneNumber: data.phoneNumber,
