@@ -79,6 +79,8 @@ export function LoginByEmail({ navigation }: AuthDriverProps<'loginByEmail'>) {
   useEffect(() => {
     if (data && data.role !== undefined) {
       // TODO add clientRole case
+      if (data) dispatch(setUserAsync(data));
+
       if (data.role === UserRole.Owner)
         navigation.navigate('ownerRootDriver', {
           screen: 'activityDriver',
@@ -89,11 +91,11 @@ export function LoginByEmail({ navigation }: AuthDriverProps<'loginByEmail'>) {
             },
           },
         });
-      else if (data.role === UserRole.Worker)
+      else if (data.role === UserRole.Worker) {
         navigation.navigate('workerRootDriver', {
           screen: 'workerAssignationScreen',
         });
-      dispatch(setUserAsync(data));
+      }
     }
   }, [data]);
 

@@ -74,6 +74,11 @@ export const setUpUser = createAsyncThunk(
         setThemeToStorage(response.payload.account.theme);
       return {
         initializationStatus: InitializationStatus.FULFILLED,
+        personalData: response.payload.personalData,
+        address: response.payload.address,
+        account: response.payload.account,
+        company: response.payload.company,
+        role: response.payload.role,
         ...response.payload,
       };
     } catch (error) {

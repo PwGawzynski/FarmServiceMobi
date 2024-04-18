@@ -88,6 +88,7 @@ export interface sseAsyncListenerParams {
   message: (data?: MessageEvent) => void;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   error?: (data?: ErrorEvent | TimeoutEvent | ExceptionEvent | any) => void;
+  sseUrl: string;
 }
 export class ApiSelf {
   /**
@@ -591,6 +592,35 @@ export class ApiSelf {
     eventSource.addEventListener('open', data => {
       if (open) open(data);
     });
+  }
+
+  static workerTasks({ open, message, error }: sseAsyncListenerParams) {
+    const eventSource = new EventSource(
+      `http://${Constants.expoConfig?.extra?.apiUrl}:3006/task/assigned`,
+      {
+        headers: {
+          Authorization: `Bearer ${ApiSelf.access_token}`,
+          timeout: 0,
+        },
+      },
+    );
+    eventSource.addEventListener('close', () => {
+      console.info('WORKER_ASSIGNED_LISTENER_CLOSE');
+    });
+
+    eventSource.addEventListener('message', data => {
+      if (message) message(data);
+    });
+    eventSource.addEventListener('error', data => {
+      if (error) error(data);
+      eventSource.close();
+    });
+    eventSource.addEventListener('open', data => {
+      if (open) open(data);
+    });
+    const remListeners = () => eventSource.removeAllEventListeners();
+    const close = () => eventSource.close();
+    return [remListeners, close];
   }
 }
 /* ---------------------------------------AUTO_REFRESH_TOKENS--------------------------------------- */

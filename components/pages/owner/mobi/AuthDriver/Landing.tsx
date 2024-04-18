@@ -76,7 +76,6 @@ export default function Landing({ navigation }: AuthDriverProps<'landing'>) {
   const [state, send] = useActor(LandingMachine, { input: { fetchCount: 1 } });
   const queryLog = useSelector(selectQueryFetchLog('clients-fetch-error'));
   const dispatch = useDispatch();
-
   const queryClient = useRef(
     new QueryClient({
       defaultOptions: {
