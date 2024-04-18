@@ -91,13 +91,7 @@ export function LoginByEmail({ navigation }: AuthDriverProps<'loginByEmail'>) {
         });
       else if (data.role === UserRole.Worker)
         navigation.navigate('workerRootDriver', {
-          screen: 'workerActivityDriver',
-          params: {
-            screen: 'workerActivityDesktopRoot',
-            params: {
-              screen: 'workerLastActivities',
-            },
-          },
+          screen: 'workerAssignationScreen',
         });
       dispatch(setUserAsync(data));
     }
