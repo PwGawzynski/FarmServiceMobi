@@ -1,5 +1,4 @@
 import { ActivityIndicator, ActivityIndicatorProps } from 'react-native';
-import { useEffect } from 'react';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
@@ -26,12 +25,8 @@ export function PendingInfo({
   const animatedStyle = useAnimatedStyle(() => ({ opacity: opacity.value }));
   const { color } = useTheme();
 
-  useEffect(() => {
-    if (isVisible) opacity.value = withTiming(1, { duration: 200 });
-    return () => {
-      opacity.value = withTiming(0, { duration: 100 });
-    };
-  }, [isVisible]);
+  if (isVisible) opacity.value = withTiming(1, { duration: 200 });
+  else return null;
 
   return (
     <Animated.View

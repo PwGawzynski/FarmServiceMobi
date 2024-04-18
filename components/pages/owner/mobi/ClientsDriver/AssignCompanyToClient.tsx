@@ -102,8 +102,7 @@ export function AssignCompanyToClient({
 >) {
   const { onCreateClient, afterCreateClient, onEdit } = params;
   const personalData =
-    onCreateClient?.user.personal_data ||
-    afterCreateClient?.user?.personal_data;
+    onCreateClient?.user.personalData || afterCreateClient?.user?.personalData;
   const address =
     onCreateClient?.user.address ||
     afterCreateClient?.user?.address ||

@@ -6,6 +6,7 @@ import { ResponseObject } from '../../FarmServiceApiTypes/Respnse/responseGeneri
 import { LoginUser } from '../../FarmServiceApiTypes/User/LoginUser';
 import { TranslationNames } from '../../locales/TranslationNames';
 import { UserResetPasswordReqI } from '../../FarmServiceApiTypes/User/Requests';
+import { UserResponseBase } from '../../FarmServiceApiTypes/User/Responses';
 
 /**
  * Method used to handle api calls as base driver maintaining
@@ -69,7 +70,9 @@ export async function me() {
  * @throws Error when credentials are wrong or something went wrong
  * @return UserResponseBase | undefined
  */
-export async function login(data: LoginUser) {
+export async function login(
+  data: LoginUser,
+): Promise<UserResponseBase | undefined> {
   const UNAUTHORIZED_MSG = t(
     TranslationNames.userService.errorMessages.wrongCredentials,
   );

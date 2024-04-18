@@ -48,12 +48,12 @@ export function ClientsDesktop() {
         onPressNavigateTo="clientControlPanel"
         navigationParamName="client"
         listStyleSettings={item => ({
-          header: `${item.user.personal_data.name} ${item.user.personal_data.surname}`,
+          header: `${item.user.personalData.name} ${item.user.personalData.surname}`,
           bottomRightText: item.user.address.city,
           alignment: 'right',
           avatarChars: [
-            item.user.personal_data.name[0],
-            item.user.personal_data.surname[0],
+            item.user.personalData.name[0],
+            item.user.personalData.surname[0],
           ],
         })}
         filterFunction={clientListFilter}

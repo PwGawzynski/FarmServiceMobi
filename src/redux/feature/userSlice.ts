@@ -20,7 +20,7 @@ export enum InitializationStatus {
 
 export type UserContextI = {
   role: UserRole | undefined;
-  personal_data: Partial<UserResponseBase['personal_data']>;
+  personalData: Partial<UserResponseBase['personalData']>;
   address: Partial<UserResponseBase['address']>;
   account: Partial<UserResponseBase['account']>;
   company?: Partial<{
@@ -39,7 +39,7 @@ export type UserSliceI = {
 
 const initUserData: UserContextI = {
   role: undefined,
-  personal_data: {
+  personalData: {
     name: undefined,
     surname: undefined,
     phoneNumber: undefined,
@@ -96,7 +96,13 @@ export const setUserAsync = createAsyncThunk(
   'user/setUserAsync',
   async (data: UserResponseBase) => {
     await setThemeToStorage(data.account.theme);
-    return { ...data };
+    return {
+      ...data,
+      personalData: { ...data.personalData },
+      address: { ...data.address },
+      account: { ...data.account },
+      company: { ...data.company },
+    };
   },
 );
 
@@ -108,8 +114,8 @@ const UserSlice = createSlice({
       state.initializationStatus = action.payload?.initializationStatus;
       state.role = action.payload?.role;
       if (action.payload?.account) state.account = action.payload.account;
-      if (action.payload?.personal_data)
-        state.personal_data = action.payload?.personal_data;
+      if (action.payload?.personalData)
+        state.personalData = action.payload?.personalData;
       if (action.payload?.address) state.address = action.payload?.address;
       if (action.payload?.company) state.company = action.payload?.company;
     });
@@ -136,7 +142,7 @@ export const selectUserRole = (state: UserSliceI) => state.user?.role;
 export const selectInitStatus = (state: UserSliceI) =>
   state.user?.initializationStatus;
 export const selectUserPersonalData = (state: UserSliceI) =>
-  state.user?.personal_data;
+  state.user?.personalData;
 export const selectUserAddress = (state: UserSliceI) => state.user?.address;
 export const selectUserAccount = (state: UserSliceI) => state.user?.account;
 export const selectUserCompany = (state: UserSliceI) => state.user?.company;

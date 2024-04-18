@@ -18,6 +18,7 @@ import { PendingInfo } from '../../../../atoms/PendingInfo';
 import { FormErrorInfo } from '../../../../atoms/FormErrorInfo';
 import { TextWithLink } from '../../../../atoms/TextWithLink';
 import { AppButton } from '../../../../atoms/AppButton';
+import { UserRole } from '../../../../../FarmServiceApiTypes/User/Enums';
 
 export function LoginByEmail({ navigation }: AuthDriverProps<'loginByEmail'>) {
   const { t } = useTranslation();
@@ -77,15 +78,27 @@ export function LoginByEmail({ navigation }: AuthDriverProps<'loginByEmail'>) {
 
   useEffect(() => {
     if (data && data.role !== undefined) {
-      navigation.navigate('ownerRootDriver', {
-        screen: 'activityDriver',
-        params: {
-          screen: 'activityDesktopRoot',
+      // TODO add clientRole case
+      if (data.role === UserRole.Owner)
+        navigation.navigate('ownerRootDriver', {
+          screen: 'activityDriver',
           params: {
-            screen: 'lastActivities',
+            screen: 'activityDesktopRoot',
+            params: {
+              screen: 'lastActivities',
+            },
           },
-        },
-      });
+        });
+      else if (data.role === UserRole.Worker)
+        navigation.navigate('workerRootDriver', {
+          screen: 'workerActivityDriver',
+          params: {
+            screen: 'workerActivityDesktopRoot',
+            params: {
+              screen: 'workerLastActivities',
+            },
+          },
+        });
       dispatch(setUserAsync(data));
     }
   }, [data]);
