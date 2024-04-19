@@ -63,7 +63,10 @@
         "serverError": "Hmmm something went wrong, please try again later",
         "locationPolicyTitle": "Location Usage Policy",
         "locationPolicyDescription": "We use your location to provide you with the best possible experience, we don't store your location data, we use it only to get the coordinates of the field",
-        "locationPolicyButton": "I understand"
+        "locationPolicyButton": "I understand",
+        "resetButton": "Reset",
+        "markerName": "Field",
+        "markerDescription": "Estimated Field Location"
       }
     },
     "machineDesktopDriver": {
