@@ -608,8 +608,8 @@ export class ApiSelf {
       console.info('WORKER_ASSIGNED_LISTENER_CLOSE');
     });
 
-    eventSource.addEventListener('message', data => {
-      if (message) message(data);
+    eventSource.addEventListener('message', (data: MessageEvent) => {
+      if (message) message(JSON.parse(data.data as string).payload);
     });
     eventSource.addEventListener('error', data => {
       if (error) error(data);
@@ -618,9 +618,7 @@ export class ApiSelf {
     eventSource.addEventListener('open', data => {
       if (open) open(data);
     });
-    const remListeners = () => eventSource.removeAllEventListeners();
-    const close = () => eventSource.close();
-    return [remListeners, close];
+    return eventSource;
   }
 }
 /* ---------------------------------------AUTO_REFRESH_TOKENS--------------------------------------- */
