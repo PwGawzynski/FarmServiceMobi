@@ -72,6 +72,7 @@ export const setUpUser = createAsyncThunk(
       const response = await Api.me();
       if (response.code === ResponseCode.ProcessedCorrect && response.payload)
         setThemeToStorage(response.payload.account.theme);
+      // some data may be missing due to user role
       return {
         initializationStatus: InitializationStatus.FULFILLED,
         personalData: {
