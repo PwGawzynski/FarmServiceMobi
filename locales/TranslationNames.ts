@@ -78,6 +78,9 @@ export const TranslationNames = {
           'screens.AuthDriver.createField.locationPolicyDescription',
         locationPolicyButton:
           'screens.AuthDriver.createField.locationPolicyButton',
+        resetButton: 'screens.AuthDriver.createField.resetButton',
+        markerName: 'screens.AuthDriver.createField.markerName',
+        markerDescription: 'screens.AuthDriver.createField.markerDescription',
       },
     },
     machineDesktopDriver: {
@@ -527,6 +530,7 @@ export const TranslationNames = {
       nameLabel: 'createFieldForm.formPlaceholder.nameLabel',
       area: 'createFieldForm.formPlaceholder.area',
       polishSystemId: 'createFieldForm.formPlaceholder.polishSystemId',
+      resetButton: 'createFieldForm.formPlaceholder.resetButton',
     },
     validation: {
       nameLabel: 'createFieldForm.validation.nameLabel',
