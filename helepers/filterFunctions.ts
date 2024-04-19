@@ -2,6 +2,7 @@ import { FieldResponseBase } from '../FarmServiceApiTypes/Field/Ressponses';
 import { MachineResponseBase } from '../FarmServiceApiTypes/Machine/Responses';
 import { OrderResponseBase } from '../FarmServiceApiTypes/Order/Ressponses';
 import { ClientResponseBase } from '../FarmServiceApiTypes/Clients/Responses';
+import { TaskResponseBase } from '../FarmServiceApiTypes/Task/Responses';
 
 export const searchEngineNameSurnameFilter = <
   T extends { personalData: { name: string; surname: string } },
@@ -94,6 +95,25 @@ export const clientListFilter = (
     .sort((a, b) =>
       a.user.personalData.surname.toLowerCase() >
       b.user.personalData.surname.toLowerCase()
+        ? 1
+        : -1,
+    );
+
+export const filterTasks = (
+  data: TaskResponseBase[] | undefined,
+  filter: string | undefined,
+) =>
+  data
+    ?.filter(order =>
+      filter
+        ? order.field.nameLabel
+            .trim()
+            .toLowerCase()
+            .includes(filter.toLowerCase().replace(' ', ''))
+        : true,
+    )
+    .sort((a, b) =>
+      new Date(a.createdAt).getTime() > new Date(b.createdAt).getTime()
         ? 1
         : -1,
     );
