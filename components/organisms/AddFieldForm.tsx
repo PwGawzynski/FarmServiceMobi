@@ -3,7 +3,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { LocationObject } from 'expo-location';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { t } from 'i18next';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { YStack } from 'tamagui';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { FormCreator } from '../atoms/FormCreator';
@@ -225,7 +225,7 @@ export function AddFieldForm({
         ref={mapRef}
         shouldRasterizeIOS
         initialRegion={initialState}
-        provider={PROVIDER_GOOGLE}
+        provider={Platform.OS === 'android' ? PROVIDER_GOOGLE : undefined}
         style={{
           flex: 1,
           borderRadius: 20,
