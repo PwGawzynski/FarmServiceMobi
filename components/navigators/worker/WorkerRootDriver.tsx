@@ -3,6 +3,7 @@ import { NativeStackScreenOptionsBase } from '../../../settings/navigators/Nativ
 import { ActivityDriver } from './activities/ActivitiesDriver';
 import { WorkerRootDriverParamList } from '../../../types/self/navigation/Worker/paramList/WorkerRootDriverParamList';
 import { WorkerAssignation } from '../../pages/worker/WorkerAssignation';
+import { Work } from '../../pages/worker/Work';
 
 const Stack = createNativeStackNavigator<WorkerRootDriverParamList>();
 
@@ -27,6 +28,7 @@ export function WorkerRootDriver() {
         name="workerAssignationScreen"
         component={WorkerAssignation}
       />
+      <Stack.Screen name="work" component={Work} />
     </Stack.Navigator>
   );
 }
