@@ -93,13 +93,15 @@ export const setUpUser = createAsyncThunk(
           isActivated: response.payload.account.isActivated,
           theme: response.payload.account.theme,
         },
-        company: {
-          name: response.payload.company.name,
-          address: response.payload.company.address,
-          email: response.payload.company.email,
-          PhoneNumber: response.payload.company?.phoneNumber,
-          NIP: response.payload.company.NIP,
-        },
+        company: response.payload.company
+          ? {
+              name: response.payload.company.name,
+              address: response.payload.company.address,
+              email: response.payload.company.email,
+              PhoneNumber: response.payload.company?.phoneNumber,
+              NIP: response.payload.company.NIP,
+            }
+          : undefined,
         role: response.payload.role,
         ...response.payload,
       };
@@ -151,24 +153,27 @@ const UserSlice = createSlice({
       if (action.payload?.company) state.company = action.payload?.company;
     });
     builder.addCase(setUserAsync.fulfilled, (state, action) => {
-      state.personalData = {
-        name: action.payload.personalData.name,
-        surname: action.payload.personalData.surname,
-        phoneNumber: action.payload.personalData.phoneNumber,
-      };
-      state.role = action.payload.role;
-      state.account = {
-        theme: action.payload.account.theme,
-      };
-      state.address = {
-        city: action.payload.address.city,
-        county: action.payload.address.county,
-        voivodeship: action.payload.address.voivodeship,
-        postalCode: action.payload.address.postalCode,
-        street: action.payload.address.street,
-        houseNumber: action.payload.address.houseNumber,
-        apartmentNumber: action.payload.address.apartmentNumber,
-      };
+      if (action.payload.personalData)
+        state.personalData = {
+          name: action.payload.personalData.name,
+          surname: action.payload.personalData.surname,
+          phoneNumber: action.payload.personalData.phoneNumber,
+        };
+      if (action.payload.role) state.role = action.payload.role;
+      if (action.payload.account)
+        state.account = {
+          theme: action.payload.account.theme,
+        };
+      if (action.payload.address)
+        state.address = {
+          city: action.payload.address.city,
+          county: action.payload.address.county,
+          voivodeship: action.payload.address.voivodeship,
+          postalCode: action.payload.address.postalCode,
+          street: action.payload.address.street,
+          houseNumber: action.payload.address.houseNumber,
+          apartmentNumber: action.payload.address.apartmentNumber,
+        };
     });
   },
   reducers: {
