@@ -74,10 +74,32 @@ export const setUpUser = createAsyncThunk(
         setThemeToStorage(response.payload.account.theme);
       return {
         initializationStatus: InitializationStatus.FULFILLED,
-        personalData: response.payload.personalData,
-        address: response.payload.address,
-        account: response.payload.account,
-        company: response.payload.company,
+        personalData: {
+          name: response.payload.personalData.name,
+          surname: response.payload.personalData.surname,
+          phoneNumber: response.payload.personalData.phoneNumber,
+        },
+        address: {
+          city: response.payload.address.city,
+          county: response.payload.address.county,
+          voivodeship: response.payload.address.voivodeship,
+          postalCode: response.payload.address.postalCode,
+          street: response.payload.address.street,
+          houseNumber: response.payload.address.houseNumber,
+          apartmentNumber: response.payload.address.apartmentNumber,
+        },
+        account: {
+          email: response.payload.account.email,
+          isActivated: response.payload.account.isActivated,
+          theme: response.payload.account.theme,
+        },
+        company: {
+          name: response.payload.company.name,
+          address: response.payload.company.address,
+          email: response.payload.company.email,
+          PhoneNumber: response.payload.company?.phoneNumber,
+          NIP: response.payload.company.NIP,
+        },
         role: response.payload.role,
         ...response.payload,
       };
@@ -103,7 +125,11 @@ export const setUserAsync = createAsyncThunk(
     await setThemeToStorage(data.account.theme);
     return {
       ...data,
-      personalData: { ...data.personalData },
+      personalData: {
+        name: data.personalData.name,
+        surname: data.personalData.surname,
+        phoneNumber: data.personalData.phoneNumber,
+      },
       address: { ...data.address },
       account: { ...data.account },
       company: { ...data.company },
@@ -125,9 +151,24 @@ const UserSlice = createSlice({
       if (action.payload?.company) state.company = action.payload?.company;
     });
     builder.addCase(setUserAsync.fulfilled, (state, action) => {
+      state.personalData = {
+        name: action.payload.personalData.name,
+        surname: action.payload.personalData.surname,
+        phoneNumber: action.payload.personalData.phoneNumber,
+      };
       state.role = action.payload.role;
-      state.account = action.payload.account;
-      state.address = action.payload.address;
+      state.account = {
+        theme: action.payload.account.theme,
+      };
+      state.address = {
+        city: action.payload.address.city,
+        county: action.payload.address.county,
+        voivodeship: action.payload.address.voivodeship,
+        postalCode: action.payload.address.postalCode,
+        street: action.payload.address.street,
+        houseNumber: action.payload.address.houseNumber,
+        apartmentNumber: action.payload.address.apartmentNumber,
+      };
     });
   },
   reducers: {
