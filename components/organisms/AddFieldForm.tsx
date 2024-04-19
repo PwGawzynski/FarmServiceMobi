@@ -1,10 +1,11 @@
 import { useForm } from 'react-hook-form';
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { LocationObject } from 'expo-location';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { t } from 'i18next';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { YStack } from 'tamagui';
+import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { FormCreator } from '../atoms/FormCreator';
 import { createFieldSetup } from '../../helepers/FormSetups/CreateFieldSetup';
 import {
@@ -20,6 +21,9 @@ import { TranslationNames } from '../../locales/TranslationNames';
 import { FormErrorInfo } from '../atoms/FormErrorInfo';
 import PlusIco from '../../assets/plus.svg';
 import { updateFieldReqI } from '../../FarmServiceApiTypes/Field/Requests';
+import { Colors } from '../../settings/styles/colors';
+import { getDataFromCords } from '../../api/geoportal/Geoportal';
+import CrosshatchIco from '../../assets/crosshair.svg';
 
 const TRANSLATIONS = {
   successMessage: t(
@@ -31,6 +35,11 @@ const TRANSLATIONS = {
   ),
   pendingStatus: t(
     TranslationNames.screens.clientDesktopDriver.createClient.pendingStatus,
+  ),
+  resetButton: t(TranslationNames.screens.authDriver.createField.resetButton),
+  marker: t(TranslationNames.screens.authDriver.createField.markerName),
+  markerDescription: t(
+    TranslationNames.screens.authDriver.createField.markerDescription,
   ),
 };
 
@@ -91,13 +100,16 @@ const prepareDataEdit = (
     },
   }) as updateFieldReqI;
 export function AddFieldForm({
-  transformedData,
+  transformedData: td,
   gpsCords,
   client,
   field,
   navigation,
   goBack,
 }: Props) {
+  const [transformedData, setTransformedData] = useState<
+    DataFromXMLRes | undefined
+  >(td);
   const queryClient = useQueryClient();
   const { mutate, isSuccess, error, isPending } = useMutation({
     mutationKey: ['createField'],
@@ -110,6 +122,14 @@ export function AddFieldForm({
         },
       );
     },
+  });
+  const {
+    mutate: getFromCords,
+    data: cordsData,
+    isPending: cordsPending,
+  } = useMutation({
+    mutationKey: ['locationCordsData'],
+    mutationFn: getDataFromCords,
   });
 
   const {
@@ -149,6 +169,7 @@ export function AddFieldForm({
     control,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     defaultValues: useMemo(() => {
       const area = Number.isNaN(Number(field?.area))
@@ -175,8 +196,66 @@ export function AddFieldForm({
     else if (transformedData && gpsCords)
       mutate(prepareData(transformedData, data, client, gpsCords));
   };
+  useEffect(() => {
+    console.log(cordsData);
+    if (cordsData) {
+      setTransformedData(cordsData);
+      reset(cordsData);
+    }
+  }, [cordsData]);
+  const initialState = {
+    latitude: gpsCords?.coords.latitude || 37.78825,
+    longitude: gpsCords?.coords.longitude || -122.4324,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421,
+  };
+  const mapRef = useRef<MapView>(null);
+  const handleMapReset = () =>
+    mapRef.current?.animateCamera({
+      center: initialState,
+      pitch: 0,
+      heading: 0,
+      altitude: 1000,
+      zoom: 19,
+    });
   return (
-    <YStack f={1}>
+    <YStack f={1} className="mt-4">
+      <MapView
+        showsUserLocation
+        ref={mapRef}
+        shouldRasterizeIOS
+        initialRegion={initialState}
+        provider={Platform.OS === 'android' ? PROVIDER_GOOGLE : undefined}
+        style={{
+          flex: 1,
+          borderRadius: 20,
+        }}
+        mapType="satellite"
+        cacheEnabled={false}
+      >
+        <Marker
+          coordinate={initialState}
+          pinColor={Colors.GREEN}
+          description={TRANSLATIONS.markerDescription}
+          title={TRANSLATIONS.marker}
+          draggable
+          onDragEnd={e =>
+            getFromCords({
+              latitude: e.nativeEvent.coordinate.latitude.toString(),
+              longitude: e.nativeEvent.coordinate.longitude.toString(),
+            })
+          }
+        />
+      </MapView>
+      <ButtonTamagui
+        icon={<CrosshatchIco />}
+        text={TRANSLATIONS.resetButton}
+        buttonProps={{
+          size: '$2',
+          marginTop: '$2',
+          onPress: handleMapReset,
+        }}
+      />
       <View className="w-full h-6 mt-2 overflow-hidden flex-row justify-center items-center">
         {!error && !editError && (
           <PendingInfo
@@ -188,10 +267,19 @@ export function AddFieldForm({
           <FormErrorInfo error={error?.message || editError?.message} />
         )}
       </View>
-      <FormCreator
-        controllerSetups={createFieldSetup(control)}
-        errors={errors}
-      />
+      {!cordsPending ? (
+        <FormCreator
+          controllerSetups={createFieldSetup(control)}
+          errors={errors}
+        />
+      ) : (
+        <YStack f={1}>
+          <PendingInfo
+            isVisible={cordsPending}
+            infoText="Searching for field..."
+          />
+        </YStack>
+      )}
       <ButtonTamagui
         icon={<PlusIco />}
         text={field ? TRANSLATIONS.editSubmitButton : TRANSLATIONS.submitButton}
