@@ -272,6 +272,37 @@
 
     }
   },
+  "workerScreens": {
+    "activityDriver": {
+      "taskView": {
+        "reset_map": "Reset Map",
+        "task_view": "Task View",
+        "task_info": "Task Info",
+        "field_info": "Field Info",
+        "address_info": "Address Info",
+        "created_at": "Created At",
+        "closed_at": "Closed At",
+        "opened_at": "Opened At",
+        "performance_date": "Performance Date",
+        "type": "Type",
+        "status": "Status",
+        "done": "Done",
+        "not_done": "Not Done",
+        "name": "Name",
+        "pl_id": "PL_ID",
+        "area": "Area",
+        "doc_data": "DOC Data",
+        "city": "City",
+        "county": "County",
+        "longitude": "Longitude",
+        "latitude": "Latitude",
+        "voivodeship": "Voivodeship"
+      }
+    },
+    "activityDesktopRoot": {
+      "welcome": "Welcome"
+    }
+  },
   "serviceDefaults": {
     "unauthorised": "Session expired, please login again",
     "default": "Something went wrong, please try again later"
@@ -363,7 +394,9 @@
       "cantUpdateMachine": "Cannot update machine",
       "cantUpdateMachineDescription": "Sorry we cannot update machine, try later",
       "cantDeleteMachine": "Cannot delete machine",
-      "cantDeleteMachineDescription": "Sorry we cannot delete machine, try later"
+      "cantDeleteMachineDescription": "Sorry we cannot delete machine, try later",
+      "cantCreateTask": "Cannot create task",
+      "cantCreateTaskDescription": "Something went wrong, try again later"
     },
     "filedBottomSheet": {
       "showOnMapButton": "Show on map",

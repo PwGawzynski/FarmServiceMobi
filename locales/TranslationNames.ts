@@ -345,6 +345,38 @@ export const TranslationNames = {
       },
     },
   },
+  workerScreens: {
+    activityDriver: {
+      taskView: {
+        reset_map: 'workerScreens.activityDriver.taskView.reset_map',
+        task_view: 'workerScreens.activityDriver.taskView.task_view',
+        task_info: 'workerScreens.activityDriver.taskView.task_info',
+        field_info: 'workerScreens.activityDriver.taskView.field_info',
+        address_info: 'workerScreens.activityDriver.taskView.address_info',
+        created_at: 'workerScreens.activityDriver.taskView.created_at',
+        closed_at: 'workerScreens.activityDriver.taskView.closed_at',
+        opened_at: 'workerScreens.activityDriver.taskView.opened_at',
+        performance_date:
+          'workerScreens.activityDriver.taskView.performance_date',
+        type: 'workerScreens.activityDriver.taskView.type',
+        status: 'workerScreens.activityDriver.taskView.status',
+        done: 'workerScreens.activityDriver.taskView.done',
+        not_done: 'workerScreens.activityDriver.taskView.not_done',
+        name: 'workerScreens.activityDriver.taskView.name',
+        pl_id: 'workerScreens.activityDriver.taskView.pl_id',
+        area: 'workerScreens.activityDriver.taskView.area',
+        doc_data: 'workerScreens.activityDriver.taskView.doc_data',
+        city: 'workerScreens.activityDriver.taskView.city',
+        county: 'workerScreens.activityDriver.taskView.county',
+        longitude: 'workerScreens.activityDriver.taskView.longitude',
+        latitude: 'workerScreens.activityDriver.taskView.latitude',
+        voivodeship: 'workerScreens.activityDriver.taskView.voivodeship',
+      },
+    },
+    activityDesktopRoot: {
+      welcome: 'workerScreens.activityDesktopRoot.welcome',
+    },
+  },
   serviceDefaults: {
     unauthorised: 'serviceDefaults.unauthorised',
     default: 'serviceDefaults.default',
@@ -440,6 +472,8 @@ export const TranslationNames = {
       cantDeleteMachine: 'components.toast.cantDeleteMachine',
       cantDeleteMachineDescription:
         'components.toast.cantDeleteMachineDescription',
+      cantCreateTask: 'components.toast.cantCreateTask',
+      cantCreateTaskDescription: 'components.toast.cantCreateTaskDescription',
     },
     filedBottomSheet: {
       showOnMapButton: 'components.filedBottomSheet.showOnMapButton',
@@ -488,6 +522,7 @@ export const TranslationNames = {
       longitude: 'addressForm.validation.longitude',
     },
   },
+
   createCompanyForm: {
     formPlaceholder: {
       email: 'createCompanyForm.formPlaceholder.email',
