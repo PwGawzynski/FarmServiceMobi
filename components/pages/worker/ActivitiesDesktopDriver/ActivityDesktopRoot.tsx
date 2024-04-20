@@ -28,12 +28,16 @@ export function ActivityDesktopRoot({
   const user = useSelector(selectUser);
   const name = user?.personalData.name;
   const [tasks, setTasks] = useState<TaskResponseBase[]>([]);
+  const [isFetching, setIsFetching] = useState(true);
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let es: any;
     (async () => {
       const eventSource = await Api.workerTasks({
-        message: (m: TaskResponseBase[]) => setTasks(m),
+        message: (m: TaskResponseBase[]) => {
+          setIsFetching(false);
+          setTasks(m);
+        },
       });
       es = eventSource;
     })();
@@ -52,9 +56,8 @@ export function ActivityDesktopRoot({
       name={`${TRANSLATIONS.welcome} ${name}`}
     >
       <List<TaskResponseBase>
-        isFetching={false}
         isError={false}
-        isLoading={false}
+        isLoading={isFetching}
         data={tasks}
         onPressNavigateTo="taskView"
         navigationParamName="task"
