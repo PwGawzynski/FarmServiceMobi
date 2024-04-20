@@ -122,16 +122,10 @@ export function ListItemSkeleton({ maxHeight }: ListItemSkeletonProps) {
   }, []);
   return (
     <View className={`flex-1 justify-center mt-2 mb-2 p-2 max-h-${maxHeight}`}>
-      <Animated.View style={[animatedStyle]} className="flex-1 flex-row">
-        <Circle height={40} width={40} backgroundColor="$color8" />
-        <View className="flex-1 flex-col items-end">
-          <View backgroundColor="$color8" className="flex-1 rounded-md w-2/3" />
-          <View
-            backgroundColor="$color8"
-            className="flex-1 w-1/3 rounded-md mt-2"
-          />
-        </View>
-      </Animated.View>
+      <Animated.View
+        style={[animatedStyle]}
+        className="flex-1 flex-row bg-light-blue dark:bg-dark-8 rounded-lg"
+      />
     </View>
   );
 }
