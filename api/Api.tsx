@@ -594,6 +594,7 @@ export class ApiSelf {
     });
   }
 
+  @IsDelayed()
   static workerTasks({ open, message, error }: sseAsyncListenerParams) {
     const eventSource = new EventSource(
       `http://${Constants.expoConfig?.extra?.apiUrl}:3006/task/assigned`,
