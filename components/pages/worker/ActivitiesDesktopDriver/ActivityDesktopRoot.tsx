@@ -2,7 +2,6 @@ import { useSelector } from 'react-redux';
 import { useEffect, useRef, useState } from 'react';
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
 import { t } from 'i18next';
-import { ScreenBase } from '../../owner/mobi/common/ScreenBase';
 import { ActivitiesDesktopDriverScreenProps } from '../../../../types/self/navigation/Worker/props/activities/WorkerActivitiesDesktopDriverProps';
 import { selectUser } from '../../../../src/redux/feature/userSlice';
 import { Api } from '../../../../api/Api';
@@ -11,6 +10,7 @@ import List from '../../../organisms/List';
 import { TaskType } from '../../../../FarmServiceApiTypes/Task/Enums';
 import { filterTasks } from '../../../../helepers/filterFunctions';
 import { TranslationNames } from '../../../../locales/TranslationNames';
+import { ScreenBase } from '../../owner/mobi/common/ScreenBase';
 
 const TRANSLATIONS = {
   welcome: t(TranslationNames.workerScreens.activityDesktopRoot.welcome),
@@ -33,13 +33,12 @@ export function ActivityDesktopRoot({
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let es: any;
     (async () => {
-      const eventSource = await Api.workerTasks({
+      es = await Api.workerTasks({
         message: (m: TaskResponseBase[]) => {
           setIsFetching(false);
           setTasks(m);
         },
       });
-      es = eventSource;
     })();
     return () => {
       es.removeAllEventListeners();
@@ -61,7 +60,6 @@ export function ActivityDesktopRoot({
         data={tasks}
         onPressNavigateTo="taskView"
         navigationParamName="task"
-        modalRef={modalRef}
         listStyleSettings={item => ({
           header: item.field.nameLabel,
           bottomRightText: `${TaskType[item.type]} ( ${new Date(
