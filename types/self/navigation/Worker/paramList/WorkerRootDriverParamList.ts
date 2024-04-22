@@ -5,5 +5,5 @@ import { TaskResponseBase } from '../../../../../FarmServiceApiTypes/Task/Respon
 export type WorkerRootDriverParamList = {
   workerActivityDriver: NavigatorScreenParams<WorkerActivityDriverParamList>;
   workerAssignationScreen: undefined;
-  work: TaskResponseBase;
+  work: { task: TaskResponseBase };
 };
