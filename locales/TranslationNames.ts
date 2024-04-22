@@ -348,29 +348,47 @@ export const TranslationNames = {
   workerScreens: {
     activityDriver: {
       taskView: {
-        reset_map: 'workerScreens.activityDriver.taskView.reset_map',
-        task_view: 'workerScreens.activityDriver.taskView.task_view',
-        task_info: 'workerScreens.activityDriver.taskView.task_info',
-        field_info: 'workerScreens.activityDriver.taskView.field_info',
-        address_info: 'workerScreens.activityDriver.taskView.address_info',
-        created_at: 'workerScreens.activityDriver.taskView.created_at',
-        closed_at: 'workerScreens.activityDriver.taskView.closed_at',
-        opened_at: 'workerScreens.activityDriver.taskView.opened_at',
-        performance_date:
-          'workerScreens.activityDriver.taskView.performance_date',
-        type: 'workerScreens.activityDriver.taskView.type',
-        status: 'workerScreens.activityDriver.taskView.status',
-        done: 'workerScreens.activityDriver.taskView.done',
-        not_done: 'workerScreens.activityDriver.taskView.not_done',
-        name: 'workerScreens.activityDriver.taskView.name',
-        pl_id: 'workerScreens.activityDriver.taskView.pl_id',
-        area: 'workerScreens.activityDriver.taskView.area',
-        doc_data: 'workerScreens.activityDriver.taskView.doc_data',
-        city: 'workerScreens.activityDriver.taskView.city',
-        county: 'workerScreens.activityDriver.taskView.county',
-        longitude: 'workerScreens.activityDriver.taskView.longitude',
-        latitude: 'workerScreens.activityDriver.taskView.latitude',
-        voivodeship: 'workerScreens.activityDriver.taskView.voivodeship',
+        screenTitle: 'workerScreens.activityDriver.taskView.screenTitle',
+        resumeButton: 'workerScreens.activityDriver.taskView.resumeButton',
+        openButton: 'workerScreens.activityDriver.taskView.openButton',
+        taskInfoPanel: {
+          reset_map:
+            'workerScreens.activityDriver.taskView.taskInfoPanel.reset_map',
+          task_view:
+            'workerScreens.activityDriver.taskView.taskInfoPanel.task_view',
+          task_info:
+            'workerScreens.activityDriver.taskView.taskInfoPanel.task_info',
+          field_info:
+            'workerScreens.activityDriver.taskView.taskInfoPanel.field_info',
+          address_info:
+            'workerScreens.activityDriver.taskView.taskInfoPanel.address_info',
+          created_at:
+            'workerScreens.activityDriver.taskView.taskInfoPanel.created_at',
+          closed_at:
+            'workerScreens.activityDriver.taskView.taskInfoPanel.closed_at',
+          opened_at:
+            'workerScreens.activityDriver.taskView.taskInfoPanel.opened_at',
+          performance_date:
+            'workerScreens.activityDriver.taskView.taskInfoPanel.performance_date',
+          type: 'workerScreens.activityDriver.taskView.taskInfoPanel.type',
+          status: 'workerScreens.activityDriver.taskView.taskInfoPanel.status',
+          done: 'workerScreens.activityDriver.taskView.taskInfoPanel.done',
+          not_done:
+            'workerScreens.activityDriver.taskView.taskInfoPanel.not_done',
+          name: 'workerScreens.activityDriver.taskView.taskInfoPanel.name',
+          pl_id: 'workerScreens.activityDriver.taskView.taskInfoPanel.pl_id',
+          area: 'workerScreens.activityDriver.taskView.taskInfoPanel.area',
+          doc_data:
+            'workerScreens.activityDriver.taskView.taskInfoPanel.doc_data',
+          city: 'workerScreens.activityDriver.taskView.taskInfoPanel.city',
+          county: 'workerScreens.activityDriver.taskView.taskInfoPanel.county',
+          longitude:
+            'workerScreens.activityDriver.taskView.taskInfoPanel.longitude',
+          latitude:
+            'workerScreens.activityDriver.taskView.taskInfoPanel.latitude',
+          voivodeship:
+            'workerScreens.activityDriver.taskView.taskInfoPanel.voivodeship',
+        },
       },
     },
     activityDesktopRoot: {
@@ -388,7 +406,6 @@ export const TranslationNames = {
   },
   components: {
     orderForm: {
-      pendingStatus: 'components.orderForm.pendingStatus',
       submitButton: 'components.orderForm.submitButton',
     },
     verticalList: {
