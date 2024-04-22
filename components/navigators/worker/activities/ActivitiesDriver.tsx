@@ -6,7 +6,11 @@ import { TaskView } from '../../../pages/worker/ActivityDriver/TaskView';
 
 const Stack = createNativeStackNavigator<WorkerActivityDriverParamList>();
 
-export function ActivityDriver() {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function ActivityDriver(/* {}: WorkerRootDriverScreenProps<
+  'workerActivityDriver',
+  'workerRootDriver'
+> */) {
   return (
     <Stack.Navigator
       screenOptions={NativeStackScreenOptionsBase}
