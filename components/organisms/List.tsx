@@ -24,7 +24,7 @@ import { TranslationNames } from '../../locales/TranslationNames';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export interface Props<T extends Record<string, any>> {
   /* eslint-disable react/no-unused-prop-types */
-  modalRef: RefObject<BottomSheetModal>;
+  modalRef?: RefObject<BottomSheetModal>;
   searchEnginePlaceholder?: string;
   isSelectable?: boolean;
   triggerOnSelectedChange?: (isEmpty: boolean) => void;
