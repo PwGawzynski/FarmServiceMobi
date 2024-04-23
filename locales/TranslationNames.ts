@@ -348,10 +348,16 @@ export const TranslationNames = {
   workerScreens: {
     activityDriver: {
       taskView: {
+        errorToastTitleOpen:
+          'workerScreens.activityDriver.taskView.errorToastTitleOpen',
+        errorToastTitleResume:
+          'workerScreens.activityDriver.taskView.errorToastTitleResume',
         screenTitle: 'workerScreens.activityDriver.taskView.screenTitle',
         resumeButton: 'workerScreens.activityDriver.taskView.resumeButton',
         openButton: 'workerScreens.activityDriver.taskView.openButton',
         taskInfoPanel: {
+          sessions:
+            'workerScreens.activityDriver.taskView.taskInfoPanel.sessionsCardTitle',
           reset_map:
             'workerScreens.activityDriver.taskView.taskInfoPanel.reset_map',
           task_view:
@@ -389,6 +395,12 @@ export const TranslationNames = {
           voivodeship:
             'workerScreens.activityDriver.taskView.taskInfoPanel.voivodeship',
         },
+        doneTaskHintCard: {
+          doneTaskHintCardTitle:
+            'workerScreens.activityDriver.taskView.doneTaskHintCard.doneTaskHintCardTitle',
+          doneTaskHintCardDescription:
+            'workerScreens.activityDriver.taskView.doneTaskHintCard.doneTaskHintCardDescription',
+        },
       },
     },
     activityDesktopRoot: {
@@ -405,6 +417,14 @@ export const TranslationNames = {
     },
   },
   components: {
+    taskWorkView: {
+      errorToastTitleClose: 'components.taskWorkView.errorToastTitleClose',
+      errorToastTitlePause: 'components.taskWorkView.errorToastTitlePause',
+      pauseButton: 'components.taskWorkView.pauseButton',
+      focusOnFieldButton: 'components.taskWorkView.focusOnFieldButton',
+      autofocusSwitch: 'components.taskWorkView.autofocusSwitch',
+      markAsDoneButton: 'components.taskWorkView.markAsDoneButton',
+    },
     orderForm: {
       submitButton: 'components.orderForm.submitButton',
     },

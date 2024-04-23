@@ -275,10 +275,13 @@
   "workerScreens": {
     "activityDriver": {
       "taskView": {
+        "errorToastTitleOpen": "Cannot open task",
+        "errorToastTitleResume": "Cannot resume task",
         "screenTitle": "Task View",
         "resumeButton": "Resume",
         "openButton": "Open",
         "taskInfoPanel": {
+          "sessionsCardTitle": "Sessions",
           "reset_map": "Reset Map",
           "task_view": "Task View",
           "task_info": "Task Info",
@@ -301,6 +304,10 @@
           "longitude": "Longitude",
           "latitude": "Latitude",
           "voivodeship": "Voivodeship"
+        },
+        "doneTaskHintCard":{
+            "doneTaskHintCardTitle": "Task has been marked as done",
+            "doneTaskHintCardDescription": "When you marked this task as done, it is considered a completed task, which means you no longer have permissions to manage it."
         }
       }
     },
@@ -318,6 +325,14 @@
     }
   },
   "components": {
+    "taskWorkView": {
+      "errorToastTitleClose": "Cannot close task",
+      "errorToastTitlePause": "Cannot pause task",
+      "pauseButton": "Pause",
+      "focusOnFieldButton": "Focus on field",
+      "autofocusSwitch": "Autofocus",
+      "markAsDoneButton": "Mark as done"
+    },
     "orderForm": {
       "pendingStatus": "Creating order...",
       "submitButton": "Create"

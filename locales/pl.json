@@ -277,7 +277,10 @@
       "resumeButton": "Wznów",
       "openButton": "Rozpocznij",
       "taskView": {
+        "errorToastTitleOpen": "Nie można otworzyć zadania",
+        "errorToastTitleResume": "Cannot resume task",
         "taskInfoPanel": {
+          "sessionsCardTitle": "Sesje",
           "reset_map": "Zresetuj Mapę",
           "task_view": "Widok Zadania",
           "task_info": "Informacje o Zadaniu",
@@ -300,6 +303,10 @@
           "longitude": "Długość Geograficzna",
           "latitude": "Szerokość Geograficzna",
           "voivodeship": "Województwo"
+        },
+        "doneTaskHintCard":{
+          "doneTaskHintCardTitle": "Task has been marked as done",
+          "doneTaskHintCardDescription": "When you marked this task as done, it is considered a completed task, which means you no longer have permissions to manage it."
         }
       }
     },
@@ -317,6 +324,14 @@
     }
   },
   "components": {
+    "taskWorkView": {
+      "errorToastTitleClose": "Nie można zamknąć zadania",
+      "errorToastTitlePause": "Nie można wstrzymać zadania",
+      "pauseButton": "Pauza",
+      "focusOnFieldButton": "Wycentruj na pole",
+      "autofocusSwitch": "Podążaj za mną",
+      "markAsDoneButton": "Oznacz jako zrobione"
+    },
     "orderForm": {
       "pendingStatus": "Tworzenie zamówienia...",
       "submitButtonText": "Utwórz zamówienie"
