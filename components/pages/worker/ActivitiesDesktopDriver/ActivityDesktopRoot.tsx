@@ -2,8 +2,12 @@ import { useSelector } from 'react-redux';
 import { useEffect, useRef, useState } from 'react';
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
 import { t } from 'i18next';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { ActivitiesDesktopDriverScreenProps } from '../../../../types/self/navigation/Worker/props/activities/WorkerActivitiesDesktopDriverProps';
-import { selectUser } from '../../../../src/redux/feature/userSlice';
+import {
+  selectTheme,
+  selectUser,
+} from '../../../../src/redux/feature/userSlice';
 import { Api } from '../../../../api/Api';
 import { TaskResponseBase } from '../../../../FarmServiceApiTypes/Task/Responses';
 import List from '../../../organisms/List';
@@ -11,6 +15,10 @@ import { TaskType } from '../../../../FarmServiceApiTypes/Task/Enums';
 import { filterTasks } from '../../../../helepers/filterFunctions';
 import { TranslationNames } from '../../../../locales/TranslationNames';
 import { ScreenBase } from '../../owner/mobi/common/ScreenBase';
+import ResumeIco from '../../../../assets/refresh.svg';
+import { Theme } from '../../../../FarmServiceApiTypes/Account/Constants';
+import { Colors } from '../../../../settings/styles/colors';
+import InfoIco from '../../../../assets/info.svg';
 
 const TRANSLATIONS = {
   welcome: t(TranslationNames.workerScreens.activityDesktopRoot.welcome),
@@ -27,8 +35,12 @@ export function ActivityDesktopRoot({
 >) {
   const user = useSelector(selectUser);
   const name = user?.personalData.name;
-  const [tasks, setTasks] = useState<TaskResponseBase[]>([]);
   const [isFetching, setIsFetching] = useState(true);
+  const queryClient = useQueryClient();
+  const { data } = useQuery({
+    queryKey: ['workerTasks'],
+    initialData: undefined,
+  });
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let es: any;
@@ -36,7 +48,7 @@ export function ActivityDesktopRoot({
       es = await Api.workerTasks({
         message: (m: TaskResponseBase[]) => {
           setIsFetching(false);
-          setTasks(m);
+          queryClient.setQueryData(['workerTasks'], m);
         },
       });
     })();
@@ -46,6 +58,7 @@ export function ActivityDesktopRoot({
     };
   }, []);
   const modalRef = useRef<BottomSheetModal>(null);
+  const theme = useSelector(selectTheme);
   return (
     <ScreenBase
       bottomSheetsProps={{
@@ -57,7 +70,7 @@ export function ActivityDesktopRoot({
       <List<TaskResponseBase>
         isError={false}
         isLoading={isFetching}
-        data={tasks}
+        data={data}
         onPressNavigateTo="taskView"
         navigationParamName="task"
         listStyleSettings={item => ({
@@ -66,6 +79,16 @@ export function ActivityDesktopRoot({
             item.performanceDate,
           ).toLocaleDateString()} )`,
           alignment: 'left',
+          customIco:
+            item.lastPausedAt && !item.closedAt ? (
+              <ResumeIco
+                color={theme === Theme.dark ? Colors.GREEN : Colors.DARK_BLUE}
+              />
+            ) : (
+              <InfoIco
+                color={theme === Theme.dark ? Colors.GREEN : Colors.DARK_BLUE}
+              />
+            ),
           infoIco: true,
         })}
         filterFunction={filterTasks}
