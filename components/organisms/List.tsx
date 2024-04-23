@@ -124,16 +124,23 @@ function ListMemo<T extends Record<string, any>>(
         if (handleOnItemPress) handleOnItemPress(item);
       };
 
-      const { bottomRightText, header, infoIco, avatarChars, alignment } =
-        listStyleSettings
-          ? listStyleSettings(item)
-          : {
-              bottomRightText: undefined,
-              header: undefined,
-              infoIco: undefined,
-              avatarChars: undefined,
-              alignment: undefined,
-            };
+      const {
+        bottomRightText,
+        header,
+        infoIco,
+        avatarChars,
+        alignment,
+        customIco,
+      } = listStyleSettings
+        ? listStyleSettings(item)
+        : {
+            bottomRightText: undefined,
+            header: undefined,
+            infoIco: undefined,
+            avatarChars: undefined,
+            alignment: undefined,
+            customIco: undefined,
+          };
       return (
         <ListItem<T>
           onPressNavigateTo={onPressNavigateTo}
@@ -146,6 +153,7 @@ function ListMemo<T extends Record<string, any>>(
           header={header}
           bottomRightText={bottomRightText}
           infoIco={infoIco}
+          customIco={customIco}
           alignment={alignment}
           avatarChars={avatarChars}
         />
