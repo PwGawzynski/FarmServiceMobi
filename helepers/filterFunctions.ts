@@ -113,7 +113,8 @@ export const filterTasks = (
         : true,
     )
     .sort((a, b) =>
-      new Date(a.createdAt).getTime() > new Date(b.createdAt).getTime()
+      new Date(a.performanceDate).getTime() - new Date().getTime() <
+      new Date(b.performanceDate).getTime() - new Date().getTime()
         ? 1
         : -1,
     );
