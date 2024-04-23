@@ -1,5 +1,5 @@
-import { memo } from 'react';
-import { ScrollView } from 'tamagui';
+import { memo, useMemo } from 'react';
+import { Card, ScrollView, SizableText, YGroup } from 'tamagui';
 import { t } from 'i18next';
 import Animated, {
   useAnimatedStyle,
@@ -11,6 +11,7 @@ import { EntityAsACard } from '../molecules/EntityAsACard';
 import { TaskType } from '../../FarmServiceApiTypes/Task/Enums';
 import { TranslationNames } from '../../locales/TranslationNames';
 import { MAP_ANIMATION_DURATION } from '../molecules/MapContainer';
+import { TaskSessionItem } from './TaskSessionItem';
 
 const TRANSLATIONS = {
   TASK_INFO_CARD: {
@@ -87,14 +88,37 @@ const TRANSLATIONS = {
         .voivodeship,
     ),
   },
+  SESSIONS_CARD: {
+    sessionsCardTitle: t(
+      TranslationNames.workerScreens.activityDriver.taskView.taskInfoPanel
+        .sessions,
+    ),
+  },
 };
-
+export interface TaskInfoPanelProps {
+  task: TaskResponseBase;
+  translateY?: boolean;
+  leadingChildren?: JSX.Element;
+  footerChildren?: JSX.Element;
+}
 const TaskInfoPanelM = memo(
-  ({ task, translateY }: { task: TaskResponseBase; translateY?: boolean }) => {
+  ({
+    task,
+    translateY,
+    leadingChildren,
+    footerChildren,
+  }: TaskInfoPanelProps) => {
     const position = useSharedValue(0);
     const animatedStyle = useAnimatedStyle(() => ({
       transform: [{ translateY: position.value }],
     }));
+    const sessions = useMemo(
+      () =>
+        task.sessions.map(session => (
+          <TaskSessionItem session={session} key={Math.random()} />
+        )),
+      [task.sessions],
+    );
     if (translateY)
       position.value = withTiming(120, { duration: MAP_ANIMATION_DURATION });
     else position.value = withTiming(0, { duration: MAP_ANIMATION_DURATION });
@@ -107,7 +131,14 @@ const TaskInfoPanelM = memo(
           animatedStyle,
         ]}
       >
-        <ScrollView showsVerticalScrollIndicator={false}>
+        <ScrollView showsVerticalScrollIndicator={false} mt="$4">
+          {leadingChildren}
+          <Card bordered p="$2">
+            <SizableText fontSize="$7" className="uppercase font-bold">
+              {TRANSLATIONS.SESSIONS_CARD.sessionsCardTitle}
+            </SizableText>
+            <YGroup>{sessions}</YGroup>
+          </Card>
           <EntityAsACard
             data={{
               createdAt: new Date(task.createdAt).toLocaleDateString(),
@@ -168,6 +199,7 @@ const TaskInfoPanelM = memo(
             }}
             cardName={TRANSLATIONS.ADDRESS_INFO_CARD.cardName}
           />
+          {footerChildren}
         </ScrollView>
       </Animated.View>
     );
