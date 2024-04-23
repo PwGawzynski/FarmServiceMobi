@@ -491,6 +491,33 @@ export class ApiSelf {
     ).data.payload as TaskResponseBase | undefined;
   }
 
+  @IsDelayed()
+  static async openTask(taskId: string) {
+    return (
+      (await ApiSelf.axiosInstance.put('/task/open', undefined, {
+        params: { 'task-id': taskId },
+      })) as AxiosResponse<ResponseObject>
+    ).data.payload as TaskResponseBase | undefined;
+  }
+
+  @IsDelayed()
+  static async pauseTask(taskId: string) {
+    return (
+      (await ApiSelf.axiosInstance.put('/task/pause', undefined, {
+        params: { 'task-id': taskId },
+      })) as AxiosResponse<ResponseObject>
+    ).data.payload as TaskResponseBase | undefined;
+  }
+
+  @IsDelayed()
+  static async closeTask(taskId: string) {
+    return (
+      (await ApiSelf.axiosInstance.put('/task/close', undefined, {
+        params: { 'task-id': taskId },
+      })) as AxiosResponse<ResponseObject>
+    ).data.payload as TaskResponseBase | undefined;
+  }
+
   static async deleteTask(taskId: string) {
     return (
       (await ApiSelf.axiosInstance.delete('/task', {
