@@ -1,14 +1,7 @@
-import React, { useEffect } from 'react';
 import { Platform, SafeAreaView, StatusBar, Text, View } from 'react-native';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { YStack } from 'tamagui';
-import Animated, {
-  Easing,
-  useAnimatedStyle,
-  useSharedValue,
-  withTiming,
-  LinearTransition,
-} from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 import {
   MainBottomSheet,
   MainBottomSheetProps,
@@ -65,24 +58,7 @@ export function ScreenBaseWithoutSaveArea({
   children,
   activityDot,
   bottomSheetsProps,
-  isModalVisible,
-}: Props & { isModalVisible?: boolean }) {
-  const bottomOffset = useSharedValue(0);
-  const transition = LinearTransition.duration(100).easing(Easing.linear);
-  const mbAnimation = useAnimatedStyle(() => ({
-    transform: [{ translateY: bottomOffset.value }],
-  }));
-  useEffect(() => {
-    if (isModalVisible) {
-      bottomOffset.value = withTiming(-100, {
-        duration: 100,
-      });
-    } else {
-      bottomOffset.value = withTiming(0, {
-        duration: 100,
-      });
-    }
-  }, [isModalVisible]);
+}: Props) {
   return (
     <YStack
       className="flex-1 bg-[#fff] dark:bg-dark"
@@ -91,10 +67,7 @@ export function ScreenBaseWithoutSaveArea({
       }}
     >
       <BottomSheetModalProvider>
-        <Animated.View
-          layout={transition}
-          style={[{ flex: 1, top: 0, left: 0 }, mbAnimation]}
-        >
+        <Animated.View style={[{ flex: 1, top: 0, left: 0 }]}>
           <View className="flex-1">
             {activityDot && (
               <View className="w-full h-2  items-end">
