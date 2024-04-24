@@ -24,6 +24,8 @@ const TRANSLATIONS = {
   welcome: t(TranslationNames.workerScreens.activityDesktopRoot.welcome),
 };
 
+let checkedIfOpenSession = false;
+
 export function ActivityDesktopRoot({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   navigation,
@@ -39,8 +41,22 @@ export function ActivityDesktopRoot({
   const queryClient = useQueryClient();
   const { data } = useQuery({
     queryKey: ['workerTasks'],
-    initialData: undefined,
+    initialData: undefined as TaskResponseBase[] | undefined,
   });
+  useEffect(() => {
+    if (!checkedIfOpenSession && data) {
+      const openSession = data.find(task =>
+        task.sessions.find(s => !s.closedAt),
+      );
+      checkedIfOpenSession = true;
+      if (openSession) {
+        navigation.navigate('taskView', {
+          task: openSession,
+        });
+      }
+    }
+  }, [data]);
+
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let es: any;
