@@ -131,7 +131,7 @@ export function TaskView({
         />
       </YStack>
     );
-  }, [task.closedAt, task.isDone]);
+  }, [task.sessions.length]);
 
   return (
     <ScreenBase name={TRANSLATIONS.screenTitle}>
