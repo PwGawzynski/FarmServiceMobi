@@ -112,9 +112,10 @@ export const filterTasks = (
             .includes(filter.toLowerCase().replace(' ', ''))
         : true,
     )
-    .sort((a, b) =>
-      new Date(a.performanceDate).getTime() - new Date().getTime() <
-      new Date(b.performanceDate).getTime() - new Date().getTime()
+    .sort((a, b) => {
+      if (a.isDone || b.isDone) return -1;
+      return new Date(a.performanceDate).getTime() - new Date().getTime() <
+        new Date(b.performanceDate).getTime() - new Date().getTime()
         ? 1
-        : -1,
-    );
+        : -1;
+    });
