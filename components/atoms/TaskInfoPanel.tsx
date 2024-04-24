@@ -10,8 +10,8 @@ import { TaskResponseBase } from '../../FarmServiceApiTypes/Task/Responses';
 import { EntityAsACard } from '../molecules/EntityAsACard';
 import { TaskType } from '../../FarmServiceApiTypes/Task/Enums';
 import { TranslationNames } from '../../locales/TranslationNames';
-import { MAP_ANIMATION_DURATION } from '../molecules/MapContainer';
 import { TaskSessionItem } from './TaskSessionItem';
+import { MAP_ANIMATION_DURATION } from '../../settings/map/defaults';
 
 const TRANSLATIONS = {
   TASK_INFO_CARD: {

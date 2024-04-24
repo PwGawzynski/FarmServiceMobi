@@ -13,6 +13,12 @@ import { Switch } from '../atoms/Switch';
 import { closeTask, pauseTask } from '../../api/Task/Task';
 import { TranslationNames } from '../../locales/TranslationNames';
 import { updateWorkerTasks } from '../../helepers/FetchingHelpers';
+import {
+  USER_LOCATION_FASTEST_INTERVAL_HIGH,
+  USER_LOCATION_FASTEST_INTERVAL_LOW,
+  USER_LOCATION_UPDATE_INTERVAL_HIGH,
+  USER_LOCATION_UPDATE_INTERVAL_LOW,
+} from '../../settings/map/defaults';
 
 export interface TaskWorkViewProps {
   task: TaskResponseBase;
@@ -125,8 +131,9 @@ export function TaskWorkView({
               setIsAutofocused(false);
               mapRef.current?.setNativeProps({
                 followsUserLocation: false,
-                userLocationFastestInterval: 1000,
-                userLocationUpdateInterval: 1000,
+                userLocationFastestInterval:
+                  USER_LOCATION_FASTEST_INTERVAL_HIGH,
+                userLocationUpdateInterval: USER_LOCATION_UPDATE_INTERVAL_HIGH,
               });
               mapRef.current?.animateToRegion({
                 latitude: Number(task.field.address.latitude),
@@ -145,14 +152,14 @@ export function TaskWorkView({
           if (!isAutofocused) {
             mapRef.current?.setNativeProps({
               followsUserLocation: true,
-              userLocationFastestInterval: 1000,
-              userLocationUpdateInterval: 1000,
+              userLocationFastestInterval: USER_LOCATION_FASTEST_INTERVAL_HIGH,
+              userLocationUpdateInterval: USER_LOCATION_UPDATE_INTERVAL_HIGH,
             });
           } else {
             mapRef.current?.setNativeProps({
               followsUserLocation: false,
-              userLocationFastestInterval: 5000,
-              userLocationUpdateInterval: 5000,
+              userLocationFastestInterval: USER_LOCATION_FASTEST_INTERVAL_LOW,
+              userLocationUpdateInterval: USER_LOCATION_UPDATE_INTERVAL_LOW,
             });
           }
         }}

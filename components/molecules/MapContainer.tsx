@@ -8,6 +8,11 @@ import Animated, {
 import { ReactNode, useState } from 'react';
 import { Card, SizableText } from 'tamagui';
 import { UserLocationI } from './TaskWorkView';
+import {
+  MAP_ANIMATION_DURATION,
+  MAP_DEF_LAT_DELTA,
+  MAP_DEF_LONG_DELTA,
+} from '../../settings/map/defaults';
 
 export interface MapContainerProps {
   scaleUp?: boolean;
@@ -18,7 +23,6 @@ export interface MapContainerProps {
   Marker: ReactNode;
   mapRef: React.RefObject<MapView>;
 }
-export const MAP_ANIMATION_DURATION = 300;
 
 export function MapContainer({
   scaleUp,
@@ -37,8 +41,8 @@ export function MapContainer({
   const initialState = {
     latitude: Number(initialCords.latitude) || 37.78825,
     longitude: Number(initialCords.longitude) || -122.4324,
-    latitudeDelta: 0.00922,
-    longitudeDelta: 0.00421,
+    latitudeDelta: MAP_DEF_LAT_DELTA,
+    longitudeDelta: MAP_DEF_LONG_DELTA,
   };
 
   if (scaleUp) {
