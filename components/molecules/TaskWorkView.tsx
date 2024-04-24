@@ -19,12 +19,15 @@ import {
   USER_LOCATION_UPDATE_INTERVAL_HIGH,
   USER_LOCATION_UPDATE_INTERVAL_LOW,
 } from '../../settings/map/defaults';
+import { TimeCounter } from '../atoms/TimeCounter';
+import { TaskSessionResponseBase } from '../../FarmServiceApiTypes/TaskSession/Responses';
 
 export interface TaskWorkViewProps {
   task: TaskResponseBase;
   setTask: Dispatch<SetStateAction<TaskResponseBase>>;
   mapRef: React.RefObject<MapView>;
   onClosePress?: Dispatch<SetStateAction<boolean>>;
+  uncloseSession?: TaskSessionResponseBase;
 }
 
 export interface UserLocationI {
@@ -61,6 +64,7 @@ export function TaskWorkView({
   mapRef,
   onClosePress,
   setTask,
+  uncloseSession,
 }: TaskWorkViewProps) {
   const modal = useContext(WorkerModalContext);
   const [isAutofocused, setIsAutofocused] = useState(true);
@@ -83,17 +87,16 @@ export function TaskWorkView({
         text2: e.message,
       }),
   });
-
   const { mutate: pause, isPending: isPausePending } = useMutation({
     mutationKey: ['pauseTask', task.id],
     mutationFn: pauseTask,
     onSuccess: sth => {
+      setTask(sth);
       onClosePress?.(false);
       modal?.setIsModalVisible(false);
       modal?.modalRef?.current?.close();
       modal?.modalRef?.current?.dismiss();
       updateWorkerTasks(qc, sth, task.id);
-      setTask(sth);
     },
     onError: e =>
       Toast.show({
@@ -122,6 +125,9 @@ export function TaskWorkView({
             onPress: () => close(task.id),
           }}
           text={TRANSLATIONS.markAsDoneButton}
+        />
+        <TimeCounter
+          startTime={new Date(uncloseSession?.openedAt || Date.now())}
         />
         <ButtonTamagui
           icon={<EndIco />}
