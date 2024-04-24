@@ -1,4 +1,4 @@
-import { useContext, useMemo, useRef, useState } from 'react';
+import { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import MapView, { Marker } from 'react-native-maps';
 import { YStack } from 'tamagui';
 import { t } from 'i18next';
@@ -71,6 +71,10 @@ export function TaskView({
   const mapRef = useRef<MapView>(null);
   const [taskOpened, setTaskOpened] = useState<boolean>(false);
   const qc = useQueryClient();
+  const unClosedSession = useMemo(
+    () => task.sessions.find(s => !s.closedAt),
+    [task.sessions],
+  );
 
   const TaskWorkViewMemo = useMemo(
     () => (
@@ -79,9 +83,10 @@ export function TaskView({
         onClosePress={setTaskOpened}
         mapRef={mapRef}
         task={task}
+        uncloseSession={unClosedSession}
       />
     ),
-    [task],
+    [task, unClosedSession],
   );
 
   const { mutate, isPending } = useMutation({
@@ -131,7 +136,16 @@ export function TaskView({
         />
       </YStack>
     );
-  }, [task.sessions.length]);
+  }, [task.closedAt, task.isDone]);
+
+  useEffect(() => {
+    if (unClosedSession) {
+      console.log(unClosedSession, 'unclosed');
+      modal?.modalRef?.current?.present(TaskWorkViewMemo);
+      setTaskOpened(true);
+      modal?.setIsModalVisible(true);
+    }
+  }, [unClosedSession]);
 
   return (
     <ScreenBase name={TRANSLATIONS.screenTitle}>
