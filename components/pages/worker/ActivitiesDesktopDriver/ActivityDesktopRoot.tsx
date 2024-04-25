@@ -19,6 +19,7 @@ import { ScreenBase } from '../../owner/mobi/common/ScreenBase';
 import ResumeIco from '../../../../assets/refresh.svg';
 import { Theme } from '../../../../FarmServiceApiTypes/Account/Constants';
 import { Colors } from '../../../../settings/styles/colors';
+import PlayIco from '../../../../assets/play.svg';
 
 const TRANSLATIONS = {
   welcome: t(TranslationNames.workerScreens.activityDesktopRoot.welcome),
@@ -85,6 +86,7 @@ export function ActivityDesktopRoot({
       es.close();
     };
   }, []);
+
   const modalRef = useRef<BottomSheetModal>(null);
   const theme = useSelector(selectTheme);
   return (
@@ -108,8 +110,13 @@ export function ActivityDesktopRoot({
           ).toLocaleDateString()} )`,
           alignment: 'left',
           customIco:
+            // eslint-disable-next-line no-nested-ternary
             item.lastPausedAt && !item.closedAt ? (
               <ResumeIco
+                color={theme === Theme.dark ? Colors.GREEN : Colors.DARK_BLUE}
+              />
+            ) : !item.lastPausedAt && !item.closedAt ? (
+              <PlayIco
                 color={theme === Theme.dark ? Colors.GREEN : Colors.DARK_BLUE}
               />
             ) : undefined,

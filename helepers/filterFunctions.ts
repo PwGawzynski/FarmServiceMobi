@@ -99,23 +99,47 @@ export const clientListFilter = (
         : -1,
     );
 
+export const sortTasks = (data: TaskResponseBase[] | undefined) => {
+  if (!data) return undefined;
+  return [
+    ...data
+      .filter(e => !e.isDone && e.lastPausedAt)
+      .sort((a, b) => {
+        return new Date(a.performanceDate).getTime() - new Date().getTime() <
+          new Date(b.performanceDate).getTime() - new Date().getTime()
+          ? 1
+          : -1;
+      }),
+    ...data
+      .filter(e => !e.isDone && !e.lastPausedAt)
+      .sort((a, b) => {
+        return new Date(a.performanceDate).getTime() - new Date().getTime() <
+          new Date(b.performanceDate).getTime() - new Date().getTime()
+          ? 1
+          : -1;
+      }),
+    ...data
+      .filter(e => e.isDone)
+      .sort((a, b) => {
+        return new Date(a.performanceDate).getTime() - new Date().getTime() <
+          new Date(b.performanceDate).getTime() - new Date().getTime()
+          ? 1
+          : -1;
+      }),
+  ];
+};
+
 export const filterTasks = (
   data: TaskResponseBase[] | undefined,
   filter: string | undefined,
-) =>
-  data
-    ?.filter(order =>
-      filter
-        ? order.field.nameLabel
-            .trim()
-            .toLowerCase()
-            .includes(filter.toLowerCase().replace(' ', ''))
-        : true,
-    )
-    .sort((a, b) => {
-      if (a.isDone || b.isDone) return -1;
-      return new Date(a.performanceDate).getTime() - new Date().getTime() <
-        new Date(b.performanceDate).getTime() - new Date().getTime()
-        ? 1
-        : -1;
-    });
+) => {
+  const filtered = data?.filter(order =>
+    filter
+      ? order.field.nameLabel
+          .trim()
+          .toLowerCase()
+          .includes(filter.toLowerCase().replace(' ', ''))
+      : true,
+  );
+  return sortTasks(filtered);
+};
