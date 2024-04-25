@@ -114,9 +114,15 @@ const TaskInfoPanelM = memo(
     }));
     const sessions = useMemo(
       () =>
-        task.sessions.map(session => (
-          <TaskSessionItem session={session} key={Math.random()} />
-        )),
+        task.sessions
+          .sort((a, b) =>
+            new Date(a.openedAt).getTime() < new Date(b.openedAt).getTime()
+              ? 1
+              : -1,
+          )
+          .map(session => (
+            <TaskSessionItem session={session} key={Math.random()} />
+          )),
       [task.sessions],
     );
     if (translateY)
