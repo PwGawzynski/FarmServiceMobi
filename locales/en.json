@@ -272,6 +272,49 @@
 
     }
   },
+  "workerScreens": {
+    "activityDriver": {
+      "taskView": {
+        "errorToastTitleOpen": "Cannot open task",
+        "errorToastTitleResume": "Cannot resume task",
+        "screenTitle": "Task View",
+        "resumeButton": "Resume",
+        "openButton": "Open",
+        "taskInfoPanel": {
+          "sessionsCardTitle": "Sessions",
+          "reset_map": "Reset Map",
+          "task_view": "Task View",
+          "task_info": "Task Info",
+          "field_info": "Field Info",
+          "address_info": "Address Info",
+          "created_at": "Created At",
+          "closed_at": "Closed At",
+          "opened_at": "Opened At",
+          "performance_date": "Performance Date",
+          "type": "Type",
+          "status": "Status",
+          "done": "Done",
+          "not_done": "Not Done",
+          "name": "Name",
+          "pl_id": "PL_ID",
+          "area": "Area",
+          "doc_data": "DOC Data",
+          "city": "City",
+          "county": "County",
+          "longitude": "Longitude",
+          "latitude": "Latitude",
+          "voivodeship": "Voivodeship"
+        },
+        "doneTaskHintCard":{
+            "doneTaskHintCardTitle": "Task has been marked as done",
+            "doneTaskHintCardDescription": "When you marked this task as done, it is considered a completed task, which means you no longer have permissions to manage it."
+        }
+      }
+    },
+    "activityDesktopRoot": {
+      "welcome": "Welcome"
+    }
+  },
   "serviceDefaults": {
     "unauthorised": "Session expired, please login again",
     "default": "Something went wrong, please try again later"
@@ -282,6 +325,14 @@
     }
   },
   "components": {
+    "taskWorkView": {
+      "errorToastTitleClose": "Cannot close task",
+      "errorToastTitlePause": "Cannot pause task",
+      "pauseButton": "Pause",
+      "focusOnFieldButton": "Focus on field",
+      "autofocusSwitch": "Autofocus",
+      "markAsDoneButton": "Mark as done"
+    },
     "orderForm": {
       "pendingStatus": "Creating order...",
       "submitButton": "Create"
@@ -363,7 +414,9 @@
       "cantUpdateMachine": "Cannot update machine",
       "cantUpdateMachineDescription": "Sorry we cannot update machine, try later",
       "cantDeleteMachine": "Cannot delete machine",
-      "cantDeleteMachineDescription": "Sorry we cannot delete machine, try later"
+      "cantDeleteMachineDescription": "Sorry we cannot delete machine, try later",
+      "cantCreateTask": "Cannot create task",
+      "cantCreateTaskDescription": "Something went wrong, try again later"
     },
     "filedBottomSheet": {
       "showOnMapButton": "Show on map",

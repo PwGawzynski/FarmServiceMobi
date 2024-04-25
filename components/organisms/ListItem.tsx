@@ -13,6 +13,7 @@ export type ListItemStyleSettings = {
    */
   alignment?: 'left' | 'right' | 'center';
   infoIco?: boolean;
+  customIco?: JSX.Element;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -43,6 +44,7 @@ export function ListItem<T extends Record<string, any>>({
   header,
   bottomRightText,
   infoIco,
+  customIco,
   alignment = 'center',
 }: Props<T>) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -109,11 +111,7 @@ export function ListItem<T extends Record<string, any>>({
             {bottomRightText}
           </SizableText>
         </YStack>
-        {infoIco && (
-          <YStack>
-            <InfoIco color={val} />
-          </YStack>
-        )}
+        {infoIco && <YStack>{customIco || <InfoIco />}</YStack>}
       </XStack>
     </Card>
   );

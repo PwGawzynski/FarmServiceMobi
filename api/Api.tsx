@@ -491,6 +491,33 @@ export class ApiSelf {
     ).data.payload as TaskResponseBase | undefined;
   }
 
+  @IsDelayed()
+  static async openTask(taskId: string) {
+    return (
+      (await ApiSelf.axiosInstance.put('/task/open', undefined, {
+        params: { 'task-id': taskId },
+      })) as AxiosResponse<ResponseObject>
+    ).data.payload as TaskResponseBase | undefined;
+  }
+
+  @IsDelayed()
+  static async pauseTask(taskId: string) {
+    return (
+      (await ApiSelf.axiosInstance.put('/task/pause', undefined, {
+        params: { 'task-id': taskId },
+      })) as AxiosResponse<ResponseObject>
+    ).data.payload as TaskResponseBase | undefined;
+  }
+
+  @IsDelayed()
+  static async closeTask(taskId: string) {
+    return (
+      (await ApiSelf.axiosInstance.put('/task/close', undefined, {
+        params: { 'task-id': taskId },
+      })) as AxiosResponse<ResponseObject>
+    ).data.payload as TaskResponseBase | undefined;
+  }
+
   static async deleteTask(taskId: string) {
     return (
       (await ApiSelf.axiosInstance.delete('/task', {
@@ -594,6 +621,7 @@ export class ApiSelf {
     });
   }
 
+  @IsDelayed()
   static workerTasks({ open, message, error }: sseAsyncListenerParams) {
     const eventSource = new EventSource(
       `http://${Constants.expoConfig?.extra?.apiUrl}:3006/task/assigned`,
@@ -608,8 +636,8 @@ export class ApiSelf {
       console.info('WORKER_ASSIGNED_LISTENER_CLOSE');
     });
 
-    eventSource.addEventListener('message', data => {
-      if (message) message(data);
+    eventSource.addEventListener('message', (data: MessageEvent) => {
+      if (message) message(JSON.parse(data.data as string).payload);
     });
     eventSource.addEventListener('error', data => {
       if (error) error(data);
@@ -618,9 +646,7 @@ export class ApiSelf {
     eventSource.addEventListener('open', data => {
       if (open) open(data);
     });
-    const remListeners = () => eventSource.removeAllEventListeners();
-    const close = () => eventSource.close();
-    return [remListeners, close];
+    return eventSource;
   }
 }
 /* ---------------------------------------AUTO_REFRESH_TOKENS--------------------------------------- */

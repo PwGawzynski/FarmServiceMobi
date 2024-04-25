@@ -345,6 +345,68 @@ export const TranslationNames = {
       },
     },
   },
+  workerScreens: {
+    activityDriver: {
+      taskView: {
+        errorToastTitleOpen:
+          'workerScreens.activityDriver.taskView.errorToastTitleOpen',
+        errorToastTitleResume:
+          'workerScreens.activityDriver.taskView.errorToastTitleResume',
+        screenTitle: 'workerScreens.activityDriver.taskView.screenTitle',
+        resumeButton: 'workerScreens.activityDriver.taskView.resumeButton',
+        openButton: 'workerScreens.activityDriver.taskView.openButton',
+        taskInfoPanel: {
+          sessions:
+            'workerScreens.activityDriver.taskView.taskInfoPanel.sessionsCardTitle',
+          reset_map:
+            'workerScreens.activityDriver.taskView.taskInfoPanel.reset_map',
+          task_view:
+            'workerScreens.activityDriver.taskView.taskInfoPanel.task_view',
+          task_info:
+            'workerScreens.activityDriver.taskView.taskInfoPanel.task_info',
+          field_info:
+            'workerScreens.activityDriver.taskView.taskInfoPanel.field_info',
+          address_info:
+            'workerScreens.activityDriver.taskView.taskInfoPanel.address_info',
+          created_at:
+            'workerScreens.activityDriver.taskView.taskInfoPanel.created_at',
+          closed_at:
+            'workerScreens.activityDriver.taskView.taskInfoPanel.closed_at',
+          opened_at:
+            'workerScreens.activityDriver.taskView.taskInfoPanel.opened_at',
+          performance_date:
+            'workerScreens.activityDriver.taskView.taskInfoPanel.performance_date',
+          type: 'workerScreens.activityDriver.taskView.taskInfoPanel.type',
+          status: 'workerScreens.activityDriver.taskView.taskInfoPanel.status',
+          done: 'workerScreens.activityDriver.taskView.taskInfoPanel.done',
+          not_done:
+            'workerScreens.activityDriver.taskView.taskInfoPanel.not_done',
+          name: 'workerScreens.activityDriver.taskView.taskInfoPanel.name',
+          pl_id: 'workerScreens.activityDriver.taskView.taskInfoPanel.pl_id',
+          area: 'workerScreens.activityDriver.taskView.taskInfoPanel.area',
+          doc_data:
+            'workerScreens.activityDriver.taskView.taskInfoPanel.doc_data',
+          city: 'workerScreens.activityDriver.taskView.taskInfoPanel.city',
+          county: 'workerScreens.activityDriver.taskView.taskInfoPanel.county',
+          longitude:
+            'workerScreens.activityDriver.taskView.taskInfoPanel.longitude',
+          latitude:
+            'workerScreens.activityDriver.taskView.taskInfoPanel.latitude',
+          voivodeship:
+            'workerScreens.activityDriver.taskView.taskInfoPanel.voivodeship',
+        },
+        doneTaskHintCard: {
+          doneTaskHintCardTitle:
+            'workerScreens.activityDriver.taskView.doneTaskHintCard.doneTaskHintCardTitle',
+          doneTaskHintCardDescription:
+            'workerScreens.activityDriver.taskView.doneTaskHintCard.doneTaskHintCardDescription',
+        },
+      },
+    },
+    activityDesktopRoot: {
+      welcome: 'workerScreens.activityDesktopRoot.welcome',
+    },
+  },
   serviceDefaults: {
     unauthorised: 'serviceDefaults.unauthorised',
     default: 'serviceDefaults.default',
@@ -355,8 +417,15 @@ export const TranslationNames = {
     },
   },
   components: {
+    taskWorkView: {
+      errorToastTitleClose: 'components.taskWorkView.errorToastTitleClose',
+      errorToastTitlePause: 'components.taskWorkView.errorToastTitlePause',
+      pauseButton: 'components.taskWorkView.pauseButton',
+      focusOnFieldButton: 'components.taskWorkView.focusOnFieldButton',
+      autofocusSwitch: 'components.taskWorkView.autofocusSwitch',
+      markAsDoneButton: 'components.taskWorkView.markAsDoneButton',
+    },
     orderForm: {
-      pendingStatus: 'components.orderForm.pendingStatus',
       submitButton: 'components.orderForm.submitButton',
     },
     verticalList: {
@@ -440,6 +509,8 @@ export const TranslationNames = {
       cantDeleteMachine: 'components.toast.cantDeleteMachine',
       cantDeleteMachineDescription:
         'components.toast.cantDeleteMachineDescription',
+      cantCreateTask: 'components.toast.cantCreateTask',
+      cantCreateTaskDescription: 'components.toast.cantCreateTaskDescription',
     },
     filedBottomSheet: {
       showOnMapButton: 'components.filedBottomSheet.showOnMapButton',
@@ -488,6 +559,7 @@ export const TranslationNames = {
       longitude: 'addressForm.validation.longitude',
     },
   },
+
   createCompanyForm: {
     formPlaceholder: {
       email: 'createCompanyForm.formPlaceholder.email',

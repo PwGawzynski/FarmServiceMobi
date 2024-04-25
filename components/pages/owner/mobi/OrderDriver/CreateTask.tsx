@@ -3,6 +3,7 @@ import { BottomSheetModal } from '@gorhom/bottom-sheet';
 import { SizableText, YStack } from 'tamagui';
 import { t } from 'i18next';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import Toast from 'react-native-toast-message';
 import { ScreenBase } from '../common/ScreenBase';
 import { OrdersDriverScreenProps } from '../../../../../types/self/navigation/Owner/props/orders/OrdersDriverProps';
 import { GuideCard, GuideCardElement } from '../../../../atoms/GuideCard';
@@ -145,6 +146,12 @@ const TRANSLATIONS = {
       TranslationNames.screens.orderDriver.createTask.machineSelectorEmptyList,
     ),
   },
+  TOAST: {
+    error: {
+      title: t(TranslationNames.components.toast.cantCreateTask),
+      message: t(TranslationNames.components.toast.cantCreateTaskDescription),
+    },
+  },
 };
 
 const hintCard: Array<HintCardObject> = [
@@ -207,7 +214,7 @@ export function CreateTask({
   const [screenState, setScreenState] = useState(ScreenState.SelectField);
 
   const queryClient = useQueryClient();
-  const { mutate, isPending, isSuccess } = useMutation({
+  const { mutate, isPending, isSuccess, error } = useMutation({
     mutationKey: ['createTask'],
     mutationFn: createTask,
     onSuccess: responseData =>
@@ -222,7 +229,14 @@ export function CreateTask({
     if (isSuccess) {
       navigation.navigate('orderDetails', { order });
     }
-  }, [isSuccess]);
+    if (error) {
+      Toast.show({
+        type: 'error',
+        text1: TRANSLATIONS.TOAST.error.title,
+        text2: error.message || TRANSLATIONS.TOAST.error.message,
+      });
+    }
+  }, [isSuccess, error]);
 
   const handleSubmit = () => {
     if (taskData.fields) {

@@ -28,6 +28,39 @@ export async function getTaskByOrder(orderId: string) {
   ) as unknown as Array<TaskResponseBase>;
 }
 
+export async function openTask(taskId: string) {
+  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
+  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
+  return apiHandler<string>(
+    UNAUTHORIZED_MSG,
+    DEFAULT_MSG,
+    Api.openTask,
+    taskId,
+  ) as unknown as TaskResponseBase;
+}
+
+export async function closeTask(taskId: string) {
+  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
+  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
+  return apiHandler<string>(
+    UNAUTHORIZED_MSG,
+    DEFAULT_MSG,
+    Api.closeTask,
+    taskId,
+  ) as unknown as TaskResponseBase;
+}
+
+export async function pauseTask(taskId: string) {
+  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
+  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
+  return apiHandler<string>(
+    UNAUTHORIZED_MSG,
+    DEFAULT_MSG,
+    Api.pauseTask,
+    taskId,
+  ) as unknown as TaskResponseBase;
+}
+
 export async function deleteTask(taskId: string) {
   const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
   const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);

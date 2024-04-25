@@ -11,7 +11,7 @@ import { Colors } from '../../settings/styles/colors';
 export type MainBottomSheetProps = {
   children?: React.ReactNode;
   modalRef?: React.RefObject<BottomSheetModal>;
-  modalSettings?: BottomSheetProps;
+  modalSettings?: Omit<BottomSheetProps, 'children'>;
   snapPoints?: string[];
 };
 
@@ -38,7 +38,6 @@ export function MainBottomSheet({
 }: MainBottomSheetProps) {
   const snapPoints = useMemo(() => ['25%', '50%', '75%'], []);
   const theme = useSelector(selectTheme);
-
   return (
     <Portal>
       <BottomSheetModal

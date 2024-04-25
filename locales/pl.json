@@ -271,6 +271,49 @@
       }
     }
   },
+  "workerScreens": {
+    "activityDriver": {
+      "screenTitle": "Zadanie",
+      "resumeButton": "Wznów",
+      "openButton": "Rozpocznij",
+      "taskView": {
+        "errorToastTitleOpen": "Nie można otworzyć zadania",
+        "errorToastTitleResume": "Cannot resume task",
+        "taskInfoPanel": {
+          "sessionsCardTitle": "Sesje",
+          "reset_map": "Zresetuj Mapę",
+          "task_view": "Widok Zadania",
+          "task_info": "Informacje o Zadaniu",
+          "field_info": "Informacje o Polu",
+          "address_info": "Informacje Adresowe",
+          "created_at": "Utworzono",
+          "closed_at": "Zamknięto",
+          "opened_at": "Otwarto",
+          "performance_date": "Data Wykonania",
+          "type": "Typ",
+          "status": "Status",
+          "done": "Zrobione",
+          "not_done": "Nie Zrobione",
+          "name": "Nazwa",
+          "pl_id": "PL_ID",
+          "area": "Obszar",
+          "doc_data": "Data DOC",
+          "city": "Miasto",
+          "county": "Powiat",
+          "longitude": "Długość Geograficzna",
+          "latitude": "Szerokość Geograficzna",
+          "voivodeship": "Województwo"
+        },
+        "doneTaskHintCard":{
+          "doneTaskHintCardTitle": "Task has been marked as done",
+          "doneTaskHintCardDescription": "When you marked this task as done, it is considered a completed task, which means you no longer have permissions to manage it."
+        }
+      }
+    },
+    "activityDesktopRoot": {
+      "welcome": "Witaj"
+    }
+  },
   "serviceDefaults": {
     "unauthorised": "Nieautoryzowany dostęp",
     "default": "Coś poszło nie tak"
@@ -281,6 +324,14 @@
     }
   },
   "components": {
+    "taskWorkView": {
+      "errorToastTitleClose": "Nie można zamknąć zadania",
+      "errorToastTitlePause": "Nie można wstrzymać zadania",
+      "pauseButton": "Pauza",
+      "focusOnFieldButton": "Wycentruj na pole",
+      "autofocusSwitch": "Podążaj za mną",
+      "markAsDoneButton": "Oznacz jako zrobione"
+    },
     "orderForm": {
       "pendingStatus": "Tworzenie zamówienia...",
       "submitButtonText": "Utwórz zamówienie"
@@ -363,7 +414,9 @@
       "cantUpdateMachine": "Nie można zaktualizować maszyny",
       "cantUpdateMachineDescription": "Przepraszamy, nie można zaktualizować maszyny, spróbuj ponownie później",
       "cantDeleteMachine": "Nie można usunąć maszyny",
-      "cantDeleteMachineDescription": "Przepraszamy, nie można usunąć maszyny, spróbuj ponownie później"
+      "cantDeleteMachineDescription": "Przepraszamy, nie można usunąć maszyny, spróbuj ponownie później",
+      "cantCreateTask": "Nie można utworzyć zadania",
+      "cantCreateTaskDescription": "Przepraszamy, nie można utworzyć zadania, spróbuj ponownie później"
     },
     "filedBottomSheet": {
       "showOnMapButton": "Pokaż na mapie",

@@ -11,6 +11,7 @@ import {
   setQueryFetchLogs,
 } from '../src/redux/feature/cachingDriverSlice';
 import { TranslationNames } from '../locales/TranslationNames';
+import { TaskResponseBase } from '../FarmServiceApiTypes/Task/Responses';
 
 export function fetchClientDriver(
   queryClient: MutableRefObject<QueryClient>,
@@ -46,4 +47,14 @@ export function fetchClientDriver(
         });
       });
   return undefined;
+}
+
+export function updateWorkerTasks(
+  qc: QueryClient,
+  res: TaskResponseBase,
+  updatedTaskId: string,
+) {
+  qc.setQueryData(['workerTasks'], (oldData: Array<TaskResponseBase>) => {
+    return [...oldData.filter(prev => prev.id !== updatedTaskId), res];
+  });
 }
