@@ -19,7 +19,6 @@ import { ScreenBase } from '../../owner/mobi/common/ScreenBase';
 import ResumeIco from '../../../../assets/refresh.svg';
 import { Theme } from '../../../../FarmServiceApiTypes/Account/Constants';
 import { Colors } from '../../../../settings/styles/colors';
-import InfoIco from '../../../../assets/info.svg';
 
 const TRANSLATIONS = {
   welcome: t(TranslationNames.workerScreens.activityDesktopRoot.welcome),
@@ -113,11 +112,7 @@ export function ActivityDesktopRoot({
               <ResumeIco
                 color={theme === Theme.dark ? Colors.GREEN : Colors.DARK_BLUE}
               />
-            ) : (
-              <InfoIco
-                color={theme === Theme.dark ? Colors.GREEN : Colors.DARK_BLUE}
-              />
-            ),
+            ) : undefined,
           infoIco: true,
         })}
         filterFunction={filterTasks}

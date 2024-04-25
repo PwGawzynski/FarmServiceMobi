@@ -1,6 +1,7 @@
 import { Card, Circle, SizableText, useTheme, XStack, YStack } from 'tamagui';
 import { useNavigation } from '@react-navigation/native';
 import { UserAvatar } from '../molecules/UserAvatar';
+
 import InfoIco from '../../assets/info.svg';
 
 export type ListItemStyleSettings = {
@@ -111,7 +112,7 @@ export function ListItem<T extends Record<string, any>>({
             {bottomRightText}
           </SizableText>
         </YStack>
-        {infoIco && <YStack>{customIco || <InfoIco />}</YStack>}
+        {infoIco && <YStack>{customIco || <InfoIco color={val} />}</YStack>}
       </XStack>
     </Card>
   );
