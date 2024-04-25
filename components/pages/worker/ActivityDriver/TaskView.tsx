@@ -71,10 +71,9 @@ export function TaskView({
   const mapRef = useRef<MapView>(null);
   const [taskOpened, setTaskOpened] = useState<boolean>(false);
   const qc = useQueryClient();
-  const unClosedSession = useMemo(
-    () => task.sessions.find(s => !s.closedAt),
-    [task.sessions],
-  );
+  const unClosedSession = useMemo(() => {
+    return task.sessions.find(s => !s.closedAt);
+  }, [task.sessions]);
 
   const TaskWorkViewMemo = useMemo(
     () => (
@@ -126,7 +125,6 @@ export function TaskView({
   });
 
   const hintCard = useMemo(() => {
-    console.log(task.closedAt, task.isDone);
     if (!(task.closedAt || task.isDone)) return undefined;
     return (
       <YStack mb="$4">
@@ -140,7 +138,6 @@ export function TaskView({
 
   useEffect(() => {
     if (unClosedSession) {
-      console.log(unClosedSession, 'unclosed');
       modal?.modalRef?.current?.present(TaskWorkViewMemo);
       setTaskOpened(true);
       modal?.setIsModalVisible(true);
