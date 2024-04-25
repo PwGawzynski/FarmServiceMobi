@@ -23,10 +23,10 @@ export function TaskSessionItem({
   return (
     <ListItem p="$1" backgroundColor="transparent" key={Math.random()}>
       <XStack className="flex-1 items-center justify-between">
-        <SizableText>
+        <SizableText f={1} textAlign="center">
           {formatDate(session.openedAt, haveDifferentYears)}
         </SizableText>
-        <SizableText color="$color4">
+        <SizableText textAlign="center" f={1} color="$color4">
           {new Date(
             Math.abs(
               new Date(session.closedAt || Date.now()).getTime() -
@@ -37,7 +37,7 @@ export function TaskSessionItem({
             .substring(11, 19)}{' '}
           H
         </SizableText>
-        <SizableText>
+        <SizableText textAlign="center" f={1}>
           {session.closedAt
             ? formatDate(session.closedAt, haveDifferentYears)
             : '-'}
