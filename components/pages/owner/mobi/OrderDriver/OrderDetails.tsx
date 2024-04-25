@@ -115,7 +115,7 @@ export function OrderDetails({
     <ScreenBase
       bottomSheetsProps={{
         modalRef,
-        snapPoints: ['40%', '60%'],
+        snapPoints: ['40%', '80%'],
       }}
       name={t(TranslationNames.screens.orderDriver.orderDetails.screenName)}
     >

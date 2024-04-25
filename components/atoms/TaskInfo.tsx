@@ -1,6 +1,7 @@
-import { SizableText, XStack, YStack } from 'tamagui';
+import { Card, ScrollView, SizableText, XStack, YGroup, YStack } from 'tamagui';
 import { t } from 'i18next';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMemo } from 'react';
 import { TaskResponseBase } from '../../FarmServiceApiTypes/Task/Responses';
 import { ButtonTamagui } from './ButtonTamagui';
 import { Colors } from '../../settings/styles/colors';
@@ -10,6 +11,7 @@ import { TranslationNames } from '../../locales/TranslationNames';
 import TrashIco from '../../assets/trash.svg';
 import { deleteTask } from '../../api/Task/Task';
 import { OrderResponseBase } from '../../FarmServiceApiTypes/Order/Ressponses';
+import { TaskSessionItem } from './TaskSessionItem';
 
 export type Props = {
   task: TaskResponseBase;
@@ -44,59 +46,89 @@ export function TaskInfo({ task, onDeleteProcessed, order }: Props) {
       );
     },
   });
+  const sessions = useMemo(
+    () =>
+      task.sessions
+        .sort((a, b) =>
+          new Date(a.openedAt).getTime() < new Date(b.openedAt).getTime()
+            ? 1
+            : -1,
+        )
+        .map(session => (
+          <TaskSessionItem session={session} key={Math.random()} />
+        )),
+    [task.sessions],
+  );
 
   const handleOnDelete = () => {
     mutate(task.id);
   };
 
   return (
-    <YStack f={1} p="$3">
-      <XStack justifyContent="space-between">
-        <SizableText
-          color="$color4"
-          className="text-xl uppercase font-bold mb-2"
-        >
-          {task.field.nameLabel}
-        </SizableText>
-        <ButtonTamagui
-          isPending={isPending}
-          icon={<TrashIco />}
-          bgColor={Colors.ERROR_RED}
-          text={TaskInfoCardNames.deleteButton}
-          buttonProps={{ onPress: handleOnDelete, size: '$2' }}
-        />
-      </XStack>
-      <KeyValuePair name={TaskInfoCardNames.type} value={TaskType[task.type]} />
-      <KeyValuePair
-        name={TaskInfoCardNames.worker}
-        value={`${task.worker.personalData.name} ${task.worker.personalData.surname}`}
-      />
-      <KeyValuePair
-        name={TaskInfoCardNames.machine}
-        value={task.machine.name}
-      />
-      <KeyValuePair
-        name={TaskInfoCardNames.createdAt}
-        value={new Date(task.createdAt).toLocaleDateString()}
-      />
-      {task.openedAt && (
-        <KeyValuePair
-          name={TaskInfoCardNames.openedAt}
-          value={new Date(task.openedAt).toLocaleDateString()}
-        />
-      )}
-      {task.closedAt && (
-        <KeyValuePair
-          name={TaskInfoCardNames.closedAt}
-          value={new Date(task.closedAt).toLocaleDateString()}
-        />
-      )}
-      <KeyValuePair
-        name={TaskInfoCardNames.fieldArea}
-        value={`${Number(task.field.area).toFixed(2).toString()} ${t(
-          TranslationNames.components.taskInfoCard.ha,
-        )}`}
-      />
+    <YStack f={1} maxHeight="90%" p="$3">
+      <YStack f={1} maxHeight="50%">
+        <XStack justifyContent="space-between">
+          <SizableText
+            color="$color4"
+            className="text-xl uppercase font-bold mb-2"
+          >
+            {task.field.nameLabel}
+          </SizableText>
+          <ButtonTamagui
+            isPending={isPending}
+            icon={<TrashIco />}
+            bgColor={Colors.ERROR_RED}
+            text={TaskInfoCardNames.deleteButton}
+            buttonProps={{ onPress: handleOnDelete, size: '$2' }}
+          />
+        </XStack>
+        <Card bordered mt="$4" p="$2">
+          <KeyValuePair
+            name={TaskInfoCardNames.type}
+            value={TaskType[task.type]}
+          />
+          <KeyValuePair
+            name={TaskInfoCardNames.worker}
+            value={`${task.worker.personalData.name} ${task.worker.personalData.surname}`}
+          />
+          <KeyValuePair
+            name={TaskInfoCardNames.machine}
+            value={task.machine.name}
+          />
+          <KeyValuePair
+            name={TaskInfoCardNames.createdAt}
+            value={new Date(task.createdAt).toLocaleDateString()}
+          />
+          {task.openedAt && (
+            <KeyValuePair
+              name={TaskInfoCardNames.openedAt}
+              value={new Date(task.openedAt).toLocaleDateString()}
+            />
+          )}
+          {task.closedAt && (
+            <KeyValuePair
+              name={TaskInfoCardNames.closedAt}
+              value={new Date(task.closedAt).toLocaleDateString()}
+            />
+          )}
+          <KeyValuePair
+            name={TaskInfoCardNames.fieldArea}
+            value={`${Number(task.field.area).toFixed(2).toString()} ${t(
+              TranslationNames.components.taskInfoCard.ha,
+            )}`}
+          />
+        </Card>
+      </YStack>
+      <YStack f={1} maxHeight="%50">
+        <Card bordered p="$2">
+          <SizableText fontSize="$7" className="uppercase font-bold">
+            Sessions
+          </SizableText>
+          <ScrollView>
+            <YGroup>{sessions}</YGroup>
+          </ScrollView>
+        </Card>
+      </YStack>
     </YStack>
   );
 }
