@@ -77,11 +77,11 @@ export function TaskWorkView({
     mutationFn: closeTask,
     onSuccess: sth => {
       onClosePress?.(false);
-      setTask(sth);
       modal?.setIsModalVisible(false);
       modal?.modalRef?.current?.close();
       modal?.modalRef?.current?.dismiss();
       updateWorkerTasks(qc, sth, task.id);
+      setTask(sth);
     },
     onError: e =>
       Toast.show({
