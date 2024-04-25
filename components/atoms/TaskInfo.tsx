@@ -1,7 +1,8 @@
 import { Card, ScrollView, SizableText, XStack, YGroup, YStack } from 'tamagui';
 import { t } from 'i18next';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
+import { BottomSheetModal } from '@gorhom/bottom-sheet';
 import { TaskResponseBase } from '../../FarmServiceApiTypes/Task/Responses';
 import { ButtonTamagui } from './ButtonTamagui';
 import { Colors } from '../../settings/styles/colors';
@@ -12,11 +13,14 @@ import TrashIco from '../../assets/trash.svg';
 import { deleteTask } from '../../api/Task/Task';
 import { OrderResponseBase } from '../../FarmServiceApiTypes/Order/Ressponses';
 import { TaskSessionItem } from './TaskSessionItem';
+import { TaskSessionManagement } from '../molecules/TaskSessionManagement';
+import { TaskSessionResponseBase } from '../../FarmServiceApiTypes/TaskSession/Responses';
 
 export type Props = {
   task: TaskResponseBase;
   onDeleteProcessed: () => void;
   order: OrderResponseBase;
+  modalRef?: React.RefObject<BottomSheetModal>;
 };
 
 const TaskInfoCardNames = {
@@ -32,7 +36,7 @@ const TaskInfoCardNames = {
   ),
 };
 
-export function TaskInfo({ task, onDeleteProcessed, order }: Props) {
+export function TaskInfo({ task, onDeleteProcessed, order, modalRef }: Props) {
   const queryClient = useQueryClient();
   const { mutate, isPending } = useMutation({
     mutationKey: ['delTask', order.id],
@@ -46,6 +50,24 @@ export function TaskInfo({ task, onDeleteProcessed, order }: Props) {
       );
     },
   });
+
+  const backToTask = useCallback(() => {
+    modalRef?.current?.present(
+      <TaskInfo
+        order={order}
+        task={task}
+        modalRef={modalRef}
+        onDeleteProcessed={onDeleteProcessed}
+      />,
+    );
+  }, []);
+
+  const handleOnSessionPress = (session: TaskSessionResponseBase) => {
+    modalRef?.current?.present(
+      <TaskSessionManagement onBackToTask={backToTask} session={session} />,
+    );
+  };
+
   const sessions = useMemo(
     () =>
       task.sessions
@@ -55,7 +77,11 @@ export function TaskInfo({ task, onDeleteProcessed, order }: Props) {
             : -1,
         )
         .map(session => (
-          <TaskSessionItem session={session} key={Math.random()} />
+          <TaskSessionItem
+            onPress={() => handleOnSessionPress(session)}
+            session={session}
+            key={Math.random()}
+          />
         )),
     [task.sessions],
   );

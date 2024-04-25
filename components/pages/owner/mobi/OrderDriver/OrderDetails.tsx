@@ -96,6 +96,7 @@ export function OrderDetails({
   const handleTaskPress = (task: TaskResponseBase) => {
     modalRef.current?.present(
       <TaskInfo
+        modalRef={modalRef}
         order={order}
         onDeleteProcessed={modalRef.current.dismiss}
         task={task}
