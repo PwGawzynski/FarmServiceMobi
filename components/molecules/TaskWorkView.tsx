@@ -42,6 +42,9 @@ export interface UserLocationI {
   isFromMockProvider?: boolean | undefined;
 }
 
+// the lower the value, the more map is zoomed in
+const FOCUS_DELTA = 0.001;
+
 const TRANSLATIONS = {
   pauseButton: t(TranslationNames.components.taskWorkView.pauseButton),
   focusOnFieldButton: t(
@@ -73,8 +76,8 @@ export function TaskWorkView({
     mutationKey: ['closeTask', task.id],
     mutationFn: closeTask,
     onSuccess: sth => {
-      setTask(sth);
       onClosePress?.(false);
+      setTask(sth);
       modal?.setIsModalVisible(false);
       modal?.modalRef?.current?.close();
       modal?.modalRef?.current?.dismiss();
@@ -91,12 +94,12 @@ export function TaskWorkView({
     mutationKey: ['pauseTask', task.id],
     mutationFn: pauseTask,
     onSuccess: sth => {
-      setTask(sth);
       onClosePress?.(false);
       modal?.setIsModalVisible(false);
       modal?.modalRef?.current?.close();
       modal?.modalRef?.current?.dismiss();
       updateWorkerTasks(qc, sth, task.id);
+      setTask(sth);
     },
     onError: e =>
       Toast.show({
@@ -108,7 +111,7 @@ export function TaskWorkView({
 
   return (
     <YStack f={1} m="$4" mt="0" mb="10%">
-      <YStack>
+      <YStack f={1} maxHeight="50%">
         <ButtonTamagui
           icon={<PauseIco />}
           isPending={isPausePending}
@@ -122,13 +125,16 @@ export function TaskWorkView({
           isPending={isClosePending}
           buttonProps={{
             mt: '$2',
+            mb: '$2',
             onPress: () => close(task.id),
           }}
           text={TRANSLATIONS.markAsDoneButton}
         />
-        <TimeCounter
-          startTime={new Date(uncloseSession?.openedAt || Date.now())}
-        />
+        <YStack f={1} jc="center">
+          <TimeCounter
+            startTime={new Date(uncloseSession?.openedAt || Date.now())}
+          />
+        </YStack>
         <ButtonTamagui
           icon={<EndIco />}
           buttonProps={{
@@ -144,8 +150,8 @@ export function TaskWorkView({
               mapRef.current?.animateToRegion({
                 latitude: Number(task.field.address.latitude),
                 longitude: Number(task.field.address.longitude),
-                latitudeDelta: 0.01,
-                longitudeDelta: 0.01,
+                latitudeDelta: FOCUS_DELTA,
+                longitudeDelta: FOCUS_DELTA,
               });
             },
           }}
