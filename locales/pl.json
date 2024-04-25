@@ -311,7 +311,9 @@
       }
     },
     "activityDesktopRoot": {
-      "welcome": "Witaj"
+      "welcome": "Witaj",
+      "newTaskIncomeHeader": "Nowe zadanie !",
+      "newTaskIncomeDescription": "Masz nowe zadanie do wykonania"
     }
   },
   "serviceDefaults": {

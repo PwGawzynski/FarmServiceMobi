@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
 import { t } from 'i18next';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
+import Toast from 'react-native-toast-message';
 import { ActivitiesDesktopDriverScreenProps } from '../../../../types/self/navigation/Worker/props/activities/WorkerActivitiesDesktopDriverProps';
 import {
   selectTheme,
@@ -22,6 +23,12 @@ import InfoIco from '../../../../assets/info.svg';
 
 const TRANSLATIONS = {
   welcome: t(TranslationNames.workerScreens.activityDesktopRoot.welcome),
+  newTaskIncomeHeader: t(
+    TranslationNames.workerScreens.activityDesktopRoot.newTaskIncomeHeader,
+  ),
+  newTaskIncomeDescription: t(
+    TranslationNames.workerScreens.activityDesktopRoot.newTaskIncomeDescription,
+  ),
 };
 
 let checkedIfOpenSession = false;
@@ -64,6 +71,12 @@ export function ActivityDesktopRoot({
       es = await Api.workerTasks({
         message: (m: TaskResponseBase[]) => {
           setIsFetching(false);
+          if (data?.length !== undefined && data.length !== m.length)
+            Toast.show({
+              type: 'info',
+              text1: TRANSLATIONS.newTaskIncomeHeader,
+              text2: TRANSLATIONS.newTaskIncomeDescription,
+            });
           queryClient.setQueryData(['workerTasks'], m);
         },
       });

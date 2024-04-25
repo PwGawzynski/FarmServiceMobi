@@ -312,7 +312,9 @@
       }
     },
     "activityDesktopRoot": {
-      "welcome": "Welcome"
+      "welcome": "Welcome",
+      "newTaskIncomeHeader": "New task !",
+      "newTaskIncomeDescription": "You have been added to task list"
     }
   },
   "serviceDefaults": {

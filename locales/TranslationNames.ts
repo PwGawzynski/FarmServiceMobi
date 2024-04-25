@@ -405,6 +405,10 @@ export const TranslationNames = {
     },
     activityDesktopRoot: {
       welcome: 'workerScreens.activityDesktopRoot.welcome',
+      newTaskIncomeHeader:
+        'workerScreens.activityDesktopRoot.newTaskIncomeHeader',
+      newTaskIncomeDescription:
+        'workerScreens.activityDesktopRoot.newTaskIncomeDescription',
     },
   },
   serviceDefaults: {
