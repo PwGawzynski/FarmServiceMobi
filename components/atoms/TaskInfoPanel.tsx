@@ -210,7 +210,8 @@ const TaskInfoPanelM = memo(
       </Animated.View>
     );
   },
-  (p, n) => p.translateY === n.translateY,
+  (p, n) =>
+    p.translateY === n.translateY && p.leadingChildren === n.leadingChildren,
 );
 TaskInfoPanelM.displayName = 'TaskInfoPanel';
 export const TaskInfoPanel = TaskInfoPanelM;
