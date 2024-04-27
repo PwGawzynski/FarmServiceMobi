@@ -4,6 +4,9 @@ import { YStack } from 'tamagui';
 import { t } from 'i18next';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Toast from 'react-native-toast-message';
+import { Alert, AppState, Linking, Platform } from 'react-native';
+import { ActivityAction, startActivityAsync } from 'expo-intent-launcher';
+import { PermissionStatus } from 'expo-modules-core';
 import { ScreenBase } from '../../owner/mobi/common/ScreenBase';
 import { WorkerActivitiesDriverScreenProps } from '../../../../types/self/navigation/Worker/props/activities/WorkerActivitiesDriverProps';
 import { ButtonTamagui } from '../../../atoms/ButtonTamagui';
@@ -17,7 +20,9 @@ import { TaskResponseBase } from '../../../../FarmServiceApiTypes/Task/Responses
 import { updateWorkerTasks } from '../../../../helepers/FetchingHelpers';
 import PlayIcon from '../../../../assets/play.svg';
 import ResumeIcon from '../../../../assets/refresh.svg';
-import { GuideCard } from '../../../atoms/GuideCard';
+import { HintCard } from '../../../atoms/HintCard';
+import { useLocation } from '../../../../helepers/hooks/location';
+import { TextWithLink } from '../../../atoms/TextWithLink';
 
 export interface OpenedTaskSettingsI {
   isOpened: boolean;
@@ -57,6 +62,49 @@ const TRANSLATIONS = {
         .doneTaskHintCardDescription,
     ),
   },
+  locationErrorHintCard: {
+    hintCardTitle: t(
+      TranslationNames.workerScreens.activityDriver.taskView
+        .locationErrorHintCard.hintCardTitle,
+    ),
+    hintCardDescription: t(
+      TranslationNames.workerScreens.activityDriver.taskView
+        .locationErrorHintCard.hintCardDescription,
+    ),
+    enableLocationLink: t(
+      TranslationNames.workerScreens.activityDriver.taskView
+        .locationErrorHintCard.enableLocationLink,
+    ),
+  },
+  enableLocationAlert: {
+    title: t(
+      TranslationNames.workerScreens.activityDriver.taskView.enableLocationAlert
+        .title,
+    ),
+    description: t(
+      TranslationNames.workerScreens.activityDriver.taskView.enableLocationAlert
+        .description,
+    ),
+    okButton: t(
+      TranslationNames.workerScreens.activityDriver.taskView.enableLocationAlert
+        .okButton,
+    ),
+    cancelButton: t(
+      TranslationNames.workerScreens.activityDriver.taskView.enableLocationAlert
+        .cancelButton,
+    ),
+  },
+  locationPrompt: {
+    title: t(
+      TranslationNames.workerScreens.activityDriver.taskView.locationPrompt
+        .title,
+    ),
+
+    description: t(
+      TranslationNames.workerScreens.activityDriver.taskView.locationPrompt
+        .description,
+    ),
+  },
 };
 
 export function TaskView({
@@ -87,6 +135,62 @@ export function TaskView({
     ),
     [task, unClosedSession],
   );
+
+  const { requestCurrentLocation, requestPermission, permissionStatus } =
+    useLocation();
+  useEffect(() => {
+    if (permissionStatus !== PermissionStatus.GRANTED) {
+      Alert.alert(
+        TRANSLATIONS.enableLocationAlert.title,
+        TRANSLATIONS.enableLocationAlert.description,
+        [
+          {
+            text: TRANSLATIONS.enableLocationAlert.okButton,
+            onPress: () => {
+              if (Platform.OS === 'ios') {
+                Linking.openURL('app-settings:');
+              } else {
+                startActivityAsync(ActivityAction.LOCATION_SOURCE_SETTINGS);
+              }
+            },
+          },
+          {
+            text: TRANSLATIONS.enableLocationAlert.cancelButton,
+            style: 'cancel',
+          },
+        ],
+        { cancelable: true },
+      );
+    }
+  }, []);
+
+  /**
+   * ----------------------------------------APP STATE----------------------------------------
+   * On app state listener, because user can go back from settings
+   */
+  const appState = useRef(AppState.currentState);
+  useEffect(() => {
+    const subscription = AppState.addEventListener('change', nextAppState => {
+      if (
+        appState.current.match(/inactive|background/) &&
+        nextAppState === 'active'
+      ) {
+        (async () => {
+          await requestPermission();
+        })();
+      }
+
+      appState.current = nextAppState;
+    });
+
+    return () => {
+      subscription.remove();
+    };
+  }, []);
+
+  /**
+   * ----------------------------------------MUTATIONS----------------------------------------
+   */
 
   const { mutate, isPending } = useMutation({
     mutationKey: ['openTask', task.id],
@@ -124,17 +228,78 @@ export function TaskView({
       }),
   });
 
+  /**
+   * ----------------------------------------HANDLERS----------------------------------------
+   */
+
+  const tryOpenTask = async () => {
+    const location = await requestCurrentLocation();
+    if (location) {
+      mutate({
+        taskId: task.id,
+        taskSession: {
+          onOpenWorkerLatitude: location.coords.latitude
+            .toString()
+            .slice(0, 14),
+          onopenWorkerLongitude: location.coords.longitude
+            .toString()
+            .slice(0, 14),
+        },
+      });
+    } else {
+      Alert.prompt(
+        TRANSLATIONS.locationPrompt.title,
+        TRANSLATIONS.locationPrompt.description,
+      );
+    }
+  };
+
+  const handleOpen = () => {
+    if (!task.lastPausedAt) {
+      tryOpenTask();
+    } else resume(task.id);
+  };
+
+  /**
+   * ----------------------------------------MEMOS----------------------------------------
+   */
+
   const hintCard = useMemo(() => {
     if (!(task.closedAt || task.isDone)) return undefined;
     return (
       <YStack mb="$4">
-        <GuideCard
+        <HintCard
           header={TRANSLATIONS.doneTaskHintCard.header}
           text={TRANSLATIONS.doneTaskHintCard.text}
         />
       </YStack>
     );
   }, [task.closedAt, task.isDone]);
+
+  const locationDisabledHint = useMemo(() => {
+    if (permissionStatus === PermissionStatus.GRANTED) return undefined;
+    return (
+      <YStack mb="$4">
+        <HintCard
+          type="error"
+          header={TRANSLATIONS.locationErrorHintCard.hintCardTitle}
+          text={TRANSLATIONS.locationErrorHintCard.hintCardDescription}
+        >
+          <TextWithLink
+            linkText={TRANSLATIONS.locationErrorHintCard.enableLocationLink}
+            onLinkPress={() => {
+              if (Platform.OS === 'ios') {
+                Linking.openURL('app-settings:');
+              } else {
+                startActivityAsync(ActivityAction.LOCATION_SOURCE_SETTINGS);
+              }
+            }}
+            abs="mt-0 justify-start"
+          />
+        </HintCard>
+      </YStack>
+    );
+  }, [permissionStatus]);
 
   useEffect(() => {
     if (unClosedSession) {
@@ -168,10 +333,10 @@ export function TaskView({
       <TaskInfoPanel
         translateY={taskOpened}
         task={task}
-        leadingChildren={hintCard}
+        leadingChildren={locationDisabledHint || hintCard}
       />
       <YStack>
-        {!task.isDone && (
+        {!task.isDone && permissionStatus === PermissionStatus.GRANTED && (
           <ButtonTamagui
             text={
               task.lastPausedAt
@@ -182,10 +347,7 @@ export function TaskView({
             icon={task.lastPausedAt ? <ResumeIcon /> : <PlayIcon />}
             buttonProps={{
               mb: '$4',
-              onPress: () => {
-                if (!task.lastPausedAt) mutate(task.id);
-                else resume(task.id);
-              },
+              onPress: handleOpen,
             }}
           />
         )}
