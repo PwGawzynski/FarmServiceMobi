@@ -344,6 +344,8 @@
     "taskWorkView": {
       "errorToastTitleClose": "Nie można zamknąć zadania",
       "errorToastTitlePause": "Nie można wstrzymać zadania",
+      "locationErrorHeader": "Error",
+      "locationErrorDescription": "Wystąpił błąd lokalizacji spróbuj później",
       "pauseButton": "Pauza",
       "focusOnFieldButton": "Wycentruj na pole",
       "autofocusSwitch": "Podążaj za mną",

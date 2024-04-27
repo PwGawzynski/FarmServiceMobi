@@ -345,6 +345,8 @@
     "taskWorkView": {
       "errorToastTitleClose": "Cannot close task",
       "errorToastTitlePause": "Cannot pause task",
+      "locationErrorHeader": "Error",
+      "locationErrorDescription": "Location Error Occurred, try later",
       "pauseButton": "Pause",
       "focusOnFieldButton": "Focus on field",
       "autofocusSwitch": "Autofocus",

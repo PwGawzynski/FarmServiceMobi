@@ -23,6 +23,7 @@ import ResumeIcon from '../../../../assets/refresh.svg';
 import { HintCard } from '../../../atoms/HintCard';
 import { useLocation } from '../../../../helepers/hooks/location';
 import { TextWithLink } from '../../../atoms/TextWithLink';
+import { performAction } from '../../../../helepers/taskSession/helpers';
 
 export interface OpenedTaskSettingsI {
   isOpened: boolean;
@@ -136,10 +137,14 @@ export function TaskView({
     [task, unClosedSession],
   );
 
+  /**
+   * ----------------------------------------LOCATION----------------------------------------
+   * this section is responsible for handling location permissions and location updates
+   */
   const { requestCurrentLocation, requestPermission, permissionStatus } =
     useLocation();
   useEffect(() => {
-    if (permissionStatus !== PermissionStatus.GRANTED) {
+    if (permissionStatus && permissionStatus !== PermissionStatus.GRANTED) {
       Alert.alert(
         TRANSLATIONS.enableLocationAlert.title,
         TRANSLATIONS.enableLocationAlert.description,
@@ -162,11 +167,11 @@ export function TaskView({
         { cancelable: true },
       );
     }
-  }, []);
+  }, [permissionStatus]);
 
   /**
    * ----------------------------------------APP STATE----------------------------------------
-   * On app state listener, because user can go back from settings
+   * On app state listener, due to the fact that user can go back from settings
    */
   const appState = useRef(AppState.currentState);
   useEffect(() => {
@@ -232,32 +237,17 @@ export function TaskView({
    * ----------------------------------------HANDLERS----------------------------------------
    */
 
-  const tryOpenTask = async () => {
-    const location = await requestCurrentLocation();
-    if (location) {
-      mutate({
-        taskId: task.id,
-        taskSession: {
-          onOpenWorkerLatitude: location.coords.latitude
-            .toString()
-            .slice(0, 14),
-          onopenWorkerLongitude: location.coords.longitude
-            .toString()
-            .slice(0, 14),
-        },
-      });
-    } else {
-      Alert.prompt(
-        TRANSLATIONS.locationPrompt.title,
-        TRANSLATIONS.locationPrompt.description,
-      );
-    }
-  };
-
   const handleOpen = () => {
     if (!task.lastPausedAt) {
-      tryOpenTask();
-    } else resume(task.id);
+      performAction(mutate, requestCurrentLocation, task.id, {
+        header: TRANSLATIONS.locationPrompt.title,
+        description: TRANSLATIONS.locationPrompt.description,
+      });
+    } else
+      performAction(resume, requestCurrentLocation, task.id, {
+        header: TRANSLATIONS.locationPrompt.title,
+        description: TRANSLATIONS.locationPrompt.description,
+      });
   };
 
   /**

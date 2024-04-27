@@ -31,7 +31,7 @@ export async function getTaskByOrder(orderId: string) {
 
 export type OpenTaskData = {
   taskId: string;
-  taskSession: TaskSessionCreateRequest;
+  taskSession?: TaskSessionCreateRequest;
 };
 
 export async function openTask({ taskId, taskSession }: OpenTaskData) {
@@ -43,25 +43,25 @@ export async function openTask({ taskId, taskSession }: OpenTaskData) {
   }) as unknown as TaskResponseBase;
 }
 
-export async function closeTask(taskId: string) {
+export async function closeTask({ taskId, taskSession }: OpenTaskData) {
   const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
   const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
-  return apiHandler<string>(
+  return apiHandler<OpenTaskData>(
     UNAUTHORIZED_MSG,
     DEFAULT_MSG,
     Api.closeTask,
-    taskId,
+    { taskId, taskSession },
   ) as unknown as TaskResponseBase;
 }
 
-export async function pauseTask(taskId: string) {
+export async function pauseTask({ taskId, taskSession }: OpenTaskData) {
   const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
   const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
-  return apiHandler<string>(
+  return apiHandler<OpenTaskData>(
     UNAUTHORIZED_MSG,
     DEFAULT_MSG,
     Api.pauseTask,
-    taskId,
+    { taskId, taskSession },
   ) as unknown as TaskResponseBase;
 }
 

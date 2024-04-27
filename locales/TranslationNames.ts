@@ -447,6 +447,9 @@ export const TranslationNames = {
     taskWorkView: {
       errorToastTitleClose: 'components.taskWorkView.errorToastTitleClose',
       errorToastTitlePause: 'components.taskWorkView.errorToastTitlePause',
+      locationErrorHeader: 'components.taskWorkView.locationErrorHeader',
+      locationErrorDescription:
+        'components.taskWorkView.locationErrorDescription',
       pauseButton: 'components.taskWorkView.pauseButton',
       focusOnFieldButton: 'components.taskWorkView.focusOnFieldButton',
       autofocusSwitch: 'components.taskWorkView.autofocusSwitch',

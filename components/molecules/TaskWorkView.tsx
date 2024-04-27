@@ -21,6 +21,8 @@ import {
 } from '../../settings/map/defaults';
 import { TimeCounter } from '../atoms/TimeCounter';
 import { TaskSessionResponseBase } from '../../FarmServiceApiTypes/TaskSession/Responses';
+import { useLocation } from '../../helepers/hooks/location';
+import { performAction } from '../../helepers/taskSession/helpers';
 
 export interface TaskWorkViewProps {
   task: TaskResponseBase;
@@ -60,6 +62,12 @@ const TRANSLATIONS = {
   errorToastTitlePause: t(
     TranslationNames.components.taskWorkView.errorToastTitlePause,
   ),
+  locationErrorHeader: t(
+    TranslationNames.components.taskWorkView.locationErrorHeader,
+  ),
+  locationErrorDescription: t(
+    TranslationNames.components.taskWorkView.locationErrorDescription,
+  ),
 };
 
 export function TaskWorkView({
@@ -71,6 +79,11 @@ export function TaskWorkView({
 }: TaskWorkViewProps) {
   const modal = useContext(WorkerModalContext);
   const [isAutofocused, setIsAutofocused] = useState(true);
+  const location = useLocation();
+
+  /**
+   * ----------------------------------------MUATATIONS----------------------------------------
+   */
   const qc = useQueryClient();
   const { mutate: close, isPending: isClosePending } = useMutation({
     mutationKey: ['closeTask', task.id],
@@ -109,6 +122,20 @@ export function TaskWorkView({
       }),
   });
 
+  /**
+   * ----------------------------------------HANDLERS----------------------------------------
+   */
+  const handlePause = () =>
+    performAction(pause, location.requestCurrentLocation, task.id, {
+      header: TRANSLATIONS.locationErrorHeader,
+      description: TRANSLATIONS.locationErrorDescription,
+    });
+  const handleClose = () =>
+    performAction(close, location.requestCurrentLocation, task.id, {
+      header: TRANSLATIONS.locationErrorHeader,
+      description: TRANSLATIONS.locationErrorDescription,
+    });
+
   return (
     <YStack f={1} m="$4" mt="0" mb="10%">
       <YStack f={1} maxHeight="50%">
@@ -116,7 +143,7 @@ export function TaskWorkView({
           icon={<PauseIco />}
           isPending={isPausePending}
           buttonProps={{
-            onPress: () => pause(task.id),
+            onPress: handlePause,
           }}
           text={TRANSLATIONS.pauseButton}
         />
@@ -126,7 +153,7 @@ export function TaskWorkView({
           buttonProps={{
             mt: '$2',
             mb: '$2',
-            onPress: () => close(task.id),
+            onPress: handleClose,
           }}
           text={TRANSLATIONS.markAsDoneButton}
         />

@@ -502,18 +502,18 @@ export class ApiSelf {
   }
 
   @IsDelayed()
-  static async pauseTask(taskId: string) {
+  static async pauseTask({ taskId, taskSession }: OpenTaskData) {
     return (
-      (await ApiSelf.axiosInstance.put('/task/pause', undefined, {
+      (await ApiSelf.axiosInstance.put('/task/pause', taskSession, {
         params: { 'task-id': taskId },
       })) as AxiosResponse<ResponseObject>
     ).data.payload as TaskResponseBase | undefined;
   }
 
   @IsDelayed()
-  static async closeTask(taskId: string) {
+  static async closeTask({ taskId, taskSession }: OpenTaskData) {
     return (
-      (await ApiSelf.axiosInstance.put('/task/close', undefined, {
+      (await ApiSelf.axiosInstance.put('/task/close', taskSession, {
         params: { 'task-id': taskId },
       })) as AxiosResponse<ResponseObject>
     ).data.payload as TaskResponseBase | undefined;
