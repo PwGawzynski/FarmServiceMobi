@@ -401,6 +401,29 @@ export const TranslationNames = {
           doneTaskHintCardDescription:
             'workerScreens.activityDriver.taskView.doneTaskHintCard.doneTaskHintCardDescription',
         },
+        locationErrorHintCard: {
+          hintCardTitle:
+            'workerScreens.activityDriver.taskView.locationErrorHintCard.hintCardTitle',
+          hintCardDescription:
+            'workerScreens.activityDriver.taskView.locationErrorHintCard.hintCardDescription',
+          enableLocationLink:
+            'workerScreens.activityDriver.taskView.locationErrorHintCard.enableLocationLink',
+        },
+        enableLocationAlert: {
+          title:
+            'workerScreens.activityDriver.taskView.enableLocationAlert.title',
+          description:
+            'workerScreens.activityDriver.taskView.enableLocationAlert.description',
+          okButton:
+            'workerScreens.activityDriver.taskView.enableLocationAlert.okButton',
+          cancelButton:
+            'workerScreens.activityDriver.taskView.enableLocationAlert.cancelButton',
+        },
+        locationPrompt: {
+          title: 'workerScreens.activityDriver.taskView.locationPrompt.title',
+          description:
+            'workerScreens.activityDriver.taskView.locationPrompt.description',
+        },
       },
     },
     activityDesktopRoot: {

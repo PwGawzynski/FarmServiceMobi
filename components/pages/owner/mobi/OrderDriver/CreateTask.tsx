@@ -6,7 +6,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Toast from 'react-native-toast-message';
 import { ScreenBase } from '../common/ScreenBase';
 import { OrdersDriverScreenProps } from '../../../../../types/self/navigation/Owner/props/orders/OrdersDriverProps';
-import { GuideCard, GuideCardElement } from '../../../../atoms/GuideCard';
+import { HintCard, GuideCardElement } from '../../../../atoms/HintCard';
 import { ButtonTamagui } from '../../../../atoms/ButtonTamagui';
 import { TranslationNames } from '../../../../../locales/TranslationNames';
 import { FieldResponseBase } from '../../../../../FarmServiceApiTypes/Field/Ressponses';
@@ -313,24 +313,24 @@ export function CreateTask({
       <YStack f={1} className="mt-2">
         <YStack className="mt-2">
           {screenState !== ScreenState.AllSelected && (
-            <GuideCard
+            <HintCard
               header={hintCard[screenState].header}
               text={hintCard[screenState].text}
             >
               <GuideCardElement
-                isCurent={screenState === ScreenState.SelectField}
+                isCurrent={screenState === ScreenState.SelectField}
                 isDone={!!taskData?.fields?.length}
                 text={TRANSLATIONS.SELECT_FIELDS.next_step_button}
               />
               <GuideCardElement
-                isCurent={screenState === ScreenState.SelectWorker}
+                isCurrent={screenState === ScreenState.SelectWorker}
                 isDone={!!taskData?.worker}
                 text={TRANSLATIONS.SELECT_WORKER.next_step_button}
               />
               <GuideCardElement
                 text={TRANSLATIONS.SELECT_MACHINE.next_step_button}
               />
-            </GuideCard>
+            </HintCard>
           )}
         </YStack>
         {screenState === ScreenState.SelectField && (

@@ -55,6 +55,7 @@ import {
   TaskResponseBase,
   TaskResponseCollection,
 } from '../FarmServiceApiTypes/Task/Responses';
+import { OpenTaskData } from './Task/Task';
 /* ---------------------------------------DECORATOR_USED_TO_DELAY_RES--------------------------------------- */
 
 const IsDelayed = () => {
@@ -492,9 +493,9 @@ export class ApiSelf {
   }
 
   @IsDelayed()
-  static async openTask(taskId: string) {
+  static async openTask({ taskId, taskSession }: OpenTaskData) {
     return (
-      (await ApiSelf.axiosInstance.put('/task/open', undefined, {
+      (await ApiSelf.axiosInstance.put('/task/open', taskSession, {
         params: { 'task-id': taskId },
       })) as AxiosResponse<ResponseObject>
     ).data.payload as TaskResponseBase | undefined;

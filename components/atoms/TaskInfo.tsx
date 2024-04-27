@@ -1,7 +1,7 @@
 import { Card, ScrollView, SizableText, XStack, YGroup, YStack } from 'tamagui';
 import { t } from 'i18next';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useCallback, useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
 import { TaskResponseBase } from '../../FarmServiceApiTypes/Task/Responses';
 import { ButtonTamagui } from './ButtonTamagui';
@@ -51,22 +51,9 @@ export function TaskInfo({ task, onDeleteProcessed, order, modalRef }: Props) {
     },
   });
 
-  const backToTask = useCallback(() => {
-    modalRef?.current?.present(
-      <TaskInfo
-        order={order}
-        task={task}
-        modalRef={modalRef}
-        onDeleteProcessed={onDeleteProcessed}
-      />,
-    );
-  }, []);
-
-  const handleOnSessionPress = (session: TaskSessionResponseBase) => {
-    modalRef?.current?.present(
-      <TaskSessionManagement onBackToTask={backToTask} session={session} />,
-    );
-  };
+  const [sessionView, setSessionView] = useState<
+    TaskSessionResponseBase | undefined
+  >(undefined);
 
   const sessions = useMemo(
     () =>
@@ -78,7 +65,10 @@ export function TaskInfo({ task, onDeleteProcessed, order, modalRef }: Props) {
         )
         .map(session => (
           <TaskSessionItem
-            onPress={() => handleOnSessionPress(session)}
+            onPress={() => {
+              modalRef?.current?.collapse();
+              setSessionView(session);
+            }}
             session={session}
             key={Math.random()}
           />
@@ -90,7 +80,15 @@ export function TaskInfo({ task, onDeleteProcessed, order, modalRef }: Props) {
     mutate(task.id);
   };
 
-  return (
+  return sessionView ? (
+    <TaskSessionManagement
+      onBackToTask={() => {
+        modalRef?.current?.expand();
+        setSessionView(undefined);
+      }}
+      session={sessionView}
+    />
+  ) : (
     <YStack f={1} maxHeight="90%" p="$3">
       <YStack f={1} maxHeight="50%">
         <XStack justifyContent="space-between">

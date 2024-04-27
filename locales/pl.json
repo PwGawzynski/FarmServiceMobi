@@ -305,8 +305,23 @@
           "voivodeship": "Województwo"
         },
         "doneTaskHintCard":{
-          "doneTaskHintCardTitle": "Task has been marked as done",
-          "doneTaskHintCardDescription": "When you marked this task as done, it is considered a completed task, which means you no longer have permissions to manage it."
+          "doneTaskHintCardTitle": "Zadanie zakończone",
+          "doneTaskHintCardDescription": "Po oznaczeniu zadania jako wykonanego jest ono uznawane za ukończone, co oznacza, że nie masz już uprawnień do zarządzania nim."
+        },
+        "locationErrorHintCard":{
+          "hintCardTitle": "Lokalizacja jest wymagana",
+          "hintCardDescription": "Zgodnie z polityką firmy aby rozpocząć wykonywanie zadania musisz udostępnić swoją lokalizację. Twoje położenie bedzie zapisywane i przetwarzane podczas pracy w celu uniknięcia błedów podczas pracy.",
+          "enableLocationLink": "Włącz lokalizację"
+        },
+        "enableLocationAlert": {
+          "title": "Włącz lokalizację",
+          "description": "Aby rozpocząć pracę, musisz włączyć lokalizację. Twoje położenie będzie zapisywane i przetwarzane podczas pracy w celu uniknięcia błędów podczas pracy.",
+          "okButton": "Włącz",
+          "cancelButton": "Anuluj"
+        },
+        "locationPrompt": {
+          "title": "Włącz lokalizację",
+          "description": "Aby rozpocząć pracę, musisz włączyć lokalizację. Twoje położenie będzie zapisywane i przetwarzane podczas pracy w celu uniknięcia błędów podczas pracy."
         }
       }
     },

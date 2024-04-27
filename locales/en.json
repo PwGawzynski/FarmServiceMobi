@@ -308,6 +308,21 @@
         "doneTaskHintCard":{
             "doneTaskHintCardTitle": "Task has been marked as done",
             "doneTaskHintCardDescription": "When you marked this task as done, it is considered a completed task, which means you no longer have permissions to manage it."
+        },
+        "locationErrorHintCard":{
+          "hintCardTitle": "Location is disabled",
+          "hintCardDescription": "According to the company's policy, in order to start a task you must make your location available. Your location will be recorded and processed while you are working to avoid errors while working.",
+          "enableLocationLink": "Enable location"
+        },
+        "enableLocationAlert": {
+          "title": "Location is disabled",
+          "description": "To start a task, you must enable location. Your location will be recorded and processed while you are working to avoid errors while working.",
+          "okButton": "Enable",
+          "cancelButton": "Cancel"
+        },
+        "locationPrompt": {
+            "title": "Location is disabled",
+            "description": "To start a task, you must enable location. Your location will be recorded and processed while you are working to avoid errors while working."
         }
       }
     },

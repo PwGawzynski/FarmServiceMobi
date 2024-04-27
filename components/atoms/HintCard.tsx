@@ -6,22 +6,32 @@ import { Colors } from '../../settings/styles/colors';
 import { selectTheme } from '../../src/redux/feature/userSlice';
 import DotIcon from '../../assets/dot.svg';
 import CheckIcon from '../../assets/check.svg';
+import DangerIco from '../../assets/danger.svg';
 
 export interface GuideCardProps {
   header: string;
   text: string;
   children?: React.ReactNode;
+  type?: 'hint' | 'error';
 }
 
-export function GuideCard({ header, text, children }: GuideCardProps) {
+export function HintCard({
+  header,
+  text,
+  children,
+  type = 'hint',
+}: GuideCardProps) {
   const theme = useSelector(selectTheme);
+  const isHint = type === 'hint';
   return (
-    <Card bordered borderColor="$color11" p="$3">
+    <Card bordered borderColor={isHint ? '$color11' : Colors.ERROR_RED} p="$3">
       <XStack>
         <YStack f={1}>
           <SizableText
             fontSize="$4"
-            className="uppercase font-bold mb-3 text-light-blue dark:text-dark-gray"
+            className={`uppercase font-bold mb-3 text-light-blue dark:text-dark-gray ${
+              !isHint ? 'text-error-red' : ''
+            }`}
           >
             {header}
           </SizableText>
@@ -31,9 +41,14 @@ export function GuideCard({ header, text, children }: GuideCardProps) {
           <YStack className="mt-4">{children}</YStack>
         </YStack>
         <YStack ai="flex-end">
-          <InfoIcon
-            color={theme === Theme.dark ? Colors.DARK_GRAY : Colors.LIGHT_BLUE}
-          />
+          {isHint && (
+            <InfoIcon
+              color={
+                theme === Theme.dark ? Colors.DARK_GRAY : Colors.LIGHT_BLUE
+              }
+            />
+          )}
+          {!isHint && <DangerIco color={Colors.ERROR_RED} />}
         </YStack>
       </XStack>
     </Card>
@@ -43,13 +58,13 @@ export function GuideCard({ header, text, children }: GuideCardProps) {
 export interface GuideCardElementProps {
   text: string;
   isDone?: boolean;
-  isCurent?: boolean;
+  isCurrent?: boolean;
 }
 
 export function GuideCardElement({
   text,
   isDone,
-  isCurent,
+  isCurrent,
 }: GuideCardElementProps) {
   const theme = useSelector(selectTheme);
   const iconColor = theme === Theme.dark ? Colors.WHITE : Colors.LIGHT_BLUE;
@@ -67,10 +82,10 @@ export function GuideCardElement({
         ml="$2"
         color={textColor}
         textTransform="uppercase"
-        fontSize={isCurent ? '$4' : '$2'}
+        fontSize={isCurrent ? '$4' : '$2'}
         style={{
           textDecorationLine: isDone ? 'line-through' : 'none',
-          fontWeight: isCurent ? 'bold' : 'normal',
+          fontWeight: isCurrent ? 'bold' : 'normal',
         }}
       >
         {text}
