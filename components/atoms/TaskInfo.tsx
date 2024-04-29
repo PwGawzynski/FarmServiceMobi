@@ -3,6 +3,7 @@ import { t } from 'i18next';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
+import { Alert } from 'react-native';
 import { TaskResponseBase } from '../../FarmServiceApiTypes/Task/Responses';
 import { ButtonTamagui } from './ButtonTamagui';
 import { Colors } from '../../settings/styles/colors';
@@ -10,17 +11,29 @@ import { KeyValuePair } from './KeyValuePair';
 import { TaskType } from '../../FarmServiceApiTypes/Task/Enums';
 import { TranslationNames } from '../../locales/TranslationNames';
 import TrashIco from '../../assets/trash.svg';
-import { deleteTask } from '../../api/Task/Task';
+import { closeTaskByOwner, deleteTask } from '../../api/Task/Task';
 import { OrderResponseBase } from '../../FarmServiceApiTypes/Order/Ressponses';
 import { TaskSessionItem } from './TaskSessionItem';
 import { TaskSessionManagement } from '../molecules/TaskSessionManagement';
 import { TaskSessionResponseBase } from '../../FarmServiceApiTypes/TaskSession/Responses';
+import CheckIco from '../../assets/check.svg';
 
 export type Props = {
   task: TaskResponseBase;
   onDeleteProcessed: () => void;
   order: OrderResponseBase;
   modalRef?: React.RefObject<BottomSheetModal>;
+};
+
+const TRANSLATIONS = {
+  onDeleteAlertTitle: t(
+    TranslationNames.components.taskInfoCard.onDeleteAlertTitle,
+  ),
+  onDeleteAlertDescription: t(
+    TranslationNames.components.taskInfoCard.onDeleteAlertDescription,
+  ),
+  alertOkButton: t(TranslationNames.components.alert.okButton),
+  alertCancelButton: t(TranslationNames.components.alert.cancelButton),
 };
 
 const TaskInfoCardNames = {
@@ -31,9 +44,8 @@ const TaskInfoCardNames = {
   openedAt: t(TranslationNames.components.taskInfoCard.openedAt),
   closedAt: t(TranslationNames.components.taskInfoCard.closedAt),
   fieldArea: t(TranslationNames.components.taskInfoCard.fieldArea),
-  deleteButton: t(
-    TranslationNames.screens.machineDriver.machineDetailsScreen.deleteButton,
-  ),
+  deleteButton: t(TranslationNames.components.taskInfoCard.deleteButton),
+  closeTaskButton: t(TranslationNames.components.taskInfoCard.closeTaskButton),
 };
 
 export function TaskInfo({ task, onDeleteProcessed, order, modalRef }: Props) {
@@ -47,6 +59,19 @@ export function TaskInfo({ task, onDeleteProcessed, order, modalRef }: Props) {
         ['orderTasks', order.id],
         (old: TaskResponseBase[]) =>
           old?.filter(storedTask => storedTask.id !== v),
+      );
+    },
+  });
+
+  const { mutate: close, isPending: isClosePending } = useMutation({
+    mutationKey: ['closeTask', task.id],
+    mutationFn: closeTaskByOwner,
+    onSuccess: (d, v) => {
+      onDeleteProcessed();
+      return queryClient.setQueryData(
+        ['orderTasks', order.id],
+        (old: TaskResponseBase[]) =>
+          old?.filter(storedTask => storedTask.id !== v).push(d),
       );
     },
   });
@@ -77,7 +102,26 @@ export function TaskInfo({ task, onDeleteProcessed, order, modalRef }: Props) {
   );
 
   const handleOnDelete = () => {
-    mutate(task.id);
+    Alert.alert(
+      TRANSLATIONS.onDeleteAlertTitle,
+      TRANSLATIONS.onDeleteAlertDescription,
+      [
+        {
+          text: TRANSLATIONS.alertCancelButton,
+          style: 'cancel',
+        },
+        {
+          text: TRANSLATIONS.alertOkButton,
+          onPress: () => {
+            mutate(task.id);
+          },
+        },
+      ],
+    );
+  };
+
+  const handleOnClose = () => {
+    close(task.id);
   };
 
   return sessionView ? (
@@ -90,7 +134,7 @@ export function TaskInfo({ task, onDeleteProcessed, order, modalRef }: Props) {
     />
   ) : (
     <YStack f={1} maxHeight="90%" p="$3">
-      <YStack f={1} maxHeight="50%">
+      <YStack>
         <XStack justifyContent="space-between">
           <SizableText
             color="$color4"
@@ -105,6 +149,15 @@ export function TaskInfo({ task, onDeleteProcessed, order, modalRef }: Props) {
             text={TaskInfoCardNames.deleteButton}
             buttonProps={{ onPress: handleOnDelete, size: '$2' }}
           />
+          {!task.isDone && task.openedAt && (
+            <ButtonTamagui
+              isPending={isClosePending}
+              icon={<CheckIco />}
+              bgColor="$color4"
+              text={TaskInfoCardNames.closeTaskButton}
+              buttonProps={{ onPress: handleOnClose, size: '$2' }}
+            />
+          )}
         </XStack>
         <Card bordered mt="$4" p="$2">
           <KeyValuePair
@@ -143,7 +196,7 @@ export function TaskInfo({ task, onDeleteProcessed, order, modalRef }: Props) {
           />
         </Card>
       </YStack>
-      <YStack f={1} maxHeight="%50">
+      <YStack mt="$4" maxHeight="50%">
         <Card bordered p="$2">
           <SizableText fontSize="$7" className="uppercase font-bold">
             Sessions
