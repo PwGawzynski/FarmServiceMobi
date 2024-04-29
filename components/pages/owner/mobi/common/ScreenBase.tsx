@@ -1,4 +1,11 @@
-import { Platform, SafeAreaView, StatusBar, Text, View } from 'react-native';
+import {
+  Image,
+  Platform,
+  SafeAreaView,
+  StatusBar,
+  Text,
+  View,
+} from 'react-native';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { YStack } from 'tamagui';
 import Animated from 'react-native-reanimated';
@@ -13,6 +20,7 @@ export type Props = {
   activityDot?: boolean;
   bottomSheetsProps?: MainBottomSheetProps;
   switchOfMargins?: boolean;
+  image?: string;
 };
 
 export function ScreenBase({
@@ -21,35 +29,44 @@ export function ScreenBase({
   activityDot,
   bottomSheetsProps,
   switchOfMargins,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  image,
 }: Props) {
   return (
-    <SafeAreaView
-      className="flex-1 bg-[#fff] dark:bg-dark"
+    <View
       style={{
-        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+        flex: 1,
       }}
     >
-      <BottomSheetModalProvider>
-        <View className={`flex-1 ${!switchOfMargins && 'ml-4 mr-4'}`}>
-          {activityDot && (
-            <View className="w-full h-2  items-end">
-              {activityDot && (
-                <View className="h-2 w-2 rounded-full bg-activity-dot" />
-              )}
-            </View>
-          )}
-          {name && (
-            <View className="w-full">
-              <Text className="text-2xl uppercase font-bold text-dark dark:text-green">
-                {name}
-              </Text>
-            </View>
-          )}
-          {children}
-        </View>
-        {bottomSheetsProps && <MainBottomSheet {...bottomSheetsProps} />}
-      </BottomSheetModalProvider>
-    </SafeAreaView>
+      <Image src={require('../../../../../assets/HARVESTING.webp')} />
+      <SafeAreaView
+        className="flex-1 bg-[#fff] dark:bg-dark"
+        style={{
+          paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+        }}
+      >
+        <BottomSheetModalProvider>
+          <View className={`flex-1 ${!switchOfMargins && 'ml-4 mr-4'}`}>
+            {activityDot && (
+              <View className="w-full h-2  items-end">
+                {activityDot && (
+                  <View className="h-2 w-2 rounded-full bg-activity-dot" />
+                )}
+              </View>
+            )}
+            {name && (
+              <View className="w-full">
+                <Text className="text-2xl uppercase font-bold text-dark dark:text-green">
+                  {name}
+                </Text>
+              </View>
+            )}
+            {children}
+          </View>
+          {bottomSheetsProps && <MainBottomSheet {...bottomSheetsProps} />}
+        </BottomSheetModalProvider>
+      </SafeAreaView>
+    </View>
   );
 }
 

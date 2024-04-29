@@ -658,6 +658,34 @@ export class ApiSelf {
     });
     return eventSource;
   }
+
+  @IsDelayed()
+  static companiesActivities({ open, message, error }: sseAsyncListenerParams) {
+    const eventSource = new EventSource(
+      `http://${Constants.expoConfig?.extra?.apiUrl}:3006/activities/by-company`,
+      {
+        headers: {
+          Authorization: `Bearer ${ApiSelf.access_token}`,
+          timeout: 0,
+        },
+      },
+    );
+    eventSource.addEventListener('close', () => {
+      console.info('COMPANIES_TASk_LISTENER_CLOSE');
+    });
+
+    eventSource.addEventListener('message', (data: MessageEvent) => {
+      if (message) message(JSON.parse(data.data as string).payload);
+    });
+    eventSource.addEventListener('error', data => {
+      if (error) error(data);
+      eventSource.close();
+    });
+    eventSource.addEventListener('open', data => {
+      if (open) open(data);
+    });
+    return eventSource;
+  }
 }
 /* ---------------------------------------AUTO_REFRESH_TOKENS--------------------------------------- */
 function methodDecorator(
