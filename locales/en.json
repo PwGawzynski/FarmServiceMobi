@@ -328,6 +328,10 @@
         "locationPrompt": {
             "title": "Location is disabled",
             "description": "To start a task, you must enable location. Your location will be recorded and processed while you are working to avoid errors while working."
+        },
+        "closedByOwnerAlert": {
+            "title": "Task has been closed",
+            "description": "This task has been closed by the owner, you can no longer manage it"
         }
       }
     },

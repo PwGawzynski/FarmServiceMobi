@@ -429,6 +429,12 @@ export const TranslationNames = {
           description:
             'workerScreens.activityDriver.taskView.locationPrompt.description',
         },
+        closedByOwnerAlert: {
+          title:
+            'workerScreens.activityDriver.taskView.closedByOwnerAlert.title',
+          description:
+            'workerScreens.activityDriver.taskView.closedByOwnerAlert.description',
+        },
       },
     },
     activityDesktopRoot: {

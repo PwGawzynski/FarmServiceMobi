@@ -327,6 +327,10 @@
         "locationPrompt": {
           "title": "Włącz lokalizację",
           "description": "Aby rozpocząć pracę, musisz włączyć lokalizację. Twoje położenie będzie zapisywane i przetwarzane podczas pracy w celu uniknięcia błędów podczas pracy."
+        },
+        "closedByOwnerAlert": {
+          "title": "Task has been closed",
+          "description": "This task has been closed by the owner, you can no longer manage it"
         }
       }
     },
