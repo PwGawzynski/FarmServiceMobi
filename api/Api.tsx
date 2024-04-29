@@ -519,6 +519,15 @@ export class ApiSelf {
     ).data.payload as TaskResponseBase | undefined;
   }
 
+  @IsDelayed()
+  static async closeTaskByOwner(taskId: string) {
+    return (
+      (await ApiSelf.axiosInstance.put('/task/close-by-owner', undefined, {
+        params: { 'task-id': taskId },
+      })) as AxiosResponse<ResponseObject>
+    ).data.payload as TaskResponseBase | undefined;
+  }
+
   static async deleteTask(taskId: string) {
     return (
       (await ApiSelf.axiosInstance.delete('/task', {
