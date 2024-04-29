@@ -16,10 +16,8 @@ export const performAction = async (
     callback({
       taskId,
       taskSession: {
-        onOpenWorkerLatitude: location.coords.latitude.toString().slice(0, 14),
-        onopenWorkerLongitude: location.coords.longitude
-          .toString()
-          .slice(0, 14),
+        workerLatitude: location.coords.latitude.toString().slice(0, 14),
+        workerLongitude: location.coords.longitude.toString().slice(0, 14),
       },
     });
   } else {
