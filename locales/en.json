@@ -168,7 +168,7 @@
             "openedAt": "Opened At",
             "pricePerUnit": "Price Per Unit"
           },
-          "topRightButtonName": "Edit"
+          "topRightButtonName": "Edit",
         },
         "additionalInfo": "Additional Info",
         "clientCard": {
@@ -179,7 +179,12 @@
             "surname": "Surname"
           }
         },
-        "tasksButton": "Tasks"
+        "tasksButton": "Tasks",
+        "taskStatus": {
+          "done": "Closed",
+          "notDone": "Opened",
+          "new": "New"
+        }
       },
       "createTask": {
         "screenTitle": "Create task",
@@ -342,6 +347,26 @@
     }
   },
   "components": {
+    "alert": {
+      "okButton": "OK",
+        "cancelButton": "Cancel"
+    },
+    "taskSessionManagement": {
+      "sessionInfoTitle": "Session Info",
+      "openedAtLabel": "OPENED AT",
+      "closedAtLabel": "CLOSED AT",
+      "onOpenWorkerLatLabel": "ON OPEN WORKER LAT:",
+      "onOpenWorkerLongLabel": "ON OPEN WORKER LONG:",
+      "onCloseWorkerLatLabel": "ON CLOSE WORKER LAT:",
+      "onCloseWorkerLongLabel": "ON CLOSE WORKER LONG:",
+      "backButton": "Back",
+      "openStartOnMapButton": "Show start-point",
+      "openEndOnMapButton": "Show end-point",
+      "workerOnOpenLabel": "Worker on open",
+      "workerOnCloseLabel": "Worker on close",
+      "toastOpenMapErrorHeader": "Error",
+      "toastOpenMapErrorDescription": "Failed to open map"
+    },
     "taskWorkView": {
       "errorToastTitleClose": "Cannot close task",
       "errorToastTitlePause": "Cannot pause task",
@@ -378,7 +403,10 @@
       "closedAt": "Closed at",
       "fieldArea": "Field Area",
       "ha": "Ha",
-      "deleteButton": "Delete"
+      "deleteButton": "Delete",
+      "closeTaskButton": "Close",
+      "onDeleteAlertTitle": "DANGER ACTION",
+      "onDeleteAlertDescription": "Are you sure you want to delete this task? You will loose all session data and won't  be able to revert them. This action cannot be undone!!"
     },
     "fieldSelector": {
       "title": "Select fields",

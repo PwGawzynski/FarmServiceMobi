@@ -232,6 +232,11 @@ export const TranslationNames = {
           },
         },
         tasksButton: 'screens.orderDriver.orderDetails.tasksButton',
+        taskStatus: {
+          done: 'screens.orderDriver.orderDetails.taskStatus.done',
+          closed: 'screens.orderDriver.orderDetails.taskStatus.notDone',
+          new: 'screens.orderDriver.orderDetails.taskStatus.new',
+        },
       },
       createTask: {
         screenTitle: 'screens.orderDriver.createTask.screenTitle',
@@ -444,6 +449,33 @@ export const TranslationNames = {
     },
   },
   components: {
+    alert: {
+      okButton: 'components.alert.okButton',
+      cancelButton: 'components.alert.cancelButton',
+    },
+    taskSessionManagement: {
+      sessionInfoTitle: 'components.taskSessionManagement.sessionInfoTitle',
+      openedAtLabel: 'components.taskSessionManagement.openedAtLabel',
+      closedAtLabel: 'components.taskSessionManagement.closedAtLabel',
+      onOpenWorkerLatLabel:
+        'components.taskSessionManagement.onOpenWorkerLatLabel',
+      onOpenWorkerLongLabel:
+        'components.taskSessionManagement.onOpenWorkerLongLabel',
+      onCloseWorkerLatLabel:
+        'components.taskSessionManagement.onCloseWorkerLatLabel',
+      onCloseWorkerLongLabel:
+        'components.taskSessionManagement.onCloseWorkerLongLabel',
+      backButton: 'components.taskSessionManagement.backButton',
+      openStartOnMapButton:
+        'components.taskSessionManagement.openStartOnMapButton',
+      openEndOnMapButton: 'components.taskSessionManagement.openEndOnMapButton',
+      workerOnOpenLabel: 'components.taskSessionManagement.workerOnOpenLabel',
+      workerOnCloseLabel: 'components.taskSessionManagement.workerOnCloseLabel',
+      toastOpenMapErrorHeader:
+        'components.taskSessionManagement.toastOpenMapErrorHeader',
+      toastOpenMapErrorDescription:
+        'components.taskSessionManagement.toastOpenMapErrorDescription',
+    },
     taskWorkView: {
       errorToastTitleClose: 'components.taskWorkView.errorToastTitleClose',
       errorToastTitlePause: 'components.taskWorkView.errorToastTitlePause',
@@ -482,6 +514,10 @@ export const TranslationNames = {
       fieldArea: 'components.taskInfoCard.fieldArea',
       ha: 'components.taskInfoCard.ha',
       deleteButton: 'components.taskInfoCard.deleteButton',
+      closeTaskButton: 'components.taskInfoCard.closeTaskButton',
+      onDeleteAlertTitle: 'components.taskInfoCard.onDeleteAlertTitle',
+      onDeleteAlertDescription:
+        'components.taskInfoCard.onDeleteAlertDescription',
     },
     fieldSelector: {
       subbmitButton: 'components.fieldSelector.title',
