@@ -17,6 +17,7 @@ export type Props<T> = {
   listEmptyText?: string;
   swipeRightAnimation?: boolean;
   beFlex?: boolean;
+  scrollToBottomOnContentSizeChange?: boolean;
 };
 
 const EL_HEIGHT = 100;
@@ -30,6 +31,7 @@ export function UniversalList<T>({
   listEmptyText,
   swipeRightAnimation,
   beFlex,
+  scrollToBottomOnContentSizeChange,
 }: Props<T>) {
   const ListEmptyComponent = useMemo(
     () => (
@@ -56,6 +58,7 @@ export function UniversalList<T>({
   }, []);
   return (
     <VerticalList
+      scrollToBottomOnContentSizeChange={scrollToBottomOnContentSizeChange}
       ListEmptyComponent={listEmptyComponent || ListEmptyComponent}
       estimatedSize={150}
       renderItem={renderItem}

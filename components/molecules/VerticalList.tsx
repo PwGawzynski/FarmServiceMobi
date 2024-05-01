@@ -23,6 +23,7 @@ export type VerticalListProps<T> = {
   data?: T[];
   ListEmptyComponent?: JSX.Element;
   onLoadingData?: JSX.Element[] | JSX.Element;
+  scrollToBottomOnContentSizeChange?: boolean;
 };
 
 export function VerticalList<T>({
@@ -33,6 +34,7 @@ export function VerticalList<T>({
   onLoadingData,
   isLoading,
   isLoadingError,
+  scrollToBottomOnContentSizeChange,
 }: VerticalListProps<T>) {
   const ref = useRef<FlashList<T>>(null);
   const [blankAreaTrackerResult, onBlankArea] = useBlankAreaTracker(ref);
@@ -60,12 +62,18 @@ export function VerticalList<T>({
     ),
     [],
   );
+  const onContentSizeChange = useCallback(() => {
+    if (scrollToBottomOnContentSizeChange) {
+      ref.current?.scrollToEnd({ animated: true });
+    }
+  }, []);
   if (isLoading) return onLoadingData;
   if (isLoadingError) return <LoadingErrorInfo />;
   if (data === undefined) return <DataUndefinedInfo />;
   return (
     <FlashList
       ref={ref}
+      onContentSizeChange={onContentSizeChange}
       showsVerticalScrollIndicator={false}
       ItemSeparatorComponent={divider}
       estimatedItemSize={estimatedSize}

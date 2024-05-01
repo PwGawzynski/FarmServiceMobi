@@ -1,11 +1,4 @@
-import {
-  Image,
-  Platform,
-  SafeAreaView,
-  StatusBar,
-  Text,
-  View,
-} from 'react-native';
+import { Platform, SafeAreaView, StatusBar, Text, View } from 'react-native';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { YStack } from 'tamagui';
 import Animated from 'react-native-reanimated';
@@ -20,7 +13,6 @@ export type Props = {
   activityDot?: boolean;
   bottomSheetsProps?: MainBottomSheetProps;
   switchOfMargins?: boolean;
-  image?: string;
 };
 
 export function ScreenBase({
@@ -29,8 +21,6 @@ export function ScreenBase({
   activityDot,
   bottomSheetsProps,
   switchOfMargins,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  image,
 }: Props) {
   return (
     <View
@@ -38,7 +28,6 @@ export function ScreenBase({
         flex: 1,
       }}
     >
-      <Image src={require('../../../../../assets/HARVESTING.webp')} />
       <SafeAreaView
         className="flex-1 bg-[#fff] dark:bg-dark"
         style={{
