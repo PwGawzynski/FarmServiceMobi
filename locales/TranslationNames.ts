@@ -83,6 +83,13 @@ export const TranslationNames = {
         markerDescription: 'screens.AuthDriver.createField.markerDescription',
       },
     },
+    activityDesktopRoot: {
+      title: 'screens.activityDesktopRoot.title',
+      newActivity: 'screens.activityDesktopRoot.newActivity',
+      newActivityDescription:
+        'screens.activityDesktopRoot.newActivityDescription',
+      noActivities: 'screens.activityDesktopRoot.noActivities',
+    },
     machineDesktopDriver: {
       addMachineScreen: {
         screenTitle:
@@ -715,5 +722,18 @@ export const TranslationNames = {
       licensePlateMaxLength:
         'createMachineForm.validation.licensePlateMaxLength',
     },
+  },
+  sessionAsActivity: {
+    openSessionTitle: 'sessionAsActivity.openSessionTitle',
+    closeSessionTitle: 'sessionAsActivity.closeSessionTitle',
+    openTask: 'sessionAsActivity.openTask',
+    closeTask: 'sessionAsActivity.closeTask',
+    worker: 'sessionAsActivity.worker',
+    has: 'sessionAsActivity.has',
+    opened: 'sessionAsActivity.opened',
+    closed: 'sessionAsActivity.closed',
+    aSessionOnAField: 'sessionAsActivity.aSessionOnAField',
+    workOnAField: 'sessionAsActivity.workOnAField',
+    somethingWentWrong: 'sessionAsActivity.somethingWentWrong',
   },
 };

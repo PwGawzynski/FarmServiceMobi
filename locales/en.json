@@ -69,6 +69,12 @@
         "markerDescription": "Estimated Field Location"
       }
     },
+    "activityDesktopRoot": {
+      "title": "Last activities",
+      "newActivity": "New activity",
+      "newActivityDescription": "New activity has been registered",
+      "noActivities": "No activities to display"
+    },
     "machineDesktopDriver": {
       "addMachineScreen": {
         "screenTitle": "Add machine",
@@ -598,5 +604,18 @@
       "licensePlateMinLength": "License plate too short",
       "licensePlateMaxLength": "License plate too long"
     }
+  },
+  "sessionAsActivity": {
+    "openSessionTitle": "Session Opened",
+    "closeSessionTitle": "Session Closed",
+    "openTask": "Task Opened",
+    "closeTask": "Task Closed",
+    "worker": "Worker",
+    "has": "has",
+    "opened": "opened",
+    "closed": "closed",
+    "aSessionOnAField": "a session on a field",
+    "workOnAField": "work on a field",
+    "somethingWentWrong": "Something went wrong, please try again later"
   }
 }

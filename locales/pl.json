@@ -69,6 +69,12 @@
         "markerDescription": "Przybliżona lokalizacja twojego pola"
       }
     },
+    "activityDesktopRoot": {
+      "title": "Ostatnie aktywności",
+      "newActivity": "Nowa aktywność",
+      "newActivityDescription": "Zarejestrowano nową aktywność",
+      "noActivities": "Brak aktywności do wyświetlenia"
+    },
     "machineDesktopDriver": {
       "addMachineScreen": {
         "screenTitle": "Dodaj maszynę",
@@ -591,5 +597,19 @@
       "licensePlateMinLength": "Numer rejestracyjny za krótki",
       "licensePlateMaxLength": "Numer rejestracyjny za długi"
     }
+  },
+  "sessionAsActivity": {
+    "openSessionTitle": "Sesja Otwarta",
+    "closeSessionTitle": "Sesja Zamknięta",
+    "openTask": "Zadanie Otwarte",
+    "closeTask": "Zadanie Zamknięte",
+    "worker": "Pracownik",
+    "has": "has",
+    "opened": "rozpoczął",
+    "closed": "zakończył",
+    "aSessionOnAField": "sesje  pracy na polu",
+    "workOnAField": "prace na polu",
+    "somethingWentWrong": "Coś poszło nie tak, spróbuj ponownie później"
+
   }
 }
