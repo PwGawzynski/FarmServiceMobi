@@ -1,4 +1,4 @@
-import { memo, useMemo } from 'react';
+import { memo, useCallback, useMemo } from 'react';
 import { Card, ScrollView, SizableText } from 'tamagui';
 import { t } from 'i18next';
 import Animated, {
@@ -126,8 +126,12 @@ const TaskInfoPanelM = memo(
         ),
       [task.sessions],
     );
-    const renderItem = ({ item }: { item: TaskSessionResponseBase }) => (
-      <TaskSessionItem session={item} key={Math.random()} />
+    const renderItem = useCallback(
+      // eslint-disable-next-line react/no-unused-prop-types
+      ({ item }: { item: TaskSessionResponseBase }) => (
+        <TaskSessionItem session={item} key={Math.random()} />
+      ),
+      [],
     );
     if (translateY)
       position.value = withTiming(120, { duration: MAP_ANIMATION_DURATION });
@@ -152,6 +156,7 @@ const TaskInfoPanelM = memo(
               {TRANSLATIONS.SESSIONS_CARD.sessionsCardTitle}
             </SizableText>
             <FlashList
+              showsVerticalScrollIndicator={false}
               renderItem={renderItem}
               data={sessions}
               estimatedItemSize={SESSION_ITEM_HEIGHT}
