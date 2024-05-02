@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import Toast from 'react-native-toast-message';
 import { ListRenderItemInfo } from '@shopify/flash-list';
 import { YStack } from 'tamagui';
@@ -77,6 +77,10 @@ export function ActivityDesktopRoot({
     queryKey: ['companiesTasks'],
     initialData: undefined as ActivityResponseBase[] | undefined,
   });
+  const dataLength = useRef(data?.length);
+  useEffect(() => {
+    dataLength.current = data?.length;
+  }, [data]);
 
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -85,7 +89,11 @@ export function ActivityDesktopRoot({
       es = await Api.companiesActivities({
         message: (m: ActivityResponseBase[]) => {
           setIsFetching(false);
-          if (data?.length !== undefined && data.length !== m.length)
+          console.log(dataLength, m.length, 'test');
+          if (
+            dataLength.current !== undefined &&
+            dataLength.current !== m.length
+          )
             Toast.show({
               type: 'info',
               text1: TRANSLATIONS.newActivityToastTitle,
