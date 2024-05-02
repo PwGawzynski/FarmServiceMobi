@@ -185,6 +185,12 @@ export function TaskView({
           },
           {
             text: TRANSLATIONS.enableLocationAlert.cancelButton,
+            onPress: () => {
+              setTaskOpened(false);
+              modal?.setIsModalVisible(false);
+              modal?.modalRef?.current?.close();
+              modal?.modalRef?.current?.dismiss();
+            },
             style: 'cancel',
           },
         ],
