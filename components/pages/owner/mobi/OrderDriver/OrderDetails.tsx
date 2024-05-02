@@ -146,7 +146,7 @@ export function OrderDetails({
         )}
       />
       {order.additionalInfo && (
-        <Card className="max-h-52" p="$2" bordered mt="$4">
+        <Card className="max-h-32" p="$2" bordered mt="$4">
           <SizableText textTransform="uppercase" size="$7" fontWeight="bold">
             {t(
               TranslationNames.screens.orderDriver.orderDetails.additionalInfo,
