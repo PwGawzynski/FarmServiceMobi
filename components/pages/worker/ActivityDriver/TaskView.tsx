@@ -199,7 +199,7 @@ export function TaskView({
     }
   }, [permissionStatus]);
 
-  /**
+  /** c
    * ----------------------------------------APP STATE----------------------------------------
    * On app state listener, due to the fact that user can go back from settings
    */

@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 import Toast from 'react-native-toast-message';
 import { ListRenderItemInfo } from '@shopify/flash-list';
 import { YStack } from 'tamagui';
+import { t } from 'i18next';
 import { ScreenBase } from '../common/ScreenBase';
 import {
   ButtonOptions,
@@ -17,12 +18,14 @@ import { ActivityItem } from '../../../../atoms/ActivityItem';
 import { TranslationNames } from '../../../../../locales/TranslationNames';
 
 const TRANSLATIONS = {
-  title: TranslationNames.screens.activityDesktopRoot.title,
-  newActivityToastTitle:
+  title: t(TranslationNames.screens.activityDesktopRoot.title),
+  newActivityToastTitle: t(
     TranslationNames.screens.activityDesktopRoot.newActivity,
-  newActivityToastText:
+  ),
+  newActivityToastText: t(
     TranslationNames.screens.activityDesktopRoot.newActivityDescription,
-  noActivities: TranslationNames.screens.activityDesktopRoot.noActivities,
+  ),
+  noActivities: t(TranslationNames.screens.activityDesktopRoot.noActivities),
 };
 
 export function ActivityDesktopRoot({
