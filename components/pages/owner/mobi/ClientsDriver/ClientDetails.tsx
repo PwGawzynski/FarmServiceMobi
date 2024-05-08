@@ -1,4 +1,4 @@
-import { Card, SizableText, XStack, YStack } from 'tamagui';
+import { Card, ScrollView, SizableText, XStack } from 'tamagui';
 import { t } from 'i18next';
 import { useNavigation } from '@react-navigation/native';
 import { ClientsDriverScreenProps } from '../../../../../types/self/navigation/Owner/props/clients/ClientsDriverProps';
@@ -24,7 +24,7 @@ export function ClientDetails({
   const { company, email } = route.params.client;
   return (
     <ScreenBase name={`${personalData.name} ${personalData.surname}`}>
-      <YStack f={1}>
+      <ScrollView f={1}>
         <Card bordered p="$2" mt="$4">
           <XStack jc="space-between" ai="center">
             <SizableText textTransform="uppercase" size="$7" fontWeight="bold">
@@ -219,7 +219,7 @@ export function ClientDetails({
             </>
           )}
         </Card>
-      </YStack>
+      </ScrollView>
       <XStack mt="$4">
         <CallAndMailPanel
           callButtonProps={{ phoneNumber: personalData.phoneNumber }}
