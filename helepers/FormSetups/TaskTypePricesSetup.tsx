@@ -15,6 +15,7 @@ export const createTaskTypePriceSetup = (
     placeholderName: t(
       TranslationNames.taskTypePriceForm.formPlaceholder.harvesting,
     ),
+    valuePreprocessor: (value: string) => value.replace(',', '.'),
     textInputProp: {
       keyboardType: 'numeric',
       placeholder: t(
@@ -29,6 +30,7 @@ export const createTaskTypePriceSetup = (
     placeholderName: t(
       TranslationNames.taskTypePriceForm.formPlaceholder.transport,
     ),
+    valuePreprocessor: (value: string) => value.replace(',', '.'),
     textInputProp: {
       keyboardType: 'numeric',
       placeholder: t(
@@ -39,6 +41,7 @@ export const createTaskTypePriceSetup = (
   {
     control,
     rules: TaskTypePriceRules.Tax,
+    valuePreprocessor: (value: string) => value.replace(',', '.'),
     name: 'Tax',
     placeholderName: t(TranslationNames.taskTypePriceForm.formPlaceholder.tax),
     textInputProp: {
