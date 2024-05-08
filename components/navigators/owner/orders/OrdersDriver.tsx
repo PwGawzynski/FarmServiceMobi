@@ -5,6 +5,9 @@ import { OrdersDriverParamList } from '../../../../types/self/navigation/Owner/p
 import { OrderDetails } from '../../../pages/owner/mobi/OrderDriver/OrderDetails';
 import { EditOrder } from '../../../pages/owner/mobi/OrderDriver/EditOrder';
 import { CreateTask } from '../../../pages/owner/mobi/OrderDriver/CreateTask';
+import { OrderAccounting } from '../../../pages/owner/mobi/OrderDriver/OrderAccounting';
+import { OrderAccountingSelectPrices } from '../../../pages/owner/mobi/OrderDriver/OrderAccountingSelectPrices';
+import { AccountingSummary } from '../../../pages/owner/mobi/OrderDriver/AccountingSummary';
 
 const Stack = createNativeStackNavigator<OrdersDriverParamList>();
 
@@ -38,6 +41,30 @@ export function OrdersDriver() {
         }}
         name="createTask"
         component={CreateTask}
+      />
+      <Stack.Screen
+        options={{
+          animation: 'fade',
+          gestureDirection: 'horizontal',
+        }}
+        name="orderAccounting"
+        component={OrderAccounting}
+      />
+      <Stack.Screen
+        options={{
+          animation: 'fade',
+          gestureDirection: 'horizontal',
+        }}
+        name="orderAccountingSelectPrices"
+        component={OrderAccountingSelectPrices}
+      />
+      <Stack.Screen
+        options={{
+          animation: 'fade',
+          gestureDirection: 'horizontal',
+        }}
+        name="orderAccountingInvoice"
+        component={AccountingSummary}
       />
     </Stack.Navigator>
   );

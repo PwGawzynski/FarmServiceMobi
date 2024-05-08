@@ -19,7 +19,6 @@ function prepareDefaultValues(order: OrderResponseBase) {
     name: order.name,
     performanceDate: new Date(order.performanceDate),
     additionalInfo: order.additionalInfo,
-    pricePerUnit: order.pricePerUnit,
   };
 }
 
@@ -58,7 +57,6 @@ export function EditOrder({
     mutate({
       ...formData,
       order: params.order.id,
-      pricePerUnit: Number(formData.pricePerUnit),
     });
   };
 

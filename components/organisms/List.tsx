@@ -52,6 +52,7 @@ export interface Props<T extends Record<string, any>> {
 }
 export interface ListRef<T> {
   items: T[];
+  all: T[] | undefined;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -109,14 +110,12 @@ function ListMemo<T extends Record<string, any>>(
   /**
    * Exposes the fields selected
    */
-  useImperativeHandle(
-    ref,
-    () =>
-      ({
-        items: selectedItems,
-      }) as ListRef<T>,
-    [selectedItems],
-  );
+  useImperativeHandle(ref, () => {
+    return {
+      items: selectedItems,
+      all: data,
+    } as ListRef<T>;
+  });
 
   const renderItem = useCallback(
     ({ item }: ListRenderItemInfo<T>) => {

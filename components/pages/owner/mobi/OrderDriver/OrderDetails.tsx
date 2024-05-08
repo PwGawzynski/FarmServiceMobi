@@ -39,9 +39,9 @@ const detailsCardNames = {
     TranslationNames.screens.orderDriver.orderDetails.detailsCard.fields
       .openedAt,
   ),
-  pricePerUnit: t(
+  totalArea: t(
     TranslationNames.screens.orderDriver.orderDetails.detailsCard.fields
-      .pricePerUnit,
+      .totalTaskArea,
   ),
 };
 
@@ -72,7 +72,9 @@ const orderDataObject = (order: OrderResponseBase) => ({
   creationDate:
     order.createdAt && new Date(order.createdAt)?.toLocaleDateString(),
   openedAt: order.openedAt && new Date(order.openedAt)?.toLocaleDateString(),
-  pricePerUnit: order.pricePerUnit,
+  totalArea: Number.isNaN(order.totalArea)
+    ? '0.00'
+    : Number(order.totalArea).toFixed(2),
 });
 
 const clientDataObject = (client: ClientResponseBase) => ({
@@ -103,6 +105,13 @@ export function OrderDetails({
       navigation.navigate('createTask', {
         order,
         client: client as ClientResponseBase,
+      });
+  };
+  const handleAccountOrder = () => {
+    if (client)
+      navigation.navigate('orderAccounting', {
+        order,
+        client,
       });
   };
   const handleTaskPress = (task: TaskResponseBase) => {
@@ -207,6 +216,13 @@ export function OrderDetails({
         buttonProps={{
           mt: '$4',
           onPress: handleCreateTask,
+        }}
+      />
+      <ButtonTamagui
+        text="Account order"
+        buttonProps={{
+          mt: '$4',
+          onPress: handleAccountOrder,
         }}
       />
     </ScreenBase>

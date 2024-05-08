@@ -12,6 +12,7 @@ export type EntityAsACardProps<T extends Record<string, any>> = {
   cardName?: string;
   topRightButtonName?: string;
   topRightButtonIcon?: JSX.Element;
+  cardClassName?: string;
 };
 
 export function EntityAsACard<
@@ -25,9 +26,10 @@ export function EntityAsACard<
   topRightButtonName,
   omittedKeys,
   topRightButtonIcon,
+  cardClassName,
 }: EntityAsACardProps<T>) {
   return (
-    <Card bordered p="$2" mt="$4">
+    <Card bordered p="$2" mt="$4" className={cardClassName}>
       <XStack jc="space-between" ai="center">
         {cardName && (
           <SizableText textTransform="uppercase" size="$7" fontWeight="bold">
