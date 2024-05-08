@@ -519,6 +519,15 @@ export class ApiSelf {
     ).data.payload as TaskResponseBase | undefined;
   }
 
+  @IsDelayed()
+  static async closeTaskByOwner(taskId: string) {
+    return (
+      (await ApiSelf.axiosInstance.put('/task/close-by-owner', undefined, {
+        params: { 'task-id': taskId },
+      })) as AxiosResponse<ResponseObject>
+    ).data.payload as TaskResponseBase | undefined;
+  }
+
   static async deleteTask(taskId: string) {
     return (
       (await ApiSelf.axiosInstance.delete('/task', {
@@ -635,6 +644,34 @@ export class ApiSelf {
     );
     eventSource.addEventListener('close', () => {
       console.info('WORKER_ASSIGNED_LISTENER_CLOSE');
+    });
+
+    eventSource.addEventListener('message', (data: MessageEvent) => {
+      if (message) message(JSON.parse(data.data as string).payload);
+    });
+    eventSource.addEventListener('error', data => {
+      if (error) error(data);
+      eventSource.close();
+    });
+    eventSource.addEventListener('open', data => {
+      if (open) open(data);
+    });
+    return eventSource;
+  }
+
+  @IsDelayed()
+  static companiesActivities({ open, message, error }: sseAsyncListenerParams) {
+    const eventSource = new EventSource(
+      `http://${Constants.expoConfig?.extra?.apiUrl}:3006/activities/by-company`,
+      {
+        headers: {
+          Authorization: `Bearer ${ApiSelf.access_token}`,
+          timeout: 0,
+        },
+      },
+    );
+    eventSource.addEventListener('close', () => {
+      console.info('COMPANIES_TASk_LISTENER_CLOSE');
     });
 
     eventSource.addEventListener('message', (data: MessageEvent) => {

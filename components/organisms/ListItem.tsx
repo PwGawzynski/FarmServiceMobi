@@ -15,6 +15,7 @@ export type ListItemStyleSettings = {
   alignment?: 'left' | 'right' | 'center';
   infoIco?: boolean;
   customIco?: JSX.Element;
+  disabled?: boolean;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -47,6 +48,7 @@ export function ListItem<T extends Record<string, any>>({
   infoIco,
   customIco,
   alignment = 'center',
+  disabled,
 }: Props<T>) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const navigation = useNavigation<any>();
@@ -65,6 +67,7 @@ export function ListItem<T extends Record<string, any>>({
 
   const {
     color4: { val },
+    color11: { val: disabledVal },
   } = useTheme();
 
   const aling = alignment === 'left' ? 'left' : 'right';
@@ -92,7 +95,7 @@ export function ListItem<T extends Record<string, any>>({
             <SizableText
               fontWeight="bold"
               fontSize={header.length > 20 ? '$4' : '$7'}
-              color="$color"
+              color={disabled ? '$color11' : '$color'}
               textTransform="uppercase"
               textAlign={aling}
               adjustsFontSizeToFit
@@ -105,14 +108,18 @@ export function ListItem<T extends Record<string, any>>({
             adjustsFontSizeToFit
             numberOfLines={1}
             overflow="hidden"
-            color="$color4"
+            color={disabled ? '$color11' : '$color4'}
             mt="$1"
             textAlign={aling}
           >
             {bottomRightText}
           </SizableText>
         </YStack>
-        {infoIco && <YStack>{customIco || <InfoIco color={val} />}</YStack>}
+        {infoIco && (
+          <YStack>
+            {customIco || <InfoIco color={disabled ? disabledVal : val} />}
+          </YStack>
+        )}
       </XStack>
     </Card>
   );

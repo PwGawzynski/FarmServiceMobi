@@ -2,7 +2,7 @@ import { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import MapView, { Marker } from 'react-native-maps';
 import { YStack } from 'tamagui';
 import { t } from 'i18next';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import Toast from 'react-native-toast-message';
 import { Alert, AppState, Linking, Platform } from 'react-native';
 import { ActivityAction, startActivityAsync } from 'expo-intent-launcher';
@@ -106,10 +106,21 @@ const TRANSLATIONS = {
         .description,
     ),
   },
+  closedByOwnerAlert: {
+    title: t(
+      TranslationNames.workerScreens.activityDriver.taskView.closedByOwnerAlert
+        .title,
+    ),
+    description: t(
+      TranslationNames.workerScreens.activityDriver.taskView.closedByOwnerAlert
+        .description,
+    ),
+  },
 };
 
 export function TaskView({
   route: { params },
+  navigation,
 }: WorkerActivitiesDriverScreenProps<
   'taskView',
   'workerActivityDriver',
@@ -123,6 +134,19 @@ export function TaskView({
   const unClosedSession = useMemo(() => {
     return task.sessions.find(s => !s.closedAt);
   }, [task.sessions]);
+  const { data } = useQuery<TaskResponseBase[]>({
+    queryKey: ['workerTasks'],
+  });
+
+  useEffect(() => {
+    if (!data?.find(incomingTask => incomingTask.id === task.id)) {
+      Alert.alert(
+        TRANSLATIONS.closedByOwnerAlert.title,
+        TRANSLATIONS.closedByOwnerAlert.description,
+      );
+      navigation.goBack();
+    }
+  }, [data]);
 
   const TaskWorkViewMemo = useMemo(
     () => (
@@ -161,6 +185,12 @@ export function TaskView({
           },
           {
             text: TRANSLATIONS.enableLocationAlert.cancelButton,
+            onPress: () => {
+              setTaskOpened(false);
+              modal?.setIsModalVisible(false);
+              modal?.modalRef?.current?.close();
+              modal?.modalRef?.current?.dismiss();
+            },
             style: 'cancel',
           },
         ],
@@ -169,7 +199,7 @@ export function TaskView({
     }
   }, [permissionStatus]);
 
-  /**
+  /** c
    * ----------------------------------------APP STATE----------------------------------------
    * On app state listener, due to the fact that user can go back from settings
    */

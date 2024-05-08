@@ -3,6 +3,7 @@ import { MachineResponseBase } from '../FarmServiceApiTypes/Machine/Responses';
 import { OrderResponseBase } from '../FarmServiceApiTypes/Order/Ressponses';
 import { ClientResponseBase } from '../FarmServiceApiTypes/Clients/Responses';
 import { TaskResponseBase } from '../FarmServiceApiTypes/Task/Responses';
+import { ActivityResponseBase } from '../FarmServiceApiTypes/Activity/Responses';
 
 export const searchEngineNameSurnameFilter = <
   T extends { personalData: { name: string; surname: string } },
@@ -142,4 +143,13 @@ export const filterTasks = (
       : true,
   );
   return sortTasks(filtered);
+};
+
+export const sortActivitiesByDateDesc = (
+  data: ActivityResponseBase[] | undefined,
+) => {
+  if (!data) return undefined;
+  return data.sort((a, b) => {
+    return new Date(a.actionDate).getTime() - new Date(b.actionDate).getTime();
+  });
 };

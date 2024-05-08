@@ -40,7 +40,8 @@ export function WorkerSelector({
     gcTime: EXPO_PUBLIC_QUERY_STALE_TIME,
   });
   const listEmptyComponent = useMemo(() => ListEmptyComponent, []);
-
+  const isActiveFilter = (item: WorkerResponseBase) =>
+    item.status === Status.Active;
   return (
     <YStack f={1}>
       <List<WorkerResponseBase>
@@ -52,7 +53,7 @@ export function WorkerSelector({
         ref={workerListRef}
         isFetching={isFetching}
         isError={isError}
-        data={data}
+        data={data?.filter(isActiveFilter)}
         maxSelectedItems={maxSelectedItems}
         modalRef={modalRef}
         listStyleSettings={item => ({

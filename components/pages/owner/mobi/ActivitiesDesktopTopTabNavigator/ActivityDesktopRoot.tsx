@@ -1,10 +1,32 @@
-import { View } from 'react-native';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import Toast from 'react-native-toast-message';
+import { ListRenderItemInfo } from '@shopify/flash-list';
+import { YStack } from 'tamagui';
+import { t } from 'i18next';
 import { ScreenBase } from '../common/ScreenBase';
 import {
   ButtonOptions,
   NavigationBottomPanel,
 } from '../../../../molecules/NavigationBottomPanel';
 import { ActivitiesDesktopDriverScreenProps } from '../../../../../types/self/navigation/Owner/props/activities/ActivitiesDesktopDriverProps';
+import { Api } from '../../../../../api/Api';
+import { ActivityResponseBase } from '../../../../../FarmServiceApiTypes/Activity/Responses';
+import { UniversalList } from '../../../../organisms/UniversalList';
+import { sortActivitiesByDateDesc } from '../../../../../helepers/filterFunctions';
+import { ActivityItem } from '../../../../atoms/ActivityItem';
+import { TranslationNames } from '../../../../../locales/TranslationNames';
+
+const TRANSLATIONS = {
+  title: t(TranslationNames.screens.activityDesktopRoot.title),
+  newActivityToastTitle: t(
+    TranslationNames.screens.activityDesktopRoot.newActivity,
+  ),
+  newActivityToastText: t(
+    TranslationNames.screens.activityDesktopRoot.newActivityDescription,
+  ),
+  noActivities: t(TranslationNames.screens.activityDesktopRoot.noActivities),
+};
 
 export function ActivityDesktopRoot({
   navigation,
@@ -49,15 +71,68 @@ export function ActivityDesktopRoot({
         }),
     },
   ];
+  const [isFetching, setIsFetching] = useState(true);
+  const queryClient = useQueryClient();
+  const { data } = useQuery({
+    queryKey: ['companiesTasks'],
+    initialData: undefined as ActivityResponseBase[] | undefined,
+  });
+  const dataLength = useRef(data?.length);
+  useEffect(() => {
+    dataLength.current = data?.length;
+  }, [data]);
+
+  useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let es: any;
+    (async () => {
+      es = await Api.companiesActivities({
+        message: (m: ActivityResponseBase[]) => {
+          setIsFetching(false);
+          console.log(dataLength, m.length, 'test');
+          if (
+            dataLength.current !== undefined &&
+            dataLength.current !== m.length
+          )
+            Toast.show({
+              type: 'info',
+              text1: TRANSLATIONS.newActivityToastTitle,
+              text2: TRANSLATIONS.newActivityToastText,
+            });
+          queryClient.setQueryData(['companiesTasks'], m);
+        },
+      });
+    })();
+    return () => {
+      es?.removeAllEventListeners();
+      es?.close();
+    };
+  }, []);
+
+  const renderItem = useCallback(
+    ({ item }: ListRenderItemInfo<ActivityResponseBase>) => {
+      return <ActivityItem item={item} />;
+    },
+    [],
+  );
 
   return (
-    <ScreenBase name="Last Activities">
-      <View className="flex-1 flex-col">
-        <View className="flex-1 " />
-        <View className="flex-1 max-h-32 items-center ">
-          <NavigationBottomPanel options={navigationOptions} />
-        </View>
-      </View>
+    <ScreenBase name={TRANSLATIONS.title}>
+      <YStack f={1} mt="$4">
+        <UniversalList<ActivityResponseBase>
+          data={sortActivitiesByDateDesc(data)}
+          beFlex
+          listSetup={{
+            isLoading: isFetching,
+          }}
+          listEmptyText={TRANSLATIONS.noActivities}
+          renderItem={renderItem}
+          scrollToBottomOnContentSizeChange
+        />
+      </YStack>
+      <YStack className="max-h-28 flex-1">
+        <NavigationBottomPanel options={navigationOptions} />
+      </YStack>
     </ScreenBase>
   );
 }

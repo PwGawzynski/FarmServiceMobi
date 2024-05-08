@@ -83,6 +83,13 @@ export const TranslationNames = {
         markerDescription: 'screens.AuthDriver.createField.markerDescription',
       },
     },
+    activityDesktopRoot: {
+      title: 'screens.activityDesktopRoot.title',
+      newActivity: 'screens.activityDesktopRoot.newActivity',
+      newActivityDescription:
+        'screens.activityDesktopRoot.newActivityDescription',
+      noActivities: 'screens.activityDesktopRoot.noActivities',
+    },
     machineDesktopDriver: {
       addMachineScreen: {
         screenTitle:
@@ -232,6 +239,11 @@ export const TranslationNames = {
           },
         },
         tasksButton: 'screens.orderDriver.orderDetails.tasksButton',
+        taskStatus: {
+          done: 'screens.orderDriver.orderDetails.taskStatus.done',
+          closed: 'screens.orderDriver.orderDetails.taskStatus.notDone',
+          new: 'screens.orderDriver.orderDetails.taskStatus.new',
+        },
       },
       createTask: {
         screenTitle: 'screens.orderDriver.createTask.screenTitle',
@@ -424,6 +436,12 @@ export const TranslationNames = {
           description:
             'workerScreens.activityDriver.taskView.locationPrompt.description',
         },
+        closedByOwnerAlert: {
+          title:
+            'workerScreens.activityDriver.taskView.closedByOwnerAlert.title',
+          description:
+            'workerScreens.activityDriver.taskView.closedByOwnerAlert.description',
+        },
       },
     },
     activityDesktopRoot: {
@@ -444,6 +462,33 @@ export const TranslationNames = {
     },
   },
   components: {
+    alert: {
+      okButton: 'components.alert.okButton',
+      cancelButton: 'components.alert.cancelButton',
+    },
+    taskSessionManagement: {
+      sessionInfoTitle: 'components.taskSessionManagement.sessionInfoTitle',
+      openedAtLabel: 'components.taskSessionManagement.openedAtLabel',
+      closedAtLabel: 'components.taskSessionManagement.closedAtLabel',
+      onOpenWorkerLatLabel:
+        'components.taskSessionManagement.onOpenWorkerLatLabel',
+      onOpenWorkerLongLabel:
+        'components.taskSessionManagement.onOpenWorkerLongLabel',
+      onCloseWorkerLatLabel:
+        'components.taskSessionManagement.onCloseWorkerLatLabel',
+      onCloseWorkerLongLabel:
+        'components.taskSessionManagement.onCloseWorkerLongLabel',
+      backButton: 'components.taskSessionManagement.backButton',
+      openStartOnMapButton:
+        'components.taskSessionManagement.openStartOnMapButton',
+      openEndOnMapButton: 'components.taskSessionManagement.openEndOnMapButton',
+      workerOnOpenLabel: 'components.taskSessionManagement.workerOnOpenLabel',
+      workerOnCloseLabel: 'components.taskSessionManagement.workerOnCloseLabel',
+      toastOpenMapErrorHeader:
+        'components.taskSessionManagement.toastOpenMapErrorHeader',
+      toastOpenMapErrorDescription:
+        'components.taskSessionManagement.toastOpenMapErrorDescription',
+    },
     taskWorkView: {
       errorToastTitleClose: 'components.taskWorkView.errorToastTitleClose',
       errorToastTitlePause: 'components.taskWorkView.errorToastTitlePause',
@@ -482,6 +527,10 @@ export const TranslationNames = {
       fieldArea: 'components.taskInfoCard.fieldArea',
       ha: 'components.taskInfoCard.ha',
       deleteButton: 'components.taskInfoCard.deleteButton',
+      closeTaskButton: 'components.taskInfoCard.closeTaskButton',
+      onDeleteAlertTitle: 'components.taskInfoCard.onDeleteAlertTitle',
+      onDeleteAlertDescription:
+        'components.taskInfoCard.onDeleteAlertDescription',
     },
     fieldSelector: {
       subbmitButton: 'components.fieldSelector.title',
@@ -673,5 +722,18 @@ export const TranslationNames = {
       licensePlateMaxLength:
         'createMachineForm.validation.licensePlateMaxLength',
     },
+  },
+  sessionAsActivity: {
+    openSessionTitle: 'sessionAsActivity.openSessionTitle',
+    closeSessionTitle: 'sessionAsActivity.closeSessionTitle',
+    openTask: 'sessionAsActivity.openTask',
+    closeTask: 'sessionAsActivity.closeTask',
+    worker: 'sessionAsActivity.worker',
+    has: 'sessionAsActivity.has',
+    opened: 'sessionAsActivity.opened',
+    closed: 'sessionAsActivity.closed',
+    aSessionOnAField: 'sessionAsActivity.aSessionOnAField',
+    workOnAField: 'sessionAsActivity.workOnAField',
+    somethingWentWrong: 'sessionAsActivity.somethingWentWrong',
   },
 };

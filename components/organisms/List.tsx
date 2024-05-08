@@ -131,6 +131,7 @@ function ListMemo<T extends Record<string, any>>(
         avatarChars,
         alignment,
         customIco,
+        disabled,
       } = listStyleSettings
         ? listStyleSettings(item)
         : {
@@ -140,6 +141,7 @@ function ListMemo<T extends Record<string, any>>(
             avatarChars: undefined,
             alignment: undefined,
             customIco: undefined,
+            disabled: false,
           };
       return (
         <ListItem<T>
@@ -156,6 +158,7 @@ function ListMemo<T extends Record<string, any>>(
           customIco={customIco}
           alignment={alignment}
           avatarChars={avatarChars}
+          disabled={disabled}
         />
       );
     },

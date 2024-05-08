@@ -53,6 +53,16 @@ export async function closeTask({ taskId, taskSession }: OpenTaskData) {
     { taskId, taskSession },
   ) as unknown as TaskResponseBase;
 }
+export async function closeTaskByOwner(taskId: string) {
+  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
+  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
+  return apiHandler<string>(
+    UNAUTHORIZED_MSG,
+    DEFAULT_MSG,
+    Api.closeTaskByOwner,
+    taskId,
+  ) as unknown as TaskResponseBase;
+}
 
 export async function pauseTask({ taskId, taskSession }: OpenTaskData) {
   const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);

@@ -54,6 +54,18 @@ const clientCardNames = {
   ),
 };
 
+const TRANSLATIONS = {
+  taskStatus: {
+    closed: t(
+      TranslationNames.screens.orderDriver.orderDetails.taskStatus.done,
+    ),
+    opened: t(
+      TranslationNames.screens.orderDriver.orderDetails.taskStatus.closed,
+    ),
+    new: t(TranslationNames.screens.orderDriver.orderDetails.taskStatus.new),
+  },
+};
+
 const orderDataObject = (order: OrderResponseBase) => ({
   name: order.name,
   performanceDate: new Date(order.performanceDate).toLocaleDateString(),
@@ -116,7 +128,7 @@ export function OrderDetails({
     <ScreenBase
       bottomSheetsProps={{
         modalRef,
-        snapPoints: ['40%', '80%'],
+        snapPoints: ['50%', '80%'],
       }}
       name={t(TranslationNames.screens.orderDriver.orderDetails.screenName)}
     >
@@ -134,7 +146,7 @@ export function OrderDetails({
         )}
       />
       {order.additionalInfo && (
-        <Card className="max-h-52" p="$2" bordered mt="$4">
+        <Card className="max-h-32" p="$2" bordered mt="$4">
           <SizableText textTransform="uppercase" size="$7" fontWeight="bold">
             {t(
               TranslationNames.screens.orderDriver.orderDetails.additionalInfo,
@@ -172,9 +184,17 @@ export function OrderDetails({
         data={tasks as unknown as TaskResponseBase[]}
         listStyleSettings={item => ({
           header: item.field.nameLabel,
-          bottomRightText: TaskType[item.type],
+          bottomRightText: `${TaskType[item.type]} - ${
+            // eslint-disable-next-line no-nested-ternary
+            item.isDone
+              ? TRANSLATIONS.taskStatus.closed
+              : item.openedAt
+                ? TRANSLATIONS.taskStatus.opened
+                : TRANSLATIONS.taskStatus.new
+          }`,
           alignment: 'left',
           infoIco: true,
+          disabled: item.isDone,
         })}
         handleOnItemPress={handleTaskPress}
         isFetching={isPending}

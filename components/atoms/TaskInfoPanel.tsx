@@ -1,17 +1,19 @@
-import { memo, useMemo } from 'react';
-import { Card, ScrollView, SizableText, YGroup } from 'tamagui';
+import { memo, useCallback, useMemo } from 'react';
+import { Card, ScrollView, SizableText } from 'tamagui';
 import { t } from 'i18next';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
+import { FlashList } from '@shopify/flash-list';
 import { TaskResponseBase } from '../../FarmServiceApiTypes/Task/Responses';
 import { EntityAsACard } from '../molecules/EntityAsACard';
 import { TaskType } from '../../FarmServiceApiTypes/Task/Enums';
 import { TranslationNames } from '../../locales/TranslationNames';
 import { TaskSessionItem } from './TaskSessionItem';
 import { MAP_ANIMATION_DURATION } from '../../settings/map/defaults';
+import { TaskSessionResponseBase } from '../../FarmServiceApiTypes/TaskSession/Responses';
 
 const TRANSLATIONS = {
   TASK_INFO_CARD: {
@@ -101,6 +103,9 @@ export interface TaskInfoPanelProps {
   leadingChildren?: JSX.Element;
   footerChildren?: JSX.Element;
 }
+const SESSION_ITEM_HEIGHT = 20;
+const SESSION_ITEM_VISIBLE_COUNT = 10;
+
 const TaskInfoPanelM = memo(
   ({
     task,
@@ -114,16 +119,19 @@ const TaskInfoPanelM = memo(
     }));
     const sessions = useMemo(
       () =>
-        task.sessions
-          .sort((a, b) =>
-            new Date(a.openedAt).getTime() < new Date(b.openedAt).getTime()
-              ? 1
-              : -1,
-          )
-          .map(session => (
-            <TaskSessionItem session={session} key={Math.random()} />
-          )),
+        task.sessions.sort((a, b) =>
+          new Date(a.openedAt).getTime() < new Date(b.openedAt).getTime()
+            ? 1
+            : -1,
+        ),
       [task.sessions],
+    );
+    const renderItem = useCallback(
+      // eslint-disable-next-line react/no-unused-prop-types
+      ({ item }: { item: TaskSessionResponseBase }) => (
+        <TaskSessionItem session={item} key={Math.random()} />
+      ),
+      [],
     );
     if (translateY)
       position.value = withTiming(120, { duration: MAP_ANIMATION_DURATION });
@@ -139,11 +147,20 @@ const TaskInfoPanelM = memo(
       >
         <ScrollView showsVerticalScrollIndicator={false} mt="$4">
           {leadingChildren}
-          <Card bordered p="$2">
+          <Card
+            height={SESSION_ITEM_HEIGHT * SESSION_ITEM_VISIBLE_COUNT}
+            bordered
+            p="$2"
+          >
             <SizableText fontSize="$7" className="uppercase font-bold">
               {TRANSLATIONS.SESSIONS_CARD.sessionsCardTitle}
             </SizableText>
-            <YGroup>{sessions}</YGroup>
+            <FlashList
+              showsVerticalScrollIndicator={false}
+              renderItem={renderItem}
+              data={sessions}
+              estimatedItemSize={SESSION_ITEM_HEIGHT}
+            />
           </Card>
           <EntityAsACard
             data={{
