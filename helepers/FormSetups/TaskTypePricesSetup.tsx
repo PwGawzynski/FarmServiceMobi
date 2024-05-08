@@ -38,7 +38,7 @@ export const createTaskTypePriceSetup = (
   },
   {
     control,
-    rules: TaskTypePriceRules.Transport,
+    rules: TaskTypePriceRules.Tax,
     name: 'Tax',
     placeholderName: t(TranslationNames.taskTypePriceForm.formPlaceholder.tax),
     textInputProp: {

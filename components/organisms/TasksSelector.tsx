@@ -56,7 +56,7 @@ export function TaskSelector({
   const listEmptyComponent = useMemo(() => ListEmptyComponent, []);
   const isActiveFilter = (item: TaskResponseBase) => item.isDone;
   return (
-    <YStack f={1}>
+    <YStack f={1} mt="$4">
       <List<TaskResponseBase>
         isSelectable
         listEmptyComponent={listEmptyComponent}
