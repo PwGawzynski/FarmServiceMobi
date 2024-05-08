@@ -150,9 +150,10 @@
             "performanceDate": "Data wykonania",
             "creationDate": "Data utworzenia",
             "openedAt": "Otwarte o",
-            "pricePerUnit": "Cena za jednostkę"
+            "pricePerUnit": "Cena za jednostkę",
+            "totalTaskArea": "Całkowity obszar zadań"
           },
-          "topRightButtonName": "Edytuj",
+          "topRightButtonName": "Edytuj"
         },
         "additionalInfo": "Dodatkowe informacje",
         "clientCard": {
@@ -212,6 +213,56 @@
         "fieldSelectorEmptyList": "Brak pól do wyświetlenia, kliknij poniżej aby dodać nowe",
         "workerSelectorEmptyList": "Brak pracowników do wyświetlenia, kliknij poniżej aby dodać nowego",
         "machineSelectorEmptyList": "Brak maszyn do wyświetlenia, kliknij poniżej aby dodać nową"
+      },
+      "accountingSummary": {
+        "clientInvoiceData": "Dane Faktury Klienta",
+        "useClientsCompanyData": "Użyj Danych Firmy Klienta",
+        "createCompanyData": "Utwórz Dane Firmy Klieta",
+        "companyName": "Nazwa Firmy",
+        "companyNIP": "NIP Firmy",
+        "county": "Powiat",
+        "apartmentNumber": "Numer Mieszkania",
+        "voivodeship": "Województwo",
+        "name": "Imię",
+        "surname": "Nazwisko",
+        "phoneNumber": "Numer Telefonu",
+        "orderName": "Nazwa Zamówienia",
+        "performanceDate": "Data Wykonania",
+        "totalArea": "Całkowita Powierzchnia",
+        "status": "Status",
+        "openedAt": "Otwarto O",
+        "createdAt": "Utworzono O",
+        "taxValue": "Wartość Podatku",
+        "totalPrice": "Całkowita Cena",
+        "totalPriceWithTax": "Całkowita Cena z Podatkiem",
+        "harvestingTotalArea": "Całkowita Powierzchnia Zbiorów",
+        "transportTotalArea": "Całkowita Powierzchnia Transportu",
+        "harvestingTotalPrice": "Całkowita Cena Zbiorów",
+        "transportTotalPrice": "Całkowita Cena Transportu",
+        "companyDataIsEmpty": "Dane Firmy są Puste",
+        "clientNoCompany": "Twój klient nie ma danych firmy, kliknij poniżej, aby wypełnić dane firmy",
+        "companyEmail": "Email Firmy",
+        "companyPhoneNumber": "Numer Telefonu Firmy",
+        "city": "Miasto",
+        "street": "Ulica",
+        "postalCode": "Kod Pocztowy",
+        "houseNumber": "Numer Domu",
+        "fillCompanyData": "Wypełnij Dane Firmy",
+        "usingClientPersonalDataHintHeader": "Korzystanie z Danych Osobowych Klienta",
+        "usingClientPersonalDataHintDesc": "Korzystając z danych osobowych klienta, będziesz mógł tworzyć tylko faktury na imię i nazwisko, co oznacza, że dane firmy klienta nie będą na fakturze, nawet jeśli istnieją.",
+        "noData": "Brak danych"
+      },
+      "orderAccounting": {
+        "screenTitle": "Rozliczenie"
+      },
+      "OrderAccountingSelectPrices": {
+        "screenTitle": "Wyznacz ceny",
+        "area": "OBSZAR",
+        "total": "suma:",
+        "sum": "SUM:",
+        "totalWithTax": "Suma z podatkiem:",
+        "tasksNotSelected": "Nie wybrano zadań",
+        "nextButton": "Następny krok"
       }
     },
     "ordersDesktopDriver":{
@@ -425,6 +476,11 @@
       "title": "Wybierz pracownika",
       "searchPlaceholder": "Znajdź pracownika"
     },
+    "taskSelector":{
+      "title": "Wybierz zadania",
+      "searchPlaceholder": "Znajdź zadanie",
+      "buttonTitle": "Przejdź dalej"
+    },
     "machineSelector": {
       "title": "Wybierz maszynę",
       "searchPlaceholder": "Znajdź maszynę"
@@ -582,6 +638,20 @@
       "name": "Nazwa jest wymagana",
       "performanceDate": "Data wykonania jest wymagana"
 
+    }
+  },
+  "taskTypePriceForm": {
+    "formPlaceholder": {
+      "harvesting": "Koszenie",
+      "transport": "Transport",
+      "tax": "Iloczyn podatku"
+    },
+    "validation": {
+      "priceRequired": "Cena jest wymagana",
+      "priceAsNumber": "Cena musi być liczbą",
+      "taxIsRequired": "Podatek musi zostać zdefiniowany",
+      "taxMinValue": "Wielkość podatku nie może być ujemna",
+      "taxMaxValue": "Wielkość podatku nie może być większa niż 1"
     }
   },
   "createMachineForm": {

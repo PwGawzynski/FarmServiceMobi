@@ -172,9 +172,9 @@
             "performanceDate": "Performance Date",
             "creationDate": "Creation Date",
             "openedAt": "Opened At",
-            "pricePerUnit": "Price Per Unit"
+            "totalTaskArea": "Total Task Area"
           },
-          "topRightButtonName": "Edit",
+          "topRightButtonName": "Edit"
         },
         "additionalInfo": "Additional Info",
         "clientCard": {
@@ -234,6 +234,56 @@
         "fieldSelectorEmptyList": "No fields to display, click below to create new one",
         "workerSelectorEmptyList": "No workers to display, click below to create new one",
         "machineSelectorEmptyList": "No machines to display, click below to create new one"
+      },
+      "accountingSummary": {
+        "clientInvoiceData": "Client Invoice Data",
+        "useClientsCompanyData": "Use Clients Company Data",
+        "createCompanyData": "Create Client Company Data",
+        "companyName": "Company Name",
+        "companyNIP": "Company NIP",
+        "county": "County",
+        "apartmentNumber": "Apartment Number",
+        "voivodeship": "Voivodeship",
+        "name": "Name",
+        "surname": "Surname",
+        "phoneNumber": "Phone Number",
+        "orderName": "Order Name",
+        "performanceDate": "Performance Date",
+        "totalArea": "Total Area",
+        "status": "Status",
+        "openedAt": "Opened At",
+        "createdAt": "Created At",
+        "taxValue": "Tax value",
+        "totalPrice": "Total Price",
+        "totalPriceWithTax": "Total Price With Tax",
+        "harvestingTotalArea": "Harvesting total area",
+        "transportTotalArea": "Transport total area",
+        "harvestingTotalPrice": "Harvesting total price",
+        "transportTotalPrice": "Transport total price",
+        "companyDataIsEmpty": "Company data is empty",
+        "clientNoCompany": "Your client has no company data, click bellow to fill company data",
+        "companyEmail": "Company Email",
+        "companyPhoneNumber": "Company Phone Number",
+        "city": "City",
+        "street": "Street",
+        "postalCode": "Postal Code",
+        "houseNumber": "House Number",
+        "fillCompanyData": "Fill Company Data",
+        "usingClientPersonalDataHintHeader": "Using Client Personal Data",
+        "usingClientPersonalDataHintDesc": "When using the customer's personal data, you will only be able to create named invoices, which means that the customer's company data will not be on the invoice even if they exist.",
+        "noData": "No data"
+      },
+      "orderAccounting": {
+        "screenTitle": "Order accounting"
+      },
+      "OrderAccountingSelectPrices": {
+        "screenTitle": "Set Pricing",
+        "area": "AREA",
+        "total": "total:",
+        "sum": "SUM:",
+        "totalWithTax": "TOTAL (W. TAX):",
+        "tasksNotSelected": "No tasks selected",
+        "nextButton": "Next"
       }
     },
     "ordersDesktopDriver":{
@@ -426,6 +476,11 @@
         "title": "Select workers",
         "searchPlaceholder": "Find a worker"
     },
+    "taskSelector":{
+      "title": "Select Tasks",
+      "searchPlaceholder": "Find a task",
+      "buttonTitle": "Next step"
+    },
     "machineSelector": {
       "title": "Select machines",
       "searchPlaceholder": "Find a machine"
@@ -589,6 +644,20 @@
     "validation": {
       "name": "Name is required",
       "performanceDate": "Performance date is required"
+    }
+  },
+  "taskTypePriceForm": {
+    "formPlaceholder": {
+      "harvesting": "Harvesting",
+      "transport": "Transport",
+      "tax": "Tax value"
+    },
+    "validation": {
+      "priceRequired": "Price is required",
+      "priceAsNumber": "Price must be a number",
+      "taxIsRequired": "Tax must be defined",
+      "taxMinValue": "Tax value must be positive number",
+      "taxMaxValue": "Tax cannot be greater then 1"
     }
   },
   "createMachineForm": {

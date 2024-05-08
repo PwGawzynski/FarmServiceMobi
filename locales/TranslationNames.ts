@@ -221,8 +221,8 @@ export const TranslationNames = {
               'screens.orderDriver.orderDetails.detailsCard.fields.creationDate',
             openedAt:
               'screens.orderDriver.orderDetails.detailsCard.fields.openedAt',
-            pricePerUnit:
-              'screens.orderDriver.orderDetails.detailsCard.fields.pricePerUnit',
+            totalTaskArea:
+              'screens.orderDriver.orderDetails.detailsCard.fields.totalTaskArea',
           },
           topRightButtonName:
             'screens.orderDriver.orderDetails.detailsCard.topRightButtonName',
@@ -300,6 +300,76 @@ export const TranslationNames = {
           'screens.orderDriver.createTask.workerSelectorEmptyList',
         machineSelectorEmptyList:
           'screens.orderDriver.createTask.machineSelectorEmptyList',
+      },
+      accountingSummary: {
+        clientInvoiceData:
+          'screens.orderDriver.accountingSummary.clientInvoiceData',
+        useClientsCompanyData:
+          'screens.orderDriver.accountingSummary.useClientsCompanyData',
+        createCompanyData:
+          'screens.orderDriver.accountingSummary.createCompanyData',
+        companyName: 'screens.orderDriver.accountingSummary.companyName',
+        companyNIP: 'screens.orderDriver.accountingSummary.companyNIP',
+        county: 'screens.orderDriver.accountingSummary.county',
+        apartmentNumber:
+          'screens.orderDriver.accountingSummary.apartmentNumber',
+        voivodeship: 'screens.orderDriver.accountingSummary.voivodeship',
+        name: 'screens.orderDriver.accountingSummary.name',
+        surname: 'screens.orderDriver.accountingSummary.surname',
+        phoneNumber: 'screens.orderDriver.accountingSummary.phoneNumber',
+        orderName: 'screens.orderDriver.accountingSummary.orderName',
+        performanceDate:
+          'screens.orderDriver.accountingSummary.performanceDate',
+        totalArea: 'screens.orderDriver.accountingSummary.totalArea',
+        status: 'screens.orderDriver.accountingSummary.status',
+        openedAt: 'screens.orderDriver.accountingSummary.openedAt',
+        createdAt: 'screens.orderDriver.accountingSummary.createdAt',
+        taxValue: 'screens.orderDriver.accountingSummary.taxValue',
+        totalPrice: 'screens.orderDriver.accountingSummary.totalPrice',
+        totalPriceWithTax:
+          'screens.orderDriver.accountingSummary.totalPriceWithTax',
+        harvestingTotalArea:
+          'screens.orderDriver.accountingSummary.harvestingTotalArea',
+        transportTotalArea:
+          'screens.orderDriver.accountingSummary.transportTotalArea',
+        harvestingTotalPrice:
+          'screens.orderDriver.accountingSummary.harvestingTotalPrice',
+        transportTotalPrice:
+          'screens.orderDriver.accountingSummary.transportTotalPrice',
+        companyDataIsEmpty:
+          'screens.orderDriver.accountingSummary.companyDataIsEmpty',
+        clientNoCompany:
+          'screens.orderDriver.accountingSummary.clientNoCompany',
+        companyEmail: 'screens.orderDriver.accountingSummary.companyEmail',
+        companyPhoneNumber:
+          'screens.orderDriver.accountingSummary.companyPhoneNumber',
+        city: 'screens.orderDriver.accountingSummary.city',
+        street: 'screens.orderDriver.accountingSummary.street',
+        postalCode: 'screens.orderDriver.accountingSummary.postalCode',
+        houseNumber: 'screens.orderDriver.accountingSummary.houseNumber',
+        fillCompanyData:
+          'screens.orderDriver.accountingSummary.fillCompanyData',
+        usingClientPersonalDataHintHeader:
+          'screens.orderDriver.accountingSummary.usingClientPersonalDataHintHeader',
+        usingClientPersonalDataHintDesc:
+          'screens.orderDriver.accountingSummary.usingClientPersonalDataHintDesc',
+        noData: 'screens.orderDriver.accountingSummary.noData',
+      },
+      orderAccounting: {
+        screenTitle: 'screens.orderDriver.orderAccounting.screenTitle',
+      },
+      OrderAccountingSelectPrices: {
+        screenTitle:
+          'screens.orderDriver.OrderAccountingSelectPrices.screenTitle',
+        area: 'screens.orderDriver.OrderAccountingSelectPrices.area',
+        total: 'screens.orderDriver.OrderAccountingSelectPrices.total',
+        sum: 'screens.orderDriver.OrderAccountingSelectPrices.sum',
+        totalWithTax:
+          'screens.orderDriver.OrderAccountingSelectPrices.totalWithTax',
+        tasksNotSelected:
+          'screens.orderDriver.OrderAccountingSelectPrices.tasksNotSelected',
+        nextButton:
+          'screens.orderDriver.OrderAccountingSelectPrices.nextButton',
       },
     },
     ordersDesktopDriver: {
@@ -502,6 +572,7 @@ export const TranslationNames = {
     },
     orderForm: {
       submitButton: 'components.orderForm.submitButton',
+      pendingStatus: 'components.orderForm.pendingStatus',
     },
     verticalList: {
       problemOccurred: 'components.verticalList.problemOccurred',
@@ -539,6 +610,11 @@ export const TranslationNames = {
     workerSelector: {
       subbmitButton: 'components.workerSelector.title',
       searchPlaceholder: 'components.workerSelector.searchPlaceholder',
+    },
+    taskSelector: {
+      title: 'components.taskSelector.title',
+      searchPlaceholder: 'components.taskSelector.searchPlaceholder',
+      buttonTitle: 'components.taskSelector.buttonTitle',
     },
     machineSelector: {
       subbmitButton: 'components.machineSelector.title',
@@ -705,6 +781,20 @@ export const TranslationNames = {
     validation: {
       name: 'createOrderForm.validation.name',
       performanceDate: 'createOrderForm.validation.performanceDate',
+    },
+  },
+  taskTypePriceForm: {
+    formPlaceholder: {
+      harvesting: 'taskTypePriceForm.formPlaceholder.harvesting',
+      transport: 'taskTypePriceForm.formPlaceholder.transport',
+      tax: 'taskTypePriceForm.formPlaceholder.tax',
+    },
+    validation: {
+      priceRequired: 'taskTypePriceForm.validation.priceRequired',
+      priceAsNumber: 'taskTypePriceForm.validation.priceAsNumber',
+      taxIsRequired: 'taskTypePriceForm.validation.taxIsRequired',
+      taxMinValue: 'taskTypePriceForm.validation.taxMinValue',
+      taxMaxValue: 'taskTypePriceForm.validation.taxMaxValue',
     },
   },
   createMachineForm: {
