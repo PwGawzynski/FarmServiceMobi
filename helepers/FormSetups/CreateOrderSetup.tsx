@@ -60,22 +60,6 @@ export const createUpdateOrderSetup = (
   },
   {
     control,
-    rules: updateOrderRules.pricePerUnit,
-    name: 'pricePerUnit',
-    inputType: InputType.TEXT,
-    textInputProp: {
-      keyboardType: 'numeric',
-    },
-    placeholderName: t(
-      TranslationNames.createOrderForm.formPlaceholder.pricePerUnit,
-    ),
-    valuePreprocessor: value => {
-      if (typeof value === 'string') return value.replace(',', '.');
-      return value;
-    },
-  },
-  {
-    control,
     rules: updateOrderRules.additionalInfo,
     name: 'additionalInfo',
     inputType: InputType.TEXT_AREA,
