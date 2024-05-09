@@ -1,6 +1,7 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { ScrollView } from 'tamagui';
 import { t } from 'i18next';
+import { useIsFocused } from '@react-navigation/native';
 import { OrdersDriverScreenProps } from '../../../../../types/self/navigation/Owner/props/orders/OrdersDriverProps';
 import { ScreenBase } from '../common/ScreenBase';
 import { Switch } from '../../../../atoms/Switch';
@@ -216,24 +217,26 @@ const accountingSetupForTaskType = (accounting: OrderAccountingSummary) => {
 };
 
 export function AccountingSummary({
-  route: { params },
+  route,
   navigation,
 }: OrdersDriverScreenProps<
   'orderAccountingInvoice',
   'ordersDriver',
   'ownerRootDriver'
 >) {
-  const { order, client, accounting, tasks } = params;
-  const [useClientCompanyData, setUseClientCompanyData] = useState(
-    !!client.company,
-  );
+  const { order, client, accounting, tasks } = route.params;
+  const [useClientCompanyData, setUseClientCompanyData] = useState(true);
   const {
     totalAreaByTaskTypeConvertedKeys,
     actuallyUsedTaskTypeNames,
     actuallyUsedTaskPriceByTypeNames,
   } = useMemo(() => accountingSetupForTaskType(accounting), [accounting]);
 
-  const handleClientMore = () =>
+  // refreshes the screen params when user comes back from an assign company
+  const isFocused = useIsFocused();
+  useEffect(() => {}, [isFocused]);
+
+  const handleClientCreateCompany = () =>
     navigation.navigate('clientsDriver', {
       screen: 'clientDetails',
       params: { client: client as ClientResponseBase },
@@ -248,7 +251,7 @@ export function AccountingSummary({
         >
           <AppLinkButton
             title={TRANSLATIONS.createCompanyData}
-            onPress={handleClientMore}
+            onPress={handleClientCreateCompany}
           />
         </HintCard>
       );
@@ -272,7 +275,7 @@ export function AccountingSummary({
         />
       </>
     );
-  }, [client.company]);
+  }, [client.company, useClientCompanyData]);
 
   const clientPersonalInfo = useMemo(() => {
     if (!client.user) return undefined;
@@ -312,7 +315,7 @@ export function AccountingSummary({
           data={{
             ...accounting.summary.TaskTypePrice,
             ...totalAreaByTaskTypeConvertedKeys,
-            tax: `${accounting.tax.toFixed(2)} %`,
+            tax: `${(accounting.tax * 100).toFixed(2)} %`,
             totalPrice: accounting.totalPrice.toFixed(2),
             totalPriceWithTax: accounting.totalPriceWithTax.toFixed(2),
           }}
