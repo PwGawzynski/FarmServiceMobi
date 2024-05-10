@@ -56,6 +56,8 @@ import {
   TaskResponseCollection,
 } from '../FarmServiceApiTypes/Task/Responses';
 import { OpenTaskData } from './Task/Task';
+import { CreateOrderPriceReqI } from '../FarmServiceApiTypes/OrderPricing/Requests';
+import { OrderPriceResponseBase } from '../FarmServiceApiTypes/OrderPricing/Responses';
 /* ---------------------------------------DECORATOR_USED_TO_DELAY_RES--------------------------------------- */
 
 const IsDelayed = () => {
@@ -378,6 +380,15 @@ export class ApiSelf {
         data,
       )) as AxiosResponse<ResponseObject>
     ).data.payload as OrderResponseBase | undefined;
+  }
+
+  static async updateOrderPricing(data: CreateOrderPriceReqI) {
+    return (
+      (await ApiSelf.axiosInstance.put(
+        '/order/update-pricing',
+        data,
+      )) as AxiosResponse<ResponseObject>
+    ).data.payload as OrderPriceResponseBase | undefined;
   }
 
   @IsDelayed()
