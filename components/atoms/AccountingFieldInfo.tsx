@@ -49,17 +49,29 @@ export function AccountingFieldInfo({
 
   return (
     <XStack ai="center" jc="space-between" f={1} maxHeight={20}>
-      <SizableText className="flex-1 text-left uppercase font-bold text-light-blue dark:text-white">
+      <SizableText
+        fontSize={12}
+        className="flex-1 text-left uppercase font-bold text-light-blue dark:text-white"
+      >
         {item.field.nameLabel}
       </SizableText>
-      <SizableText className="flex-1 text-center uppercase font-bold text-light-blue dark:text-white">
+      <SizableText
+        fontSize={12}
+        className="flex-1 text-center uppercase font-bold text-light-blue dark:text-white"
+      >
         {fieldArea.toFixed(2).toString()}
       </SizableText>
-      <SizableText className="flex-1 text-center uppercase font-bold text-light-blue dark:text-white">
+      <SizableText
+        fontSize={12}
+        className="flex-1 text-center uppercase font-bold text-light-blue dark:text-white"
+      >
         {priceWithoutTax.toFixed(2).toString()}
       </SizableText>
-      <SizableText className="flex-1 text-right uppercase font-bold text-light-blue dark:text-white">
-        {priceWithTax.toFixed(2).toString()} PLN
+      <SizableText
+        fontSize={12}
+        className="flex-1 text-right uppercase font-bold text-light-blue dark:text-white"
+      >
+        {priceWithTax.toFixed(2).toString()}
       </SizableText>
     </XStack>
   );
