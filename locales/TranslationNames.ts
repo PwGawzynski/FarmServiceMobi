@@ -570,6 +570,12 @@ export const TranslationNames = {
       autofocusSwitch: 'components.taskWorkView.autofocusSwitch',
       markAsDoneButton: 'components.taskWorkView.markAsDoneButton',
     },
+    accountingTaskCard: {
+      task: 'components.accountingTaskCard.task',
+      area: 'components.accountingTaskCard.area',
+      price: 'components.accountingTaskCard.price',
+      priceWithTax: 'components.accountingTaskCard.priceWithTax',
+    },
     orderForm: {
       submitButton: 'components.orderForm.submitButton',
       pendingStatus: 'components.orderForm.pendingStatus',

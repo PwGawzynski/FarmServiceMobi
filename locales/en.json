@@ -437,6 +437,12 @@
       "autofocusSwitch": "Autofocus",
       "markAsDoneButton": "Mark as done"
     },
+    "accountingTaskCard": {
+      "task": "Task",
+      "area": "Area",
+      "price": "Price",
+      "priceWithTax": "Price(Tax)"
+    },
     "orderForm": {
       "pendingStatus": "Creating order...",
       "submitButton": "Create"
