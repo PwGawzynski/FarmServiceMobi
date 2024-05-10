@@ -1,9 +1,9 @@
 import { t } from 'i18next';
 import { FormRulesType } from './FormRulesType';
-import OrderConstants from '../../FarmServiceApiTypes/Order/Constants';
 import { creteMaxMessage, creteMinMessage } from './FormRulesHelper';
 import { TranslationNames } from '../../locales/TranslationNames';
 import { OrderAccountingFormI } from '../../types/self/common/types';
+import { OrderPricingConstants } from '../../FarmServiceApiTypes/OrderPricing/Constants';
 
 export const TaskTypePriceRules: FormRulesType<OrderAccountingFormI> = {
   Harvesting: {
@@ -13,16 +13,16 @@ export const TaskTypePriceRules: FormRulesType<OrderAccountingFormI> = {
       message: t(TranslationNames.taskTypePriceForm.validation.priceAsNumber),
     },
     min: {
-      value: OrderConstants.MIN_PRICE_PER_UNIT,
+      value: OrderPricingConstants.MIN_PRICE,
       message: creteMinMessage<OrderAccountingFormI>(
-        OrderConstants.MIN_PRICE_PER_UNIT,
+        OrderPricingConstants.MIN_PRICE,
         'Harvesting',
       ),
     },
     max: {
-      value: OrderConstants.MAX_PRICE_PER_UNIT,
+      value: OrderPricingConstants.MAX_PRICE,
       message: creteMaxMessage<OrderAccountingFormI>(
-        OrderConstants.MAX_PRICE_PER_UNIT,
+        OrderPricingConstants.MAX_PRICE,
         'Harvesting',
       ),
     },
@@ -34,16 +34,16 @@ export const TaskTypePriceRules: FormRulesType<OrderAccountingFormI> = {
       message: t(TranslationNames.taskTypePriceForm.validation.priceAsNumber),
     },
     min: {
-      value: OrderConstants.MIN_PRICE_PER_UNIT,
+      value: OrderPricingConstants.MIN_PRICE,
       message: creteMinMessage<OrderAccountingFormI>(
-        OrderConstants.MIN_PRICE_PER_UNIT,
+        OrderPricingConstants.MIN_PRICE,
         'Transport',
       ),
     },
     max: {
-      value: OrderConstants.MAX_PRICE_PER_UNIT,
+      value: OrderPricingConstants.MAX_PRICE,
       message: creteMaxMessage<OrderAccountingFormI>(
-        OrderConstants.MAX_PRICE_PER_UNIT,
+        OrderPricingConstants.MAX_PRICE,
         'Transport',
       ),
     },
@@ -55,11 +55,11 @@ export const TaskTypePriceRules: FormRulesType<OrderAccountingFormI> = {
       message: t(TranslationNames.taskTypePriceForm.validation.priceAsNumber),
     },
     min: {
-      value: 0,
+      value: OrderPricingConstants.MIN_TAX,
       message: t(TranslationNames.taskTypePriceForm.validation.taxMinValue),
     },
     max: {
-      value: 1,
+      value: OrderPricingConstants.MAX_TAX,
       message: t(TranslationNames.taskTypePriceForm.validation.taxMaxValue),
     },
   },

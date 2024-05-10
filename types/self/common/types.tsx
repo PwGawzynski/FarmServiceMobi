@@ -9,15 +9,18 @@ export type OrderAccountingFormI = TaskTypeToNumber & {
 
 export type SummaryByTaskType = {
   TaskTypePrice: {
-    [K in keyof typeof TaskType]: number;
+    [K in keyof typeof TaskType]: number | undefined;
   };
   TaskTypeArea: {
-    [K in keyof typeof TaskType]: number;
+    [K in keyof typeof TaskType]: number | undefined;
   };
 };
 
 export type OrderAccountingSummary = {
   summary: SummaryByTaskType;
+  pricesForTaskTypeUnit: {
+    [K in keyof typeof TaskType]: number | undefined;
+  };
   tax: number;
   totalPrice: number;
   totalPriceWithTax: number;

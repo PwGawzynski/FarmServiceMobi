@@ -30,7 +30,7 @@ export function EntityAsACard<
 }: EntityAsACardProps<T>) {
   return (
     <Card bordered p="$2" mt="$4" className={cardClassName}>
-      <XStack jc="space-between" ai="center">
+      <XStack jc={cardName ? 'space-between' : 'flex-end'} ai="center">
         {cardName && (
           <SizableText textTransform="uppercase" size="$7" fontWeight="bold">
             {cardName}

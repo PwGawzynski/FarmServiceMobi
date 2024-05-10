@@ -1,8 +1,10 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { Alert } from 'react-native';
 import { Card, ScrollView, YStack } from 'tamagui';
 import { t } from 'i18next';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { objectKeys } from '@tamagui/create-theme';
 import { ScreenBase } from '../common/ScreenBase';
 import { createTaskTypePriceSetup } from '../../../../../helepers/FormSetups/TaskTypePricesSetup';
 import { FormCreator } from '../../../../atoms/FormCreator';
@@ -13,6 +15,9 @@ import { ButtonTamagui } from '../../../../atoms/ButtonTamagui';
 import { OrderAccountingFormI } from '../../../../../types/self/common/types';
 import { AccountingTaskCard } from '../../../../molecules/AccountingTaskCard';
 import { TranslationNames } from '../../../../../locales/TranslationNames';
+import { updateOrderPrice } from '../../../../../api/Order/Order';
+import { CreateOrderPriceReqI } from '../../../../../FarmServiceApiTypes/OrderPricing/Requests';
+import { OrderResponseBase } from '../../../../../FarmServiceApiTypes/Order/Ressponses';
 
 const TRANSLATIONS = {
   screenTitle: t(
@@ -49,7 +54,34 @@ export function OrderAccountingSelectPrices({
 >) {
   const { tasks, order, client } = params;
   const { control, formState, handleSubmit, watch } =
-    useForm<OrderAccountingFormI>({});
+    useForm<OrderAccountingFormI>({
+      defaultValues: {
+        ...order?.pricing?.prices,
+        Tax: order?.pricing?.tax,
+      },
+    });
+
+  console.log({
+    ...order?.pricing?.prices,
+    Tax: order?.pricing?.tax,
+  });
+
+  const queryClient = useQueryClient();
+  const { mutate, isPending, isSuccess, data } = useMutation({
+    mutationKey: ['updateOrderPricing', order.id],
+    mutationFn: updateOrderPrice,
+    onSuccess: (sth, variables) => {
+      queryClient.setQueryData(
+        ['orders'],
+        (oldData: Array<OrderResponseBase>) => {
+          if (variables) {
+            return [...oldData.filter(o => o.id !== sth?.id), sth];
+          }
+          return oldData;
+        },
+      );
+    },
+  });
 
   /**
    * Set Created based on a given task, which includes only uniq task type
@@ -170,27 +202,43 @@ export function OrderAccountingSelectPrices({
     );
   }, [PriceSumWTaxValue, watch()]);
 
+  useEffect(() => {
+    if (isSuccess && data && data.pricing && data.pricing && tasks)
+      navigation.navigate('orderAccountingInvoice', {
+        order,
+        tasks,
+        client,
+        accounting: {
+          summary: {
+            TaskTypeArea: TotalAreaSet,
+            TaskTypePrice: TotalPriceSet,
+          },
+          pricesForTaskTypeUnit: data.pricing.prices,
+          tax: Number(data.pricing.tax),
+          totalPrice: PriceInTotal,
+          totalPriceWithTax: PriceSumWTaxValue,
+        },
+      });
+  }, [isSuccess, data, tasks]);
+
+  const onSubmit = (formData: OrderAccountingFormI) => {
+    mutate({
+      order: order.id,
+      prices: objectKeys(formData)
+        .filter(k => k !== 'Tax')
+        .reduce(
+          (p, c) => ({ ...p, [c]: Number(formData[c]) }),
+          {} as CreateOrderPriceReqI['prices'],
+        ),
+      tax: formData.Tax,
+    });
+  };
+
   if (!tasks) {
     Alert.prompt(TRANSLATIONS.tasksNotSelected);
     navigation.goBack();
     return null;
   }
-  const onSubmit = (data: OrderAccountingFormI) => {
-    navigation.navigate('orderAccountingInvoice', {
-      order,
-      tasks,
-      client,
-      accounting: {
-        summary: {
-          TaskTypeArea: TotalAreaSet,
-          TaskTypePrice: TotalPriceSet,
-        },
-        tax: Number(data.Tax),
-        totalPrice: PriceInTotal,
-        totalPriceWithTax: PriceSumWTaxValue,
-      },
-    });
-  };
 
   return (
     <ScreenBase name={TRANSLATIONS.screenTitle}>
@@ -211,6 +259,7 @@ export function OrderAccountingSelectPrices({
         <AccountingTaskCard tasks={tasks} itemProps={{ watch }} />
       </YStack>
       <ButtonTamagui
+        isPending={isPending}
         text={TRANSLATIONS.nextButton}
         buttonProps={{
           onPress: handleSubmit(onSubmit),

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { ScrollView } from 'tamagui';
+import { ScrollView, Separator } from 'tamagui';
 import { t } from 'i18next';
 import { useIsFocused } from '@react-navigation/native';
 import { OrdersDriverScreenProps } from '../../../../../types/self/navigation/Owner/props/orders/OrdersDriverProps';
@@ -16,6 +16,7 @@ import { TaskType } from '../../../../../FarmServiceApiTypes/Task/Enums';
 import { AccountingTaskCard } from '../../../../molecules/AccountingTaskCard';
 import { TranslationNames } from '../../../../../locales/TranslationNames';
 import { OrderAccountingSummary } from '../../../../../types/self/common/types';
+import InfoIco from '../../../../../assets/info.svg';
 
 const TRANSLATIONS = {
   clientInvoiceData: t(
@@ -232,6 +233,7 @@ export function AccountingSummary({
     actuallyUsedTaskPriceByTypeNames,
   } = useMemo(() => accountingSetupForTaskType(accounting), [accounting]);
 
+  console.log(accounting);
   // refreshes the screen params when user comes back from an assign company
   const isFocused = useIsFocused();
   useEffect(() => {}, [isFocused]);
@@ -257,10 +259,18 @@ export function AccountingSummary({
       );
     return (
       <>
+        <EntityAsACard<Omit<ClientResponseBase['user']['personalData'], 'id'>>
+          data={client.user.personalData}
+          names={personalDataTranslatedKeys}
+          onTopRightBtnPress={handleClientCreateCompany}
+          cardName="Client"
+          topRightButtonName="More"
+          topRightButtonIcon={<InfoIco />}
+          cardClassName="mt-0"
+        />
         <EntityAsACard<
           Omit<ClientsCompanyResponseBase, 'id' | 'client' | 'address'>
         >
-          cardClassName="mt-0"
           data={{
             name: client.company.name,
             NIP: client.company.NIP,
@@ -301,15 +311,20 @@ export function AccountingSummary({
           label={TRANSLATIONS.useClientsCompanyData}
           onCheckedChange={setUseClientCompanyData}
         />
+        <Separator mb="$4" mt="$2" />
         <EntityAsACard<
           Record<
-            keyof Omit<OrderResponseBase, 'id' | 'clientId' | 'additionalInfo'>,
+            keyof Omit<
+              OrderResponseBase,
+              'id' | 'clientId' | 'additionalInfo' | 'pricing'
+            >,
             string | undefined
           >
         >
           cardClassName="mt-0"
           data={prepareOrderData(order)}
           names={orderInfoTranslatedKeys}
+          cardName="Order"
         />
         <EntityAsACard
           data={{
@@ -327,7 +342,10 @@ export function AccountingSummary({
         />
         <AccountingTaskCard
           tasks={tasks}
-          itemProps={{ tax: accounting.tax }}
+          itemProps={{
+            tax: accounting.tax,
+            prices: accounting.pricesForTaskTypeUnit,
+          }}
           bordered
           cardStyle={{
             height: 20 * tasks.length + 40,

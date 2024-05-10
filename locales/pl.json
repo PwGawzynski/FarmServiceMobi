@@ -437,6 +437,12 @@
       "autofocusSwitch": "Podążaj za mną",
       "markAsDoneButton": "Oznacz jako zrobione"
     },
+    "accountingTaskCard": {
+      "task": "Zadanie",
+      "area": "Pow.",
+      "price": "Cena",
+      "priceWithTax": "Cena(VAT)"
+    },
     "orderForm": {
       "pendingStatus": "Tworzenie zamówienia...",
       "submitButtonText": "Utwórz zamówienie"
