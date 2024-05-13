@@ -8,6 +8,7 @@ import {
 } from '../../FarmServiceApiTypes/Order/Requests';
 import { OrderResponseBase } from '../../FarmServiceApiTypes/Order/Ressponses';
 import { CreateOrderPriceReqI } from '../../FarmServiceApiTypes/OrderPricing/Requests';
+import { InvoiceResponseBase } from '../../FarmServiceApiTypes/Invoice/Responses';
 
 export async function createOrder(data: CreateOrderReqI) {
   const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
@@ -29,6 +30,35 @@ export async function updateOrderPrice(data: CreateOrderPriceReqI) {
     data,
   ) as unknown as OrderResponseBase | undefined;
 }
+
+export async function getInvoices(orderId: string) {
+  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
+  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
+  return apiHandler<string>(
+    UNAUTHORIZED_MSG,
+    DEFAULT_MSG,
+    Api.getInvoices,
+    orderId,
+  ) as unknown as InvoiceResponseBase[] | undefined;
+}
+export async function account({
+  tasks,
+  orderId,
+}: {
+  tasks: string[];
+  orderId: string;
+}) {
+  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
+  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
+  return apiHandler<{
+    tasks: string[];
+    orderId: string;
+  }>(UNAUTHORIZED_MSG, DEFAULT_MSG, Api.accountOrder, {
+    tasks,
+    orderId,
+  }) as unknown as InvoiceResponseBase | undefined;
+}
+
 export async function getAllOrders() {
   const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
   const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
