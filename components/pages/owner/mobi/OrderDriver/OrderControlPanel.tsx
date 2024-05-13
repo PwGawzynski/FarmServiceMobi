@@ -30,6 +30,13 @@ export function OrderControlPanel({
         client,
       });
   };
+
+  const handleOrderInvoices = () => {
+    if (client)
+      navigation.navigate('orderInvoices', {
+        order,
+      });
+  };
   const handleTaskList = () => {
     if (client)
       navigation.navigate('orderTasksScreen', {
@@ -47,6 +54,13 @@ export function OrderControlPanel({
   return (
     <ScreenBase name="Order Control panel">
       <YStack f={1} />
+      <ButtonTamagui
+        text="Invoices"
+        buttonProps={{
+          mb: '$4',
+          onPress: handleOrderInvoices,
+        }}
+      />
       <ButtonTamagui
         icon={<InfoIcon />}
         text="Info"
