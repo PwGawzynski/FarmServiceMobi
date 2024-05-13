@@ -162,7 +162,7 @@
         "screenTitle": "Edit order",
         "submitButton": "Save"
       },
-      "orderDetails": {
+      "orderTasksScreen": {
         "screenName": "order Details",
         "taskListHeader": "Tasks",
         "detailsCard": {

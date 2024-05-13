@@ -26,19 +26,25 @@ export function findClientById(
 const TRANSLATIONS = {
   taskStatus: {
     closed: t(
-      TranslationNames.screens.orderDriver.orderDetails.taskStatus.done,
+      TranslationNames.screens.orderDriver.orderTasksScreen.taskStatus.done,
     ),
     opened: t(
-      TranslationNames.screens.orderDriver.orderDetails.taskStatus.closed,
+      TranslationNames.screens.orderDriver.orderTasksScreen.taskStatus.closed,
     ),
-    new: t(TranslationNames.screens.orderDriver.orderDetails.taskStatus.new),
+    new: t(
+      TranslationNames.screens.orderDriver.orderTasksScreen.taskStatus.new,
+    ),
   },
 };
 
-export function OrderDetails({
+export function OrderTasksScreen({
   route: { params },
   navigation,
-}: OrdersDriverScreenProps<'orderDetails', 'ordersDriver', 'ownerRootDriver'>) {
+}: OrdersDriverScreenProps<
+  'orderTasksScreen',
+  'ordersDriver',
+  'ownerRootDriver'
+>) {
   const { order } = params;
   const modalRef = useRef<BottomSheetModal>(null);
   const { data } = useQuery({
@@ -86,10 +92,12 @@ export function OrderDetails({
         modalRef,
         snapPoints: ['50%', '80%'],
       }}
-      name={t(TranslationNames.screens.orderDriver.orderDetails.screenName)}
+      name={t(TranslationNames.screens.orderDriver.orderTasksScreen.screenName)}
     >
       <SizableText className="uppercase font-bold text-xl mt-4 ">
-        {t(TranslationNames.screens.orderDriver.orderDetails.taskListHeader)}
+        {t(
+          TranslationNames.screens.orderDriver.orderTasksScreen.taskListHeader,
+        )}
       </SizableText>
       <List<TaskResponseBase>
         // we have to set margin top to 0 and margin bottom to 0, because we use forwardRef in a List component,
@@ -118,7 +126,9 @@ export function OrderDetails({
         beFlex
       />
       <ButtonTamagui
-        text={t(TranslationNames.screens.orderDriver.orderDetails.tasksButton)}
+        text={t(
+          TranslationNames.screens.orderDriver.orderTasksScreen.tasksButton,
+        )}
         buttonProps={{
           mt: '$4',
           onPress: handleCreateTask,

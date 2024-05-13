@@ -140,7 +140,7 @@
         "screenTitle": "Edytuj zamówienie",
         "submitButton": "Zapisz zmiany"
       },
-      "orderDetails": {
+      "orderTasksScreen": {
         "screenName": "Szczegóły zamówienia",
         "taskListHeader": "Tasks",
         "detailsCard": {

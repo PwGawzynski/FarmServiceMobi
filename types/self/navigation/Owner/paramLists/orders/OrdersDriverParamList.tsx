@@ -8,7 +8,7 @@ import { OrderAccountingSummary } from '../../../../common/types';
 
 export type OrdersDriverParamList = {
   ordersDesktopRoot: NavigatorScreenParams<OrdersDesktopDriverParamList>;
-  orderDetails: { order: OrderResponseBase };
+  orderTasksScreen: { order: OrderResponseBase };
   orderControlPanel: { order: OrderResponseBase };
   orderAccounting: { order: OrderResponseBase; client: ClientResponseBase };
   orderAccountingInvoice: {

@@ -70,7 +70,8 @@ export function EditOrder({
           t(TranslationNames.components.toast.canUpdateOrderDescription),
       });
     }
-    if (isSuccess && data) navigation.navigate('orderDetails', { order: data });
+    if (isSuccess && data)
+      navigation.navigate('orderTasksScreen', { order: data });
   }, [error, isSuccess]);
 
   return (
