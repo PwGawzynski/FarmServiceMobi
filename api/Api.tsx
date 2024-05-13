@@ -58,6 +58,9 @@ import {
 import { OpenTaskData } from './Task/Task';
 import { CreateOrderPriceReqI } from '../FarmServiceApiTypes/OrderPricing/Requests';
 import { OrderPriceResponseBase } from '../FarmServiceApiTypes/OrderPricing/Responses';
+
+import { SettlementRequest } from '../FarmServiceApiTypes/Settlement/Requests';
+import { InvoiceResponseBase } from '../FarmServiceApiTypes/Invoice/Responses';
 /* ---------------------------------------DECORATOR_USED_TO_DELAY_RES--------------------------------------- */
 
 const IsDelayed = () => {
@@ -389,6 +392,34 @@ export class ApiSelf {
         data,
       )) as AxiosResponse<ResponseObject>
     ).data.payload as OrderPriceResponseBase | undefined;
+  }
+
+  static async getInvoices(orderId: string) {
+    return (
+      (await ApiSelf.axiosInstance.get('/invoice/for', {
+        params: { orderId },
+      })) as AxiosResponse<ResponseObject>
+    ).data.payload as InvoiceResponseBase[] | undefined;
+  }
+
+  static async accountOrder({
+    tasks,
+    orderId,
+  }: {
+    tasks: string[];
+    orderId: string;
+  }) {
+    return (
+      (await ApiSelf.axiosInstance.put(
+        '/order/account',
+        {
+          tasks,
+        } as SettlementRequest,
+        {
+          params: { id: orderId },
+        },
+      )) as AxiosResponse<ResponseObject>
+    ).data.payload as InvoiceResponseBase | undefined;
   }
 
   @IsDelayed()
