@@ -10,7 +10,8 @@ import { address } from 'ip';
   },
      plugins: [
          "expo-localization",
-         "expo-secure-store"
+         "expo-secure-store",
+         'react-native-reanimated/plugin'
      ],
   eas: {
     projectId: 'd93bb622-30d0-4f55-85c6-5fde5f331ce4',

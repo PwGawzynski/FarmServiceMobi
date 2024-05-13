@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { TamaguiProvider } from 'tamagui';
 import { useColorScheme } from 'nativewind';
 import { useEffect } from 'react';
-import Toast from 'react-native-toast-message';
+import { Toast } from 'react-native-toast-message/lib/src/Toast';
 import { AuthDriverParamList } from '../../types/self/navigation/Owner/paramLists/AuthDriverParamList';
 // eslint-disable-next-line import/extensions
 import config from '../../tamagui_conf/tamagui.config';

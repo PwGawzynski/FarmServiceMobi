@@ -35,7 +35,7 @@ export function ButtonTamagui({
         } as never
       }
       backgroundColor={bgColor || '$color4'}
-      color={elementColor}
+      color={elementColor || '$color9'}
       disabled={isPending}
       {...buttonProps}
     >

@@ -1,10 +1,11 @@
-import Toast, {
-  BaseToast,
-  ErrorToast,
-  InfoToast,
+import {
+  BaseToastProps,
   ToastConfig,
-} from 'react-native-toast-message';
-import { BaseToastProps } from 'react-native-toast-message/lib/src/types';
+} from 'react-native-toast-message/lib/src/types';
+import { BaseToast } from 'react-native-toast-message/lib/src/components/BaseToast';
+import { ErrorToast } from 'react-native-toast-message/lib/src/components/ErrorToast';
+import { InfoToast } from 'react-native-toast-message/lib/src/components/InfoToast';
+import { Toast } from 'react-native-toast-message/lib/src/Toast';
 import { Colors } from '../settings/styles/colors';
 import { Theme } from '../FarmServiceApiTypes/Account/Constants';
 
