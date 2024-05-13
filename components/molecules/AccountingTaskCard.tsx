@@ -42,7 +42,14 @@ export function AccountingTaskCard({
   );
 
   return (
-    <Card f={1} mt="$4" p="$4" style={cardStyle} bordered={bordered}>
+    <Card
+      minHeight="$12"
+      f={1}
+      mt="$4"
+      p="$4"
+      style={cardStyle}
+      bordered={bordered}
+    >
       <XStack mb="$2" jc="space-between" ai="center">
         <SizableText
           color="$color11"
