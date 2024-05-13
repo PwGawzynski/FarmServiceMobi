@@ -66,6 +66,7 @@
     "expo-status-bar": "~1.12.1",
     "expo-system-ui": "~3.0.4",
     "expo-updates": "~0.25.11",
+    "expo-web-browser": "~13.0.3",
     "i18n-js": "^4.3.2",
     "i18next": "^23.7.11",
     "nativewind": "^2.0.11",

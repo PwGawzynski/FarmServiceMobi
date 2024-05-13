@@ -5420,6 +5420,11 @@ expo-updates@~0.25.11:
     ignore "^5.3.1"
     resolve-from "^5.0.0"
 
+expo-web-browser@~13.0.3:
+  version "13.0.3"
+  resolved "https://registry.yarnpkg.com/expo-web-browser/-/expo-web-browser-13.0.3.tgz#dceb05dbc187b498ca937b02adf385b0232a4e92"
+  integrity sha512-HXb7y82ApVJtqk8tManyudtTrCtx8xcUnVzmJECeHCB0SsWSQ+penVLZxJkcyATWoJOsFMnfVSVdrTcpKKGszQ==
+
 expo@~51.0.4:
   version "51.0.4"
   resolved "https://registry.yarnpkg.com/expo/-/expo-51.0.4.tgz#e641cc1495705a9573f238f6bc9c3929844066d9"
