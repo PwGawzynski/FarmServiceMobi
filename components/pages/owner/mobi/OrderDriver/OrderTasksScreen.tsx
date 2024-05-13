@@ -5,7 +5,6 @@ import { useRef } from 'react';
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
 import { ScreenBase } from '../common/ScreenBase';
 import { OrdersDriverScreenProps } from '../../../../../types/self/navigation/Owner/props/orders/OrdersDriverProps';
-import { getClients } from '../../../../../api/clients/Client';
 import { ClientResponseBase } from '../../../../../FarmServiceApiTypes/Clients/Responses';
 import { ButtonTamagui } from '../../../../atoms/ButtonTamagui';
 import { TranslationNames } from '../../../../../locales/TranslationNames';
@@ -14,14 +13,6 @@ import List from '../../../../organisms/List';
 import { TaskResponseBase } from '../../../../../FarmServiceApiTypes/Task/Responses';
 import { TaskType } from '../../../../../FarmServiceApiTypes/Task/Enums';
 import { TaskInfo } from '../../../../atoms/TaskInfo';
-
-export function findClientById(
-  clients: ClientResponseBase[] | undefined,
-  id: string,
-) {
-  if (clients) return clients.find(client => client.id === id);
-  return undefined;
-}
 
 const TRANSLATIONS = {
   taskStatus: {
@@ -45,26 +36,14 @@ export function OrderTasksScreen({
   'ordersDriver',
   'ownerRootDriver'
 >) {
-  const { order } = params;
+  const { order, client } = params;
   const modalRef = useRef<BottomSheetModal>(null);
-  const { data } = useQuery({
-    queryKey: ['clients'],
-    queryFn: getClients,
-  });
-  const client = findClientById(data, params.order.clientId);
 
   const handleCreateTask = () => {
     if (client)
       navigation.navigate('createTask', {
         order,
         client: client as ClientResponseBase,
-      });
-  };
-  const handleAccountOrder = () => {
-    if (client)
-      navigation.navigate('orderAccounting', {
-        order,
-        client,
       });
   };
   const handleTaskPress = (task: TaskResponseBase) => {
@@ -132,13 +111,6 @@ export function OrderTasksScreen({
         buttonProps={{
           mt: '$4',
           onPress: handleCreateTask,
-        }}
-      />
-      <ButtonTamagui
-        text="Account order"
-        buttonProps={{
-          mt: '$4',
-          onPress: handleAccountOrder,
         }}
       />
     </ScreenBase>

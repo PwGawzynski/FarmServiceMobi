@@ -1,6 +1,7 @@
 import { Alert } from 'react-native';
 import { LocationObject } from 'expo-location';
 import { OpenTaskData } from '../../api/Task/Task';
+import { ClientResponseBase } from '../../FarmServiceApiTypes/Clients/Responses';
 
 export const performAction = async (
   callback: (data: OpenTaskData) => void,
@@ -24,3 +25,11 @@ export const performAction = async (
     Alert.prompt(alertMessage.header, alertMessage.description);
   }
 };
+
+export function findClientById(
+  clients: ClientResponseBase[] | undefined,
+  id: string,
+) {
+  if (clients) return clients.find(client => client.id === id);
+  return undefined;
+}
