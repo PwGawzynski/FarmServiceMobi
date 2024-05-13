@@ -8,6 +8,7 @@ import { CreateTask } from '../../../pages/owner/mobi/OrderDriver/CreateTask';
 import { OrderAccounting } from '../../../pages/owner/mobi/OrderDriver/OrderAccounting';
 import { OrderAccountingSelectPrices } from '../../../pages/owner/mobi/OrderDriver/OrderAccountingSelectPrices';
 import { AccountingSummary } from '../../../pages/owner/mobi/OrderDriver/AccountingSummary';
+import { OrderControlPanel } from '../../../pages/owner/mobi/OrderDriver/orderControlPanel';
 
 const Stack = createNativeStackNavigator<OrdersDriverParamList>();
 
@@ -25,6 +26,14 @@ export function OrdersDriver() {
         }}
         name="orderDetails"
         component={OrderDetails}
+      />
+      <Stack.Screen
+        options={{
+          animation: 'default',
+          gestureDirection: 'horizontal',
+        }}
+        name="orderControlPanel"
+        component={OrderControlPanel}
       />
       <Stack.Screen
         options={{
