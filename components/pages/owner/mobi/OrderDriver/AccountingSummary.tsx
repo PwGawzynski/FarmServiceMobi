@@ -1,7 +1,10 @@
 import { useEffect, useMemo, useState } from 'react';
 import { ScrollView, Separator } from 'tamagui';
-import { t } from 'i18next';
+import i18next, { t } from 'i18next';
 import { useIsFocused } from '@react-navigation/native';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import * as WebBrowser from 'expo-web-browser';
+import { Alert } from 'react-native';
 import { OrdersDriverScreenProps } from '../../../../../types/self/navigation/Owner/props/orders/OrdersDriverProps';
 import { ScreenBase } from '../common/ScreenBase';
 import { Switch } from '../../../../atoms/Switch';
@@ -17,6 +20,10 @@ import { AccountingTaskCard } from '../../../../molecules/AccountingTaskCard';
 import { TranslationNames } from '../../../../../locales/TranslationNames';
 import { OrderAccountingSummary } from '../../../../../types/self/common/types';
 import InfoIco from '../../../../../assets/info.svg';
+import { account } from '../../../../../api/Order/Order';
+import { ButtonTamagui } from '../../../../atoms/ButtonTamagui';
+import { InvoiceLanguage } from '../../../../../FarmServiceApiTypes/InvoiceEntity/Enums';
+import { InvoiceResponseBase } from '../../../../../FarmServiceApiTypes/Invoice/Responses';
 
 const TRANSLATIONS = {
   clientInvoiceData: t(
@@ -233,7 +240,51 @@ export function AccountingSummary({
     actuallyUsedTaskPriceByTypeNames,
   } = useMemo(() => accountingSetupForTaskType(accounting), [accounting]);
 
-  console.log(accounting);
+  const queryClient = useQueryClient();
+  const { mutate, data, isSuccess, isPending, isError } = useMutation({
+    mutationKey: ['account', order.id],
+    mutationFn: account,
+    onSuccess: res => {
+      queryClient.setQueryData(
+        ['orderInvoices', order.id],
+        (old: InvoiceResponseBase[]) => {
+          if (old) return [...old, res];
+          return [res];
+        },
+      );
+    },
+  });
+
+  useEffect(() => {
+    if (isError) {
+      Alert.alert(
+        'Something happened :(',
+        'An error occurred while generating the invoice, please try again.',
+      );
+    }
+  }, [isError]);
+
+  useEffect(() => {
+    if (isSuccess && data) {
+      (async () => {
+        await WebBrowser.openBrowserAsync(
+          `${data.invoiceDownloadLink}&version=` +
+            `${i18next.language === 'pl' ? InvoiceLanguage[InvoiceLanguage.PL] : InvoiceLanguage[InvoiceLanguage.EN]}`,
+        );
+      })();
+      navigation.navigate('orderInvoices', {
+        order,
+      });
+    }
+  }, [isSuccess, data]);
+
+  const handleAccountOrder = () => {
+    mutate({
+      orderId: order.id,
+      tasks: tasks.map(task_ => task_.id),
+    });
+  };
+
   // refreshes the screen params when user comes back from an assign company
   const isFocused = useIsFocused();
   useEffect(() => {}, [isFocused]);
@@ -305,7 +356,7 @@ export function AccountingSummary({
 
   return (
     <ScreenBase name={TRANSLATIONS.clientInvoiceData}>
-      <ScrollView marginTop="$4" showsVerticalScrollIndicator={false}>
+      <ScrollView f={1} marginTop="$4" showsVerticalScrollIndicator={false}>
         {useClientCompanyData ? clientCompanyInfo : clientPersonalInfo}
         <Switch
           label={TRANSLATIONS.useClientsCompanyData}
@@ -352,6 +403,15 @@ export function AccountingSummary({
           }}
         />
       </ScrollView>
+      <ButtonTamagui
+        isPending={isPending}
+        text="Generate Invoice"
+        buttonProps={{
+          onPress: handleAccountOrder,
+          mt: '$4',
+          mb: '$4',
+        }}
+      />
     </ScreenBase>
   );
 }
