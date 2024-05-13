@@ -26,6 +26,7 @@
     "@react-navigation/stack": "^6.3.20",
     "@reduxjs/toolkit": "^2.0.1",
     "@shopify/flash-list": "1.6.4",
+    "@shopify/react-native-skia": "^1.2.3",
     "@tamagui/animations-react-native": "^1.88.21",
     "@tamagui/create-theme": "^1.88.21",
     "@tamagui/lucide-icons": "^1.89.3",
@@ -96,6 +97,7 @@
     "react-redux": "^9.0.4",
     "tamagui": "^1.88.21",
     "toastify-react-native": "^4.0.0",
+    "victory-native": "^40.2.0",
     "xstate": "^5.3.0"
   },
   "devDependencies": {
