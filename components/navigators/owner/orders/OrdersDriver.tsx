@@ -10,6 +10,7 @@ import { AccountingSummary } from '../../../pages/owner/mobi/OrderDriver/Account
 import { OrderTasksScreen } from '../../../pages/owner/mobi/OrderDriver/OrderTasksScreen';
 import { OrderControlPanel } from '../../../pages/owner/mobi/OrderDriver/OrderControlPanel';
 import { OrderInfo } from '../../../pages/owner/mobi/OrderDriver/OrderInfo';
+import { OrderInvoices } from '../../../pages/owner/mobi/OrderDriver/OrderInvoices';
 
 const Stack = createNativeStackNavigator<OrdersDriverParamList>();
 
@@ -35,6 +36,15 @@ export function OrdersDriver() {
         }}
         name="orderInfo"
         component={OrderInfo}
+      />
+      <Stack.Screen
+        options={{
+          animation: 'fade',
+          gestureDirection: 'horizontal',
+          gestureEnabled: false,
+        }}
+        name="orderInvoices"
+        component={OrderInvoices}
       />
       <Stack.Screen
         options={{
