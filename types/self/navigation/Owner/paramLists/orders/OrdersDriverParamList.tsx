@@ -10,6 +10,7 @@ export type OrdersDriverParamList = {
   ordersDesktopRoot: NavigatorScreenParams<OrdersDesktopDriverParamList>;
   orderTasksScreen: { order: OrderResponseBase; client: ClientResponseBase };
   orderControlPanel: { order: OrderResponseBase };
+  orderInvoices: { order: OrderResponseBase };
   orderInfo: { order: OrderResponseBase; client: ClientResponseBase };
   orderAccounting: { order: OrderResponseBase; client: ClientResponseBase };
   orderAccountingInvoice: {
