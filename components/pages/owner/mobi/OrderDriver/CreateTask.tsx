@@ -227,7 +227,7 @@ export function CreateTask({
   });
   useEffect(() => {
     if (isSuccess) {
-      navigation.navigate('orderTasksScreen', { order });
+      navigation.navigate('orderTasksScreen', { order, client });
     }
     if (error) {
       Toast.show({
