@@ -1,15 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { StyleSheet } from 'react-native';
-import { BarCodeScanner } from 'expo-barcode-scanner';
 import { SizableText, View } from 'tamagui';
 import { useSelector } from 'react-redux';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
-  withRepeat,
   withTiming,
 } from 'react-native-reanimated';
-import { Camera } from 'expo-camera';
+import { CameraView, useCameraPermissions } from 'expo-camera';
 import ScanningIco from '../../assets/scan-line.svg';
 import OkIco from '../../assets/check-circle.svg';
 import { selectTheme } from '../../src/redux/feature/userSlice';
@@ -28,7 +26,6 @@ export interface QRScannerProps {
 const ANIMATION_DURATION = 1000;
 
 export function QRScanner({ scanned, handleBarCodeScanned }: QRScannerProps) {
-  const [hasPermission, setHasPermission] = useState<null | boolean>(null);
   const theme = useSelector(selectTheme);
   const scale = useSharedValue(0.9);
   const BounceAnimatedStyle = useAnimatedStyle(() => ({
@@ -38,31 +35,28 @@ export function QRScanner({ scanned, handleBarCodeScanned }: QRScannerProps) {
   const opacityAnimatedStyle = useAnimatedStyle(() => ({
     opacity: opacity.value,
   }));
+  const [permission, requestPermission] = useCameraPermissions();
+
   useEffect(() => {
-    const getBarCodeScannerPermissions = async () => {
-      const { status } = await BarCodeScanner.requestPermissionsAsync();
-      setHasPermission(status === 'granted');
-    };
-    scale.value = withRepeat(
-      withTiming(1, { duration: ANIMATION_DURATION }),
-      -1,
-      true,
-    );
-    getBarCodeScannerPermissions();
+    requestPermission();
   }, []);
 
-  if (hasPermission === null) {
-    return <SizableText>Requesting for camera permission</SizableText>;
-  }
-  if (hasPermission === false) {
-    return <SizableText>No access to camera</SizableText>;
+  if (permission === null) {
+    return (
+      <SizableText className="text-center p-4">
+        Requesting for camera permission
+      </SizableText>
+    );
   }
 
   return (
     <View className="flex-1">
       {!scanned && (
-        <Camera
-          onBarCodeScanned={
+        <CameraView
+          barcodeScannerSettings={{
+            barcodeTypes: ['qr'],
+          }}
+          onBarcodeScanned={
             scanned
               ? undefined
               : params => {
