@@ -269,6 +269,10 @@
         "totalWithTax": "Suma z podatkiem:",
         "tasksNotSelected": "Nie wybrano zadań",
         "nextButton": "Następny krok"
+      },
+      "orderInvoices": {
+        "screenTitle": "Faktury",
+        "backButton": "Wróć"
       }
     },
     "ordersDesktopDriver":{

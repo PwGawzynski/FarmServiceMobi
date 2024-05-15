@@ -380,6 +380,10 @@ export const TranslationNames = {
         nextButton:
           'screens.orderDriver.OrderAccountingSelectPrices.nextButton',
       },
+      orderInvoices: {
+        screenTitle: 'screens.orderDriver.orderInvoices.screenTitle',
+        backButton: 'screens.orderDriver.orderInvoices.backButton',
+      },
     },
     ordersDesktopDriver: {
       addOrder: {

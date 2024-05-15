@@ -290,6 +290,10 @@
         "totalWithTax": "TOTAL (W. TAX):",
         "tasksNotSelected": "No tasks selected",
         "nextButton": "Next"
+      },
+      "orderInvoices": {
+        "screenTitle": "Order invoices",
+        "backButton": "Back",
       }
     },
     "ordersDesktopDriver":{
