@@ -250,7 +250,13 @@
         "fillCompanyData": "Wypełnij Dane Firmy",
         "usingClientPersonalDataHintHeader": "Korzystanie z Danych Osobowych Klienta",
         "usingClientPersonalDataHintDesc": "Korzystając z danych osobowych klienta, będziesz mógł tworzyć tylko faktury na imię i nazwisko, co oznacza, że dane firmy klienta nie będą na fakturze, nawet jeśli istnieją.",
-        "noData": "Brak danych"
+        "noData": "Brak danych",
+        "alertTitle": "Coś poszło nie tak :(",
+        "alertDescription": "Nie udało się wygenerować faktury, spróbuj ponownie później",
+        "clientCardName": "Klient",
+        "clientCardTopRightButtonName": "Więcej",
+        "orderCardName": "Zamówienie",
+        "generateInvoiceButton": "Generuj Fakture"
       },
       "orderAccounting": {
         "screenTitle": "Rozliczenie"
@@ -549,6 +555,14 @@
       "deleteFieldAlertDeleteButton": "Usuń",
       "deleteFieldAlertCancelButton": "Anuluj",
       "ha": "Ha"
+    },
+    "orderPerformanceChart": {
+      "errorFetchingData": "Błąd pobierania danych",
+      "tryAgainLater": "Spróbuj ponownie później",
+      "computingPerformance": "Obliczanie wydajności...",
+      "hintCardTitle": "Brak danych",
+      "hintCardDescription": "Brak danych do wyświetlenia, wykres zostanie wyświetlony po wykonaniu co najmniej jednego zadania",
+      "dailyPerformance": "Dzienna wydajność"
     }
   },
   "addressForm": {

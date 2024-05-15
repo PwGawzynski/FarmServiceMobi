@@ -354,6 +354,15 @@ export const TranslationNames = {
         usingClientPersonalDataHintDesc:
           'screens.orderDriver.accountingSummary.usingClientPersonalDataHintDesc',
         noData: 'screens.orderDriver.accountingSummary.noData',
+        alertTitle: 'screens.orderDriver.accountingSummary.alertTitle',
+        alertDescription:
+          'screens.orderDriver.accountingSummary.alertDescription',
+        clientCardName: 'screens.orderDriver.accountingSummary.clientCardName',
+        clientCardTopRightButtonName:
+          'screens.orderDriver.accountingSummary.clientCardTopRightButtonName',
+        orderCardName: 'screens.orderDriver.accountingSummary.orderCardName',
+        generateInvoiceButton:
+          'screens.orderDriver.accountingSummary.generateInvoiceButton',
       },
       orderAccounting: {
         screenTitle: 'screens.orderDriver.orderAccounting.screenTitle',
@@ -689,6 +698,16 @@ export const TranslationNames = {
       deleteFieldAlertCancelButton:
         'components.filedBottomSheet.deleteFieldAlertCancelButton',
       ha: 'components.filedBottomSheet.ha',
+    },
+    orderPerformanceChart: {
+      errorFetchingData: 'components.orderPerformanceChart.errorFetchingData',
+      tryAgainLater: 'components.orderPerformanceChart.tryAgainLater',
+      computingPerformance:
+        'components.orderPerformanceChart.computingPerformance',
+      hintCardTitle: 'components.orderPerformanceChart.hintCardTitle',
+      hintCardDescription:
+        'components.orderPerformanceChart.hintCardDescription',
+      dailyPerformance: 'components.orderPerformanceChart.dailyPerformance',
     },
   },
   addressForm: {
