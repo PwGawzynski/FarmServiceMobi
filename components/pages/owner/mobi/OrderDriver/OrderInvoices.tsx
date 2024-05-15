@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useCallback, useRef } from 'react';
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
 import * as WebBrowser from 'expo-web-browser';
-import i18next from 'i18next';
+import i18next, { t } from 'i18next';
 import { ScreenBase } from '../common/ScreenBase';
 import { OrdersDriverScreenProps } from '../../../../../types/self/navigation/Owner/props/orders/OrdersDriverProps';
 import { getInvoices } from '../../../../../api/Order/Order';
@@ -10,6 +10,14 @@ import List from '../../../../organisms/List';
 import { InvoiceResponseBase } from '../../../../../FarmServiceApiTypes/Invoice/Responses';
 import { InvoiceLanguage } from '../../../../../FarmServiceApiTypes/InvoiceEntity/Enums';
 import { ButtonTamagui } from '../../../../atoms/ButtonTamagui';
+import { TranslationNames } from '../../../../../locales/TranslationNames';
+
+const TRANSLATIONS = {
+  screenTitle: t(
+    TranslationNames.screens.orderDriver.orderInvoices.screenTitle,
+  ),
+  backButton: t(TranslationNames.screens.orderDriver.orderInvoices.backButton),
+};
 
 export function OrderInvoices({
   route: { params },
@@ -41,7 +49,7 @@ export function OrderInvoices({
   const handleBack = () => navigation.navigate('orderControlPanel', { order });
 
   return (
-    <ScreenBase name="OrderInvoices">
+    <ScreenBase name={TRANSLATIONS.screenTitle}>
       <List<InvoiceResponseBase>
         isFetching={isFetching}
         isError={isError}
@@ -59,7 +67,7 @@ export function OrderInvoices({
         })}
       />
       <ButtonTamagui
-        text="Back"
+        text={TRANSLATIONS.backButton}
         buttonProps={{
           mt: '$4',
           onPress: handleBack,
