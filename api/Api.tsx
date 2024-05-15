@@ -526,6 +526,7 @@ export class ApiSelf {
     ).data.payload as TaskResponseCollection | undefined;
   }
 
+  @IsDelayed()
   static async getTaskByOrder(orderId: string) {
     return (
       (await ApiSelf.axiosInstance.get('/task', {
