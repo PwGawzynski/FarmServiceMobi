@@ -1,4 +1,3 @@
-import { YStack } from 'tamagui';
 import { useQuery } from '@tanstack/react-query';
 import { OrdersDriverScreenProps } from '../../../../../types/self/navigation/Owner/props/orders/OrdersDriverProps';
 import { ScreenBase } from '../common/ScreenBase';
@@ -8,6 +7,7 @@ import { findClientById } from '../../../../../helepers/taskSession/helpers';
 import InfoIcon from '../../../../../assets/info.svg';
 import TaskIco from '../../../../../assets/book-open-check.svg';
 import AccountIco from '../../../../../assets/receipt.svg';
+import { OrderPerformanceChart } from '../../../../molecules/OrderPerformanceChart';
 
 export function OrderControlPanel({
   route: { params },
@@ -51,9 +51,10 @@ export function OrderControlPanel({
         client,
       });
   };
+
   return (
     <ScreenBase name="Order Control panel">
-      <YStack f={1} />
+      <OrderPerformanceChart orderId={order.id} />
       <ButtonTamagui
         text="Invoices"
         buttonProps={{
