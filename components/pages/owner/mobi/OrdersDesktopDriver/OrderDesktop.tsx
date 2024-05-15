@@ -37,7 +37,7 @@ export function OrderDesktop() {
         isLoading={isLoading}
         data={data}
         modalRef={modalRef}
-        onPressNavigateTo="orderDetails"
+        onPressNavigateTo="orderControlPanel"
         navigationParamName="order"
         listStyleSettings={item => ({
           header: item.name,

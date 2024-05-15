@@ -174,9 +174,7 @@ export function AddFieldForm({
     defaultValues: useMemo(() => {
       const area = Number.isNaN(Number(field?.area))
         ? field?.area
-        : Number(field?.area)
-            .toFixed(4)
-            .toString();
+        : Number(field?.area).toFixed(4).toString();
       return {
         nameLabel: field?.nameLabel || undefined,
         city: field?.address.city || transformedData?.city,

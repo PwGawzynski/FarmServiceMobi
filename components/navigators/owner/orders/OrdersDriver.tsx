@@ -2,12 +2,15 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NativeStackScreenOptionsBase } from '../../../../settings/navigators/NativeStackScreenOptionsBase';
 import { OrdersDesktopDriver } from './OrdersDesktopDriver';
 import { OrdersDriverParamList } from '../../../../types/self/navigation/Owner/paramLists/orders/OrdersDriverParamList';
-import { OrderDetails } from '../../../pages/owner/mobi/OrderDriver/OrderDetails';
 import { EditOrder } from '../../../pages/owner/mobi/OrderDriver/EditOrder';
 import { CreateTask } from '../../../pages/owner/mobi/OrderDriver/CreateTask';
 import { OrderAccounting } from '../../../pages/owner/mobi/OrderDriver/OrderAccounting';
 import { OrderAccountingSelectPrices } from '../../../pages/owner/mobi/OrderDriver/OrderAccountingSelectPrices';
 import { AccountingSummary } from '../../../pages/owner/mobi/OrderDriver/AccountingSummary';
+import { OrderTasksScreen } from '../../../pages/owner/mobi/OrderDriver/OrderTasksScreen';
+import { OrderControlPanel } from '../../../pages/owner/mobi/OrderDriver/OrderControlPanel';
+import { OrderInfo } from '../../../pages/owner/mobi/OrderDriver/OrderInfo';
+import { OrderInvoices } from '../../../pages/owner/mobi/OrderDriver/OrderInvoices';
 
 const Stack = createNativeStackNavigator<OrdersDriverParamList>();
 
@@ -20,11 +23,36 @@ export function OrdersDriver() {
       <Stack.Screen name="ordersDesktopRoot" component={OrdersDesktopDriver} />
       <Stack.Screen
         options={{
+          animation: 'fade',
+          gestureDirection: 'horizontal',
+        }}
+        name="orderTasksScreen"
+        component={OrderTasksScreen}
+      />
+      <Stack.Screen
+        options={{
+          animation: 'fade',
+          gestureDirection: 'horizontal',
+        }}
+        name="orderInfo"
+        component={OrderInfo}
+      />
+      <Stack.Screen
+        options={{
+          animation: 'fade',
+          gestureDirection: 'horizontal',
+          gestureEnabled: false,
+        }}
+        name="orderInvoices"
+        component={OrderInvoices}
+      />
+      <Stack.Screen
+        options={{
           animation: 'default',
           gestureDirection: 'horizontal',
         }}
-        name="orderDetails"
-        component={OrderDetails}
+        name="orderControlPanel"
+        component={OrderControlPanel}
       />
       <Stack.Screen
         options={{

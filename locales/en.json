@@ -162,7 +162,7 @@
         "screenTitle": "Edit order",
         "submitButton": "Save"
       },
-      "orderDetails": {
+      "orderTasksScreen": {
         "screenName": "order Details",
         "taskListHeader": "Tasks",
         "detailsCard": {
@@ -271,7 +271,13 @@
         "fillCompanyData": "Fill Company Data",
         "usingClientPersonalDataHintHeader": "Using Client Personal Data",
         "usingClientPersonalDataHintDesc": "When using the customer's personal data, you will only be able to create named invoices, which means that the customer's company data will not be on the invoice even if they exist.",
-        "noData": "No data"
+        "noData": "No data",
+        "alertTitle": "Something happened :(",
+        "alertDescription": "An error occurred while generating the invoice, please try again.",
+        "clientCardName": "Client",
+        "clientCardTopRightButtonName": "More",
+        "orderCardName": "Order",
+        "generateInvoiceButton": "Generate invoice",
       },
       "orderAccounting": {
         "screenTitle": "Order accounting"
@@ -284,6 +290,10 @@
         "totalWithTax": "TOTAL (W. TAX):",
         "tasksNotSelected": "No tasks selected",
         "nextButton": "Next"
+      },
+      "orderInvoices": {
+        "screenTitle": "Order invoices",
+        "backButton": "Back",
       }
     },
     "ordersDesktopDriver":{
@@ -328,7 +338,9 @@
         "status": "Status",
         "Position": "Position",
         "editButton": "Edit",
-        "choose": "Choose"
+        "choose": "Choose",
+        "hintTitle": "Hint",
+        "hintDescription": "Status is used to determine if the worker is active or not, if the worker is not active, he will not be able to perform tasks"
       }
 
     }
@@ -548,6 +560,14 @@
       "deleteFieldAlertDeleteButton": "Delete",
       "deleteFieldAlertCancelButton": "Cancel",
       "ha": "Ha"
+    },
+    "orderPerformanceChart": {
+      "errorFetchingData": "There was an error while fetching the data",
+      "tryAgainLater": "try again later",
+      "computingPerformance": "Computing performance...",
+      "hintCardTitle": "Statistic Not aviable",
+      "hintCardDescription": "There is not enough data to generate statistics, try again later",
+      "dailyPerformance": "Daily performance"
     }
   },
   "addressForm": {

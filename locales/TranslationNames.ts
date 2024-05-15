@@ -208,41 +208,41 @@ export const TranslationNames = {
         screenTitle: 'screens.orderDriver.editOrder.screenTitle',
         submitButton: 'screens.orderDriver.editOrder.submitButton',
       },
-      orderDetails: {
-        screenName: 'screens.orderDriver.orderDetails.screenName',
-        taskListHeader: 'screens.orderDriver.orderDetails.taskListHeader',
+      orderTasksScreen: {
+        screenName: 'screens.orderDriver.orderTasksScreen.screenName',
+        taskListHeader: 'screens.orderDriver.orderTasksScreen.taskListHeader',
         detailsCard: {
-          cardName: 'screens.orderDriver.orderDetails.detailsCard.cardName',
+          cardName: 'screens.orderDriver.orderTasksScreen.detailsCard.cardName',
           fields: {
-            name: 'screens.orderDriver.orderDetails.detailsCard.fields.name',
+            name: 'screens.orderDriver.orderTasksScreen.detailsCard.fields.name',
             performanceDate:
-              'screens.orderDriver.orderDetails.detailsCard.fields.performanceDate',
+              'screens.orderDriver.orderTasksScreen.detailsCard.fields.performanceDate',
             creationDate:
-              'screens.orderDriver.orderDetails.detailsCard.fields.creationDate',
+              'screens.orderDriver.orderTasksScreen.detailsCard.fields.creationDate',
             openedAt:
-              'screens.orderDriver.orderDetails.detailsCard.fields.openedAt',
+              'screens.orderDriver.orderTasksScreen.detailsCard.fields.openedAt',
             totalTaskArea:
-              'screens.orderDriver.orderDetails.detailsCard.fields.totalTaskArea',
+              'screens.orderDriver.orderTasksScreen.detailsCard.fields.totalTaskArea',
           },
           topRightButtonName:
-            'screens.orderDriver.orderDetails.detailsCard.topRightButtonName',
+            'screens.orderDriver.orderTasksScreen.detailsCard.topRightButtonName',
         },
-        additionalInfo: 'screens.orderDriver.orderDetails.additionalInfo',
+        additionalInfo: 'screens.orderDriver.orderTasksScreen.additionalInfo',
         clientCard: {
-          cardName: 'screens.orderDriver.orderDetails.clientCard.cardName',
+          cardName: 'screens.orderDriver.orderTasksScreen.clientCard.cardName',
           topRightButtonName:
-            'screens.orderDriver.orderDetails.clientCard.topRightButtonName',
+            'screens.orderDriver.orderTasksScreen.clientCard.topRightButtonName',
           fields: {
-            name: 'screens.orderDriver.orderDetails.clientCard.fields.name',
+            name: 'screens.orderDriver.orderTasksScreen.clientCard.fields.name',
             surname:
-              'screens.orderDriver.orderDetails.clientCard.fields.surname',
+              'screens.orderDriver.orderTasksScreen.clientCard.fields.surname',
           },
         },
-        tasksButton: 'screens.orderDriver.orderDetails.tasksButton',
+        tasksButton: 'screens.orderDriver.orderTasksScreen.tasksButton',
         taskStatus: {
-          done: 'screens.orderDriver.orderDetails.taskStatus.done',
-          closed: 'screens.orderDriver.orderDetails.taskStatus.notDone',
-          new: 'screens.orderDriver.orderDetails.taskStatus.new',
+          done: 'screens.orderDriver.orderTasksScreen.taskStatus.done',
+          closed: 'screens.orderDriver.orderTasksScreen.taskStatus.notDone',
+          new: 'screens.orderDriver.orderTasksScreen.taskStatus.new',
         },
       },
       createTask: {
@@ -354,6 +354,15 @@ export const TranslationNames = {
         usingClientPersonalDataHintDesc:
           'screens.orderDriver.accountingSummary.usingClientPersonalDataHintDesc',
         noData: 'screens.orderDriver.accountingSummary.noData',
+        alertTitle: 'screens.orderDriver.accountingSummary.alertTitle',
+        alertDescription:
+          'screens.orderDriver.accountingSummary.alertDescription',
+        clientCardName: 'screens.orderDriver.accountingSummary.clientCardName',
+        clientCardTopRightButtonName:
+          'screens.orderDriver.accountingSummary.clientCardTopRightButtonName',
+        orderCardName: 'screens.orderDriver.accountingSummary.orderCardName',
+        generateInvoiceButton:
+          'screens.orderDriver.accountingSummary.generateInvoiceButton',
       },
       orderAccounting: {
         screenTitle: 'screens.orderDriver.orderAccounting.screenTitle',
@@ -370,6 +379,10 @@ export const TranslationNames = {
           'screens.orderDriver.OrderAccountingSelectPrices.tasksNotSelected',
         nextButton:
           'screens.orderDriver.OrderAccountingSelectPrices.nextButton',
+      },
+      orderInvoices: {
+        screenTitle: 'screens.orderDriver.orderInvoices.screenTitle',
+        backButton: 'screens.orderDriver.orderInvoices.backButton',
       },
     },
     ordersDesktopDriver: {
@@ -424,6 +437,9 @@ export const TranslationNames = {
         position: 'screens.ownerRootDriver.workerDetails.Position',
         editButton: 'screens.ownerRootDriver.workerDetails.editButton',
         choose: 'screens.ownerRootDriver.workerDetails.choose',
+        hintTitle: 'screens.ownerRootDriver.workerDetails.hintTitle',
+        hintDescription:
+          'screens.ownerRootDriver.workerDetails.hintDescription',
       },
     },
   },
@@ -689,6 +705,16 @@ export const TranslationNames = {
       deleteFieldAlertCancelButton:
         'components.filedBottomSheet.deleteFieldAlertCancelButton',
       ha: 'components.filedBottomSheet.ha',
+    },
+    orderPerformanceChart: {
+      errorFetchingData: 'components.orderPerformanceChart.errorFetchingData',
+      tryAgainLater: 'components.orderPerformanceChart.tryAgainLater',
+      computingPerformance:
+        'components.orderPerformanceChart.computingPerformance',
+      hintCardTitle: 'components.orderPerformanceChart.hintCardTitle',
+      hintCardDescription:
+        'components.orderPerformanceChart.hintCardDescription',
+      dailyPerformance: 'components.orderPerformanceChart.dailyPerformance',
     },
   },
   addressForm: {
