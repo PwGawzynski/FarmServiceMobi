@@ -339,7 +339,9 @@
         "status": "Status",
         "Position": "Stanowisko",
         "editButton": "Edytuj",
-        "choose": "Wybierz"
+        "choose": "Wybierz",
+        "hintTitle": "Wskazówka",
+        "hintDescription": "Status pracownika determinuje, czy pracownik może wykonywać zadania. Możesz zmienić status pracownika w dowolnym momencie.",
       }
     }
   },

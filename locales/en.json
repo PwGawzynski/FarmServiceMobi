@@ -338,7 +338,9 @@
         "status": "Status",
         "Position": "Position",
         "editButton": "Edit",
-        "choose": "Choose"
+        "choose": "Choose",
+        "hintTitle": "Hint",
+        "hintDescription": "Status is used to determine if the worker is active or not, if the worker is not active, he will not be able to perform tasks"
       }
 
     }

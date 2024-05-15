@@ -437,6 +437,9 @@ export const TranslationNames = {
         position: 'screens.ownerRootDriver.workerDetails.Position',
         editButton: 'screens.ownerRootDriver.workerDetails.editButton',
         choose: 'screens.ownerRootDriver.workerDetails.choose',
+        hintTitle: 'screens.ownerRootDriver.workerDetails.hintTitle',
+        hintDescription:
+          'screens.ownerRootDriver.workerDetails.hintDescription',
       },
     },
   },

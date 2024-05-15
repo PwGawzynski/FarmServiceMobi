@@ -25,6 +25,7 @@ import { AsAny } from '../../../../../helepers/typing';
 import { TranslationNames } from '../../../../../locales/TranslationNames';
 import { PersonalDataBase } from '../../../../../FarmServiceApiTypes/UserPersonalData/Responses';
 import { findEnumVal, makeArray } from '../../../../../helepers/MakeArray';
+import { HintCard } from '../../../../atoms/HintCard';
 
 const cacheResponse = (
   response: WorkerResponseBase | undefined,
@@ -71,6 +72,12 @@ const TRANSLATIONS = {
   choose: t(TranslationNames.screens.ownerRootDriver.workerDetails.choose),
   position: t(TranslationNames.screens.ownerRootDriver.workerDetails.position),
   sign: t(TranslationNames.components.CallAndMailPanel.sign),
+  hintTitle: t(
+    TranslationNames.screens.ownerRootDriver.workerDetails.hintTitle,
+  ),
+  hintDescription: t(
+    TranslationNames.screens.ownerRootDriver.workerDetails.hintDescription,
+  ),
 };
 
 export function WorkerDetails({
@@ -113,7 +120,11 @@ export function WorkerDetails({
       name={`${worker.personalData.name} ${worker.personalData.surname}`}
     >
       <YStack justifyContent="space-between" f={1}>
-        <YStack>
+        <YStack mt="$4">
+          <HintCard
+            header={TRANSLATIONS.hintTitle}
+            text={TRANSLATIONS.hintDescription}
+          />
           <EntityAsACard
             data={worker.personalData}
             names={{
