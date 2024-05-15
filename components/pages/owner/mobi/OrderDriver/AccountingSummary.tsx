@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { ScrollView, Separator } from 'tamagui';
-import i18next, { t } from 'i18next';
+import i18next from 'i18next';
 import { useIsFocused } from '@react-navigation/native';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import * as WebBrowser from 'expo-web-browser';
@@ -17,109 +17,13 @@ import { OrderResponseBase } from '../../../../../FarmServiceApiTypes/Order/Ress
 import { OrderStatus } from '../../../../../FarmServiceApiTypes/Order/Enums';
 import { TaskType } from '../../../../../FarmServiceApiTypes/Task/Enums';
 import { AccountingTaskCard } from '../../../../molecules/AccountingTaskCard';
-import { TranslationNames } from '../../../../../locales/TranslationNames';
 import { OrderAccountingSummary } from '../../../../../types/self/common/types';
 import InfoIco from '../../../../../assets/info.svg';
 import { account } from '../../../../../api/Order/Order';
 import { ButtonTamagui } from '../../../../atoms/ButtonTamagui';
 import { InvoiceLanguage } from '../../../../../FarmServiceApiTypes/InvoiceEntity/Enums';
 import { InvoiceResponseBase } from '../../../../../FarmServiceApiTypes/Invoice/Responses';
-
-const TRANSLATIONS = {
-  clientInvoiceData: t(
-    TranslationNames.screens.orderDriver.accountingSummary.clientInvoiceData,
-  ),
-  useClientsCompanyData: t(
-    TranslationNames.screens.orderDriver.accountingSummary
-      .useClientsCompanyData,
-  ),
-  createCompanyData: t(
-    TranslationNames.screens.orderDriver.accountingSummary.createCompanyData,
-  ),
-  companyName: t(
-    TranslationNames.screens.orderDriver.accountingSummary.companyName,
-  ),
-  companyNIP: t(
-    TranslationNames.screens.orderDriver.accountingSummary.companyNIP,
-  ),
-  county: t(TranslationNames.screens.orderDriver.accountingSummary.county),
-  apartmentNumber: t(
-    TranslationNames.screens.orderDriver.accountingSummary.apartmentNumber,
-  ),
-  voivodeship: t(
-    TranslationNames.screens.orderDriver.accountingSummary.voivodeship,
-  ),
-  name: t(TranslationNames.screens.orderDriver.accountingSummary.name),
-  surname: t(TranslationNames.screens.orderDriver.accountingSummary.surname),
-  phoneNumber: t(
-    TranslationNames.screens.orderDriver.accountingSummary.phoneNumber,
-  ),
-  orderName: t(
-    TranslationNames.screens.orderDriver.accountingSummary.orderName,
-  ),
-  performanceDate: t(
-    TranslationNames.screens.orderDriver.accountingSummary.performanceDate,
-  ),
-  totalArea: t(
-    TranslationNames.screens.orderDriver.accountingSummary.totalArea,
-  ),
-  status: t(TranslationNames.screens.orderDriver.accountingSummary.status),
-  openedAt: t(TranslationNames.screens.orderDriver.accountingSummary.openedAt),
-  createdAt: t(
-    TranslationNames.screens.orderDriver.accountingSummary.createdAt,
-  ),
-  taxValue: t(TranslationNames.screens.orderDriver.accountingSummary.taxValue),
-  totalPrice: t(
-    TranslationNames.screens.orderDriver.accountingSummary.totalPrice,
-  ),
-  totalPriceWithTax: t(
-    TranslationNames.screens.orderDriver.accountingSummary.totalPriceWithTax,
-  ),
-  harvestingTotalArea: t(
-    TranslationNames.screens.orderDriver.accountingSummary.harvestingTotalArea,
-  ),
-  transportTotalArea: t(
-    TranslationNames.screens.orderDriver.accountingSummary.transportTotalArea,
-  ),
-  harvestingTotalPrice: t(
-    TranslationNames.screens.orderDriver.accountingSummary.harvestingTotalPrice,
-  ),
-  transportTotalPrice: t(
-    TranslationNames.screens.orderDriver.accountingSummary.transportTotalPrice,
-  ),
-  companyDataIsEmpty: t(
-    TranslationNames.screens.orderDriver.accountingSummary.companyDataIsEmpty,
-  ),
-  clientNoCompanyDesc: t(
-    TranslationNames.screens.orderDriver.accountingSummary.clientNoCompany,
-  ),
-  companyEmail: t(
-    TranslationNames.screens.orderDriver.accountingSummary.companyEmail,
-  ),
-  companyPhoneNumber: t(
-    TranslationNames.screens.orderDriver.accountingSummary.companyPhoneNumber,
-  ),
-  city: t(TranslationNames.screens.orderDriver.accountingSummary.city),
-  street: t(TranslationNames.screens.orderDriver.accountingSummary.street),
-  postalCode: t(
-    TranslationNames.screens.orderDriver.accountingSummary.postalCode,
-  ),
-  houseNumber: t(
-    TranslationNames.screens.orderDriver.accountingSummary.houseNumber,
-  ),
-  fillCompanyData: t(
-    TranslationNames.screens.orderDriver.accountingSummary.fillCompanyData,
-  ),
-  usingClientPersonalDataHintHeader: t(
-    TranslationNames.screens.orderDriver.accountingSummary
-      .usingClientPersonalDataHintHeader,
-  ),
-  usingClientPersonalDataHintDesc: t(
-    TranslationNames.screens.orderDriver.accountingSummary
-      .usingClientPersonalDataHintDesc,
-  ),
-  noData: t(TranslationNames.screens.orderDriver.accountingSummary.noData),
-};
+import { TRANSLATIONS } from '../../../../../helepers/Translations/AccountingSummaryTranslations';
 
 const companyTranslatedKeys = {
   name: TRANSLATIONS.companyName,
@@ -257,10 +161,7 @@ export function AccountingSummary({
 
   useEffect(() => {
     if (isError) {
-      Alert.alert(
-        'Something happened :(',
-        'An error occurred while generating the invoice, please try again.',
-      );
+      Alert.alert(TRANSLATIONS.alertTitle, TRANSLATIONS.alertDescription);
     }
   }, [isError]);
 
@@ -314,8 +215,8 @@ export function AccountingSummary({
           data={client.user.personalData}
           names={personalDataTranslatedKeys}
           onTopRightBtnPress={handleClientCreateCompany}
-          cardName="Client"
-          topRightButtonName="More"
+          cardName={TRANSLATIONS.clientCardName}
+          topRightButtonName={TRANSLATIONS.clientCardTopRightButtonName}
           topRightButtonIcon={<InfoIco />}
           cardClassName="mt-0"
         />
@@ -375,7 +276,7 @@ export function AccountingSummary({
           cardClassName="mt-0"
           data={prepareOrderData(order)}
           names={orderInfoTranslatedKeys}
-          cardName="Order"
+          cardName={TRANSLATIONS.orderCardName}
         />
         <EntityAsACard
           data={{
@@ -405,7 +306,7 @@ export function AccountingSummary({
       </ScrollView>
       <ButtonTamagui
         isPending={isPending}
-        text="Generate Invoice"
+        text={TRANSLATIONS.generateInvoiceButton}
         buttonProps={{
           onPress: handleAccountOrder,
           mt: '$4',
