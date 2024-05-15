@@ -34,6 +34,7 @@ export function MailButton({ emailOptions }: MailButtonProps) {
         } as never
       }
       f={1}
+      color="$color9"
       onPress={onSendEmailAction}
     >
       <Button.Icon>

@@ -40,6 +40,7 @@ export function CallButton({ phoneNumber }: CallButtonProps) {
           color: color4.val,
         } as never
       }
+      color="$color9"
       onPress={onCallAction}
     >
       <Button.Icon>
