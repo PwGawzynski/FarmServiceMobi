@@ -9,6 +9,7 @@ import { selectTheme } from '../../../../src/redux/feature/userSlice';
 import { Theme } from '../../../../FarmServiceApiTypes/Account/Constants';
 import { Colors } from '../../../../settings/styles/colors';
 import { ActivityDesktopRoot } from '../../../pages/owner/mobi/ActivitiesDesktopTopTabNavigator/ActivityDesktopRoot';
+import { AppSettings } from '../../../pages/owner/mobi/ActivitiesDesktopTopTabNavigator/AppSettings';
 
 const Stack = createMaterialTopTabNavigator<ActivityDesktopDriverParamList>();
 
@@ -26,6 +27,7 @@ export function ActivitiesDesktopDriver() {
       initialRouteName="lastActivities"
     >
       <Stack.Screen name="lastActivities" component={ActivityDesktopRoot} />
+      <Stack.Screen name="appSettings" component={AppSettings} />
     </Stack.Navigator>
   );
 }
