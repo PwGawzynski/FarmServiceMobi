@@ -69,6 +69,14 @@
         "markerDescription": "Przybliżona lokalizacja twojego pola"
       }
     },
+    "appSettings": {
+      "screenTitle": "Ustawienia aplikacji",
+      "settings": {
+        "logout": "Wyloguj się",
+        "changeTheme": "Zmień motyw",
+        "changeLang": "Zmień język"
+      }
+    },
     "activityDesktopRoot": {
       "title": "Ostatnie aktywności",
       "newActivity": "Nowa aktywność",

@@ -83,6 +83,14 @@ export const TranslationNames = {
         markerDescription: 'screens.AuthDriver.createField.markerDescription',
       },
     },
+    appSettings: {
+      screenTitle: 'screens.appSettings.screenTitle',
+      settings: {
+        logout: 'screens.appSettings.settings.logout',
+        changeTheme: 'screens.appSettings.settings.changeTheme',
+        changeLang: 'screens.appSettings.settings.changeLang',
+      },
+    },
     activityDesktopRoot: {
       title: 'screens.activityDesktopRoot.title',
       newActivity: 'screens.activityDesktopRoot.newActivity',

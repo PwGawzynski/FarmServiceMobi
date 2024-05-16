@@ -12,7 +12,10 @@ import {
   IdentityAuthTokenLoginStored,
   LoginUser,
 } from '../FarmServiceApiTypes/User/LoginUser';
-import { ResponseObject } from '../FarmServiceApiTypes/Respnse/responseGeneric';
+import {
+  ResponseCode,
+  ResponseObject,
+} from '../FarmServiceApiTypes/Respnse/responseGeneric';
 import { UserResponseBase } from '../FarmServiceApiTypes/User/Responses';
 import { Theme } from '../FarmServiceApiTypes/Account/Constants';
 import {
@@ -226,6 +229,23 @@ export class ApiSelf {
     return undefined;
   }
 
+  static async logout() {
+    const response = (
+      await ApiSelf.axiosInstance.post('/auth/logout', undefined, {
+        headers: {
+          Authorization: `Bearer ${ApiSelf.refresh_token}`,
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+      })
+    ).data as ResponseObject<IdentityAuthTokenLoginRaw>;
+    if (response.code === ResponseCode.ProcessedCorrect) {
+      await ApiSelf.remTokens();
+      return true;
+    }
+    return false;
+  }
+
   /**
    * Method used to save tokens in SecureStore, received in response from Identity
    * @param response ResponseObject<IdentityAuthTokenLoginRaw> data from Identity
@@ -260,6 +280,14 @@ export class ApiSelf {
       return true;
     }
     throw new Error('cannot access data payload from response');
+  }
+
+  private static async remTokens() {
+    await SecureStore.deleteItemAsync('Tokens');
+    ApiSelf.access_token = '';
+    ApiSelf.refresh_token = '';
+    await ApiSelf.initAxios();
+    return true;
   }
 
   /* ----------------------------------------API-CALS---------------------------------------------*/
@@ -583,7 +611,6 @@ export class ApiSelf {
   static async updateWorkerStatusOrPosition(
     data: UpdateWorkerStatusOrPositionReqI,
   ) {
-    // throw new Error('kurewka');
     return (
       (await ApiSelf.axiosInstance.put(
         '/worker/update-status-or-position',
