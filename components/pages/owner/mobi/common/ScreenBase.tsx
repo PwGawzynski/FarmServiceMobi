@@ -13,6 +13,8 @@ export type Props = {
   activityDot?: boolean;
   bottomSheetsProps?: MainBottomSheetProps;
   switchOfMargins?: boolean;
+  topRightButton?: React.ReactNode;
+  titleBoxStyles?: string;
 };
 
 export function ScreenBase({
@@ -21,6 +23,8 @@ export function ScreenBase({
   activityDot,
   bottomSheetsProps,
   switchOfMargins,
+  topRightButton,
+  titleBoxStyles,
 }: Props) {
   return (
     <View
@@ -44,10 +48,15 @@ export function ScreenBase({
               </View>
             )}
             {name && (
-              <View className="w-full">
+              <View
+                className={`w-full justify-between flex-row ${titleBoxStyles}`}
+              >
                 <Text className="text-2xl uppercase font-bold text-dark dark:text-green">
                   {name}
                 </Text>
+                {topRightButton && (
+                  <View className="">{topRightButton && topRightButton}</View>
+                )}
               </View>
             )}
             {children}
