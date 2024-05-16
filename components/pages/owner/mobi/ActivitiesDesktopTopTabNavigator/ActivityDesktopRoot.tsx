@@ -1,8 +1,8 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Toast from 'react-native-toast-message';
 import { ListRenderItemInfo } from '@shopify/flash-list';
-import { YStack } from 'tamagui';
+import { useTheme, YStack } from 'tamagui';
 import { t } from 'i18next';
 import { ScreenBase } from '../common/ScreenBase';
 import {
@@ -16,6 +16,7 @@ import { UniversalList } from '../../../../organisms/UniversalList';
 import { sortActivitiesByDateDesc } from '../../../../../helepers/filterFunctions';
 import { ActivityItem } from '../../../../atoms/ActivityItem';
 import { TranslationNames } from '../../../../../locales/TranslationNames';
+import GearIco from '../../../../../assets/settings.svg';
 
 const TRANSLATIONS = {
   title: t(TranslationNames.screens.activityDesktopRoot.title),
@@ -82,6 +83,17 @@ export function ActivityDesktopRoot({
     dataLength.current = data?.length;
   }, [data]);
 
+  const { color4 } = useTheme();
+
+  const appSettingsButton = useMemo(() => {
+    const handlePress = () => navigation.navigate('appSettings');
+    return (
+      <YStack onPress={handlePress}>
+        <GearIco height={30} width={30} color={color4?.val} />
+      </YStack>
+    );
+  }, [navigation]);
+
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let es: any;
@@ -117,7 +129,7 @@ export function ActivityDesktopRoot({
   );
 
   return (
-    <ScreenBase name={TRANSLATIONS.title}>
+    <ScreenBase name={TRANSLATIONS.title} topRightButton={appSettingsButton}>
       <YStack f={1} mt="$4">
         <UniversalList<ActivityResponseBase>
           data={sortActivitiesByDateDesc(data)}
