@@ -69,6 +69,14 @@
         "markerDescription": "Estimated Field Location"
       }
     },
+    "appSettings": {
+      "screenTitle": "App settings",
+      "settings": {
+        "logout": "Log out",
+        "changeTheme": "Change theme",
+        "changeLang": "Change Language"
+      }
+    },
     "activityDesktopRoot": {
       "title": "Last activities",
       "newActivity": "New activity",
@@ -277,7 +285,7 @@
         "clientCardName": "Client",
         "clientCardTopRightButtonName": "More",
         "orderCardName": "Order",
-        "generateInvoiceButton": "Generate invoice",
+        "generateInvoiceButton": "Generate invoice"
       },
       "orderAccounting": {
         "screenTitle": "Order accounting"
@@ -293,7 +301,7 @@
       },
       "orderInvoices": {
         "screenTitle": "Order invoices",
-        "backButton": "Back",
+        "backButton": "Back"
       }
     },
     "ordersDesktopDriver":{
