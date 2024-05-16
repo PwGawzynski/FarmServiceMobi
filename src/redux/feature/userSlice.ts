@@ -184,10 +184,17 @@ const UserSlice = createSlice({
     setCompany: (state, value) => {
       state.company = value.payload;
     },
+    clearUserData: state => {
+      Object.keys(state).forEach(key => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
+        state[key] = initUserData[key as keyof UserContextI];
+      });
+    },
   },
 });
 
-export const { setTheme, setCompany } = UserSlice.actions;
+export const { setTheme, setCompany, clearUserData } = UserSlice.actions;
 
 export const selectTheme = (state: UserSliceI) => state.user?.account.theme;
 export const selectUserRole = (state: UserSliceI) => state.user?.role;
