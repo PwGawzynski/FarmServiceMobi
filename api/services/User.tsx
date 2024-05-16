@@ -104,3 +104,9 @@ export async function resetPwd(data: UserResetPasswordReqI) {
     data,
   );
 }
+
+export async function logout() {
+  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
+  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
+  return apiHandler(UNAUTHORIZED_MSG, DEFAULT_MSG, Api.logout);
+}
