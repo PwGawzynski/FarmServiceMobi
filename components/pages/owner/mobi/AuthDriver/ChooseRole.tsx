@@ -26,12 +26,14 @@ export function ChooseRole({
     navigation.navigate('register', {
       role: UserRole.Owner,
       byGoogle: params?.byGoogle,
+      byMail: params?.byMail,
     });
   };
   const handleOnWorkerPress = () => {
     navigation.navigate('register', {
       role: UserRole.Worker,
       byGoogle: params?.byGoogle,
+      byMail: params?.byMail,
     });
   };
 
