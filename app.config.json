@@ -20,6 +20,16 @@
       "bitcode": false,
       "config": {
         "usesNonExemptEncryption": false
+      },
+      "googleSignIn": {
+        "reservedClientId": "com.googleusercontent.apps.1000011250982-i8mm7lll3aie0vv2jbvigbmp0gv94b8c"
+      },
+      "infoPlist": {
+        "CFBundleURLTypes": [
+          {
+            "CFBundleURLSchemes": ["com.googleusercontent.apps.1000011250982-i8mm7lll3aie0vv2jbvigbmp0gv94b8c"]
+          }
+        ]
       }
     },
     "android": {
@@ -37,7 +47,7 @@
         "expo-build-properties",
         {
           "ios": {
-            "deploymentTarget": "16.4"
+            "deploymentTarget": "17.4"
           }
         }
       ],
@@ -47,10 +57,12 @@
           "locationAlwaysAndWhenInUsePermission": "Allow FarmService to use your location."
         }
       ],
-      "@react-native-google-signin/google-signin",
-      {
-        "iosUrlScheme": "com.googleusercontent.apps._some_id_here_"
-      },
+      [
+        "@react-native-google-signin/google-signin",
+        {
+          "iosUrlScheme": "com.googleusercontent.apps.1000011250982-i8mm7lll3aie0vv2jbvigbmp0gv94b8c"
+        }
+      ],
 
       [
         "expo-camera",
