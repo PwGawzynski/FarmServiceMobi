@@ -7,15 +7,27 @@ import { address } from 'ip';
   userInterfaceStyle: 'automatic',
   ios: {
     bundleIdentifier: 'com.pwgawzynski.farmservice',
+      supportsTablet: true,
+      bitcode: false,
+      config: {
+          usesNonExemptEncryption: false
+      },
+      googleSignIn: {
+          reservedClientId: "com.googleusercontent.apps.1000011250982-i8mm7lll3aie0vv2jbvigbmp0gv94b8c"
+      },
+      infoPlist: {
+          CFBundleURLTypes: [
+              {
+                  CFBundleURLSchemes: ["com.googleusercontent.apps.1000011250982-i8mm7lll3aie0vv2jbvigbmp0gv94b8c"]
+              }
+          ]
+      }
   },
      plugins: [
          "expo-localization",
          "expo-secure-store",
          'react-native-reanimated/plugin',
-         "@react-native-google-signin/google-signin",
-         {
-             "iosUrlScheme": "com.googleusercontent.apps._some_id_here_"
-         }
+         "@react-native-google-signin/google-signin"
      ],
   eas: {
     projectId: 'd93bb622-30d0-4f55-85c6-5fde5f331ce4',
