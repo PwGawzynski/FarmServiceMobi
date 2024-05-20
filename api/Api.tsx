@@ -437,6 +437,14 @@ export class ApiSelf {
     ).data.payload as OrderResponseBase | undefined;
   }
 
+  static async isMailFree(email: string) {
+    return (
+      (await ApiSelf.axiosInstance.get('/auth/exist', {
+        params: { email },
+      })) as AxiosResponse<ResponseObject>
+    ).data.payload as OrderResponseBase | undefined;
+  }
+
   static async updateOrderPricing(data: CreateOrderPriceReqI) {
     return (
       (await ApiSelf.axiosInstance.put(
@@ -800,6 +808,7 @@ function methodDecorator(
         'googleLogin',
         'registerNewUser',
         'logout',
+        'isMailFree',
       ].includes(key)
     )
       return originalMethod.apply(this, args);
