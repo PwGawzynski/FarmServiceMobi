@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
 import { t } from 'i18next';
+import { Alert } from 'react-native';
 import { ScreenBase } from '../common/ScreenBase';
 import { AuthDriverProps } from '../../../../../types/self/navigation/Owner/props/AuthDriverProps';
 import { createUserSetup } from '../../../../../helepers/FormSetups/CreateUserSetup';
@@ -32,6 +33,9 @@ export function Register({
         redirectScreenName: 'chooseLoginType',
       });
     },
+    onError: error => {
+      Alert.alert('Error', error.message);
+    },
   });
   const {
     control,
@@ -40,7 +44,7 @@ export function Register({
     formState: { errors },
   } = useForm<CreateUserForm>();
   const onSubmit = (d: CreateUserForm) => {
-    if (params && params.byGoogle)
+    if (params && (params.byGoogle || params.byMail))
       mutate({
         address: {
           city: d.city,
@@ -52,7 +56,8 @@ export function Register({
           postalCode: d.postalCode,
         },
         role: params.role,
-        email: params.byGoogle.email,
+        email: params.byGoogle?.email || params.byMail?.email || d.email,
+        password: params.byMail?.password,
         personalData: {
           name: d.name,
           surname: d.surname,
