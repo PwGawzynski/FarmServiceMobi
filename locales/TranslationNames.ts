@@ -107,6 +107,9 @@ export const TranslationNames = {
       newActivityDescription:
         'screens.activityDesktopRoot.newActivityDescription',
       noActivities: 'screens.activityDesktopRoot.noActivities',
+      emptyListHint: 'screens.activityDesktopRoot.emptyListHint',
+      emptyListHintDescription:
+        'screens.activityDesktopRoot.emptyListHintDescription',
     },
     machineDesktopDriver: {
       addMachineScreen: {
@@ -417,6 +420,7 @@ export const TranslationNames = {
         title: 'screens.ordersDesktopDriver.orderDesktop.title',
         searchPlaceholder:
           'screens.ordersDesktopDriver.orderDesktop.searchPlaceholder',
+        emptyList: 'screens.ordersDesktopDriver.orderDesktop.emptyList',
       },
     },
     ownerRootDriver: {
@@ -615,10 +619,10 @@ export const TranslationNames = {
       pendingStatus: 'components.orderForm.pendingStatus',
     },
     verticalList: {
-      problemOccurred: 'components.verticalList.problemOccurred',
+      problemOccurred: 'components.problemOccurred.problemOccurred',
     },
     listInfo: {
-      unknownError: 'components.listEmpty.unknownError',
+      unknownError: 'components.listInfo.unknownError',
     },
     emptyListItemCreator: {
       button: 'components.emptyListItemCreator.button',

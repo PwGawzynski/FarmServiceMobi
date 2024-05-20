@@ -325,7 +325,8 @@
         },
         "orderDesktop": {
             "title": "Orders",
-            "searchPlaceholder": "Find an order"
+            "searchPlaceholder": "Find an order",
+            "emptyList": "No orders to display, swipe right and add new one"
         }
     },
     "ownerRootDriver": {
@@ -424,7 +425,9 @@
     "activityDesktopRoot": {
       "welcome": "Welcome",
       "newTaskIncomeHeader": "New task !",
-      "newTaskIncomeDescription": "You have been added to task list"
+      "newTaskIncomeDescription": "You have been added to task list",
+      "emptyListHint": "No activities to display",
+      "emptyListHintDescription": "A little empty here 😕 We were unable to find any activity related to your company. Don't worry, you're probably just getting started. Start by adding employees, customers, fields, etc. and then sit back and watch the work unfold."
     }
   },
   "serviceDefaults": {
