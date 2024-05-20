@@ -22,6 +22,8 @@ import { OperationConfirmedAnimation } from '../pages/owner/mobi/AuthDriver/Oper
 import { WorkerRootDriver } from './worker/WorkerRootDriver';
 import { AddFiled } from '../pages/owner/mobi/AuthDriver/AddFiled';
 import { EditField } from '../pages/owner/mobi/AuthDriver/EditField';
+import { ChooseRole } from '../pages/owner/mobi/AuthDriver/ChooseRole';
+import { Register } from '../pages/owner/mobi/AuthDriver/Register';
 
 const Stack = createNativeStackNavigator<AuthDriverParamList>();
 
@@ -31,14 +33,12 @@ export default function AuthDriver() {
   useEffect(() => {
     setColorScheme(theme === Theme.light ? 'light' : 'dark');
   }, [theme]);
-
-  // TODO impossible for ios do it for android
   /* const [{ illuminance }, setData] = useState({ illuminance: 0 });
-  useEffect(() => {
-    const subscription = LightSensor.addListener(setData);
+    useEffect(() => {
+      const subscription = LightSensor.addListener(setData);
 
-    return subscription && subscription.remove();
-  }, []); */
+      return subscription && subscription.remove();
+    }, []); */
 
   if (theme === undefined) return null;
   return (
@@ -107,6 +107,24 @@ export default function AuthDriver() {
           }}
           name="chooseRegisterType"
           component={ChooseRegisterType}
+        />
+        <Stack.Screen
+          options={{
+            ...NativeStackScreenOptionsBase,
+            animation: 'fade',
+            gestureDirection: 'horizontal',
+          }}
+          name="chooseRole"
+          component={ChooseRole}
+        />
+        <Stack.Screen
+          options={{
+            ...NativeStackScreenOptionsBase,
+            animation: 'fade',
+            gestureDirection: 'horizontal',
+          }}
+          name="register"
+          component={Register}
         />
         <Stack.Screen
           options={{
