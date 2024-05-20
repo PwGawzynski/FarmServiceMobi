@@ -27,7 +27,11 @@ export function CallButton({ phoneNumber }: CallButtonProps) {
   const { color4 } = useTheme();
   useEffect(() => {
     (async () => {
-      if (!(await Linking.canOpenURL(`tel:${phoneNumber}`))) {
+      try {
+        if (!(await Linking.canOpenURL(`tel:${phoneNumber}`))) {
+          performAlert();
+        }
+      } catch (e) {
         performAlert();
       }
     })();
