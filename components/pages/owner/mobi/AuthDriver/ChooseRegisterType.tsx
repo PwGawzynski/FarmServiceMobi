@@ -25,7 +25,7 @@ export function ChooseRegisterType({
         </Text>
         <AppButton
           className="max-h-12"
-          onPress={() => navigation.navigate('chooseRole', {})}
+          onPress={() => navigation.navigate('emailAndPwdRegister')}
           title={t(
             TranslationNames.screens.authDriver.chooseRegisterType.email,
           )}
