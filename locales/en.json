@@ -91,7 +91,9 @@
       "title": "Last activities",
       "newActivity": "New activity",
       "newActivityDescription": "New activity has been registered",
-      "noActivities": "No activities to display"
+      "noActivities": "No activities to display",
+      "emptyListHint": "No activities to display",
+      "emptyListHintDescription": "A little empty here 😕 We were unable to find any activity related to your company. Don't worry, you're probably just getting started. Start by adding employees, customers, fields, etc. and then sit back and watch the work unfold."
     },
     "machineDesktopDriver": {
       "addMachineScreen": {
@@ -426,8 +428,6 @@
       "welcome": "Welcome",
       "newTaskIncomeHeader": "New task !",
       "newTaskIncomeDescription": "You have been added to task list",
-      "emptyListHint": "No activities to display",
-      "emptyListHintDescription": "A little empty here 😕 We were unable to find any activity related to your company. Don't worry, you're probably just getting started. Start by adding employees, customers, fields, etc. and then sit back and watch the work unfold."
     }
   },
   "serviceDefaults": {
