@@ -1,6 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
 import { YStack } from 'tamagui';
 import { t } from 'i18next';
 import { useTranslation } from 'react-i18next';
@@ -28,16 +27,15 @@ const TRANSLATIONS = {
 };
 
 export function AppSettings() {
-  const { mutate, isSuccess } = useMutation({
+  const dispatch = useDispatch();
+  const { mutate } = useMutation({
     mutationKey: ['logout'],
     mutationFn: logout,
-  });
-  const dispatch = useDispatch();
-  useEffect(() => {
-    if (isSuccess) {
+    onSuccess: () => {
       dispatch(clearUserData());
-    }
-  }, [isSuccess]);
+    },
+  });
+
   const theme = useSelector(selectTheme);
   const { i18n } = useTranslation();
   const { language } = i18n;
@@ -45,6 +43,7 @@ export function AppSettings() {
   const handleActions = (key: string) => {
     switch (key) {
       case 'logout':
+        dispatch(clearUserData());
         mutate();
         break;
       case 'changeTheme':
