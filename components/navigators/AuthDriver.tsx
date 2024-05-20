@@ -24,6 +24,7 @@ import { AddFiled } from '../pages/owner/mobi/AuthDriver/AddFiled';
 import { EditField } from '../pages/owner/mobi/AuthDriver/EditField';
 import { ChooseRole } from '../pages/owner/mobi/AuthDriver/ChooseRole';
 import { Register } from '../pages/owner/mobi/AuthDriver/Register';
+import { EmailAndPwdRegister } from '../pages/owner/mobi/AuthDriver/EmailAndPwdRegister';
 
 const Stack = createNativeStackNavigator<AuthDriverParamList>();
 
@@ -98,6 +99,16 @@ export default function AuthDriver() {
           }}
           name="loginByEmail"
           component={LoginByEmail}
+        />
+        <Stack.Screen
+          options={{
+            ...NativeStackScreenOptionsBase,
+            animation: 'fade',
+            gestureEnabled: true,
+            gestureDirection: 'horizontal',
+          }}
+          name="emailAndPwdRegister"
+          component={EmailAndPwdRegister}
         />
         <Stack.Screen
           options={{
