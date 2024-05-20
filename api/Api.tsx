@@ -8,6 +8,7 @@ import EventSource, {
   TimeoutEvent,
 } from 'react-native-sse';
 import {
+  GoogleAuthResponseI,
   IdentityAuthTokenLoginRaw,
   IdentityAuthTokenLoginStored,
   LoginUser,
@@ -17,7 +18,6 @@ import {
   ResponseObject,
 } from '../FarmServiceApiTypes/Respnse/responseGeneric';
 import { UserResponseBase } from '../FarmServiceApiTypes/User/Responses';
-import { Theme } from '../FarmServiceApiTypes/Account/Constants';
 import {
   CreateUserReqI,
   UserResetPasswordReqI,
@@ -300,28 +300,25 @@ export class ApiSelf {
    */
   static async registerNewUser(userData: CreateUserReqI) {
     const serializedData = {
-      email: userData.email,
-      password: userData.password,
+      email: userData?.email,
+      password: userData?.password,
       personalData: {
-        name: userData.personalData.name,
-        surname: userData.personalData.surname,
-        phoneNumber: userData.personalData.phoneNumber,
+        name: userData.personalData?.name,
+        surname: userData.personalData?.surname,
+        phoneNumber: userData.personalData?.phoneNumber,
       },
       address: {
-        city: userData.address.city,
-        county: userData.address.county,
-        street: userData.address.street,
-        apartmentNumber: userData.address.apartmentNumber,
-        voivodeship: userData.address.voivodeship,
-        houseNumber: userData.address.houseNumber,
-        postalCode: userData.address.postalCode,
-      },
-      account: {
-        theme: Theme.light,
+        city: userData.address?.city,
+        county: userData.address?.county,
+        street: userData.address?.street,
+        apartmentNumber: userData.address?.apartmentNumber,
+        voivodeship: userData.address?.voivodeship,
+        houseNumber: userData.address?.houseNumber,
+        postalCode: userData.address?.postalCode,
       },
       role: userData.role,
     } as CreateUserReqI;
-    return ApiSelf.axiosInstance.post('/user', serializedData);
+    return (await ApiSelf.axiosInstance.post('/user', serializedData)).data;
   }
 
   static async me() {
@@ -355,6 +352,33 @@ export class ApiSelf {
     ).data;
     if (await ApiSelf.saveTokensToSecureStoreFromResPayload(response))
       return ApiSelf.me();
+  }
+
+  static async googleLogin(
+    itToken: string,
+  ): Promise<UserResponseBase | string | undefined> {
+    const response: ResponseObject<GoogleAuthResponseI> = (
+      await ApiSelf.axiosInstance.post('/auth/g-login', undefined, {
+        params: { 'id-token': itToken },
+      })
+    ).data;
+    if (
+      response.payload &&
+      response.payload.access_token &&
+      response.payload.refresh_token
+    ) {
+      if (
+        await ApiSelf.saveTokensToSecureStoreFromResPayload(response as never)
+      ) {
+        return (
+          (await ApiSelf.axiosInstance.get('/user/me')) as AxiosResponse<
+            ResponseObject<UserResponseBase>
+          >
+        ).data.payload;
+      }
+    }
+    if (response.payload) return response.payload.email;
+    return undefined;
   }
 
   // eslint-disable-next-line no-underscore-dangle
@@ -769,7 +793,15 @@ function methodDecorator(
   // eslint-disable-next-line no-param-reassign,@typescript-eslint/no-explicit-any,func-names
   descriptor.value = async function (...args: any[]) {
     // to allow user login when tokens are stale or not exist
-    if (['loginUser', 'init'].includes(key))
+    if (
+      [
+        'loginUser',
+        'init',
+        'googleLogin',
+        'registerNewUser',
+        'logout',
+      ].includes(key)
+    )
       return originalMethod.apply(this, args);
     const tokenRestorationStart = Date.now();
     const tokens = await ApiSelf.session();
