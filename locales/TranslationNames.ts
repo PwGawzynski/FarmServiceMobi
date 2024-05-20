@@ -82,6 +82,16 @@ export const TranslationNames = {
         markerName: 'screens.AuthDriver.createField.markerName',
         markerDescription: 'screens.AuthDriver.createField.markerDescription',
       },
+      register: {
+        title: 'screens.AuthDriver.register.title',
+        confirmation: 'screens.AuthDriver.register.confirmation',
+        registerButton: 'screens.AuthDriver.register.registerButton',
+      },
+      chooseRole: {
+        title: 'screens.AuthDriver.chooseRole.title',
+        owner: 'screens.AuthDriver.chooseRole.owner',
+        worker: 'screens.AuthDriver.chooseRole.worker',
+      },
     },
     appSettings: {
       screenTitle: 'screens.appSettings.screenTitle',

@@ -4,7 +4,7 @@
       "chooseLoginType": {
         "header": "Sing up for FarmService",
         "email": "e-mail or NIP ",
-        "google": "Sign in with Google",
+        "google": "Go with Google",
         "registerButton": "Create One Now",
         "registerText": "Don't have an account?",
         "instruction": "Sing up for FarmService, and start working with pleasure"
@@ -67,6 +67,16 @@
         "resetButton": "Reset",
         "markerName": "Field",
         "markerDescription": "Estimated Field Location"
+      },
+      "register": {
+        "title": "Register",
+        "confirmation": "User has been created successfully, remember to confirm your email address.",
+        "registerButton": "Register"
+      },
+      "chooseRole": {
+        "title": "Choose role",
+        "owner": "Owner",
+        "worker": "Worker"
       }
     },
     "appSettings": {
