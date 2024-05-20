@@ -17,12 +17,14 @@ import { AlertI, TwoOptionAlert } from '../../../../molecules/TwoOptionAlert';
 import { PendingInfo } from '../../../../atoms/PendingInfo';
 import { FormErrorInfo } from '../../../../atoms/FormErrorInfo';
 import { FormCreator } from '../../../../atoms/FormCreator';
-import { createClientSetup } from '../../../../../helepers/FormSetups/CreateClientSetup';
+import { createUserSetup } from '../../../../../helepers/FormSetups/CreateUserSetup';
 import { AppButton } from '../../../../atoms/AppButton';
 
-export type CreateClientForm = Pick<CreateClientReqI['user'], 'email'> &
+export type CreateUserForm = Omit<CreateClientReqI['user'], 'email'> &
   CreateUserReqI['personalData'] &
-  CreateClientReqI['user']['address'];
+  CreateClientReqI['user']['address'] & {
+    email?: string;
+  };
 
 const CLEAR_TIMEOUT = 500;
 const SCREEN_NAME = t(
@@ -38,7 +40,7 @@ const EDIT_BUTTON_VALUE = t(
   TranslationNames.screens.clientDesktopDriver.createClient.editSubmitButton,
 );
 
-function prepareDefaultValues(client?: ClientResponseBase): CreateClientForm {
+function prepareDefaultValues(client?: ClientResponseBase): CreateUserForm {
   return {
     email: client?.email || '',
     name: client?.user.personalData.name || '',
@@ -51,14 +53,14 @@ function prepareDefaultValues(client?: ClientResponseBase): CreateClientForm {
     postalCode: client?.user.address.postalCode || '',
     street: client?.user.address.street || '',
     voivodeship: client?.user.address.voivodeship || '',
-  } as CreateClientForm;
+  } as CreateUserForm;
 }
 
 const convertFormDataToRequestType = (
-  data: CreateClientForm,
+  data: CreateUserForm,
 ): CreateClientReqI => ({
   user: {
-    email: data.email,
+    email: data.email ?? '',
     personalData: {
       name: data.name,
       surname: data.surname,
@@ -78,11 +80,11 @@ const convertFormDataToRequestType = (
   },
 });
 const convertFormDataToEditRequestType = (
-  data: CreateClientForm,
+  data: CreateUserForm,
   client: ClientResponseBase,
 ): UpdateClientReqI => ({
   client: client.id,
-  email: data.email,
+  email: data.email ?? '',
   personalData: {
     name: data.name,
     surname: data.surname,
@@ -160,7 +162,7 @@ export function CreateClient({
     setValue,
     getValues,
     formState: { errors, isDirty },
-  } = useForm<CreateClientForm>({
+  } = useForm<CreateUserForm>({
     defaultValues: useMemo(
       () => prepareDefaultValues(client),
       [params?.client],
@@ -315,9 +317,13 @@ export function CreateClient({
         <FormErrorInfo error={error?.message || editError?.message} />
       </View>
       <FormCreator
-        controllerSetups={createClientSetup(control, () => {
-          setValue('phoneNumber', '+48 ');
-        })}
+        controllerSetups={createUserSetup(
+          control,
+          () => {
+            setValue('phoneNumber', '+48 ');
+          },
+          true,
+        )}
         errors={errors}
       />
       <AppButton

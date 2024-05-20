@@ -5,7 +5,10 @@ import { ErrorCause } from '../../types/self/api/ErrorTypes';
 import { ResponseObject } from '../../FarmServiceApiTypes/Respnse/responseGeneric';
 import { LoginUser } from '../../FarmServiceApiTypes/User/LoginUser';
 import { TranslationNames } from '../../locales/TranslationNames';
-import { UserResetPasswordReqI } from '../../FarmServiceApiTypes/User/Requests';
+import {
+  CreateUserReqI,
+  UserResetPasswordReqI,
+} from '../../FarmServiceApiTypes/User/Requests';
 import { UserResponseBase } from '../../FarmServiceApiTypes/User/Responses';
 
 /**
@@ -83,6 +86,10 @@ export async function login(
   } catch (e) {
     if (e instanceof AxiosError) {
       switch (e.response?.status) {
+        case HttpStatusCode.BadRequest:
+          throw new Error(e.response.data.payload.message, {
+            cause: HttpStatusCode.BadRequest,
+          });
         case HttpStatusCode.Unauthorized:
           throw new Error(UNAUTHORIZED_MSG, {
             cause: HttpStatusCode.Unauthorized,
@@ -103,6 +110,39 @@ export async function resetPwd(data: UserResetPasswordReqI) {
     Api.resetPassword,
     data,
   );
+}
+
+export async function registerUser(data: CreateUserReqI) {
+  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
+  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
+  return apiHandler<CreateUserReqI>(
+    UNAUTHORIZED_MSG,
+    DEFAULT_MSG,
+    Api.registerNewUser,
+    data,
+  );
+}
+
+export async function loginByGoogle(idToken: string) {
+  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
+  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
+  return apiHandler<string>(
+    UNAUTHORIZED_MSG,
+    DEFAULT_MSG,
+    Api.googleLogin,
+    idToken,
+  ) as Promise<UserResponseBase | string | undefined>;
+}
+
+export async function isMailFree(email: string) {
+  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
+  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
+  return apiHandler<string>(
+    UNAUTHORIZED_MSG,
+    DEFAULT_MSG,
+    Api.isMailFree,
+    email,
+  ) as Promise<boolean | undefined>;
 }
 
 export async function logout() {

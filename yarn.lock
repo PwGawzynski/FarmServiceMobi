@@ -1630,6 +1630,11 @@
   dependencies:
     invariant "^2.2.4"
 
+"@react-native-google-signin/google-signin@^11.0.1":
+  version "11.0.1"
+  resolved "https://registry.yarnpkg.com/@react-native-google-signin/google-signin/-/google-signin-11.0.1.tgz#1bff0c8f65d3b32eac1622f68293e94137b96360"
+  integrity sha512-ZRSEd1ME31XZ+azS3Qe6TRb8NRicGmtRdD1vT4Tz2birnlTfNfRgy4qLrEKNZyMUTodA6+J2UvA2JWwT8ZQ/dw==
+
 "@react-native/assets-registry@0.74.83", "@react-native/assets-registry@~0.74.83":
   version "0.74.83"
   resolved "https://registry.npmjs.org/@react-native/assets-registry/-/assets-registry-0.74.83.tgz"
@@ -5273,21 +5278,21 @@ expo-constants@~16.0.0, expo-constants@~16.0.1:
   dependencies:
     "@expo/config" "~9.0.0-beta.0"
 
-expo-dev-client@~4.0.13:
-  version "4.0.13"
-  resolved "https://registry.npmjs.org/expo-dev-client/-/expo-dev-client-4.0.13.tgz"
-  integrity sha512-OKv78etzW3Yx4ecNEWbedry5z/heG7yfybL+HKkckowZaB13Bdm2h+RcDOxt2sNE8Lu4UQHa9VU5Cfa9s0+NnA==
+expo-dev-client@~4.0.14:
+  version "4.0.14"
+  resolved "https://registry.yarnpkg.com/expo-dev-client/-/expo-dev-client-4.0.14.tgz#73d2f8b6f173d01f07af3e01cf8d5acdc6e05c01"
+  integrity sha512-s5/FZZdgvoxBGA35QgNet61Dc1jh+8u375uaYkH9pUvfKFXURd9PDDAWvtAnOo+QYg9WwgiHPo7dKeCdN6pOPA==
   dependencies:
-    expo-dev-launcher "4.0.14"
+    expo-dev-launcher "4.0.15"
     expo-dev-menu "5.0.14"
     expo-dev-menu-interface "1.8.3"
     expo-manifests "~0.14.0"
     expo-updates-interface "~0.16.2"
 
-expo-dev-launcher@4.0.14:
-  version "4.0.14"
-  resolved "https://registry.npmjs.org/expo-dev-launcher/-/expo-dev-launcher-4.0.14.tgz"
-  integrity sha512-I8KXFjf7vvCwEvargeWUNBP1UHmeUNDxcnG0VXs+3Zmxc3qsTcbE+k8TU6IGeEuEp39gt3/jqEE5xmDmVnW//g==
+expo-dev-launcher@4.0.15:
+  version "4.0.15"
+  resolved "https://registry.yarnpkg.com/expo-dev-launcher/-/expo-dev-launcher-4.0.15.tgz#cd36f10b7e534e5caa176a5718381ccfa73b0b8c"
+  integrity sha512-avl4NTwFwalZjojFAXvINPgxAlcAxfdwy9PSsAq5KAkl9Vv+Vr8O2gI3nfrPwtqAA0iOIES/EKN0YFCiQuuvvg==
   dependencies:
     ajv "8.11.0"
     expo-dev-menu "5.0.14"

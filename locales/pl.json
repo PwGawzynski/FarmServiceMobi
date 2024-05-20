@@ -4,7 +4,7 @@
       "chooseLoginType": {
         "header": "Wybierz sposób logowania",
         "email": "e-mail lub NIP",
-        "google": "Zaloguj z Google",
+        "google": "Użyj Google",
         "registerButton": "Stwórz nowe konto",
         "registerText": "Nie masz jeszcze konta?",
         "instruction": "Zaloguj sie do FarmService i zacznij pracowac wygodniej"
@@ -67,6 +67,16 @@
         "resetButton": "Resetuj",
         "markerName": "Pole",
         "markerDescription": "Przybliżona lokalizacja twojego pola"
+      },
+      "register": {
+        "title": "Zarejestruj się",
+        "confirmation": "Konto zostało utworzone pomyślnie, sprawdź swoją skrzynkę e-mail, aby potwierdzić rejestrację",
+        "registerButton": "Zarejestruj się"
+      },
+      "chooseRole": {
+        "title": "Wybierz swoją rolę",
+        "owner": "Właściciel",
+        "worker": "Pracownik"
       }
     },
     "appSettings": {
@@ -293,8 +303,10 @@
         "createClientButton": "Utwórz nowego klienta"
       },
       "orderDesktop": {
-        "title": "Orders",
-        "searchPlaceholder": "Find an order"
+        "title": "Zamówienia",
+        "searchPlaceholder": "Znajdź zamówienie",
+        "emptyList": "Brak zamówień do wyświetlenia, przeciągni w prawo aby dodać nowe"
+
       }
     },
     "clientDesktopDriver": {
@@ -349,7 +361,7 @@
         "editButton": "Edytuj",
         "choose": "Wybierz",
         "hintTitle": "Wskazówka",
-        "hintDescription": "Status pracownika determinuje, czy pracownik może wykonywać zadania. Możesz zmienić status pracownika w dowolnym momencie.",
+        "hintDescription": "Status pracownika determinuje, czy pracownik może wykonywać zadania. Możesz zmienić status pracownika w dowolnym momencie."
       }
     }
   },
@@ -414,7 +426,9 @@
     "activityDesktopRoot": {
       "welcome": "Witaj",
       "newTaskIncomeHeader": "Nowe zadanie !",
-      "newTaskIncomeDescription": "Masz nowe zadanie do wykonania"
+      "newTaskIncomeDescription": "Masz nowe zadanie do wykonania",
+      "emptyListHint": "Trochę tu pusto...",
+      "emptyListHintDescription": "Trochę tu pusto \uD83D\uDE15 Nie byliśmy w stanie odnaleźć żadnych aktywności powiazanych z twoją firmą. Nic się nei martw prawdopodobie dopiero zaczynsz swoja przygodę. Zacznij dodając prawcowników, klientów pola itp a poźniej rozsiądz się wygodnie i obserwuj jak praca wre"
     }
   },
   "serviceDefaults": {

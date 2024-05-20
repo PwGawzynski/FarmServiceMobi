@@ -1,8 +1,10 @@
 import { Text, TouchableOpacity, TouchableOpacityProps } from 'react-native';
+import { ReactNode } from 'react';
 import { getFontScaledSize } from '../../helepers/FontSize';
 
 export type Props = {
   title: string;
+  children?: ReactNode;
 } & TouchableOpacityProps;
 
 export function AppButton(props: Props) {
@@ -11,6 +13,7 @@ export function AppButton(props: Props) {
       className="flex-1 h-full bg-dark dark:bg-green items-center justify-center rounded-full"
       {...props}
     >
+      {props.children}
       <Text
         numberOfLines={1}
         adjustsFontSizeToFit

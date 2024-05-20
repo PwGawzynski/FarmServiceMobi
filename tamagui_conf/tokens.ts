@@ -87,7 +87,7 @@ const color = {
   dark2: '#121212',
   dark3: '#191919',
   // bgPressed -> button default
-  dark4: '#d7df71',
+  dark4: Colors.GREEN,
   // borderColorHover -> button border
   dark5: '#d7df71',
   // button Pressed
@@ -107,7 +107,7 @@ const color = {
   light1: '#fff',
   // background
   light2: '#fff',
-  light3: 'hsl(0,0%,0%)',
+  light3: '#081e3f',
   light4: Colors.GREEN,
   light5: 'hsl(0, 0%, 94.0%)',
   light6: 'hsl(0, 0%, 92.0%)',

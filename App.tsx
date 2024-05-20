@@ -14,6 +14,7 @@ import { useFonts } from 'expo-font';
 import { useColorScheme } from 'nativewind';
 import { useReactQueryDevTools } from '@dev-plugins/react-query';
 import { useReactNavigationDevTools } from '@dev-plugins/react-navigation';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import AuthDriver from './components/navigators/AuthDriver';
 import store from './src/redux/app/Store';
 import { setUpUser } from './src/redux/feature/userSlice';
@@ -46,7 +47,9 @@ export default function App() {
   const navigationRef = useNavigationContainerRef();
   useReactNavigationDevTools(navigationRef);
   useReactQueryDevTools(queryClient);
-
+  GoogleSignin.configure({
+    iosClientId: process.env.EXPO_PUBLIC_GOOGLE_CLIENT_ID,
+  });
   if (!theme) return null;
 
   return (

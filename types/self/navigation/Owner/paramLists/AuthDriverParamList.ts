@@ -9,6 +9,7 @@ import { ActivityDesktopDriverParamList } from './activities/ActivityDesktopDriv
 import { WorkerRootDriverParamList } from '../../Worker/paramList/WorkerRootDriverParamList';
 import { ClientResponseBase } from '../../../../../FarmServiceApiTypes/Clients/Responses';
 import { FieldResponseBase } from '../../../../../FarmServiceApiTypes/Field/Ressponses';
+import { UserRole } from '../../../../../FarmServiceApiTypes/User/Enums';
 
 export type AuthDriverParamList = {
   createCompany: undefined;
@@ -16,6 +17,30 @@ export type AuthDriverParamList = {
   chooseLoginType: undefined;
   loginByEmail: undefined;
   chooseRegisterType: undefined;
+  chooseRole: {
+    byMail?: {
+      email: string;
+      password: string;
+    };
+    byGoogle?: {
+      email: string;
+      name?: string;
+      surname?: string;
+    };
+  };
+  register: {
+    role: UserRole.Owner | UserRole.Worker | UserRole.Client;
+    byGoogle?: {
+      email: string;
+      name?: string;
+      surname?: string;
+    };
+    byMail?: {
+      email: string;
+      password: string;
+    };
+  };
+  emailAndPwdRegister: undefined;
   passwordReset: undefined;
   addField: { client: ClientResponseBase; goBack?: boolean };
   editField: { client: ClientResponseBase; field: FieldResponseBase };

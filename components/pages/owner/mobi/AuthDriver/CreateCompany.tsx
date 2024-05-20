@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMutation } from '@tanstack/react-query';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ScreenBase } from '../common/ScreenBase';
 import { CreateCompanyReqI } from '../../../../../FarmServiceApiTypes/Company/Requests';
@@ -30,28 +30,35 @@ export function CreateCompany({
   const dispatch = useDispatch<AppDispatch>();
   const { t } = useTranslation();
 
-  const defaultValues = {
-    email: '',
-    name: '',
-    NIP: '',
-    phoneNumber: userPersonalData?.phoneNumber ?? '',
-    city: userAddress?.city ?? '',
-    county: userAddress?.county ?? '',
-    apartmentNumber: userAddress?.apartmentNumber ?? '',
-    houseNumber: userAddress?.houseNumber ?? '',
-    postalCode: userAddress?.postalCode ?? '',
-    street: userAddress?.street ?? '',
-    voivodeship: userAddress?.voivodeship ?? '',
-  } as CreateCompanyForm;
+  const defaultValues = useMemo(
+    () =>
+      ({
+        email: '',
+        name: '',
+        NIP: '',
+        phoneNumber: userPersonalData?.phoneNumber ?? '',
+        city: userAddress?.city ?? '',
+        county: userAddress?.county ?? '',
+        apartmentNumber: userAddress?.apartmentNumber ?? '',
+        houseNumber: userAddress?.houseNumber ?? '',
+        postalCode: userAddress?.postalCode ?? '',
+        street: userAddress?.street ?? '',
+        voivodeship: userAddress?.voivodeship ?? '',
+      }) as CreateCompanyForm,
+    [userAddress, userPersonalData],
+  );
 
   const {
     control,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<CreateCompanyForm>({
     defaultValues,
   });
-
+  useEffect(() => {
+    reset(defaultValues);
+  }, [defaultValues, reset]);
   const { mutate, data, isPending, error, isSuccess } = useMutation({
     mutationFn: createCompany,
   });

@@ -1,10 +1,10 @@
 import { t } from 'i18next';
 import { TranslationNames } from '../../locales/TranslationNames';
 import { CompanyConstants } from '../../FarmServiceApiTypes/Company/Constants';
-import { CreateCompanyForm } from '../../components/pages/mobi/AuthDriver/CreateCompany';
 import { FormRulesType } from './FormRulesType';
 import { creteMinLenMessage } from './FormRulesHelper';
 import { AddressRules, CommonRules } from './CommonRules';
+import { CreateCompanyForm } from '../../components/pages/owner/mobi/AuthDriver/CreateCompany';
 
 export const rules: FormRulesType<CreateCompanyForm> = {
   email: CommonRules.email,

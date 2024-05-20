@@ -32,7 +32,7 @@ export function SwipeRightAnimated() {
     );
   }, []);
   return (
-    <View className="w-2/3 h-1/2 items-start justify-center">
+    <View className="w-2/3 h-1/2 absolute bottom-2 items-start justify-center">
       <View className="h-[50px] w-full items-start justify-center border-green border-2 border-solid rounded-full overflow-hidden">
         <Animated.View style={[animatedStyles]}>
           <ToRightArrow width={40} height={40} color={color?.val} />

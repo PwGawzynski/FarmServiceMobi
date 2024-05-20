@@ -146,11 +146,11 @@ export function ActivityItem({ item }: ActivityItemProps) {
             <SizableText className="uppercase font-bold">
               {produceHeader(item.type)}
             </SizableText>
-            <SizableText className="text-light-blue dark:text-dark-gray">
+            <SizableText className="text-white dark:text-dark-gray">
               {new Date(item.actionDate).toLocaleTimeString()}
             </SizableText>
           </XStack>
-          <SizableText className="text-light-blue dark:text-dark-gray">
+          <SizableText className="text-white dark:text-dark-gray">
             {produceActivityText(item)}
           </SizableText>
         </YStack>

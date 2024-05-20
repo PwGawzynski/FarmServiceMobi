@@ -4,7 +4,7 @@
       "chooseLoginType": {
         "header": "Sing up for FarmService",
         "email": "e-mail or NIP ",
-        "google": "Sign in with Google",
+        "google": "Go with Google",
         "registerButton": "Create One Now",
         "registerText": "Don't have an account?",
         "instruction": "Sing up for FarmService, and start working with pleasure"
@@ -67,6 +67,16 @@
         "resetButton": "Reset",
         "markerName": "Field",
         "markerDescription": "Estimated Field Location"
+      },
+      "register": {
+        "title": "Register",
+        "confirmation": "User has been created successfully, remember to confirm your email address.",
+        "registerButton": "Register"
+      },
+      "chooseRole": {
+        "title": "Choose role",
+        "owner": "Owner",
+        "worker": "Worker"
       }
     },
     "appSettings": {
@@ -81,7 +91,9 @@
       "title": "Last activities",
       "newActivity": "New activity",
       "newActivityDescription": "New activity has been registered",
-      "noActivities": "No activities to display"
+      "noActivities": "No activities to display",
+      "emptyListHint": "No activities to display",
+      "emptyListHintDescription": "A little empty here 😕 We were unable to find any activity related to your company. Don't worry, you're probably just getting started. Start by adding employees, customers, fields, etc. and then sit back and watch the work unfold."
     },
     "machineDesktopDriver": {
       "addMachineScreen": {
@@ -315,7 +327,8 @@
         },
         "orderDesktop": {
             "title": "Orders",
-            "searchPlaceholder": "Find an order"
+            "searchPlaceholder": "Find an order",
+            "emptyList": "No orders to display, swipe right and add new one"
         }
     },
     "ownerRootDriver": {
@@ -414,7 +427,7 @@
     "activityDesktopRoot": {
       "welcome": "Welcome",
       "newTaskIncomeHeader": "New task !",
-      "newTaskIncomeDescription": "You have been added to task list"
+      "newTaskIncomeDescription": "You have been added to task list",
     }
   },
   "serviceDefaults": {
