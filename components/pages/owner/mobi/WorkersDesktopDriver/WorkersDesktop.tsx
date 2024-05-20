@@ -16,6 +16,9 @@ const TRANSLATIONS = {
   searchWorker: t(
     TranslationNames.screens.ownerRootDriver.workersDesktop.searchPlaceholder,
   ),
+  emptyList: t(
+    TranslationNames.screens.ownerRootDriver.workersDesktop.emptyList,
+  ),
 };
 
 export function WorkersDesktop() {
@@ -38,6 +41,8 @@ export function WorkersDesktop() {
         isError={isError}
         data={data}
         modalRef={modalRef}
+        swipeRightAnimation
+        listEmptyText={TRANSLATIONS.emptyList}
         onPressNavigateTo="workerDetails"
         navigationParamName="worker"
         listStyleSettings={item => {

@@ -45,6 +45,7 @@ export function ClientsDesktop() {
         isError={isError}
         data={data}
         modalRef={modalRef}
+        swipeRightAnimation
         onPressNavigateTo="clientControlPanel"
         navigationParamName="client"
         listStyleSettings={item => ({

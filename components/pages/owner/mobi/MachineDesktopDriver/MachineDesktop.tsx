@@ -17,6 +17,9 @@ const TRANSLATIONS = {
     TranslationNames.screens.machineDesktopDriver.machinesDesktop
       .searchPlaceholder,
   ),
+  emptyList: t(
+    TranslationNames.screens.machineDesktopDriver.machinesDesktop.emptyList,
+  ),
 };
 export function MachineDesktop() {
   const bottomSheetRef = useRef<BottomSheetModal>(null);
@@ -37,6 +40,8 @@ export function MachineDesktop() {
         isError={isError}
         isLoading={isLoading}
         data={data}
+        swipeRightAnimation
+        listEmptyText={TRANSLATIONS.emptyList}
         modalRef={bottomSheetRef}
         onPressNavigateTo="machineDetails"
         navigationParamName="machine"

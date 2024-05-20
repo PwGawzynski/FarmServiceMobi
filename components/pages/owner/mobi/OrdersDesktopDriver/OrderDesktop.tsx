@@ -14,6 +14,9 @@ const TRANSLATIONS = {
   searchOrder: t(
     TranslationNames.screens.ordersDesktopDriver.orderDesktop.searchPlaceholder,
   ),
+  emptyList: t(
+    TranslationNames.screens.ordersDesktopDriver.orderDesktop.emptyList,
+  ),
 };
 
 export function OrderDesktop() {
@@ -39,6 +42,8 @@ export function OrderDesktop() {
         modalRef={modalRef}
         onPressNavigateTo="orderControlPanel"
         navigationParamName="order"
+        swipeRightAnimation
+        listEmptyText="No orders found, swipe left to create new order"
         listStyleSettings={item => ({
           header: item.name,
           bottomRightText: ` DATE: ${new Date(

@@ -17,6 +17,7 @@ import { sortActivitiesByDateDesc } from '../../../../../helepers/filterFunction
 import { ActivityItem } from '../../../../atoms/ActivityItem';
 import { TranslationNames } from '../../../../../locales/TranslationNames';
 import GearIco from '../../../../../assets/settings.svg';
+import { HintCard } from '../../../../atoms/HintCard';
 
 const TRANSLATIONS = {
   title: t(TranslationNames.screens.activityDesktopRoot.title),
@@ -27,6 +28,10 @@ const TRANSLATIONS = {
     TranslationNames.screens.activityDesktopRoot.newActivityDescription,
   ),
   noActivities: t(TranslationNames.screens.activityDesktopRoot.noActivities),
+  emptyListHint: t(TranslationNames.screens.activityDesktopRoot.emptyListHint),
+  emptyListHintDescription: t(
+    TranslationNames.screens.activityDesktopRoot.emptyListHintDescription,
+  ),
 };
 
 export function ActivityDesktopRoot({
@@ -76,7 +81,7 @@ export function ActivityDesktopRoot({
   const queryClient = useQueryClient();
   const { data } = useQuery({
     queryKey: ['companiesTasks'],
-    initialData: undefined as ActivityResponseBase[] | undefined,
+    initialData: [] as ActivityResponseBase[] | undefined,
   });
   const dataLength = useRef(data?.length);
   useEffect(() => {
@@ -101,7 +106,6 @@ export function ActivityDesktopRoot({
       es = await Api.companiesActivities({
         message: (m: ActivityResponseBase[]) => {
           setIsFetching(false);
-          console.log(dataLength, m.length, 'test');
           if (
             dataLength.current !== undefined &&
             dataLength.current !== m.length
@@ -112,6 +116,9 @@ export function ActivityDesktopRoot({
               text2: TRANSLATIONS.newActivityToastText,
             });
           queryClient.setQueryData(['companiesTasks'], m);
+        },
+        open: () => {
+          setIsFetching(false);
         },
       });
     })();
@@ -128,6 +135,16 @@ export function ActivityDesktopRoot({
     [],
   );
 
+  const listEmptyComponent = useMemo(
+    () => (
+      <HintCard
+        header={TRANSLATIONS.emptyListHint}
+        text={TRANSLATIONS.emptyListHintDescription}
+      />
+    ),
+    [],
+  );
+
   return (
     <ScreenBase name={TRANSLATIONS.title} topRightButton={appSettingsButton}>
       <YStack f={1} mt="$4">
@@ -137,7 +154,7 @@ export function ActivityDesktopRoot({
           listSetup={{
             isLoading: isFetching,
           }}
-          listEmptyText={TRANSLATIONS.noActivities}
+          listEmptyComponent={listEmptyComponent}
           renderItem={renderItem}
           scrollToBottomOnContentSizeChange
         />
