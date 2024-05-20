@@ -18,6 +18,10 @@ export type AuthDriverParamList = {
   loginByEmail: undefined;
   chooseRegisterType: undefined;
   chooseRole: {
+    byMail?: {
+      email: string;
+      password: string;
+    };
     byGoogle?: {
       email: string;
       name?: string;
@@ -31,7 +35,12 @@ export type AuthDriverParamList = {
       name?: string;
       surname?: string;
     };
+    byMail?: {
+      email: string;
+      password: string;
+    };
   };
+  emailAndPwdRegister: undefined;
   passwordReset: undefined;
   addField: { client: ClientResponseBase; goBack?: boolean };
   editField: { client: ClientResponseBase; field: FieldResponseBase };
