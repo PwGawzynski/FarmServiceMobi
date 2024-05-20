@@ -86,6 +86,10 @@ export async function login(
   } catch (e) {
     if (e instanceof AxiosError) {
       switch (e.response?.status) {
+        case HttpStatusCode.BadRequest:
+          throw new Error(e.response.data.payload.message, {
+            cause: HttpStatusCode.BadRequest,
+          });
         case HttpStatusCode.Unauthorized:
           throw new Error(UNAUTHORIZED_MSG, {
             cause: HttpStatusCode.Unauthorized,
@@ -128,6 +132,17 @@ export async function loginByGoogle(idToken: string) {
     Api.googleLogin,
     idToken,
   ) as Promise<UserResponseBase | string | undefined>;
+}
+
+export async function isMailFree(email: string) {
+  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
+  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
+  return apiHandler<string>(
+    UNAUTHORIZED_MSG,
+    DEFAULT_MSG,
+    Api.isMailFree,
+    email,
+  ) as Promise<boolean | undefined>;
 }
 
 export async function logout() {
