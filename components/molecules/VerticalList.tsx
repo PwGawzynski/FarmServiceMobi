@@ -63,7 +63,7 @@ export function VerticalList<T>({
     [],
   );
   const onContentSizeChange = useCallback(() => {
-    if (scrollToBottomOnContentSizeChange) {
+    if (scrollToBottomOnContentSizeChange && data?.length) {
       ref.current?.scrollToEnd({ animated: true });
     }
   }, []);
