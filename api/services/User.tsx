@@ -5,7 +5,10 @@ import { ErrorCause } from '../../types/self/api/ErrorTypes';
 import { ResponseObject } from '../../FarmServiceApiTypes/Respnse/responseGeneric';
 import { LoginUser } from '../../FarmServiceApiTypes/User/LoginUser';
 import { TranslationNames } from '../../locales/TranslationNames';
-import { UserResetPasswordReqI } from '../../FarmServiceApiTypes/User/Requests';
+import {
+  CreateUserReqI,
+  UserResetPasswordReqI,
+} from '../../FarmServiceApiTypes/User/Requests';
 import { UserResponseBase } from '../../FarmServiceApiTypes/User/Responses';
 
 /**
@@ -103,6 +106,28 @@ export async function resetPwd(data: UserResetPasswordReqI) {
     Api.resetPassword,
     data,
   );
+}
+
+export async function registerUser(data: CreateUserReqI) {
+  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
+  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
+  return apiHandler<CreateUserReqI>(
+    UNAUTHORIZED_MSG,
+    DEFAULT_MSG,
+    Api.registerNewUser,
+    data,
+  );
+}
+
+export async function loginByGoogle(idToken: string) {
+  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
+  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
+  return apiHandler<string>(
+    UNAUTHORIZED_MSG,
+    DEFAULT_MSG,
+    Api.googleLogin,
+    idToken,
+  ) as Promise<UserResponseBase | string | undefined>;
 }
 
 export async function logout() {
