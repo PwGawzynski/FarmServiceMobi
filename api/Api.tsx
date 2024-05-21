@@ -64,6 +64,7 @@ import { OrderPriceResponseBase } from '../FarmServiceApiTypes/OrderPricing/Resp
 
 import { SettlementRequest } from '../FarmServiceApiTypes/Settlement/Requests';
 import { InvoiceResponseBase } from '../FarmServiceApiTypes/Invoice/Responses';
+import { UpdateAccountReqI } from '../FarmServiceApiTypes/Account/Requests';
 /* ---------------------------------------DECORATOR_USED_TO_DELAY_RES--------------------------------------- */
 
 const IsDelayed = () => {
@@ -629,6 +630,16 @@ export class ApiSelf {
         params: { 'task-id': taskId },
       })) as AxiosResponse<ResponseObject>
     ).data.payload as TaskResponseBase | undefined;
+  }
+
+  @IsDelayed()
+  static async updateAccountSettings(data: UpdateAccountReqI) {
+    return (
+      (await ApiSelf.axiosInstance.put(
+        '/user/account-settings',
+        data,
+      )) as AxiosResponse<ResponseObject>
+    ).data as ResponseObject | undefined;
   }
 
   static async deleteTask(taskId: string) {
