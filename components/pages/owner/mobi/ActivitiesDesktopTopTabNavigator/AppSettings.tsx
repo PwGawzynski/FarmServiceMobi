@@ -16,6 +16,7 @@ import { Colors } from '../../../../../settings/styles/colors';
 import LogOutIco from '../../../../../assets/log-out.svg';
 import ThemeIco from '../../../../../assets/sun-moon.svg';
 import { TranslationNames } from '../../../../../locales/TranslationNames';
+import { updateAccount } from '../../../../../api/account/Account';
 
 const TRANSLATIONS = {
   screenTitle: t(TranslationNames.screens.appSettings.screenTitle),
@@ -27,6 +28,15 @@ const TRANSLATIONS = {
 };
 
 export function AppSettings() {
+  const {
+    mutate: mutateAccount,
+    isPending: isAccountPending,
+    isError: isAccountMutationError,
+  } = useMutation({
+    mutationKey: ['updateAccountSettings'],
+    mutationFn: updateAccount,
+  });
+
   const dispatch = useDispatch();
   const { mutate } = useMutation({
     mutationKey: ['logout'],
@@ -47,6 +57,9 @@ export function AppSettings() {
         mutate();
         break;
       case 'changeTheme':
+        mutateAccount({
+          theme: theme === Theme.dark ? Theme.light : Theme.dark,
+        });
         dispatch(setTheme(theme === Theme.dark ? Theme.light : Theme.dark));
         break;
       case 'changeLanguage':
@@ -71,23 +84,18 @@ export function AppSettings() {
       Icon: (
         <ThemeIco color={theme === Theme.dark ? Colors.GREEN : Colors.DARK} />
       ),
+      isPending: isAccountPending,
+      isError: isAccountMutationError,
     },
-    // TODO: IMPLEMENT LANGUAGE CHANGE
-    /* {
-      title: TRANSLATIONS.settings.changeLanguage,
-      name: 'changeLanguage',
-      Icon: (
-        <LanguageIco
-          color={theme === Theme.dark ? Colors.GREEN : Colors.DARK}
-        />
-      ),
-    } */
   ] as Array<SettingsI>;
   return (
     <ScreenBase name={TRANSLATIONS.screenTitle}>
       <YStack f={1} mt="$4">
         {settings.map((setting: SettingsI, index: number) => (
           <SettingOption
+            isPending={setting.isPending}
+            isError={setting.isError}
+            theme={theme}
             key={setting.name}
             title={setting.title}
             Icon={setting.Icon}
