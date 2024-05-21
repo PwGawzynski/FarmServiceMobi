@@ -108,7 +108,7 @@ const color = {
   // background
   light2: '#fff',
   light3: '#081e3f',
-  light4: Colors.GREEN,
+  light4: Colors.DARK_BLUE,
   light5: 'hsl(0, 0%, 94.0%)',
   light6: 'hsl(0, 0%, 92.0%)',
   light7: 'hsl(0, 0%, 89.5%)',
