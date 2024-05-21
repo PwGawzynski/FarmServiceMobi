@@ -29,13 +29,13 @@ export function HintCard({
         <YStack f={1}>
           <SizableText
             fontSize="$4"
-            className={`uppercase font-bold mb-3 text-light-blue dark:text-dark-gray ${
+            className={`uppercase font-bold mb-3 text-white dark:text-dark-gray ${
               !isHint ? 'text-error-red' : ''
             }`}
           >
             {header}
           </SizableText>
-          <SizableText className="text-light-blue dark:text-dark-gray">
+          <SizableText className="text-white dark:text-dark-gray">
             {text}
           </SizableText>
           <YStack className="mt-4">{children}</YStack>
@@ -43,9 +43,7 @@ export function HintCard({
         <YStack ai="flex-end">
           {isHint && (
             <InfoIcon
-              color={
-                theme === Theme.dark ? Colors.DARK_GRAY : Colors.LIGHT_BLUE
-              }
+              color={theme === Theme.dark ? Colors.DARK_GRAY : Colors.WHITE}
             />
           )}
           {!isHint && <DangerIco color={Colors.ERROR_RED} />}
