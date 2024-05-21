@@ -183,7 +183,7 @@
         "submitButton": "Save"
       },
       "orderTasksScreen": {
-        "screenName": "order Details",
+        "screenName": "Tasks",
         "taskListHeader": "Tasks",
         "detailsCard": {
           "cardName": "Details",
@@ -672,7 +672,7 @@
     "validation": {
       "nameLabel": "Name is required",
       "polishSystemId": "Polish system id is required",
-      "polishSystemIdPattern": "PL_ID mus be in format XX-XXX",
+      "polishSystemIdPattern": "PL_ID mus be in format PL_ID (eg. 181102_2.0010.211)",
       "area": "Area is required",
       "validationAtLeast": "must be at least ",
       "validationMaximum ": "can have maximum ",
