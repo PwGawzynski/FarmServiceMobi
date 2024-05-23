@@ -36,7 +36,7 @@ export function FieldSelector({
   ListEmptyComponent,
 }: SelectFieldsProps) {
   const [canSubmit, setCanSubmit] = useState(false);
-  const { data, isError, isFetching } = useQuery({
+  const { data, isError, isFetching, refetch } = useQuery({
     queryKey: ['clientFields', client.id],
     queryFn: keys => getClientFields(keys.queryKey[1] as string),
     staleTime: EXPO_PUBLIC_QUERY_STALE_TIME,
@@ -46,6 +46,7 @@ export function FieldSelector({
   return (
     <YStack f={1}>
       <List<FieldResponseBase>
+        onRefreshCall={refetch}
         isSelectable
         listEmptyComponent={listEmptyComponent}
         triggerOnSelectedChange={isEmpty => {
