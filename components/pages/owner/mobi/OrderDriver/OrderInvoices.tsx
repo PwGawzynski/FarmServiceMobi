@@ -29,7 +29,7 @@ export function OrderInvoices({
 >) {
   const { order } = params;
 
-  const { data, isFetching, isError, isLoading } = useQuery({
+  const { data, isFetching, isError, isLoading, refetch } = useQuery({
     queryKey: ['orderInvoices', order.id],
     queryFn: context => getInvoices(context.queryKey[1] as string),
     staleTime: Infinity,
@@ -51,6 +51,7 @@ export function OrderInvoices({
   return (
     <ScreenBase name={TRANSLATIONS.screenTitle}>
       <List<InvoiceResponseBase>
+        onRefreshCall={refetch}
         isFetching={isFetching}
         isError={isError}
         isLoading={isLoading}
