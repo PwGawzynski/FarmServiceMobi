@@ -1,15 +1,16 @@
 import { View } from 'react-native';
-import { AppButton } from '../atoms/AppButton';
+import { ButtonTamagui } from '../atoms/ButtonTamagui';
 
 export type ButtonOptions = {
   title: string;
   onPress: () => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  Icon?: any;
 };
 
 export type Props = {
   options: ButtonOptions[];
   boxStyles?: string;
-  buttonStyles?: string;
 };
 
 /**
@@ -19,21 +20,23 @@ export type Props = {
  * @param boxStyles - styles for box
  * @constructor
  */
-export function NavigationBottomPanel({
-  options,
-  buttonStyles,
-  boxStyles,
-}: Props) {
+export function NavigationBottomPanel({ options, boxStyles }: Props) {
   return (
     <View
-      className={`flex-row gap-3 justify-center items-center flex-wrap mt-2  ${boxStyles}`}
+      className={`flex-row gap-2 justify-center items-center flex-wrap mt-2  ${boxStyles}`}
     >
-      {options.map(option => (
-        <AppButton
-          style={{ minWidth: '40%' }}
-          className={`max-h-10 ${buttonStyles}`}
-          title={option.title}
-          onPress={option.onPress}
+      {options.map((option, i) => (
+        <ButtonTamagui
+          icon={option.Icon}
+          buttonProps={{
+            onPress: option.onPress,
+            f: 1,
+            minWidth: '40%',
+            height: '$4',
+            mb: '$2',
+            mr: i % 2 === 0 ? '$2' : '0',
+          }}
+          text={option.title}
           key={Math.random()}
         />
       ))}
