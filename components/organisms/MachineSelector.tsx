@@ -35,7 +35,7 @@ export function MachineSelector({
   ListEmptyComponent,
 }: SelectMachineProps) {
   const [canSubmit, setCanSubmit] = useState(false);
-  const { data, isLoading, isFetching, isError } = useQuery({
+  const { data, isLoading, isFetching, isError, refetch } = useQuery({
     queryKey: ['machines'],
     queryFn: getAllMachines,
   });
@@ -43,6 +43,7 @@ export function MachineSelector({
   return (
     <YStack f={1}>
       <List<MachineResponseBase>
+        onRefreshCall={refetch}
         isSelectable
         triggerOnSelectedChange={isEmpty => {
           setCanSubmit(!isEmpty);

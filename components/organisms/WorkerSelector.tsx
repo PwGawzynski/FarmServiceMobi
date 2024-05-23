@@ -33,7 +33,7 @@ export function WorkerSelector({
   ListEmptyComponent,
 }: SelectWorkerProps) {
   const [canSubmit, setCanSubmit] = useState(false);
-  const { data, isFetching, isError } = useQuery({
+  const { data, isFetching, isError, refetch } = useQuery({
     queryKey: ['workers'],
     queryFn: allWorkers,
     staleTime: EXPO_PUBLIC_QUERY_STALE_TIME,
@@ -45,6 +45,7 @@ export function WorkerSelector({
   return (
     <YStack f={1}>
       <List<WorkerResponseBase>
+        onRefreshCall={refetch}
         isSelectable
         listEmptyComponent={listEmptyComponent}
         triggerOnSelectedChange={isEmpty => {

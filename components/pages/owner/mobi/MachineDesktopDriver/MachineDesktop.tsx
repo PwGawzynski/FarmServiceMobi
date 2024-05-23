@@ -23,7 +23,7 @@ const TRANSLATIONS = {
 };
 export function MachineDesktop() {
   const bottomSheetRef = useRef<BottomSheetModal>(null);
-  const { data, isLoading, isFetching, isError } = useQuery({
+  const { data, isLoading, isFetching, isError, refetch } = useQuery({
     queryKey: ['machines'],
     queryFn: getAllMachines,
   });
@@ -36,6 +36,7 @@ export function MachineDesktop() {
       name={TRANSLATIONS.screenTitle}
     >
       <List<MachineResponseBase>
+        onRefreshCall={refetch}
         isFetching={isFetching}
         isError={isError}
         isLoading={isLoading}
