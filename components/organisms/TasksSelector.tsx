@@ -46,6 +46,7 @@ export function TaskSelector({
     isPending,
     isLoading,
     isError,
+    refetch,
   } = useQuery({
     queryKey: ['orderTasks', orderId],
     queryFn: context => getTaskByOrder(context.queryKey[1]),
@@ -58,6 +59,7 @@ export function TaskSelector({
   return (
     <YStack f={1} mt="$4">
       <List<TaskResponseBase>
+        onRefreshCall={refetch}
         isSelectable
         listEmptyComponent={listEmptyComponent}
         triggerOnSelectedChange={isEmpty => {
