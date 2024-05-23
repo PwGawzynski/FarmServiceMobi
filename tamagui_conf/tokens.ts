@@ -109,14 +109,14 @@ const color = {
   light2: '#fff',
   light3: '#081e3f',
   light4: Colors.DARK_BLUE,
-  light5: 'hsl(0, 0%, 94.0%)',
+  light5: Colors.WHITE,
   light6: 'hsl(0, 0%, 92.0%)',
   light7: 'hsl(0, 0%, 89.5%)',
-  light8: 'hsl(0, 0%, 81.0%)',
+  light8: Colors.LIGHT_BLUE,
   light9: 'hsl(0,0%,100%)',
-  light10: 'hsl(0, 0%, 50.3%)',
+  light10: Colors.DARK_GRAY,
   // color
-  light11: Colors.DARK,
+  light11: Colors.DARKER_GRAY,
   light12: 'hsl(0, 0%, 9.0%)',
 };
 
