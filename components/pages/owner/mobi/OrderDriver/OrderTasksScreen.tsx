@@ -60,6 +60,7 @@ export function OrderTasksScreen({
     isPending,
     isLoading,
     isError,
+    refetch,
   } = useQuery({
     queryKey: ['orderTasks', order.id],
     queryFn: context => getTaskByOrder(context.queryKey[1]),
@@ -75,6 +76,7 @@ export function OrderTasksScreen({
       <List<TaskResponseBase>
         // we have to set margin top to 0 and margin bottom to 0, because we use forwardRef in a List component,
         // sand its gets those styles
+        onRefreshCall={refetch}
         cName="mt-0 mb-0"
         modalRef={modalRef}
         data={tasks as unknown as TaskResponseBase[]}
