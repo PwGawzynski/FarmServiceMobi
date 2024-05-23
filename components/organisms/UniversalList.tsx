@@ -1,5 +1,5 @@
-import { Dimensions } from 'react-native';
-import { useCallback, useMemo } from 'react';
+import { Dimensions, RefreshControlProps } from 'react-native';
+import React, { useCallback, useMemo } from 'react';
 import { ListRenderItemInfo } from '@shopify/flash-list';
 import { t } from 'i18next';
 import { VerticalList, VerticalListProps } from '../molecules/VerticalList';
@@ -18,6 +18,7 @@ export type Props<T> = {
   swipeRightAnimation?: boolean;
   beFlex?: boolean;
   scrollToBottomOnContentSizeChange?: boolean;
+  refreshControlComponent?: React.ReactElement<RefreshControlProps>;
 };
 
 const EL_HEIGHT = 100;
@@ -32,6 +33,7 @@ export function UniversalList<T>({
   swipeRightAnimation,
   beFlex,
   scrollToBottomOnContentSizeChange,
+  refreshControlComponent,
 }: Props<T>) {
   const ListEmptyComponent = useMemo(
     () => (
@@ -58,6 +60,7 @@ export function UniversalList<T>({
   }, []);
   return (
     <VerticalList
+      refreshControlComponent={refreshControlComponent}
       scrollToBottomOnContentSizeChange={scrollToBottomOnContentSizeChange}
       ListEmptyComponent={listEmptyComponent || ListEmptyComponent}
       estimatedSize={150}
