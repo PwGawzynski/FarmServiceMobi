@@ -3,8 +3,8 @@ import {
   ListRenderItem,
   useBlankAreaTracker,
 } from '@shopify/flash-list';
-import { useCallback, useEffect, useRef } from 'react';
-import { View } from 'react-native';
+import React, { useCallback, useEffect, useRef } from 'react';
+import { RefreshControlProps, View } from 'react-native';
 import { t } from 'i18next';
 import X from '../../assets/x.svg';
 import { ListInfo } from '../atoms/ListInfo';
@@ -24,6 +24,7 @@ export type VerticalListProps<T> = {
   ListEmptyComponent?: JSX.Element;
   onLoadingData?: JSX.Element[] | JSX.Element;
   scrollToBottomOnContentSizeChange?: boolean;
+  refreshControlComponent?: React.ReactElement<RefreshControlProps>;
 };
 
 export function VerticalList<T>({
@@ -35,6 +36,7 @@ export function VerticalList<T>({
   isLoading,
   isLoadingError,
   scrollToBottomOnContentSizeChange,
+  refreshControlComponent,
 }: VerticalListProps<T>) {
   const ref = useRef<FlashList<T>>(null);
   const [blankAreaTrackerResult, onBlankArea] = useBlankAreaTracker(ref);
@@ -73,6 +75,7 @@ export function VerticalList<T>({
   return (
     <FlashList
       ref={ref}
+      refreshControl={refreshControlComponent}
       onContentSizeChange={onContentSizeChange}
       showsVerticalScrollIndicator={false}
       ItemSeparatorComponent={divider}
