@@ -34,11 +34,11 @@ export function DateSelector<
       <Input
         mt="$4"
         editable={false}
-        backgroundColor="$color6"
+        backgroundColor="$color5"
         borderColor="$color4"
         value={value?.toLocaleDateString()}
         placeholder={placeholderName ?? name}
-        placeholderTextColor={theme === Theme.dark ? '$color11' : '$color9'}
+        placeholderTextColor={theme === Theme.dark ? '$color11' : '$color8'}
         onPressIn={() => setDatePickerVisible(true)}
         focusStyle={{
           borderColor: '$color4',
