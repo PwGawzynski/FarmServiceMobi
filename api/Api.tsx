@@ -516,6 +516,7 @@ export class ApiSelf {
     ).data.payload as MachineResponseBase | undefined;
   }
 
+  @IsDelayed()
   static async getAllOrders() {
     /* throw new Error('kurewka'); */
     return (
