@@ -1,5 +1,5 @@
-import { Bar, CartesianChart, useChartPressState } from 'victory-native';
 import { LinearGradient, useFont, vec } from '@shopify/react-native-skia';
+import { Bar, CartesianChart, useChartPressState } from 'victory-native';
 import { SizableText, YStack } from 'tamagui';
 import { useSelector } from 'react-redux';
 import { useQuery } from '@tanstack/react-query';
@@ -123,13 +123,12 @@ export function OrderPerformanceChart({ orderId }: OrderPerformanceChartProps) {
         <PendingInfo isVisible infoText={TRANSLATIONS.computingPerformance} />
       </YStack>
     );
-
+  const gradientStartColor =
+    theme === Theme.dark ? Colors.GREEN : Colors.DARK_BLUE;
+  const gradientEndColor = theme === Theme.dark ? Colors.WHITE : Colors.GREEN;
   return (
     <YStack f={1} p="$$">
-      <SizableText
-        fontSize="$4"
-        className="uppercase font-semibold  relative top-[15]"
-      >
+      <SizableText fontSize="$4" className="uppercase font-semibold mt-2 mb-1">
         {TRANSLATIONS.dailyPerformance}
       </SizableText>
       <CartesianChart
@@ -142,7 +141,8 @@ export function OrderPerformanceChart({ orderId }: OrderPerformanceChartProps) {
         axisOptions={{
           font,
           lineWidth: 0,
-          labelColor: theme === Theme.dark ? Colors.WHITE : Colors.DARK_GRAY,
+          labelColor: theme === Theme.dark ? Colors.WHITE : Colors.DARK_BLUE,
+          lineColor: theme === Theme.dark ? Colors.WHITE : Colors.DARK_BLUE,
           labelOffset: 0,
           tickCount: data.length,
           formatYLabel: () => ``, // we don't want to show y labels
@@ -167,7 +167,7 @@ export function OrderPerformanceChart({ orderId }: OrderPerformanceChartProps) {
               <LinearGradient
                 start={vec(0, 0)}
                 end={vec(0, 400)}
-                colors={[Colors.GREEN, Colors.WHITE]}
+                colors={[gradientStartColor, gradientEndColor]}
               />
             </Bar>
             {isActive ? (
