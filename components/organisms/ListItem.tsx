@@ -66,7 +66,7 @@ export function ListItem<T extends Record<string, any>>({
   };
 
   const {
-    color4: { val },
+    color5: { val },
     color11: { val: disabledVal },
   } = useTheme();
 
