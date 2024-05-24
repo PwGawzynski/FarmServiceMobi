@@ -140,7 +140,7 @@ function ListMemo<T extends Record<string, any>>(
         handleFieldDeselection,
         selectedItems,
       }),
-    [selectedItems, data],
+    [selectedItems, data, listStyleSettings],
   );
 
   return (
