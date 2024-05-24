@@ -3,14 +3,15 @@ import { useTranslation } from 'react-i18next';
 import { ScreenBase } from '../common/ScreenBase';
 import { TranslationNames } from '../../../../../locales/TranslationNames';
 import { AuthDriverProps } from '../../../../../types/self/navigation/Owner/props/AuthDriverProps';
-import { AppButton } from '../../../../atoms/AppButton';
 import { GoogleAuth } from '../../../../atoms/GoogleAuth';
+import { ButtonTamagui } from '../../../../atoms/ButtonTamagui';
 
 export function ChooseRegisterType({
   navigation,
   route,
 }: AuthDriverProps<'chooseRegisterType'>) {
   const { t } = useTranslation();
+  const handleByEmail = () => navigation.navigate('emailAndPwdRegister');
 
   return (
     <ScreenBase>
@@ -23,12 +24,11 @@ export function ChooseRegisterType({
             TranslationNames.screens.authDriver.chooseRegisterType.instruction,
           )}
         </Text>
-        <AppButton
-          className="max-h-12"
-          onPress={() => navigation.navigate('emailAndPwdRegister')}
-          title={t(
-            TranslationNames.screens.authDriver.chooseRegisterType.email,
-          )}
+        <ButtonTamagui
+          buttonProps={{
+            onPress: handleByEmail,
+          }}
+          text={t(TranslationNames.screens.authDriver.chooseRegisterType.email)}
         />
         <GoogleAuth navigation={navigation} route={route} />
       </View>
