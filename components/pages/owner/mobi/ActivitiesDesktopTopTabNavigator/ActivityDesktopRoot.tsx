@@ -105,7 +105,7 @@ export function ActivityDesktopRoot({
         <GearIco height={30} width={30} color={color4?.val} />
       </YStack>
     );
-  }, [navigation]);
+  }, [navigation, color4]);
 
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
