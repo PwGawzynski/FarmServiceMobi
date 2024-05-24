@@ -34,7 +34,7 @@ export function EntityAsACard<
       p="$2"
       mt="$4"
       className={cardClassName}
-      bg="$backgroundTransparent"
+      bg="$color6"
       borderColor="$color4"
     >
       <XStack jc={cardName ? 'space-between' : 'flex-end'} ai="center">
