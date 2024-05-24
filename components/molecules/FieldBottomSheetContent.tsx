@@ -19,6 +19,7 @@ import { TranslationNames } from '../../locales/TranslationNames';
 import { ClientResponseBase } from '../../FarmServiceApiTypes/Clients/Responses';
 import { AlertI, TwoOptionAlert } from './TwoOptionAlert';
 import { delField } from '../../api/field/Field';
+import { Colors } from '../../settings/styles/colors';
 
 const IOS_MAPS_OPEN_MARK = 'maps:0,0?q=';
 const ANDROID_MAPS_OPEN_MARK = 'geo:0,0?q=';
@@ -136,7 +137,7 @@ export function FieldBottomSheetContent({
   }, [isError]);
 
   return (
-    <YStack f={1} ml="$4" mr="$4">
+    <YStack f={1} ml="$4" mr="$4" bg="$backgroundTransparent">
       <TwoOptionAlert
         open={alert.status}
         isDanger={alert.isDanger}
@@ -153,12 +154,12 @@ export function FieldBottomSheetContent({
             {field.nameLabel}
           </SizableText>
           <XStack>
-            <SizableText className="uppercase">
+            <SizableText color="$color4" className="uppercase">
               {Number.isNaN(Number(field.area))
                 ? 'N/A'
                 : Number(field.area).toFixed(2)}{' '}
             </SizableText>
-            <SizableText>{TRANSLATIONS.ha}</SizableText>
+            <SizableText color="$color4">{TRANSLATIONS.ha}</SizableText>
           </XStack>
         </XStack>
         <ButtonTamagui
@@ -216,7 +217,7 @@ export function FieldBottomSheetContent({
                   setAlert({ ...initAlert, status: false }),
               }),
           }}
-          bgColor="$color7"
+          bgColor={Colors.ERROR_RED}
           elementColor="#fff"
         />
         <SizableText
