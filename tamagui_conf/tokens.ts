@@ -80,7 +80,7 @@ const radius = {
 };
 
 const color = {
-  darkTransparent: 'rgba(10,10,10,0)',
+  darkTransparent: 'rgba(255,255,255,0)',
 
   dark1: '#050505',
   // background
@@ -110,7 +110,7 @@ const color = {
   light3: '#081e3f',
   light4: Colors.DARK_BLUE,
   light5: Colors.WHITE,
-  light6: 'hsl(0, 0%, 92.0%)',
+  light6: Colors.WHITE,
   light7: '#c51a1a',
   light8: Colors.LIGHT_BLUE,
   light9: 'hsl(0,0%,100%)',
