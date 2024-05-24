@@ -18,7 +18,7 @@ import { PendingInfo } from '../../../../atoms/PendingInfo';
 import { FormErrorInfo } from '../../../../atoms/FormErrorInfo';
 import { FormCreator } from '../../../../atoms/FormCreator';
 import { createUserSetup } from '../../../../../helepers/FormSetups/CreateUserSetup';
-import { AppButton } from '../../../../atoms/AppButton';
+import { ButtonTamagui } from '../../../../atoms/ButtonTamagui';
 
 export type CreateUserForm = Omit<CreateClientReqI['user'], 'email'> &
   CreateUserReqI['personalData'] &
@@ -326,10 +326,12 @@ export function CreateClient({
         )}
         errors={errors}
       />
-      <AppButton
-        className="max-h-10"
-        title={client ? EDIT_BUTTON_VALUE : BUTTON_VALUE}
-        onPress={handleSubmit(onSubmit)}
+      <ButtonTamagui
+        text={client ? EDIT_BUTTON_VALUE : BUTTON_VALUE}
+        buttonProps={{
+          mt: '$4',
+          onPress: handleSubmit(onSubmit),
+        }}
       />
     </ScreenBase>
   );
