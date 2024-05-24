@@ -40,7 +40,7 @@ export function SettingOption({
       className={`max-h-12 flex-1 flex-row items-center border-b-2 ${topBorder ? 'border-t-2' : ''}  border-dark-gray border-solid pl-2`}
     >
       {Icon}
-      <SizableText fontSize="$4" className="pl-4">
+      <SizableText fontSize="$4" className="pl-4" color="$color2">
         {title}
       </SizableText>
       <XStack f={1} jc="flex-end" pr="$4">

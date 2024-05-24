@@ -8,10 +8,10 @@ export type KeyValuePairProps = {
 export function KeyValuePair({ name, value }: KeyValuePairProps) {
   return (
     <XStack mt="$2" jc="space-between">
-      <SizableText color="white" size="$4">
+      <SizableText color="$color4" size="$4">
         {name}
       </SizableText>
-      <SizableText color="white" size="$4">
+      <SizableText color="$color4" size="$4">
         {value?.toString() || 'N/A'}
       </SizableText>
     </XStack>
