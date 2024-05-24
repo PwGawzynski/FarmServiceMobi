@@ -21,7 +21,7 @@ import { CreateCompanyForm } from '../AuthDriver/CreateCompany';
 import { FormStatusPanel } from '../../../../molecules/FormStatusPanel';
 import { FormCreator } from '../../../../atoms/FormCreator';
 import { createClientCompanySetup } from '../../../../../helepers/FormSetups/CreateCompanySetup';
-import { AppButton } from '../../../../atoms/AppButton';
+import { ButtonTamagui } from '../../../../atoms/ButtonTamagui';
 
 export type CreateClientsCompanyForm = CreateClientsCompanyReqI['address'] &
   Omit<CreateClientsCompanyReqI, 'address'>;
@@ -251,15 +251,17 @@ export function AssignCompanyToClient({
         controllerSetups={createClientCompanySetup(control)}
         errors={errors}
       />
-      <AppButton
-        className="flex-none max-h-10 mb-4"
-        title={
+      <ButtonTamagui
+        text={
           (onEdit && WHEN_EDIT_BUTTON_TITLE) ||
           (afterCreateClient && WHEN_ASSIGNATION_BUTTON_TITLE) ||
           (onCreateClient && WHEN_CREATE_BUTTON_TITLE) ||
           ''
         }
-        onPress={handleSubmit(onSubmit)}
+        buttonProps={{
+          mt: '$4',
+          onPress: handleSubmit(onSubmit),
+        }}
       />
     </ScreenBase>
   );
