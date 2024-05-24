@@ -16,8 +16,8 @@ import { createCompany } from '../../../../../api/company/Company';
 import { TranslationNames } from '../../../../../locales/TranslationNames';
 import { FormStatusPanel } from '../../../../molecules/FormStatusPanel';
 import { FormCreator } from '../../../../atoms/FormCreator';
-import { AppButton } from '../../../../atoms/AppButton';
 import { createCompanySetup } from '../../../../../helepers/FormSetups/CreateCompanySetup';
+import { ButtonTamagui } from '../../../../atoms/ButtonTamagui';
 
 export type CreateCompanyForm = CreateCompanyReqI['address'] &
   Omit<CreateCompanyReqI, 'address'>;
@@ -107,10 +107,9 @@ export function CreateCompany({
         errors={errors}
         onSubmit={onSubmit}
       />
-      <AppButton
-        className="flex-none max-h-10 mb-4"
-        title={BUTTON_TITLE}
-        onPress={handleSubmit(onSubmit)}
+      <ButtonTamagui
+        text={BUTTON_TITLE}
+        buttonProps={{ onPress: handleSubmit(onSubmit), mt: '$4' }}
       />
     </ScreenBase>
   );
