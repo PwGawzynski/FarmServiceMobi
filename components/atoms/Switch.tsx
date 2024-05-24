@@ -1,4 +1,4 @@
-import { Label, XStack, Switch as SwitchT } from 'tamagui';
+import { Label, XStack, Switch as SwitchT, useTheme } from 'tamagui';
 import type { ViewStyle } from 'react-native';
 import { StyleProp } from '@tamagui/web/src/types';
 
@@ -26,9 +26,15 @@ export function Switch({
   checked,
   onPress,
 }: SwitchProps) {
+  const { color2 } = useTheme();
   return (
     <XStack alignItems="center" jc="space-between" pt="$2" pb="$2">
-      <Label onPress={onPress} fontSize="$5" className="uppercase font-bold">
+      <Label
+        onPress={onPress}
+        color={color2?.val}
+        fontSize="$5"
+        className="uppercase font-bold"
+      >
         {label}
       </Label>
       <SwitchT
@@ -40,7 +46,7 @@ export function Switch({
       >
         <SwitchT.Thumb
           onPress={onPress}
-          className="bg-light-blue dark:bg-dark"
+          className="bg-white dark:bg-dark"
           animation="fast"
         />
       </SwitchT>
