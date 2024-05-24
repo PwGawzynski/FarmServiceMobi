@@ -1,5 +1,5 @@
 import { Text, View } from 'react-native';
-import { AppButton } from './AppButton';
+import { ButtonTamagui } from './ButtonTamagui';
 
 export type ActivityListCardHeadProps = {
   title: string;
@@ -26,7 +26,7 @@ export function ListCardSign({ subtitle, title }: ActivityListCardHeadProps) {
         </Text>
       </View>
       <View className="w-1/4 m-2">
-        <AppButton title="more" />
+        <ButtonTamagui text="more" />
       </View>
     </View>
   );
