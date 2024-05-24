@@ -27,7 +27,11 @@ export function ClientCompletedOrders({
   });
   return (
     <YStack f={1} mt="$4">
-      <SizableText fontSize="$5" className="uppercase font-bold">
+      <SizableText
+        color="$color4"
+        fontSize="$5"
+        className="uppercase font-bold"
+      >
         Completed orders
       </SizableText>
       <List<OrderResponseBase>
