@@ -429,7 +429,7 @@
     "activityDesktopRoot": {
       "welcome": "Welcome",
       "newTaskIncomeHeader": "New task !",
-      "newTaskIncomeDescription": "You have been added to task list",
+      "newTaskIncomeDescription": "You have been added to task list"
     }
   },
   "serviceDefaults": {
