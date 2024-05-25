@@ -23,7 +23,7 @@ const TRANSLATIONS = {
 
 export function WorkersDesktop() {
   const modalRef = useRef<BottomSheetModal>(null);
-  const { data, isFetching, isError } = useQuery({
+  const { data, isFetching, isError, refetch } = useQuery({
     queryKey: ['workers'],
     queryFn: allWorkers,
     staleTime: EXPO_PUBLIC_QUERY_STALE_TIME,
@@ -37,6 +37,7 @@ export function WorkersDesktop() {
       }}
     >
       <List<WorkerResponseBase>
+        onRefreshCall={refetch}
         isFetching={isFetching}
         isError={isError}
         data={data}

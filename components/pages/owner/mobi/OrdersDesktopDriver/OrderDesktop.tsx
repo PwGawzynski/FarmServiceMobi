@@ -22,7 +22,7 @@ const TRANSLATIONS = {
 export function OrderDesktop() {
   // const company = useSelector(selectUserCompany);
   const modalRef = useRef<BottomSheetModal>(null);
-  const { data, isFetching, isLoading, isError } = useQuery({
+  const { data, isFetching, isLoading, isError, refetch } = useQuery({
     queryKey: ['orders'],
     queryFn: getAllOrders,
   });
@@ -35,6 +35,7 @@ export function OrderDesktop() {
       }}
     >
       <List<OrderResponseBase>
+        onRefreshCall={refetch}
         isFetching={isFetching}
         isError={isError}
         isLoading={isLoading}

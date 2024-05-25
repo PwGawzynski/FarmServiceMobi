@@ -1,4 +1,4 @@
-import { SizableText, XStack, YStack } from 'tamagui';
+import { XStack, YStack } from 'tamagui';
 import { t } from 'i18next';
 import { ScreenBase } from '../common/ScreenBase';
 import { CallAndMailPanel } from '../../../../molecules/CallAndMailPanel';
@@ -8,6 +8,7 @@ import { ButtonTamagui } from '../../../../atoms/ButtonTamagui';
 import UserIco from '../../../../../assets/user.svg';
 import MapIco from '../../../../../assets/map.svg';
 import PlusIco from '../../../../../assets/plus.svg';
+import { ClientCompletedOrders } from '../../../../organisms/ClientCompletedOrders';
 
 export function ClientControlPanel({
   route,
@@ -19,6 +20,7 @@ export function ClientControlPanel({
 >) {
   const { personalData } = route.params.client.user;
   const { email } = route.params.client;
+  const clientId = route.params.client.id;
   return (
     <ScreenBase
       name={t(TranslationNames.screens.clientDriver.clientControlPanel.title)}
@@ -73,9 +75,7 @@ export function ClientControlPanel({
             )}
           />
         </YStack>
-        <YStack f={1} ai="center" jc="center">
-          <SizableText>Tu chartsy kienta</SizableText>
-        </YStack>
+        <ClientCompletedOrders clientId={clientId} />
       </YStack>
       <XStack mt="$4">
         <CallAndMailPanel

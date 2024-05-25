@@ -35,7 +35,7 @@ export const dateWithoutTime = (date: string) => {
 };
 
 export const filterDoneTasks = (tasks: TaskResponseBase[]) =>
-  tasks.filter(_ => _.closedAt !== undefined && _.isDone);
+  tasks?.filter(_ => _?.closedAt !== undefined && _?.isDone);
 export const sortTasksByClosedDate = (tasks: TaskResponseBase[]) =>
   tasks
     .sort(

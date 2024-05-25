@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query';
-import { SizableText } from 'tamagui';
 import { t } from 'i18next';
 import { useRef } from 'react';
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
@@ -61,6 +60,7 @@ export function OrderTasksScreen({
     isPending,
     isLoading,
     isError,
+    refetch,
   } = useQuery({
     queryKey: ['orderTasks', order.id],
     queryFn: context => getTaskByOrder(context.queryKey[1]),
@@ -73,14 +73,10 @@ export function OrderTasksScreen({
       }}
       name={t(TranslationNames.screens.orderDriver.orderTasksScreen.screenName)}
     >
-      <SizableText className="uppercase font-bold text-xl mt-4 ">
-        {t(
-          TranslationNames.screens.orderDriver.orderTasksScreen.taskListHeader,
-        )}
-      </SizableText>
       <List<TaskResponseBase>
         // we have to set margin top to 0 and margin bottom to 0, because we use forwardRef in a List component,
         // sand its gets those styles
+        onRefreshCall={refetch}
         cName="mt-0 mb-0"
         modalRef={modalRef}
         data={tasks as unknown as TaskResponseBase[]}

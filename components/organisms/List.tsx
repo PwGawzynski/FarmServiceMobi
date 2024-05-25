@@ -6,6 +6,7 @@ import {
   useCallback,
   useEffect,
   useImperativeHandle,
+  useMemo,
   useState,
 } from 'react';
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
@@ -13,13 +14,15 @@ import { XStack, YStack } from 'tamagui';
 import { ListRenderItemInfo } from '@shopify/flash-list';
 import Toast from 'react-native-toast-message';
 import { t } from 'i18next';
+import { RefreshControl } from 'react-native';
 import { SearchBox } from '../molecules/SearchBox';
 import { ButtonTamagui } from '../atoms/ButtonTamagui';
 import DeselectIco from '../../assets/list-x.svg';
 import SelectAllIco from '../../assets/list-checks.svg';
 import { UniversalList } from './UniversalList';
-import { ListItem, ListItemStyleSettings } from './ListItem';
+import { ListItemStyleSettings } from './ListItem';
 import { TranslationNames } from '../../locales/TranslationNames';
+import { createListItem } from '../../helepers/ListItemCreator';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export interface Props<T extends Record<string, any>> {
@@ -48,6 +51,7 @@ export interface Props<T extends Record<string, any>> {
   listEmptyComponent?: JSX.Element;
   swipeRightAnimation?: boolean;
   beFlex?: boolean;
+  onRefreshCall?: () => void;
   /* eslint-enable react/no-unused-prop-types */
 }
 export interface ListRef<T> {
@@ -78,6 +82,7 @@ function ListMemo<T extends Record<string, any>>(
     listEmptyComponent,
     swipeRightAnimation,
     beFlex,
+    onRefreshCall,
   }: Props<T>,
   ref: ForwardedRef<ListRef<T>>,
 ) {
@@ -116,52 +121,26 @@ function ListMemo<T extends Record<string, any>>(
       all: data,
     } as ListRef<T>;
   });
-
+  const refreshControlComponent = useMemo(
+    () => (
+      <RefreshControl refreshing={!!isFetching} onRefresh={onRefreshCall} />
+    ),
+    [isFetching, onRefreshCall] as const,
+  );
   const renderItem = useCallback(
-    ({ item }: ListRenderItemInfo<T>) => {
-      const handleOnPress = () => {
-        if (handleOnItemPress) handleOnItemPress(item);
-      };
-
-      const {
-        bottomRightText,
-        header,
-        infoIco,
-        avatarChars,
-        alignment,
-        customIco,
-        disabled,
-      } = listStyleSettings
-        ? listStyleSettings(item)
-        : {
-            bottomRightText: undefined,
-            header: undefined,
-            infoIco: undefined,
-            avatarChars: undefined,
-            alignment: undefined,
-            customIco: undefined,
-            disabled: false,
-          };
-      return (
-        <ListItem<T>
-          onPressNavigateTo={onPressNavigateTo}
-          navigationParams={{ [navigationParamName ?? 'item']: item }}
-          onSelected={isSelectable ? handleFieldSelection : undefined}
-          onDeselected={isSelectable ? handleFieldDeselection : undefined}
-          isSelected={selectedItems.some(i => i.id === item.id)}
-          item={item}
-          onPress={!isSelectable ? handleOnPress : undefined}
-          header={header}
-          bottomRightText={bottomRightText}
-          infoIco={infoIco}
-          customIco={customIco}
-          alignment={alignment}
-          avatarChars={avatarChars}
-          disabled={disabled}
-        />
-      );
-    },
-    [selectedItems, data],
+    ({ item }: ListRenderItemInfo<T>) =>
+      createListItem({
+        item,
+        handleOnItemPress,
+        listStyleSettings,
+        onPressNavigateTo,
+        navigationParamName,
+        isSelectable,
+        handleFieldSelection,
+        handleFieldDeselection,
+        selectedItems,
+      }),
+    [selectedItems, data, listStyleSettings],
   );
 
   return (
@@ -189,6 +168,7 @@ function ListMemo<T extends Record<string, any>>(
       </YStack>
       <YStack f={1}>
         <UniversalList<T>
+          refreshControlComponent={refreshControlComponent}
           beFlex={beFlex}
           listEmptyComponent={listEmptyComponent}
           listEmptyText={listEmptyText}

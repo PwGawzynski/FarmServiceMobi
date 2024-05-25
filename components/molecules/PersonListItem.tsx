@@ -85,7 +85,7 @@ export default function PersonListItem<T extends Record<string, any>>({
           <SizableText
             fontWeight="bold"
             fontSize={name.length + surname.length > 20 ? '$4' : '$7'}
-            color="$color"
+            color="$color5"
             textTransform="uppercase"
             textAlign="right"
             adjustsFontSizeToFit
@@ -93,7 +93,7 @@ export default function PersonListItem<T extends Record<string, any>>({
           >
             {name} {surname}
           </SizableText>
-          <SizableText color="$color4" textAlign="right">
+          <SizableText color="$color" textAlign="right">
             {bottomRightText}
           </SizableText>
         </YStack>

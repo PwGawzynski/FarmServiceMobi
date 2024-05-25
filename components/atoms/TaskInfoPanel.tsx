@@ -150,6 +150,8 @@ const TaskInfoPanelM = memo(
           <Card
             height={SESSION_ITEM_HEIGHT * SESSION_ITEM_VISIBLE_COUNT}
             bordered
+            borderColor="$color4"
+            bg="$color6"
             p="$2"
           >
             <SizableText fontSize="$7" className="uppercase font-bold">

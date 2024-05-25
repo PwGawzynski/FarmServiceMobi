@@ -66,11 +66,11 @@ export function ListItem<T extends Record<string, any>>({
   };
 
   const {
-    color4: { val },
+    color5: { val },
     color11: { val: disabledVal },
   } = useTheme();
 
-  const aling = alignment === 'left' ? 'left' : 'right';
+  const align = alignment === 'left' ? 'left' : 'right';
 
   return (
     <Card onPress={handlePress} minHeight={60} jc="center">
@@ -95,9 +95,9 @@ export function ListItem<T extends Record<string, any>>({
             <SizableText
               fontWeight="bold"
               fontSize={header.length > 20 ? '$4' : '$7'}
-              color={disabled ? '$color11' : '$color'}
+              color={disabled ? '$color11' : '$color5'}
               textTransform="uppercase"
-              textAlign={aling}
+              textAlign={align}
               adjustsFontSizeToFit
               numberOfLines={1}
             >
@@ -108,9 +108,9 @@ export function ListItem<T extends Record<string, any>>({
             adjustsFontSizeToFit
             numberOfLines={1}
             overflow="hidden"
-            color={disabled ? '$color11' : '$color4'}
+            color={disabled ? '$color11' : '$color'}
             mt="$1"
-            textAlign={aling}
+            textAlign={align}
           >
             {bottomRightText}
           </SizableText>

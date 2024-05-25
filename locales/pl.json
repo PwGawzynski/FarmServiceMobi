@@ -159,7 +159,7 @@
         "submitButton": "Zapisz zmiany"
       },
       "orderTasksScreen": {
-        "screenName": "Szczegóły zamówienia",
+        "screenName": "Zadania",
         "taskListHeader": "Tasks",
         "detailsCard": {
           "cardName": "Szczegóły",
@@ -666,7 +666,7 @@
   "validation": {
     "nameLabel": "Nazwa pola jest wymagana",
     "polishSystemId": "Id w systemie polskim jest wymagane",
-    "polishSystemIdPattern": "PL_ID musi być w formacie XX-XXX",
+    "polishSystemIdPattern": "PL_ID musi być w formacie PL_ID (np. 181102_2.0010.211)",
     "area": "Obszar jest wymagany",
     "validationAtLeast": "musi być co najmniej ",
     "validationMaximum ": "może mieć maksimum ",

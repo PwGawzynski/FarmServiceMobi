@@ -37,7 +37,7 @@ export function TextArea({
         borderColor={error ? '$color7' : '$color4'}
         placeholderTextColor={
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (theme === Theme.dark ? '$color11' : '$color9') as any
+          (theme === Theme.dark ? '$color11' : '$color8') as any
         }
         onBlur={onBlur}
         focusStyle={{
@@ -46,7 +46,7 @@ export function TextArea({
         }}
         value={value?.toString()}
         placeholder={placeholderName}
-        backgroundColor="$color6"
+        backgroundColor="transparent"
         height={120}
         disabled={disabled}
         {...textInputProps}

@@ -9,6 +9,7 @@ import { Theme } from '../../../../FarmServiceApiTypes/Account/Constants';
 import { Colors } from '../../../../settings/styles/colors';
 import { WorkerActivityDesktopDriverParamList } from '../../../../types/self/navigation/Worker/paramList/activities/WorkerActivityDesktopDriverParamList';
 import { ActivityDesktopRoot } from '../../../pages/worker/ActivitiesDesktopDriver/ActivityDesktopRoot';
+import { AppSettings } from '../../../pages/owner/mobi/ActivitiesDesktopTopTabNavigator/AppSettings';
 
 const Stack =
   createMaterialTopTabNavigator<WorkerActivityDesktopDriverParamList>();
@@ -28,8 +29,12 @@ export function ActivitiesDesktopDriver() {
     >
       <Stack.Screen
         name="workerLastActivities"
+        options={{
+          swipeEnabled: false,
+        }}
         component={ActivityDesktopRoot}
       />
+      <Stack.Screen name="appSettings" component={AppSettings} />
     </Stack.Navigator>
   );
 }

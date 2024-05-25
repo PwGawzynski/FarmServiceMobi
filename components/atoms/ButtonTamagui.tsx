@@ -5,6 +5,7 @@ import { t } from 'i18next';
 import { selectTheme } from '../../src/redux/feature/userSlice';
 import { Theme } from '../../FarmServiceApiTypes/Account/Constants';
 import { TranslationNames } from '../../locales/TranslationNames';
+import { Colors } from '../../settings/styles/colors';
 
 export type IconButtonProps = {
   icon?: React.ReactNode;
@@ -56,7 +57,7 @@ export function ButtonTamagui({
         <>
           <ActivityIndicator
             size="small"
-            color={theme === Theme.dark ? '#000' : '$color8'}
+            color={theme === Theme.dark ? '#000' : Colors.WHITE}
           />
           <Button.Text
             {...textProps}

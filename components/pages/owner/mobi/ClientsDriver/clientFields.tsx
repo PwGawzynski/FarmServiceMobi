@@ -45,7 +45,7 @@ export function ClientFields({
   'ownerRootDriver'
 >) {
   const { client } = route.params;
-  const { data, isError, isFetching } = useQuery({
+  const { data, isError, isFetching, refetch } = useQuery({
     queryKey: ['clientFields', client.id],
     queryFn: keys => getClientFields(keys.queryKey[1] as string),
     staleTime: EXPO_PUBLIC_QUERY_STALE_TIME,
@@ -71,6 +71,7 @@ export function ClientFields({
       }}
     >
       <List<FieldResponseBase>
+        onRefreshCall={refetch}
         isFetching={isFetching}
         isError={isError}
         data={data}

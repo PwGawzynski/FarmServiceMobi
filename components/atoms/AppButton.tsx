@@ -10,7 +10,7 @@ export type Props = {
 export function AppButton(props: Props) {
   return (
     <TouchableOpacity
-      className="flex-1 h-full bg-dark dark:bg-green items-center justify-center rounded-full"
+      className="flex-1 h-full bg-dark-blue dark:bg-green items-center justify-center rounded-full"
       {...props}
     >
       {props.children}

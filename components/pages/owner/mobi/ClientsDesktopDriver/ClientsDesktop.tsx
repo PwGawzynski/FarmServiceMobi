@@ -23,7 +23,7 @@ const LIST_SEARCH_PLACEHOLDER = t(
 
 export function ClientsDesktop() {
   const modalRef = useRef<BottomSheetModal>(null);
-  const { data, isFetching, isError } = useQuery({
+  const { data, isFetching, isError, refetch } = useQuery({
     queryKey: ['clients'],
     queryFn: getClients,
     staleTime: EXPO_PUBLIC_QUERY_STALE_TIME,
@@ -41,6 +41,7 @@ export function ClientsDesktop() {
       name={SCREEN_NAME}
     >
       <List<ClientResponseBase>
+        onRefreshCall={refetch}
         isFetching={isFetching}
         isError={isError}
         data={data}

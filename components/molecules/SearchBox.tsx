@@ -1,6 +1,5 @@
-import { Input, SizeTokens, XStack } from 'tamagui';
+import { Input, SizeTokens, useTheme, XStack } from 'tamagui';
 import SearchIcon from '../../assets/search.svg';
-import { Colors } from '../../settings/styles/colors';
 
 export type Props = {
   onTextChange: (value: string) => void;
@@ -9,6 +8,7 @@ export type Props = {
 };
 
 export function SearchBox({ onTextChange, placeholder, size }: Props) {
+  const { color4 } = useTheme();
   return (
     <XStack
       ai="center"
@@ -19,7 +19,7 @@ export function SearchBox({ onTextChange, placeholder, size }: Props) {
       pr="$4"
       backgroundColor="$color1"
     >
-      <SearchIcon color={Colors.GREEN} />
+      <SearchIcon color={color4?.val} />
       <Input
         size={size ?? '$4'}
         f={1}

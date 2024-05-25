@@ -18,11 +18,11 @@ export type MainBottomSheetProps = {
 const styles = (theme: Theme | undefined) =>
   StyleSheet.create({
     container: {
-      backgroundColor: theme === Theme.dark ? Colors.MID_GRAY : Colors.DARK,
+      backgroundColor: theme === Theme.dark ? Colors.MID_GRAY : Colors.GREEN,
       borderRadius: 20,
     },
     handle: {
-      backgroundColor: theme === Theme.dark ? Colors.WHITE : Colors.WHITE,
+      backgroundColor: theme === Theme.dark ? Colors.WHITE : Colors.DARK_BLUE,
     },
     contentContainer: {
       flex: 1,

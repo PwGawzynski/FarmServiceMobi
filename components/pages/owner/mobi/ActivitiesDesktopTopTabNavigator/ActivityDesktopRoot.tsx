@@ -18,6 +18,10 @@ import { ActivityItem } from '../../../../atoms/ActivityItem';
 import { TranslationNames } from '../../../../../locales/TranslationNames';
 import GearIco from '../../../../../assets/settings.svg';
 import { HintCard } from '../../../../atoms/HintCard';
+import OrderIco from '../../../../../assets/order.svg';
+import Users from '../../../../../assets/users.svg';
+import TractorIco from '../../../../../assets/tractor.svg';
+import WorkersIco from '../../../../../assets/handshake.svg';
 
 const TRANSLATIONS = {
   title: t(TranslationNames.screens.activityDesktopRoot.title),
@@ -50,6 +54,7 @@ export function ActivityDesktopRoot({
           screen: 'ordersDesktopRoot',
           params: { screen: 'ordersDesktop' },
         }),
+      Icon: OrderIco,
     },
     {
       title: 'workers',
@@ -58,6 +63,7 @@ export function ActivityDesktopRoot({
           screen: 'workersDesktopRoot',
           params: { screen: 'workersDesktop' },
         }),
+      Icon: WorkersIco,
     },
 
     {
@@ -67,6 +73,7 @@ export function ActivityDesktopRoot({
           screen: 'clientsDesktopRoot',
           params: { screen: 'clientsDesktop' },
         }),
+      Icon: Users,
     },
     {
       title: 'Machines',
@@ -75,6 +82,7 @@ export function ActivityDesktopRoot({
           screen: 'machinesDesktopRoot',
           params: { screen: 'machinesDesktop' },
         }),
+      Icon: TractorIco,
     },
   ];
   const [isFetching, setIsFetching] = useState(true);
@@ -97,7 +105,7 @@ export function ActivityDesktopRoot({
         <GearIco height={30} width={30} color={color4?.val} />
       </YStack>
     );
-  }, [navigation]);
+  }, [navigation, color4]);
 
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

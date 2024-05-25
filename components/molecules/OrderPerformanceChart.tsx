@@ -1,5 +1,5 @@
-import { Bar, CartesianChart, useChartPressState } from 'victory-native';
 import { LinearGradient, useFont, vec } from '@shopify/react-native-skia';
+import { Bar, CartesianChart, useChartPressState } from 'victory-native';
 import { SizableText, YStack } from 'tamagui';
 import { useSelector } from 'react-redux';
 import { useQuery } from '@tanstack/react-query';
@@ -18,11 +18,9 @@ import { HintCard } from '../atoms/HintCard';
 import {
   calculateUniqueData,
   filterDoneTasks,
-  getDateSeries,
   getUniqueDays,
   mapDataToBarChartFormat,
   mapTasksToChartData,
-  sortTasksByClosedDate,
   ToolTip,
 } from '../../helepers/Charts/OrderPerformanceChart';
 import XIco from '../../assets/x.svg';
@@ -78,15 +76,16 @@ export function OrderPerformanceChart({ orderId }: OrderPerformanceChartProps) {
     if (tasks?.length === 0) return [];
     if (!tasks) return null;
     const doneTasks = filterDoneTasks(tasks);
-    const sortedTasks = sortTasksByClosedDate(doneTasks);
+    // UNCOMMENT if u want to se day by day series from first task closed to last
+    // const sortedTasks = sortTasksByClosedDate(doneTasks);
 
-    const minDate = new Date(sortedTasks[0]);
-    const maxDate = new Date(sortedTasks[sortedTasks.length - 1]);
+    // const minDate = new Date(sortedTasks[0]);
+    // const maxDate = new Date(sortedTasks[sortedTasks.length - 1]);
     const chartData = mapTasksToChartData(doneTasks);
     const uniqueDays = getUniqueDays(chartData);
     const uniqueDataWithFieldArea = calculateUniqueData(chartData, uniqueDays);
-    const dateSeries = getDateSeries(minDate, maxDate);
-    return mapDataToBarChartFormat(dateSeries, uniqueDataWithFieldArea);
+    // const dateSeries = getDateSeries(minDate, maxDate);
+    return mapDataToBarChartFormat(uniqueDays, uniqueDataWithFieldArea);
   }, [tasks]);
 
   if (isError)
@@ -124,13 +123,12 @@ export function OrderPerformanceChart({ orderId }: OrderPerformanceChartProps) {
         <PendingInfo isVisible infoText={TRANSLATIONS.computingPerformance} />
       </YStack>
     );
-
+  const gradientStartColor =
+    theme === Theme.dark ? Colors.GREEN : Colors.DARK_BLUE;
+  const gradientEndColor = theme === Theme.dark ? Colors.WHITE : Colors.GREEN;
   return (
     <YStack f={1} p="$$">
-      <SizableText
-        fontSize="$4"
-        className="uppercase font-semibold  relative top-[15]"
-      >
+      <SizableText fontSize="$4" className="uppercase font-semibold mt-2 mb-1">
         {TRANSLATIONS.dailyPerformance}
       </SizableText>
       <CartesianChart
@@ -143,10 +141,12 @@ export function OrderPerformanceChart({ orderId }: OrderPerformanceChartProps) {
         axisOptions={{
           font,
           lineWidth: 0,
-          labelColor: theme === Theme.dark ? Colors.WHITE : Colors.DARK_GRAY,
+          labelColor: theme === Theme.dark ? Colors.WHITE : Colors.DARK_BLUE,
+          lineColor: theme === Theme.dark ? Colors.WHITE : Colors.DARK_BLUE,
           labelOffset: 0,
           tickCount: data.length,
           formatYLabel: () => ``, // we don't want to show y labels
+          formatXLabel: s => (s !== undefined ? s : ''),
           labelPosition: {
             y: 'inset',
             x: 'outset',
@@ -159,7 +159,7 @@ export function OrderPerformanceChart({ orderId }: OrderPerformanceChartProps) {
               points={points.fieldArea}
               roundedCorners={{ topLeft: 10, topRight: 10 }}
               chartBounds={chartBounds}
-              innerPadding={data.length < 10 ? 0.7 : 0.5}
+              innerPadding={data.length < 10 ? 0.85 : 0.5}
               animate={
                 isFocused ? { type: 'timing', duration: 900 } : undefined
               }
@@ -167,7 +167,7 @@ export function OrderPerformanceChart({ orderId }: OrderPerformanceChartProps) {
               <LinearGradient
                 start={vec(0, 0)}
                 end={vec(0, 400)}
-                colors={[Colors.GREEN, Colors.WHITE]}
+                colors={[gradientStartColor, gradientEndColor]}
               />
             </Bar>
             {isActive ? (

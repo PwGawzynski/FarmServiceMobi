@@ -1,9 +1,10 @@
 import { useSelector } from 'react-redux';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
 import { t } from 'i18next';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import Toast from 'react-native-toast-message';
+import { useTheme, YStack } from 'tamagui';
 import { ActivitiesDesktopDriverScreenProps } from '../../../../types/self/navigation/Worker/props/activities/WorkerActivitiesDesktopDriverProps';
 import {
   selectTheme,
@@ -20,6 +21,7 @@ import ResumeIco from '../../../../assets/refresh.svg';
 import { Theme } from '../../../../FarmServiceApiTypes/Account/Constants';
 import { Colors } from '../../../../settings/styles/colors';
 import PlayIco from '../../../../assets/play.svg';
+import GearIco from '../../../../assets/settings.svg';
 
 const TRANSLATIONS = {
   welcome: t(TranslationNames.workerScreens.activityDesktopRoot.welcome),
@@ -87,6 +89,17 @@ export function ActivityDesktopRoot({
     };
   }, []);
 
+  const { color4 } = useTheme();
+
+  const appSettingsButton = useMemo(() => {
+    const handlePress = () => !isFetching && navigation.navigate('appSettings');
+    return (
+      <YStack onPress={handlePress}>
+        <GearIco height={30} width={30} color={color4?.val} />
+      </YStack>
+    );
+  }, [navigation, color4, isFetching]);
+
   const modalRef = useRef<BottomSheetModal>(null);
   const theme = useSelector(selectTheme);
   return (
@@ -96,6 +109,7 @@ export function ActivityDesktopRoot({
         snapPoints: ['50%', '70%'],
       }}
       name={`${TRANSLATIONS.welcome} ${name}`}
+      topRightButton={appSettingsButton}
     >
       <List<TaskResponseBase>
         isError={false}
@@ -113,11 +127,11 @@ export function ActivityDesktopRoot({
             // eslint-disable-next-line no-nested-ternary
             item.lastPausedAt && !item.closedAt ? (
               <ResumeIco
-                color={theme === Theme.dark ? Colors.GREEN : Colors.DARK_BLUE}
+                color={theme === Theme.dark ? Colors.GREEN : Colors.WHITE}
               />
             ) : !item.lastPausedAt && !item.closedAt ? (
               <PlayIco
-                color={theme === Theme.dark ? Colors.GREEN : Colors.DARK_BLUE}
+                color={theme === Theme.dark ? Colors.GREEN : Colors.WHITE}
               />
             ) : undefined,
           infoIco: true,

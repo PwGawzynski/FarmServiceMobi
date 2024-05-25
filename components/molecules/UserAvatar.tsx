@@ -14,14 +14,14 @@ export function UserAvatar({
   size,
 }: Props) {
   return (
-    <Avatar bg="$color8" circular size={size || '$3'}>
+    <Avatar bg="$color5" circular size={size || '$3'} ml="$1">
       <AvatarImage source={{ uri: imageUrl }} />
       <AvatarFallback ai="center" jc="center">
         <Text
           adjustsFontSizeToFit
           numberOfLines={1}
           fontSize="$4"
-          color="$color1"
+          color="$color3"
         >
           {nameFirstLetter}
           {surnameFirstLetter}

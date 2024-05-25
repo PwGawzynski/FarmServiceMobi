@@ -22,7 +22,14 @@ export function TimeCounter({ startTime }: SessionTimeCounterProps) {
     return () => clearInterval(interval);
   }, []);
   return (
-    <Card height={100} bordered width="full" jc="center" ai="center">
+    <Card
+      height={100}
+      bordered
+      width="full"
+      jc="center"
+      ai="center"
+      borderColor="$color4"
+    >
       <H5>{time(sessionTime)} H</H5>
     </Card>
   );

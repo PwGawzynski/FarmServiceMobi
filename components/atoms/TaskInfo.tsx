@@ -70,10 +70,13 @@ export function TaskInfo({ task, onDeleteProcessed, order, modalRef }: Props) {
       onDeleteProcessed();
       return queryClient.setQueryData(
         ['orderTasks', order.id],
-        (old: TaskResponseBase[]) =>
-          old?.filter(storedTask => storedTask.id !== v).push(d),
+        (old: TaskResponseBase[]) => {
+          if (old) return [...old.filter(storedTask => storedTask.id !== v), d];
+          return [d];
+        },
       );
     },
+    onError: error => Alert.alert('Cannot close task', error.message),
   });
 
   const [sessionView, setSessionView] = useState<
