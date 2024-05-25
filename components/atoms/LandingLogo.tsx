@@ -7,7 +7,7 @@ import { View } from 'react-native';
 
 export const LANDING_ANIMATION_DURATION = /* process.env.EXPO_PUBLIC_IS_DEV
   ? 0
-  : */ 3000;
+  : */ 1500;
 
 export type Props = {
   play: boolean;
