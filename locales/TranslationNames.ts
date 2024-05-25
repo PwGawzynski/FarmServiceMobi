@@ -99,6 +99,10 @@ export const TranslationNames = {
         logout: 'screens.appSettings.settings.logout',
         changeTheme: 'screens.appSettings.settings.changeTheme',
         changeLang: 'screens.appSettings.settings.changeLang',
+        logoutErrorAlertTitle:
+          'screens.appSettings.settings.logoutErrorAlertTitle',
+        logoutErrorAlertDescription:
+          'screens.appSettings.settings.logoutErrorAlertDescription',
       },
     },
     activityDesktopRoot: {

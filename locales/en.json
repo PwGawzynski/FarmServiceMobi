@@ -84,7 +84,9 @@
       "settings": {
         "logout": "Log out",
         "changeTheme": "Change theme",
-        "changeLang": "Change Language"
+        "changeLang": "Change Language",
+        "logoutErrorAlertTitle": "Error",
+        "logoutErrorAlertDescription": "An error occurred while logging out, please try again"
       }
     },
     "activityDesktopRoot": {

@@ -84,7 +84,9 @@
       "settings": {
         "logout": "Wyloguj się",
         "changeTheme": "Zmień motyw",
-        "changeLang": "Zmień język"
+        "changeLang": "Zmień język",
+        "logoutErrorAlertTitle": "Błąd",
+        "logoutErrorAlertDescription": "Nie udało się wylogować, spróbuj ponownie później"
       }
     },
     "activityDesktopRoot": {
