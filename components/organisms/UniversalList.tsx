@@ -35,9 +35,10 @@ export function UniversalList<T>({
   scrollToBottomOnContentSizeChange,
   refreshControlComponent,
 }: Props<T>) {
-  const ListEmptyComponent = useMemo(
-    () => (
+  const ListEmptyComponent = useMemo(() => {
+    return (
       <ListInfo
+        isDelayed
         beFlex={beFlex}
         Ico={Empty}
         text={
@@ -47,9 +48,8 @@ export function UniversalList<T>({
       >
         {swipeRightAnimation && <SwipeRightAnimated />}
       </ListInfo>
-    ),
-    [],
-  );
+    );
+  }, []);
 
   const onFetching = useCallback(() => {
     const elements = [];
