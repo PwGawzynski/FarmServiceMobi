@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { YStack } from 'tamagui';
 import { t } from 'i18next';
 import { useTranslation } from 'react-i18next';
+import { Alert } from 'react-native';
 import { ScreenBase } from '../common/ScreenBase';
 import { logout } from '../../../../../api/services/User';
 import {
@@ -17,6 +18,7 @@ import LogOutIco from '../../../../../assets/log-out.svg';
 import ThemeIco from '../../../../../assets/sun-moon.svg';
 import { TranslationNames } from '../../../../../locales/TranslationNames';
 import { updateAccount } from '../../../../../api/account/Account';
+import { ActivitiesDesktopDriverScreenProps } from '../../../../../types/self/navigation/Owner/props/activities/ActivitiesDesktopDriverProps';
 
 const TRANSLATIONS = {
   screenTitle: t(TranslationNames.screens.appSettings.screenTitle),
@@ -24,10 +26,23 @@ const TRANSLATIONS = {
     logout: t(TranslationNames.screens.appSettings.settings.logout),
     changeTheme: t(TranslationNames.screens.appSettings.settings.changeTheme),
     changeLanguage: t(TranslationNames.screens.appSettings.settings.changeLang),
+    logoutErrorAlertTitle: t(
+      TranslationNames.screens.appSettings.settings.logoutErrorAlertTitle,
+    ),
+    logoutErrorAlertDescription: t(
+      TranslationNames.screens.appSettings.settings.logoutErrorAlertDescription,
+    ),
   },
 };
 
-export function AppSettings() {
+export function AppSettings({
+  navigation,
+}: ActivitiesDesktopDriverScreenProps<
+  'appSettings',
+  'activityDesktopRoot',
+  'activityDriver',
+  'ownerRootDriver'
+>) {
   const {
     mutate: mutateAccount,
     isPending: isAccountPending,
@@ -43,7 +58,13 @@ export function AppSettings() {
     mutationFn: logout,
     onSuccess: () => {
       dispatch(clearUserData());
+      navigation.navigate('chooseLoginType');
     },
+    onError: () =>
+      Alert.alert(
+        TRANSLATIONS.settings.logoutErrorAlertTitle,
+        TRANSLATIONS.settings.logoutErrorAlertDescription,
+      ),
   });
 
   const theme = useSelector(selectTheme);
