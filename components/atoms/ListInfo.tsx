@@ -1,6 +1,6 @@
 import { Dimensions, View } from 'react-native';
 import { SizableText, useTheme, YStack } from 'tamagui';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { t } from 'i18next';
 import { TranslationNames } from '../../locales/TranslationNames';
 import Empty from '../../assets/empty.svg';
@@ -13,11 +13,13 @@ export type ListEmptyProps = {
   children?: React.ReactElement | React.ReactElement[] | boolean;
   color?: string;
   beFlex?: boolean;
+  isDelayed?: boolean;
 };
 
 const TRANSLATIONS = {
   unknownError: t(TranslationNames.components.listInfo.unknownError),
 };
+const LIST_EMPTY_DELAY = 50;
 
 export function ListInfo({
   Ico,
@@ -26,9 +28,21 @@ export function ListInfo({
   children,
   color: _color,
   beFlex,
+  isDelayed,
 }: ListEmptyProps) {
   const EMPTY_HEIGHT = height ?? Dimensions.get('window').height * 0.7;
   const { color } = useTheme();
+  const [canShow, setCanShow] = useState(false);
+  useEffect(() => {
+    if (isDelayed) {
+      const timer = setTimeout(() => {
+        setCanShow(true);
+      }, LIST_EMPTY_DELAY);
+      return () => clearTimeout(timer);
+    }
+    return undefined;
+  }, [isDelayed]);
+  if (!canShow) return null;
   return (
     <View
       style={{
