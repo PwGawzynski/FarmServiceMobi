@@ -7,7 +7,7 @@ import { TranslationNames } from '../../locales/TranslationNames';
 import { LoginUser } from '../../FarmServiceApiTypes/User/LoginUser';
 import { PendingInfo } from '../atoms/PendingInfo';
 import { FormErrorInfo } from '../atoms/FormErrorInfo';
-import { AppButton } from '../atoms/AppButton';
+import { ButtonTamagui } from '../atoms/ButtonTamagui';
 
 const VALIDATION = {
   EMAIL_MIN_LEN: `${t(
@@ -160,13 +160,15 @@ export function LoginForm({
         {error && <FormErrorInfo error={error.message} />}
       </View>
 
-      <AppButton
-        title={
+      <ButtonTamagui
+        text={
           buttonText ||
           t(TranslationNames.screens.authDriver.loginByEmail.loginButton)
         }
-        className="mt-6 max-h-12"
-        onPress={handleSubmit(onSubmit)}
+        buttonProps={{
+          mt: '$4',
+          onPress: handleSubmit(onSubmit),
+        }}
       />
     </>
   );

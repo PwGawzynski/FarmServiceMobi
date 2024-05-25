@@ -384,7 +384,7 @@ export class ApiSelf {
 
   // eslint-disable-next-line no-underscore-dangle
   static async delayRes() {
-    return process.env.EXPO_PUBLIC_IS_DEV
+    return process.env.EXPO_PUBLIC_IS_DEV === 'true'
       ? new Promise(resolve => {
           setTimeout(() => {
             resolve(true);

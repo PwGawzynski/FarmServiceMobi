@@ -4,15 +4,17 @@ import { ScreenBase } from '../common/ScreenBase';
 import { TranslationNames } from '../../../../../locales/TranslationNames';
 import { CenteredMediumHeader } from '../../../../atoms/CenteredMediumHeader';
 import { AuthDriverProps } from '../../../../../types/self/navigation/Owner/props/AuthDriverProps';
-import { AppButton } from '../../../../atoms/AppButton';
 import { TextWithLink } from '../../../../atoms/TextWithLink';
 import { GoogleAuth } from '../../../../atoms/GoogleAuth';
+import { ButtonTamagui } from '../../../../atoms/ButtonTamagui';
 
 export function ChooseLoginType({
   navigation,
   route,
 }: AuthDriverProps<'chooseLoginType'>) {
   const { t } = useTranslation();
+  const handleChooseRegisterType = () =>
+    navigation.navigate('chooseRegisterType');
 
   return (
     <ScreenBase>
@@ -23,10 +25,11 @@ export function ChooseLoginType({
         <Text className="text-center text-dark dark:text-green text-base font-medium mb-12">
           {t(TranslationNames.screens.authDriver.chooseLoginType.instruction)}
         </Text>
-        <AppButton
-          className="max-h-12"
-          onPress={() => navigation.navigate('loginByEmail')}
-          title={t(TranslationNames.screens.authDriver.chooseLoginType.email)}
+        <ButtonTamagui
+          buttonProps={{
+            onPress: () => navigation.navigate('loginByEmail'),
+          }}
+          text={t(TranslationNames.screens.authDriver.chooseLoginType.email)}
         />
         <GoogleAuth navigation={navigation} route={route} />
       </View>
@@ -35,7 +38,7 @@ export function ChooseLoginType({
         text={t(
           TranslationNames.screens.authDriver.chooseLoginType.registerText,
         )}
-        onLinkPress={() => navigation.navigate('chooseRegisterType')}
+        onLinkPress={handleChooseRegisterType}
         linkText={t(
           TranslationNames.screens.authDriver.chooseLoginType.registerButton,
         )}

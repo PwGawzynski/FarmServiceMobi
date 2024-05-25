@@ -8,9 +8,9 @@ import { googleSignIn } from '../../helepers/GoogleAuth';
 import { AppDispatch } from '../../src/redux/app/Store';
 import { roleBasedRedirection } from '../../helepers/roleBasedRedirection';
 import { TranslationNames } from '../../locales/TranslationNames';
-import { AppButton } from './AppButton';
 import { AuthDriverProps } from '../../types/self/navigation/Owner/props/AuthDriverProps';
 import GoogleIco from '../../assets/google.svg';
+import { ButtonTamagui } from './ButtonTamagui';
 
 export function GoogleAuth({
   navigation,
@@ -28,12 +28,13 @@ export function GoogleAuth({
     roleBasedRedirection(data, navigation, dispatch);
   }, [data]);
   return (
-    <AppButton
-      className="mt-2 max-h-12 flex-row items-center justify-center"
-      onPress={signIn}
-      title={t(TranslationNames.screens.authDriver.chooseLoginType.google)}
-    >
-      <GoogleIco width="10%" height="100%" />
-    </AppButton>
+    <ButtonTamagui
+      buttonProps={{
+        onPress: signIn,
+        mt: '$4',
+      }}
+      icon={<GoogleIco width={35} height={35} />}
+      text={t(TranslationNames.screens.authDriver.chooseLoginType.google)}
+    />
   );
 }

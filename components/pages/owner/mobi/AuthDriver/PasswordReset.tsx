@@ -13,8 +13,8 @@ import { ResponseCode } from '../../../../../FarmServiceApiTypes/Respnse/respons
 import { CenteredMediumHeader } from '../../../../atoms/CenteredMediumHeader';
 import { PendingInfo } from '../../../../atoms/PendingInfo';
 import { FormErrorInfo } from '../../../../atoms/FormErrorInfo';
-import { AppButton } from '../../../../atoms/AppButton';
 import { AppInput } from '../../../../atoms/AppInput';
+import { ButtonTamagui } from '../../../../atoms/ButtonTamagui';
 
 type FormData = Pick<LoginUser, 'email'>;
 
@@ -122,10 +122,12 @@ export function PasswordReset({
       <View className="h-6 w-full items-center justify-center">
         {error && <FormErrorInfo error={error.message} />}
       </View>
-      <AppButton
-        title={t(TranslationNames.screens.authDriver.passwordReset.button)}
-        className="mt-2 max-h-12"
-        onPress={handleSubmit(onSubmit)}
+      <ButtonTamagui
+        text={t(TranslationNames.screens.authDriver.passwordReset.button)}
+        buttonProps={{
+          mt: '$4',
+          onPress: handleSubmit(onSubmit),
+        }}
       />
     </ScreenBase>
   );
