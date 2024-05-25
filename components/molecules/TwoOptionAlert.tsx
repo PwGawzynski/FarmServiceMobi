@@ -1,6 +1,7 @@
-import { AlertDialog, Button, Text, XStack } from 'tamagui';
+import { AlertDialog, Text, XStack } from 'tamagui';
 import DangerIco from '../../assets/danger.svg';
 import { Colors } from '../../settings/styles/colors';
+import { ButtonTamagui } from '../atoms/ButtonTamagui';
 
 export type Props = {
   open: boolean;
@@ -28,7 +29,7 @@ export function TwoOptionAlert(props: Props) {
     <AlertDialog open={props.open}>
       <AlertDialog.Portal>
         <AlertDialog.Overlay key={Math.random()} />
-        <AlertDialog.Content p="$6" m="$8">
+        <AlertDialog.Content backgroundColor="$color11" p="$6" m="$8">
           <XStack ai="center" jc="center" pb="$4">
             {props.isDanger && (
               <DangerIco height={50} width={50} color={Colors.ERROR_RED} />
@@ -56,48 +57,25 @@ export function TwoOptionAlert(props: Props) {
             {props.description}
           </AlertDialog.Description>
           <XStack jc={props.rightButtonText ? 'space-between' : 'center'}>
-            <Button
-              backgroundColor={props.isDanger ? Colors.ERROR_RED : '$color4'}
-              onPress={props.onLeftButtonClick}
-              size="$3"
-              pressStyle={
-                {
-                  color: props.isDanger ? Colors.ERROR_RED : '$color4',
-                  borderColor: props.isDanger ? Colors.ERROR_RED : '$color4',
-                } as never
-              }
-            >
-              <Button.Text
-                adjustsFontSizeToFit
-                numberOfLines={1}
-                textTransform="uppercase"
-                fontWeight="bold"
-              >
-                {props.leftButtonText}
-              </Button.Text>
-            </Button>
-            {props.rightButtonText && (
-              <Button
-                pressStyle={
-                  {
-                    color: '$color4',
-                    borderColor: '$color4',
-                  } as never
-                }
-                onPress={props.onRightButtonClick}
-                size="$3"
-                ml="$4"
-              >
-                <Button.Text
-                  adjustsFontSizeToFit
-                  numberOfLines={1}
-                  textTransform="uppercase"
-                  fontWeight="bold"
-                >
-                  {props.rightButtonText}
-                </Button.Text>
-              </Button>
-            )}
+            <ButtonTamagui
+              text={props.leftButtonText}
+              buttonProps={{
+                onPress: props.onLeftButtonClick,
+                backgroundColor: props.isDanger ? Colors.ERROR_RED : undefined,
+                pressStyle: {
+                  backgroundColor: '$color11',
+                },
+              }}
+            />
+            <ButtonTamagui
+              text={props.rightButtonText}
+              buttonProps={{
+                onPress: props.onRightButtonClick,
+                pressStyle: {
+                  backgroundColor: '$color11',
+                },
+              }}
+            />
           </XStack>
         </AlertDialog.Content>
       </AlertDialog.Portal>
