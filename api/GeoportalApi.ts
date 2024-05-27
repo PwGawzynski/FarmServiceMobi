@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from 'axios/index';
-import { Api } from './Api';
 import { DataFromXMLRes } from '../FarmServiceApiTypes/Field/Ressponses';
 import { ResponseObject } from '../FarmServiceApiTypes/Respnse/responseGeneric';
+import { query } from '../helepers/Api/QueryDriver';
 // noinspection ES6ConvertRequireIntoImport
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const proj4 = require('proj4');
@@ -31,8 +31,12 @@ export class GeoPortalApi {
     ).data as unknown as string;
 
     return (
-      (await Api.getDataFromXLM(fieldHa)).data as ResponseObject<DataFromXMLRes>
-    ).payload;
+      await query<{ data: string }, ResponseObject<DataFromXMLRes>>({
+        type: 'POST',
+        path: 'field/xmlTranslate',
+        data: { data: fieldHa },
+      })
+    )?.payload;
   }
 
   private static async getPlodId(
