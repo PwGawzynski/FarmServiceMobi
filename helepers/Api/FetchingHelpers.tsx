@@ -5,13 +5,13 @@ import { t } from 'i18next';
 import {
   EXPO_PUBLIC_QUERY_STALE_TIME,
   QUERY_RETRY_DELAY_MULTIPLICATION,
-} from '../settings/query/querySettings';
+} from '../../settings/query/querySettings';
 import {
   LogI,
   setQueryFetchLogs,
-} from '../src/redux/feature/cachingDriverSlice';
-import { TranslationNames } from '../locales/TranslationNames';
-import { TaskResponseBase } from '../FarmServiceApiTypes/Task/Responses';
+} from '../../src/redux/feature/cachingDriverSlice';
+import { TranslationNames } from '../../locales/TranslationNames';
+import { TaskResponseBase } from '../../FarmServiceApiTypes/Task/Responses';
 
 export function fetchClientDriver(
   queryClient: MutableRefObject<QueryClient>,
