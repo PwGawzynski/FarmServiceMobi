@@ -1,32 +1,24 @@
-import { t } from 'i18next';
-import { TranslationNames } from '../../locales/TranslationNames';
-import { apiHandler } from '../services/User';
-import { Api } from '../Api';
 import { CreateTaskCollection } from '../../FarmServiceApiTypes/Task/Requests';
 import { TaskResponseBase } from '../../FarmServiceApiTypes/Task/Responses';
-import { ResponseObject } from '../../FarmServiceApiTypes/Respnse/responseGeneric';
 import { TaskSessionCreateRequest } from '../../FarmServiceApiTypes/TaskSession/Requests';
+import { query } from '../../helepers/Api/QueryDriver';
 
 export async function createTask(data: CreateTaskCollection) {
-  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
-  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
-  return apiHandler<CreateTaskCollection>(
-    UNAUTHORIZED_MSG,
-    DEFAULT_MSG,
-    Api.createTasks,
+  return query<CreateTaskCollection, TaskResponseBase>({
+    type: 'POST',
+    path: '/task',
     data,
-  ) as unknown as Array<TaskResponseBase>;
+  });
 }
 
 export async function getTaskByOrder(orderId: string) {
-  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
-  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
-  return apiHandler<string>(
-    UNAUTHORIZED_MSG,
-    DEFAULT_MSG,
-    Api.getTaskByOrder,
-    orderId,
-  ) as unknown as Array<TaskResponseBase>;
+  return query<undefined, TaskResponseBase[]>({
+    type: 'GET',
+    path: '/task',
+    config: {
+      params: { 'order-id': orderId },
+    },
+  });
 }
 
 export type OpenTaskData = {
@@ -35,53 +27,53 @@ export type OpenTaskData = {
 };
 
 export async function openTask({ taskId, taskSession }: OpenTaskData) {
-  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
-  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
-  return apiHandler<OpenTaskData>(UNAUTHORIZED_MSG, DEFAULT_MSG, Api.openTask, {
-    taskId,
-    taskSession,
-  }) as unknown as TaskResponseBase;
+  return query<TaskSessionCreateRequest, TaskResponseBase>({
+    type: 'PUT',
+    path: '/task/open',
+    data: taskSession,
+    config: {
+      params: { 'task-id': taskId },
+    },
+  });
 }
 
 export async function closeTask({ taskId, taskSession }: OpenTaskData) {
-  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
-  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
-  return apiHandler<OpenTaskData>(
-    UNAUTHORIZED_MSG,
-    DEFAULT_MSG,
-    Api.closeTask,
-    { taskId, taskSession },
-  ) as unknown as TaskResponseBase;
+  return query<TaskSessionCreateRequest, TaskResponseBase>({
+    type: 'PUT',
+    path: '/task/close',
+    data: taskSession,
+    config: {
+      params: { 'task-id': taskId },
+    },
+  });
 }
 export async function closeTaskByOwner(taskId: string) {
-  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
-  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
-  return apiHandler<string>(
-    UNAUTHORIZED_MSG,
-    DEFAULT_MSG,
-    Api.closeTaskByOwner,
-    taskId,
-  ) as unknown as TaskResponseBase;
+  return query<undefined, TaskResponseBase>({
+    type: 'PUT',
+    path: '/task/close-by-owner',
+    config: {
+      params: { 'task-id': taskId },
+    },
+  });
 }
 
 export async function pauseTask({ taskId, taskSession }: OpenTaskData) {
-  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
-  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
-  return apiHandler<OpenTaskData>(
-    UNAUTHORIZED_MSG,
-    DEFAULT_MSG,
-    Api.pauseTask,
-    { taskId, taskSession },
-  ) as unknown as TaskResponseBase;
+  return query<TaskSessionCreateRequest, TaskResponseBase>({
+    type: 'PUT',
+    path: '/task/pause',
+    data: taskSession,
+    config: {
+      params: { 'task-id': taskId },
+    },
+  });
 }
 
 export async function deleteTask(taskId: string) {
-  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
-  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
-  return apiHandler<string>(
-    UNAUTHORIZED_MSG,
-    DEFAULT_MSG,
-    Api.deleteTask,
-    taskId,
-  ) as unknown as ResponseObject<undefined>;
+  return query<undefined, TaskResponseBase>({
+    type: 'DELETE',
+    path: '/task',
+    config: {
+      params: { 'task-id': taskId },
+    },
+  });
 }
