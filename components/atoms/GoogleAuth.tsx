@@ -4,7 +4,7 @@ import { Alert } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { t } from 'i18next';
 import { loginByGoogle } from '../../api/services/User';
-import { googleSignIn } from '../../helepers/GoogleAuth';
+import { googleSignIn } from '../../helepers/Api/GoogleAuth';
 import { AppDispatch } from '../../src/redux/app/Store';
 import { roleBasedRedirection } from '../../helepers/roleBasedRedirection';
 import { TranslationNames } from '../../locales/TranslationNames';
