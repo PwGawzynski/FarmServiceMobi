@@ -1,52 +1,37 @@
-import { t } from 'i18next';
-import { TranslationNames } from '../../locales/TranslationNames';
-import { apiHandler } from '../services/User';
-import { Api } from '../Api';
 import {
   CreateMachineReqI,
   UpdateMachineReqI,
 } from '../../FarmServiceApiTypes/Machine/Requests';
 import { MachineResponseBase } from '../../FarmServiceApiTypes/Machine/Responses';
+import { query } from '../../helepers/Api/QueryDriver';
 
 export async function createMachine(data: CreateMachineReqI) {
-  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
-  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
-  return apiHandler<CreateMachineReqI>(
-    UNAUTHORIZED_MSG,
-    DEFAULT_MSG,
-    Api.createMachine,
+  return query<CreateMachineReqI, MachineResponseBase>({
+    type: 'POST',
+    path: '/machine',
     data,
-  ) as unknown as MachineResponseBase | undefined;
+  });
 }
 
 export async function updateMachine(data: UpdateMachineReqI) {
-  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
-  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
-  return apiHandler<UpdateMachineReqI>(
-    UNAUTHORIZED_MSG,
-    DEFAULT_MSG,
-    Api.updateMachine,
+  return query<UpdateMachineReqI, MachineResponseBase>({
+    type: 'PUT',
+    path: '/machine',
     data,
-  ) as unknown as MachineResponseBase | undefined;
+  });
 }
 
 export async function safelyDeleteMachine(data: UpdateMachineReqI) {
-  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
-  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
-  return apiHandler<UpdateMachineReqI>(
-    UNAUTHORIZED_MSG,
-    DEFAULT_MSG,
-    Api.safelyDeleteMachine,
+  return query<UpdateMachineReqI, MachineResponseBase>({
+    type: 'POST',
+    path: '/machine/safely-delete',
     data,
-  ) as unknown as MachineResponseBase | undefined;
+  });
 }
 
 export async function getAllMachines() {
-  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
-  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
-  return apiHandler(
-    UNAUTHORIZED_MSG,
-    DEFAULT_MSG,
-    Api.getAllMachines,
-  ) as unknown as MachineResponseBase[] | undefined;
+  return query<undefined, MachineResponseBase[]>({
+    type: 'GET',
+    path: '/machine/all',
+  });
 }

@@ -2,7 +2,6 @@ import { useMachine } from '@xstate/react';
 import { useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useEffect } from 'react';
-import Toast from 'react-native-toast-message';
 import { t } from 'i18next';
 import { ScreenBase } from '../common/ScreenBase';
 import { MachinesDesktopDriverScreenProps } from '../../../../../types/self/navigation/Owner/props/machines/MachinesDesktopDriverProps';
@@ -19,6 +18,7 @@ import { TranslationNames } from '../../../../../locales/TranslationNames';
 import { MachineResponseBase } from '../../../../../FarmServiceApiTypes/Machine/Responses';
 import PlusIco from '../../../../../assets/plus.svg';
 import SaveIco from '../../../../../assets/check.svg';
+import { DefaultQueryErrorHandler } from '../../../../../helepers/Api/DefaultQueryErrorHandler';
 
 const createDefaultValues = (machine: CreateMachineReqI | undefined) => {
   return {
@@ -54,22 +54,6 @@ const TRANSLATIONS = {
     TranslationNames.screens.machineDesktopDriver.addMachineScreen
       .screenEditTitle,
   ),
-};
-
-const showErrorAddMachineToast = (error: Error | null) => {
-  Toast.show({
-    type: 'error',
-    text1: TRANSLATIONS.cant_create_machine_header,
-    text2: error?.message ?? TRANSLATIONS.cant_create_machine_description,
-  });
-};
-
-const showErrorEditMachineToast = (error: Error | null) => {
-  Toast.show({
-    type: 'error',
-    text1: TRANSLATIONS.cant_edit_machine_header,
-    text2: error?.message ?? TRANSLATIONS.cant_edit_machine_description,
-  });
 };
 
 export function AddMachine({
@@ -111,6 +95,7 @@ export function AddMachine({
           return oldData ? [data, ...oldData] : [data];
         },
       ),
+    onError: DefaultQueryErrorHandler,
   });
   // EDIT QUERY
   const {
@@ -152,14 +137,8 @@ export function AddMachine({
 
   // REACT ON QUERY STATUS
   useEffect(() => {
-    if (error) {
-      showErrorAddMachineToast(error);
-      resetMachine();
-    }
-    if (editError) {
-      showErrorEditMachineToast(editError);
-      resetMachine();
-    }
+    if (error || editError) resetMachine();
+
     if (isSuccess || editIsSuccess) {
       resetMachine();
       if (params?.goBack) navigation.navigate('machinesDesktop');

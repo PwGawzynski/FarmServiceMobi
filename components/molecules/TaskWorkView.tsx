@@ -12,7 +12,7 @@ import EndIco from '../../assets/circle-check-big.svg';
 import { Switch } from '../atoms/Switch';
 import { closeTask, pauseTask } from '../../api/Task/Task';
 import { TranslationNames } from '../../locales/TranslationNames';
-import { updateWorkerTasks } from '../../helepers/FetchingHelpers';
+import { updateWorkerTasks } from '../../helepers/Api/FetchingHelpers';
 import {
   USER_LOCATION_FASTEST_INTERVAL_HIGH,
   USER_LOCATION_FASTEST_INTERVAL_LOW,
@@ -89,12 +89,14 @@ export function TaskWorkView({
     mutationKey: ['closeTask', task.id],
     mutationFn: closeTask,
     onSuccess: sth => {
-      setTask(sth);
-      onClosePress?.(false);
-      modal?.setIsModalVisible(false);
-      modal?.modalRef?.current?.close();
-      modal?.modalRef?.current?.dismiss();
-      updateWorkerTasks(qc, sth, task.id);
+      if (sth) {
+        setTask(sth);
+        onClosePress?.(false);
+        modal?.setIsModalVisible(false);
+        modal?.modalRef?.current?.close();
+        modal?.modalRef?.current?.dismiss();
+        updateWorkerTasks(qc, sth, task.id);
+      }
     },
     onError: e =>
       Toast.show({
@@ -107,12 +109,14 @@ export function TaskWorkView({
     mutationKey: ['pauseTask', task.id],
     mutationFn: pauseTask,
     onSuccess: sth => {
-      setTask(sth);
-      onClosePress?.(false);
-      modal?.setIsModalVisible(false);
-      modal?.modalRef?.current?.close();
-      modal?.modalRef?.current?.dismiss();
-      updateWorkerTasks(qc, sth, task.id);
+      if (sth) {
+        setTask(sth);
+        onClosePress?.(false);
+        modal?.setIsModalVisible(false);
+        modal?.modalRef?.current?.close();
+        modal?.modalRef?.current?.dismiss();
+        updateWorkerTasks(qc, sth, task.id);
+      }
     },
     onError: e =>
       Toast.show({

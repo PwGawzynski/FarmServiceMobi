@@ -1,41 +1,31 @@
-import { t } from 'i18next';
-import { TranslationNames } from '../../locales/TranslationNames';
-import { apiHandler } from '../services/User';
-import { Api } from '../Api';
 import {
   CreateFieldReqI,
   updateFieldReqI,
 } from '../../FarmServiceApiTypes/Field/Requests';
 import { FieldResponseBase } from '../../FarmServiceApiTypes/Field/Ressponses';
+import { query } from '../../helepers/Api/QueryDriver';
 
 export async function createField(data: CreateFieldReqI) {
-  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
-  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
-  return apiHandler<CreateFieldReqI, FieldResponseBase | undefined>(
-    UNAUTHORIZED_MSG,
-    DEFAULT_MSG,
-    Api.createField,
+  return query<CreateFieldReqI, FieldResponseBase>({
+    type: 'POST',
+    path: '/field',
     data,
-  ) as unknown as FieldResponseBase | undefined;
+  });
 }
 export async function editField(data: updateFieldReqI) {
-  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
-  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
-  return apiHandler<updateFieldReqI, FieldResponseBase | undefined>(
-    UNAUTHORIZED_MSG,
-    DEFAULT_MSG,
-    Api.editField,
+  return query<updateFieldReqI, FieldResponseBase>({
+    type: 'PUT',
+    path: '/field/edit',
     data,
-  ) as unknown as FieldResponseBase | undefined;
+  });
 }
 
 export async function delField(data: FieldResponseBase) {
-  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
-  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
-  return apiHandler<FieldResponseBase, FieldResponseBase | undefined>(
-    UNAUTHORIZED_MSG,
-    DEFAULT_MSG,
-    Api.deleteField,
-    data,
-  ) as unknown as FieldResponseBase | undefined;
+  return query<undefined, FieldResponseBase>({
+    type: 'DELETE',
+    path: '/field',
+    config: {
+      params: { id: data.id },
+    },
+  });
 }

@@ -17,7 +17,7 @@ import { TaskInfoPanel } from '../../../atoms/TaskInfoPanel';
 import { TranslationNames } from '../../../../locales/TranslationNames';
 import { openTask, pauseTask } from '../../../../api/Task/Task';
 import { TaskResponseBase } from '../../../../FarmServiceApiTypes/Task/Responses';
-import { updateWorkerTasks } from '../../../../helepers/FetchingHelpers';
+import { updateWorkerTasks } from '../../../../helepers/Api/FetchingHelpers';
 import PlayIcon from '../../../../assets/play.svg';
 import ResumeIcon from '../../../../assets/refresh.svg';
 import { HintCard } from '../../../atoms/HintCard';
@@ -231,11 +231,13 @@ export function TaskView({
     mutationKey: ['openTask', task.id],
     mutationFn: openTask,
     onSuccess: sth => {
-      modal?.modalRef?.current?.present(TaskWorkViewMemo);
-      setTaskOpened(true);
-      modal?.setIsModalVisible(true);
-      setTask(sth);
-      updateWorkerTasks(qc, sth, task.id);
+      if (sth) {
+        modal?.modalRef?.current?.present(TaskWorkViewMemo);
+        setTaskOpened(true);
+        modal?.setIsModalVisible(true);
+        setTask(sth);
+        updateWorkerTasks(qc, sth, task.id);
+      }
     },
     onError: e =>
       Toast.show({
@@ -249,11 +251,13 @@ export function TaskView({
     mutationKey: ['resume', task.id],
     mutationFn: pauseTask,
     onSuccess: sth => {
-      setTask(sth);
-      modal?.modalRef?.current?.present(TaskWorkViewMemo);
-      setTaskOpened(true);
-      modal?.setIsModalVisible(true);
-      updateWorkerTasks(qc, sth, task.id);
+      if (sth) {
+        setTask(sth);
+        modal?.modalRef?.current?.present(TaskWorkViewMemo);
+        setTaskOpened(true);
+        modal?.setIsModalVisible(true);
+        updateWorkerTasks(qc, sth, task.id);
+      }
     },
     onError: e =>
       Toast.show({

@@ -1,49 +1,37 @@
-import { t } from 'i18next';
-import { Api } from '../Api';
-import { TranslationNames } from '../../locales/TranslationNames';
-import { apiHandler } from '../services/User';
-import { ResponseObject } from '../../FarmServiceApiTypes/Respnse/responseGeneric';
 import {
   CreateWorkerReqI,
   UpdateWorkerStatusOrPositionReqI,
 } from '../../FarmServiceApiTypes/Worker/Requests';
 import { WorkerResponseBase } from '../../FarmServiceApiTypes/Worker/Responses';
+import { query } from '../../helepers/Api/QueryDriver';
 
 export async function workerData() {
-  return (await Api.workerData()).payload;
+  return query<undefined, WorkerResponseBase[]>({
+    type: 'GET',
+    path: '/worker',
+  });
 }
 export async function assignWorker(data: CreateWorkerReqI) {
-  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
-  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
-  return (
-    (await apiHandler<CreateWorkerReqI>(
-      UNAUTHORIZED_MSG,
-      DEFAULT_MSG,
-      Api.assignWorker,
-      data,
-    )) as unknown as ResponseObject<WorkerResponseBase | undefined>
-  )?.payload;
+  return query<CreateWorkerReqI, WorkerResponseBase>({
+    type: 'POST',
+    path: '/worker',
+    data,
+  });
 }
 
 export async function updateWorkerStatusOrPosition(
   data: UpdateWorkerStatusOrPositionReqI,
 ) {
-  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
-  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
-  return (await apiHandler<UpdateWorkerStatusOrPositionReqI>(
-    UNAUTHORIZED_MSG,
-    DEFAULT_MSG,
-    Api.updateWorkerStatusOrPosition,
+  return query<UpdateWorkerStatusOrPositionReqI, WorkerResponseBase>({
+    type: 'PUT',
+    path: '/worker/update-status-or-position',
     data,
-  )) as unknown as WorkerResponseBase | undefined;
+  });
 }
 
 export async function allWorkers() {
-  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
-  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
-  return (await apiHandler<undefined>(
-    UNAUTHORIZED_MSG,
-    DEFAULT_MSG,
-    Api.getWorkers,
-  )) as unknown as Array<WorkerResponseBase> | undefined;
+  return query<undefined, WorkerResponseBase[]>({
+    type: 'GET',
+    path: '/worker/all',
+  });
 }

@@ -1,7 +1,3 @@
-import { t } from 'i18next';
-import { TranslationNames } from '../../locales/TranslationNames';
-import { apiHandler } from '../services/User';
-import { Api } from '../Api';
 import {
   CreateOrderReqI,
   UpdateOrder,
@@ -9,73 +5,66 @@ import {
 import { OrderResponseBase } from '../../FarmServiceApiTypes/Order/Ressponses';
 import { CreateOrderPriceReqI } from '../../FarmServiceApiTypes/OrderPricing/Requests';
 import { InvoiceResponseBase } from '../../FarmServiceApiTypes/Invoice/Responses';
+import { query } from '../../helepers/Api/QueryDriver';
+import { SettlementRequest } from '../../FarmServiceApiTypes/Settlement/Requests';
 
 export async function createOrder(data: CreateOrderReqI) {
-  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
-  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
-  return apiHandler<CreateOrderReqI>(
-    UNAUTHORIZED_MSG,
-    DEFAULT_MSG,
-    Api.createOrder,
+  return query<CreateOrderReqI, OrderResponseBase>({
+    type: 'POST',
+    path: '/order',
     data,
-  ) as unknown as OrderResponseBase | undefined;
+  });
 }
 export async function updateOrderPrice(data: CreateOrderPriceReqI) {
-  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
-  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
-  return apiHandler<CreateOrderPriceReqI>(
-    UNAUTHORIZED_MSG,
-    DEFAULT_MSG,
-    Api.updateOrderPricing,
+  return query<CreateOrderPriceReqI, OrderResponseBase>({
+    type: 'PUT',
+    path: '/order/update-pricing',
     data,
-  ) as unknown as OrderResponseBase | undefined;
+  });
 }
 
 export async function getInvoices(orderId: string) {
-  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
-  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
-  return apiHandler<string>(
-    UNAUTHORIZED_MSG,
-    DEFAULT_MSG,
-    Api.getInvoices,
-    orderId,
-  ) as unknown as InvoiceResponseBase[] | undefined;
+  return query<undefined, InvoiceResponseBase[]>({
+    type: 'GET',
+    path: `/invoice/for`,
+    config: {
+      params: {
+        orderId,
+      },
+    },
+  });
 }
-export async function account({
-  tasks,
-  orderId,
-}: {
+
+type AccountData = {
   tasks: string[];
   orderId: string;
-}) {
-  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
-  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
-  return apiHandler<{
-    tasks: string[];
-    orderId: string;
-  }>(UNAUTHORIZED_MSG, DEFAULT_MSG, Api.accountOrder, {
-    tasks,
-    orderId,
-  }) as unknown as InvoiceResponseBase | undefined;
+};
+export async function account({ tasks, orderId }: AccountData) {
+  return query<SettlementRequest, InvoiceResponseBase[]>({
+    type: 'PUT',
+    path: `/order/account`,
+    data: {
+      tasks,
+    } as SettlementRequest,
+    config: {
+      params: {
+        id: orderId,
+      },
+    },
+  });
 }
 
 export async function getAllOrders() {
-  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
-  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
-  return apiHandler<CreateOrderReqI>(
-    UNAUTHORIZED_MSG,
-    DEFAULT_MSG,
-    Api.getAllOrders,
-  ) as unknown as Array<OrderResponseBase> | undefined;
+  return query<undefined, OrderResponseBase[]>({
+    type: 'GET',
+    path: '/order/all',
+  });
 }
 
 export async function updateOrder(data: UpdateOrder) {
-  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
-  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
-  return apiHandler<UpdateOrder>(
-    UNAUTHORIZED_MSG,
-    DEFAULT_MSG,
-    Api.updateOrder,
+  return query<UpdateOrder, OrderResponseBase>({
+    type: 'PUT',
+    path: '/order',
     data,
-  ) as unknown as OrderResponseBase | undefined;
+  });
 }

@@ -1,7 +1,3 @@
-import { t } from 'i18next';
-import { Api } from '../Api';
-import { apiHandler } from '../services/User';
-import { TranslationNames } from '../../locales/TranslationNames';
 import { ClientResponseBase } from '../../FarmServiceApiTypes/Clients/Responses';
 import {
   CreateClientReqI,
@@ -13,73 +9,52 @@ import {
 } from '../../FarmServiceApiTypes/ClientsCompany/Requests';
 import { ClientsCompanyResponseBase } from '../../FarmServiceApiTypes/ClientsCompany/Responses';
 import { FieldResponseBase } from '../../FarmServiceApiTypes/Field/Ressponses';
+import { query } from '../../helepers/Api/QueryDriver';
 
 export async function createClient(data: CreateClientReqI) {
-  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
-  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
-  return apiHandler<CreateClientReqI, ClientResponseBase | undefined>(
-    UNAUTHORIZED_MSG,
-    DEFAULT_MSG,
-    Api.createClient,
+  return query<CreateClientReqI, ClientResponseBase>({
+    type: 'POST',
+    path: '/clients',
     data,
-  ) as unknown as ClientResponseBase | undefined;
+  });
 }
 
 export async function assignCompanyToClient(data: CreateClientsCompanyReqI) {
-  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
-  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
-  return apiHandler<
-    CreateClientsCompanyReqI,
-    ClientsCompanyResponseBase | undefined
-  >(
-    UNAUTHORIZED_MSG,
-    DEFAULT_MSG,
-    Api.assignCompanyToClient,
+  return query<CreateClientsCompanyReqI, ClientsCompanyResponseBase>({
+    type: 'POST',
+    path: '/clients-company',
     data,
-  ) as unknown as ClientsCompanyResponseBase | undefined;
+  });
 }
 
 export async function updateClientsCompany(data: UpdateClientsCompanyReqI) {
-  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
-  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
-  return apiHandler<
-    UpdateClientsCompanyReqI,
-    ClientsCompanyResponseBase | undefined
-  >(
-    UNAUTHORIZED_MSG,
-    DEFAULT_MSG,
-    Api.updateClientsCompany,
+  return query<UpdateClientsCompanyReqI, ClientsCompanyResponseBase>({
+    type: 'PUT',
+    path: '/clients-company',
     data,
-  ) as unknown as ClientsCompanyResponseBase | undefined;
+  });
 }
 
 export async function updateClient(data: UpdateClientReqI) {
-  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
-  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
-  return apiHandler<UpdateClientReqI, ClientResponseBase | undefined>(
-    UNAUTHORIZED_MSG,
-    DEFAULT_MSG,
-    Api.updateClient,
+  return query<UpdateClientReqI, ClientResponseBase>({
+    type: 'PUT',
+    path: '/clients',
     data,
-  ) as unknown as ClientResponseBase | undefined;
+  });
 }
 
 export async function getClients() {
-  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
-  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
-  return apiHandler<ClientResponseBase>(
-    UNAUTHORIZED_MSG,
-    DEFAULT_MSG,
-    Api.getClients,
-  ) as unknown as Array<ClientResponseBase> | undefined;
+  return query<undefined, ClientResponseBase[]>({
+    type: 'GET',
+    path: '/clients/all',
+  });
 }
 export async function getClientFields(id: string) {
-  const UNAUTHORIZED_MSG = t(TranslationNames.serviceDefaults.unauthorised);
-  const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
-  return apiHandler<string, FieldResponseBase[]>(
-    UNAUTHORIZED_MSG,
-    DEFAULT_MSG,
-    Api.getClientFields,
-    id,
-  ) as unknown as Array<FieldResponseBase> | undefined;
+  return query<undefined, FieldResponseBase[]>({
+    type: 'GET',
+    path: '/field/all',
+    config: {
+      params: { client: id },
+    },
+  });
 }

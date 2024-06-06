@@ -13,7 +13,7 @@ import {
 } from '../../../../../src/redux/feature/userSlice';
 import { selectQueryFetchLog } from '../../../../../src/redux/feature/cachingDriverSlice';
 import { getClients } from '../../../../../api/clients/Client';
-import { fetchClientDriver } from '../../../../../helepers/FetchingHelpers';
+import { fetchClientDriver } from '../../../../../helepers/Api/FetchingHelpers';
 import { ScreenBase } from '../common/ScreenBase';
 import { LandingLogo } from '../../../../atoms/LandingLogo';
 import { TranslationNames } from '../../../../../locales/TranslationNames';
