@@ -487,7 +487,8 @@
       "problemOccurred": "Coś poszło nie tak, spróbuj ponownie później"
     },
     "listInfo": {
-      "unknownError": "Coś poszło nie tak"
+      "unknownError": "Coś poszło nie tak",
+      "emptyListHeader": "Brak danych do wyświetlenia"
     },
     "emptyListItemCreator": {
       "button": "Dodaj nowy"

@@ -627,6 +627,7 @@ export const TranslationNames = {
     },
     listInfo: {
       unknownError: 'components.listInfo.unknownError',
+      emptyListHeader: 'components.listInfo.emptyListHeader',
     },
     emptyListItemCreator: {
       button: 'components.emptyListItemCreator.button',

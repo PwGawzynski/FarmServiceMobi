@@ -486,7 +486,8 @@
       "problemOccurred": "Problem occurred, please try again later"
     },
     "listInfo": {
-      "unknownError": "Unknown error occurred"
+      "unknownError": "Unknown error occurred",
+      "emptyListHeader": "No data to display"
     },
     "emptyListItemCreator": {
       "button": "Create"
