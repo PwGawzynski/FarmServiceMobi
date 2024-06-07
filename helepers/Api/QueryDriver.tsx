@@ -69,10 +69,6 @@ export async function query<QUERY_DATA, RESPONSE_DATA>({
         if (queryCustomSettings?.treatAsText && typeof response === 'string') {
           return response as unknown as RESPONSE_DATA;
         }
-        if (queryCustomSettings?.treatAsText) {
-          console.error('Custom function does not return string');
-          return undefined;
-        }
         return response.payload;
       }
       default: {
