@@ -29,7 +29,6 @@ export function CreateCompany({
   const userPersonalData = useSelector(selectUserPersonalData);
   const dispatch = useDispatch<AppDispatch>();
   const { t } = useTranslation();
-
   const defaultValues = useMemo(
     () =>
       ({
