@@ -64,9 +64,8 @@ export function GuideCardElement({
   isDone,
   isCurrent,
 }: GuideCardElementProps) {
-  const theme = useSelector(selectTheme);
-  const iconColor = theme === Theme.dark ? Colors.WHITE : Colors.LIGHT_BLUE;
-  const textColor = theme === Theme.dark ? Colors.WHITE : Colors.LIGHT_BLUE;
+  const iconColor = Colors.WHITE;
+  const textColor = Colors.WHITE;
   return (
     <XStack ai="center">
       <XStack>

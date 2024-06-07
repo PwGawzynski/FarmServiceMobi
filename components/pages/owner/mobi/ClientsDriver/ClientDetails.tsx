@@ -25,7 +25,14 @@ export function ClientDetails({
   return (
     <ScreenBase name={`${personalData.name} ${personalData.surname}`}>
       <ScrollView f={1}>
-        <Card bordered p="$2" mt="$4">
+        <Card
+          bg="$backgroundTransparent"
+          bordered
+          p="$2"
+          mt="$4"
+          borderColor="$color4"
+          className="border-1"
+        >
           <XStack jc="space-between" ai="center">
             <SizableText textTransform="uppercase" size="$7" fontWeight="bold">
               {t(
@@ -55,7 +62,14 @@ export function ClientDetails({
             value={personalData.phoneNumber}
           />
         </Card>
-        <Card bordered p="$2" mt="$4">
+        <Card
+          bg="$backgroundTransparent"
+          bordered
+          p="$2"
+          mt="$4"
+          borderColor="$color4"
+          className="border-1"
+        >
           <XStack jc="space-between" ai="center">
             <SizableText textTransform="uppercase" size="$7" fontWeight="bold">
               {t(TranslationNames.screens.clientDriver.clientDetails.address)}
@@ -105,7 +119,14 @@ export function ClientDetails({
             value={address.voivodeship}
           />
         </Card>
-        <Card bordered p="$2" mt="$4">
+        <Card
+          bg="$backgroundTransparent"
+          bordered
+          p="$2"
+          mt="$4"
+          borderColor="$color4"
+          className="border-1"
+        >
           <XStack jc="space-between" ai="center">
             <SizableText textTransform="uppercase" size="$7" fontWeight="bold">
               {t(
