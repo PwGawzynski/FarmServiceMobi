@@ -62,6 +62,7 @@ export async function loginByGoogle(idToken: string) {
       params: { 'id-token': idToken },
     },
     fnName: 'googleLogin',
+    queryCustomSettings: { treatAsText: true },
   });
 }
 
