@@ -1,7 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
 import { t } from 'i18next';
-import { Alert } from 'react-native';
 import { ScreenBase } from '../common/ScreenBase';
 import { AuthDriverProps } from '../../../../../types/self/navigation/Owner/props/AuthDriverProps';
 import { createUserSetup } from '../../../../../helepers/FormSetups/CreateUserSetup';
@@ -11,6 +10,7 @@ import { ButtonTamagui } from '../../../../atoms/ButtonTamagui';
 import { registerUser } from '../../../../../api/services/User';
 import { CreateUserReqI } from '../../../../../FarmServiceApiTypes/User/Requests';
 import { TranslationNames } from '../../../../../locales/TranslationNames';
+import { DefaultQueryErrorHandler } from '../../../../../helepers/Api/DefaultQueryErrorHandler';
 
 const TRANSLATIONS = {
   title: t(TranslationNames.screens.authDriver.register.title),
@@ -24,7 +24,7 @@ export function Register({
   navigation,
   route: { params },
 }: AuthDriverProps<'register'>) {
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationKey: ['register'],
     mutationFn: registerUser,
     onSuccess: () => {
@@ -33,9 +33,7 @@ export function Register({
         redirectScreenName: 'chooseLoginType',
       });
     },
-    onError: error => {
-      Alert.alert('Error', error.message);
-    },
+    onError: DefaultQueryErrorHandler,
   });
   const {
     control,
@@ -50,7 +48,9 @@ export function Register({
           city: d.city,
           county: d.county,
           street: d.street,
-          apartmentNumber: d.apartmentNumber,
+          apartmentNumber: d.apartmentNumber?.length
+            ? d.apartmentNumber
+            : undefined,
           voivodeship: d.voivodeship,
           houseNumber: d.houseNumber,
           postalCode: d.postalCode,
@@ -75,6 +75,7 @@ export function Register({
       />
       <ButtonTamagui
         text={TRANSLATIONS.registerButton}
+        isPending={isPending}
         buttonProps={{
           onPress: handleSubmit(onSubmit),
         }}
