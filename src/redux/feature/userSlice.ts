@@ -125,18 +125,13 @@ export const setUpUser = createAsyncThunk(
 export const setUserAsync = createAsyncThunk(
   'user/setUserAsync',
   async (data: UserResponseBase) => {
-    await setThemeToStorage(data.account.theme);
-    return {
-      ...data,
-      personalData: {
-        name: data.personalData.name,
-        surname: data.personalData.surname,
-        phoneNumber: data.personalData.phoneNumber,
-      },
-      address: { ...data.address },
-      account: { ...data.account },
-      company: { ...data.company },
-    };
+    try {
+      await setThemeToStorage(data.account.theme);
+      return data;
+    } catch (e) {
+      console.error(e, "Couldn't set user in setUserAsync");
+    }
+    return undefined;
   },
 );
 
@@ -154,6 +149,7 @@ const UserSlice = createSlice({
       if (action.payload?.company) state.company = action.payload?.company;
     });
     builder.addCase(setUserAsync.fulfilled, (state, action) => {
+      if (!action.payload) return;
       if (action.payload.personalData)
         state.personalData = {
           name: action.payload.personalData.name,
