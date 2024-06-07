@@ -56,7 +56,7 @@ export function ChooseRole({
             <BriefcaseIco
               width="40%"
               height="40%"
-              color={theme === Theme.dark ? Colors.GREEN : Colors.DARK}
+              color={theme === Theme.dark ? Colors.GREEN : Colors.WHITE}
             />
             <SizableText
               fontSize="$5"
@@ -80,7 +80,7 @@ export function ChooseRole({
             <TractorIco
               width="40%"
               height="40%"
-              color={theme === Theme.dark ? Colors.GREEN : Colors.DARK}
+              color={theme === Theme.dark ? Colors.GREEN : Colors.WHITE}
             />
             <SizableText
               fontSize="$5"
