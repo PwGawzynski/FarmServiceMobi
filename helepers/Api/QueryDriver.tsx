@@ -19,12 +19,18 @@ export type Handlers<E extends number> = AllKeysDefined<
   Record<E, string | ErrorToastConfig>
 >;
 
+export interface QueryCustomSettings {
+  treatAsText?: boolean;
+}
+
 export interface QuerySettings<D> {
   type: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'CUSTOM';
   path: string;
   data?: D;
   config?: AxiosRequestConfig;
   fnName?: string | keyof ApiSelf;
+  customSettings?: QueryCustomSettings;
+  queryCustomSettings?: QueryCustomSettings;
 }
 
 export async function query<QUERY_DATA, RESPONSE_DATA>({
@@ -33,6 +39,7 @@ export async function query<QUERY_DATA, RESPONSE_DATA>({
   config,
   type,
   fnName,
+  queryCustomSettings,
 }: QuerySettings<QUERY_DATA>): Promise<RESPONSE_DATA | undefined> {
   const DEFAULT_MSG = t(TranslationNames.serviceDefaults.default);
   try {
@@ -59,6 +66,13 @@ export async function query<QUERY_DATA, RESPONSE_DATA>({
           return undefined;
         }
         const response = await Api[fnName](path, data, config);
+        if (queryCustomSettings?.treatAsText && typeof response === 'string') {
+          return response as unknown as RESPONSE_DATA;
+        }
+        if (queryCustomSettings?.treatAsText) {
+          console.error('Custom function does not return string');
+          return undefined;
+        }
         return response.payload;
       }
       default: {
@@ -93,8 +107,8 @@ export async function query<QUERY_DATA, RESPONSE_DATA>({
             );
           }
         }
-      } else throw new Error(DEFAULT_MSG);
-    } else throw new Error(DEFAULT_MSG);
+      } else throw new Error(undefined, { cause: DEFAULT_MSG });
+    } else throw new Error(undefined, { cause: DEFAULT_MSG });
   }
-  throw new Error(DEFAULT_MSG);
+  throw new Error(undefined, { cause: DEFAULT_MSG });
 }
