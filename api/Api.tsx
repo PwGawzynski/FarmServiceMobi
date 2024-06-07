@@ -291,6 +291,7 @@ export class ApiSelf {
         params: { 'id-token': config?.params?.['id-token'] },
       })
     ).data;
+    if (response.payload?.email) return response.payload.email;
     if (
       response.payload &&
       response.payload.access_token &&
@@ -303,10 +304,9 @@ export class ApiSelf {
           (await ApiSelf.axiosInstance.get('/user/me')) as AxiosResponse<
             ResponseObject<UserResponseBase>
           >
-        ).data;
+        ).data as ResponseObject<UserResponseBase>;
       }
     }
-    if (response.payload) return response.payload.email;
     return undefined;
   }
 
