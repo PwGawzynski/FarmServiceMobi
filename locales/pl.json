@@ -1,3 +1,736 @@
 {
-  "test":"Testowanie"
+  "screens": {
+    "AuthDriver": {
+      "chooseLoginType": {
+        "header": "Wybierz sposób logowania",
+        "email": "e-mail lub NIP",
+        "google": "Użyj Google",
+        "registerButton": "Stwórz nowe konto",
+        "registerText": "Nie masz jeszcze konta?",
+        "instruction": "Zaloguj sie do FarmService i zacznij pracowac wygodniej"
+      },
+      "landing": {
+        "connecting": "Łączenie z serwerem..."
+      },
+      "chooseRegisterType": {
+        "header": "Utwórz nowe konto",
+        "email": "Zacznij z e-mail",
+        "google": "Zacznij z Google",
+        "instruction": "Pracuj mądże, nie ciężko z FarmService"
+      },
+      "loginByEmail": {
+        "header": "Zaloguj się",
+        "email": "e-mail lub NIP",
+        "password": "Hasło",
+        "loginButton": "Zaloguj się",
+        "forgotPassword": "Zapomniałeś hasła?",
+        "resetPassword": "Zresetuj hasło",
+        "emailValidationInvalid": "Niepoprawny e-mail lub NIP",
+        "emailValidationRequired": "e-mail lub NIP jest wymagany",
+        "emailValidationMinLength": "e-mail lub NIP nie może być krótszy niż ",
+        "emailValidationMaxLength": "e-mail lub NIP nie może być dłuższy niż ",
+        "passwordValidationRequired": "Hasło jest wymagane",
+        "passwordValidationMinLength": "Hasło nie może być krótsze niż ",
+        "passwordValidationMaxLength": "Hasło nie może być dłuższe niż ",
+        "passwordValidationComplement": "znaki",
+        "passwordValidationPattern": "Hasło musi zawierać co najmniej jedną małą literę, jedną wielką literę i jedną cyfrę",
+        "pendingStatus": "Ładowanie...",
+        "emailPlaceholder": "e-mail lub NIP",
+        "passwordPlaceholder": "Hasło"
+      },
+      "passwordReset": {
+        "instruction": "Wpisz swój adres e-mail, aby zresetować hasło",
+        "header": "Zresetuj hasło",
+        "button": "Zresetuj hasło",
+        "pendingStatus": "Sending...",
+        "afterSuccess": "Zrobione! Jezeli podany adres e-mail istnieje w naszej bazie, otrzymasz wiadomość z linkiem do resetowania hasła."
+      },
+      "createCompany": {
+        "screenTitle": "Utwórz nową firmę",
+        "submitButton": "Utwórz firmę",
+        "successMessage": "Zrobione! Twoja firma została utworzona pomyślnie, pora brac sie do roboty!"
+      },
+      "createField": {
+        "screenTitle": "Utwórz nowe pole",
+        "submitButton": "Dodaj",
+        "editSubmitButton": "Zapisz zmiany",
+        "editScreenTitle": "Edytuj pole",
+        "successMessage": "Zrobione! Pole zostało utworzone pomyślnie",
+        "gpsConnecting": "Łączenie z GPS...",
+        "gpsAccess": "Aby używać tej funkcji, musisz wyrazić zgode na używanie lokalizacji twojego urządzenia",
+        "gpsMoreInfo": "Zobacz więcej",
+        "gpsError": "Nie udało się połączyć z GPS, spróbuj ponownie później",
+        "serverError": "Hhmm, coś poszło nie tak, spróbuj ponownie później",
+        "locationPolicyTitle": "Polityka używania lokalizacji",
+        "locationPolicyDescription": "Używamy lokalizacji, aby zapewnić Ci najlepsze wrażenia z korzystania z naszej aplikacji. Dzięki temu możemy ustawić twoją lokalizację na mapie, abyś mógł łatwo dodawać pola. Możesz wyłączyć tę funkcję w każdej chwili w ustawieniach aplikacji.",
+        "locationPolicyButton": "Rozumiem",
+        "resetButton": "Resetuj",
+        "markerName": "Pole",
+        "markerDescription": "Przybliżona lokalizacja twojego pola"
+      },
+      "register": {
+        "title": "Zarejestruj się",
+        "confirmation": "Konto zostało utworzone pomyślnie, sprawdź swoją skrzynkę e-mail, aby potwierdzić rejestrację",
+        "registerButton": "Zarejestruj się"
+      },
+      "chooseRole": {
+        "title": "Wybierz swoją rolę",
+        "owner": "Właściciel",
+        "worker": "Pracownik"
+      }
+    },
+    "appSettings": {
+      "screenTitle": "Ustawienia aplikacji",
+      "settings": {
+        "logout": "Wyloguj się",
+        "changeTheme": "Zmień motyw",
+        "changeLang": "Zmień język",
+        "logoutErrorAlertTitle": "Błąd",
+        "logoutErrorAlertDescription": "Nie udało się wylogować, spróbuj ponownie później"
+      }
+    },
+    "activityDesktopRoot": {
+      "title": "Ostatnie aktywności",
+      "newActivity": "Nowa aktywność",
+      "newActivityDescription": "Zarejestrowano nową aktywność",
+      "noActivities": "Brak aktywności do wyświetlenia"
+    },
+    "machineDesktopDriver": {
+      "addMachineScreen": {
+        "screenTitle": "Dodaj maszynę",
+        "screenEditTitle": "Edytuj maszynę",
+        "button": {
+          "creating": "Utwórz maszynę",
+          "save": "Zapisz zmiany"
+        }
+      },
+      "machinesDesktop": {
+        "title": "Maszyny",
+        "searchPlaceholder": "Znajdź maszynę",
+        "emptyList": "Brak maszyn do wyświetlenia, przeciągnij w prawo aby dodać nową"
+      }
+    },
+    "machineDriver": {
+      "machineDetailsScreen": {
+        "screenBaseName": "Szczegóły maszyny",
+        "entityAsACard": {
+          "topRightButtonName": "Edytuj",
+          "cardName": "Szczegóły",
+          "names": {
+            "id": "ID",
+            "name": "Nazwa",
+            "licensePlate": "Numer rejestracyjny"
+          },
+          "deleteButton": "Usuń Bezpiecznie"
+        }
+      }
+    },
+    "clientDriver": {
+      "assignCompanyToClient": {
+        "screenTitle": "Przypisz firmę",
+        "assignationSubmitButton": "Przypisz",
+        "editSubmitButton": "Zapisz zmiany",
+        "createButton": "Utwórz klienta i jego firme",
+        "successMessageStart": "Zrobione! Klient ",
+        "successMessageEnd": " został dodany wraz z firmą",
+        "pendingStatus": "Tworzenie..."
+      },
+      "clientDetails": {
+        "personalData": "Dane osobowe",
+        "address": "Adres",
+        "companyData": "Dane firmy",
+        "companyAddress": "Adres firmy",
+        "editButton": "Edytuj",
+        "assignCompanyButton": "Dopisz dane firmy"
+      },
+      "clientControlPanel": {
+        "title": "Panel klienta",
+        "clientDataButton": "Informacje",
+        "clientFieldsButton": "Pola klienta",
+        "clientOrdersButton": "Dodaj nowe zamówienie"
+      },
+      "clientFields": {
+        "title": "Fields",
+        "searchPlaceholder": "Find a field",
+        "submitButton": "Add field"
+      }
+    },
+    "orderDriver": {
+      "editOrder": {
+        "screenTitle": "Edytuj zamówienie",
+        "submitButton": "Zapisz zmiany"
+      },
+      "orderTasksScreen": {
+        "screenName": "Zadania",
+        "taskListHeader": "Tasks",
+        "detailsCard": {
+          "cardName": "Szczegóły",
+          "fields": {
+            "name": "Nazwa",
+            "performanceDate": "Data wykonania",
+            "creationDate": "Data utworzenia",
+            "openedAt": "Otwarte o",
+            "pricePerUnit": "Cena za jednostkę",
+            "totalTaskArea": "Całkowity obszar zadań"
+          },
+          "topRightButtonName": "Edytuj"
+        },
+        "additionalInfo": "Dodatkowe informacje",
+        "clientCard": {
+          "cardName": "Klient",
+          "topRightButtonName": "Więcej",
+          "fields": {
+            "name": "Imię",
+            "surname": "Nazwisko"
+          }
+        },
+        "tasksButton": "Zadania",
+        "taskStatus": {
+          "done": "Zamknięte",
+          "notDone": "Otwarte",
+          "new": "Nowe"
+        }
+      },
+      "createTask": {
+        "screenTitle": "Utwórz zadanie",
+        "screenSummaryTitle": "Podsumowanie",
+        "ha": "Ha",
+        "submitButton": "Utwórz zadanie",
+        "pendingStatus": "Tworzenie...",
+        "selectWorkers": {
+          "stepSelectWorkers": "Wybierz pracowników",
+          "hintHeader": "Wskazówka",
+          "hintDescription": "Wybierz pracownika, który wykona zadanie",
+          "searchPlaceholder": "Znajdź pracownika"
+        },
+        "selectMachines": {
+          "stepSelectMachine": "Wybierz maszynę",
+          "hintHeader": "Wskazówka",
+          "hintDescription": "Wybierz maszynę, która będzie używana do wykonania zadania",
+          "searchPlaceholder": "Znajdź maszynę"
+        },
+        "selectFields": {
+          "stepSelectFields": "Wybierz pola",
+          "submitButton": "Następny krok",
+          "hintHeader": "Wskazówka",
+          "hintDescription": "Wybierz pola, na których ma być wykonane zadanie, każde pole będzie traktowane jako osobne zadanie",
+          "searchPlaceholder": "Znajdź pole"
+        },
+        "summary": {
+          "summaryCard": {
+            "fields": "Pola",
+            "workers": "Pracownicy",
+            "machines": "Maszyny",
+            "type": "Typ",
+            "totalArea": "Całkowity obszar"
+          },
+          "typeSelector": {
+            "label": "Typ zadania",
+            "description": "Wybierz typ zadania, które chcesz utworzyć",
+            "creatingTasks": "Zostaną utworzone: "
+          }
+        },
+        "fieldSelectorEmptyList": "Brak pól do wyświetlenia, kliknij poniżej aby dodać nowe",
+        "workerSelectorEmptyList": "Brak pracowników do wyświetlenia, kliknij poniżej aby dodać nowego",
+        "machineSelectorEmptyList": "Brak maszyn do wyświetlenia, kliknij poniżej aby dodać nową"
+      },
+      "accountingSummary": {
+        "clientInvoiceData": "Dane Faktury Klienta",
+        "useClientsCompanyData": "Użyj Danych Firmy Klienta",
+        "createCompanyData": "Utwórz Dane Firmy Klieta",
+        "companyName": "Nazwa Firmy",
+        "companyNIP": "NIP Firmy",
+        "county": "Powiat",
+        "apartmentNumber": "Numer Mieszkania",
+        "voivodeship": "Województwo",
+        "name": "Imię",
+        "surname": "Nazwisko",
+        "phoneNumber": "Numer Telefonu",
+        "orderName": "Nazwa Zamówienia",
+        "performanceDate": "Data Wykonania",
+        "totalArea": "Całkowita Powierzchnia",
+        "status": "Status",
+        "openedAt": "Otwarto O",
+        "createdAt": "Utworzono O",
+        "taxValue": "Wartość Podatku",
+        "totalPrice": "Całkowita Cena",
+        "totalPriceWithTax": "Całkowita Cena z Podatkiem",
+        "harvestingTotalArea": "Całkowita Powierzchnia Zbiorów",
+        "transportTotalArea": "Całkowita Powierzchnia Transportu",
+        "harvestingTotalPrice": "Całkowita Cena Zbiorów",
+        "transportTotalPrice": "Całkowita Cena Transportu",
+        "companyDataIsEmpty": "Dane Firmy są Puste",
+        "clientNoCompany": "Twój klient nie ma danych firmy, kliknij poniżej, aby wypełnić dane firmy",
+        "companyEmail": "Email Firmy",
+        "companyPhoneNumber": "Numer Telefonu Firmy",
+        "city": "Miasto",
+        "street": "Ulica",
+        "postalCode": "Kod Pocztowy",
+        "houseNumber": "Numer Domu",
+        "fillCompanyData": "Wypełnij Dane Firmy",
+        "usingClientPersonalDataHintHeader": "Korzystanie z Danych Osobowych Klienta",
+        "usingClientPersonalDataHintDesc": "Korzystając z danych osobowych klienta, będziesz mógł tworzyć tylko faktury na imię i nazwisko, co oznacza, że dane firmy klienta nie będą na fakturze, nawet jeśli istnieją.",
+        "noData": "Brak danych",
+        "alertTitle": "Coś poszło nie tak :(",
+        "alertDescription": "Nie udało się wygenerować faktury, spróbuj ponownie później",
+        "clientCardName": "Klient",
+        "clientCardTopRightButtonName": "Więcej",
+        "orderCardName": "Zamówienie",
+        "generateInvoiceButton": "Generuj Fakture"
+      },
+      "orderAccounting": {
+        "screenTitle": "Rozliczenie"
+      },
+      "OrderAccountingSelectPrices": {
+        "screenTitle": "Wyznacz ceny",
+        "area": "OBSZAR",
+        "total": "suma:",
+        "sum": "SUM:",
+        "totalWithTax": "Suma z podatkiem:",
+        "tasksNotSelected": "Nie wybrano zadań",
+        "nextButton": "Następny krok"
+      },
+      "orderInvoices": {
+        "screenTitle": "Faktury",
+        "backButton": "Wróć"
+      }
+    },
+    "ordersDesktopDriver":{
+      "addOrder": {
+        "screenTitle": "Dodaj  zamówienie",
+        "submitButton": "Dodaj zamówienie",
+        "step1Communicat": "Krok 1: Wybierz klienta",
+        "step2Communicat": "Krok 2: Wypełnij dane",
+        "emptyList": "Brak klientów do wyświetlenia, kliknij przycisk poniżej aby dodać nowego",
+        "createClientButton": "Utwórz nowego klienta"
+      },
+      "orderDesktop": {
+        "title": "Zamówienia",
+        "searchPlaceholder": "Znajdź zamówienie",
+        "emptyList": "Brak zamówień do wyświetlenia, przeciągni w prawo aby dodać nowe"
+
+      }
+    },
+    "clientDesktopDriver": {
+      "createClient": {
+        "screenTitle": "Utwórz nowego klienta",
+        "submitButton": "Utwórz klienta",
+        "editSubmitButton": "Zapisz zmiany",
+        "successMessage": "Zrobione! Klient został utworzony pomyślnie",
+        "alertTitle": "Czy klient ma firmę?",
+        "alertDescription": "Jeżeli klient ma firmę, możesz ją przypisać do niego co bedzie przydatne podczas wystawiania faktur. Jeżeli nie, możesz pominąć ten krok.",
+        "alertGoWithoutButton": "Przejdź dalej",
+        "alertCreateButton": "Utwórz firmę",
+        "alertOnScreenBlurTitle": "Uważaj! Niezapisane zmiany",
+        "alertOnScreenBlurDescription": "Masz niezapisane zmiany. Czy na pewno chcesz wyjść ?",
+        "alertOnScreenBlurLeaveButton": "Opuść",
+        "alertOnScreenBlurStayButton": "Zostań",
+        "pendingStatus": "Tworzenie klienta..."
+      },
+      "clientsDesktop": {
+        "title": "Klienci",
+        "searchPlaceholder": "Znajdź klienta",
+        "emptyList": "Brak klientów do wyświetlenia, przeciągni w prawo aby dodać nowego"
+      }
+    },
+    "ownerRootDriver": {
+      "addWorker": {
+        "screenTitle": "Add worker",
+        "scanQrCode": "Scan QR code from worker's app",
+        "pendingStatus": "Adding worker...",
+        "welcomeAnimationStartText": "Worker",
+        "welcomeAnimationEndText": "has been added"
+      },
+      "workerAssignation": {
+        "qrCodeScanCommunication": "Pokaż właścicielowi kod QR, aby zeskanował go za pomocą swojej aplikacji FarmService",
+        "qrCodeTimeOut": "Zeskanuj kod QR w ciągu 60 sekund",
+        "connectionTimeout": "Przekroczono limit czasu połączenia...",
+        "error": "Wystąpił błąd...",
+        "retryButton": "Spróbuj ponownie",
+        "welcomeText": "Witaj na Pokładzie! ",
+        "pendingStatus": "Chwileczkę pobieramy dane o tobie..."
+      },
+      "workersDesktop": {
+        "title": "Pracownicy",
+        "searchPlaceholder": "Znajdź pracownika",
+        "emptyList": "Brak pracowników do wyświetlenia, przeciągni w prawo aby dodać nowego skanując kod QR"
+      },
+      "workerDetails": {
+        "personalData": "Dane osobowe",
+        "address": "Adres",
+        "status": "Status",
+        "Position": "Stanowisko",
+        "editButton": "Edytuj",
+        "choose": "Wybierz",
+        "hintTitle": "Wskazówka",
+        "hintDescription": "Status pracownika determinuje, czy pracownik może wykonywać zadania. Możesz zmienić status pracownika w dowolnym momencie."
+      }
+    }
+  },
+  "workerScreens": {
+    "activityDriver": {
+      "screenTitle": "Zadanie",
+      "resumeButton": "Wznów",
+      "openButton": "Rozpocznij",
+      "taskView": {
+        "errorToastTitleOpen": "Nie można otworzyć zadania",
+        "errorToastTitleResume": "Cannot resume task",
+        "taskInfoPanel": {
+          "sessionsCardTitle": "Sesje",
+          "reset_map": "Zresetuj Mapę",
+          "task_view": "Widok Zadania",
+          "task_info": "Informacje o Zadaniu",
+          "field_info": "Informacje o Polu",
+          "address_info": "Informacje Adresowe",
+          "created_at": "Utworzono",
+          "closed_at": "Zamknięto",
+          "opened_at": "Otwarto",
+          "performance_date": "Data Wykonania",
+          "type": "Typ",
+          "status": "Status",
+          "done": "Zrobione",
+          "not_done": "Nie Zrobione",
+          "name": "Nazwa",
+          "pl_id": "PL_ID",
+          "area": "Obszar",
+          "doc_data": "Data DOC",
+          "city": "Miasto",
+          "county": "Powiat",
+          "longitude": "Długość Geograficzna",
+          "latitude": "Szerokość Geograficzna",
+          "voivodeship": "Województwo"
+        },
+        "doneTaskHintCard":{
+          "doneTaskHintCardTitle": "Zadanie zakończone",
+          "doneTaskHintCardDescription": "Po oznaczeniu zadania jako wykonanego jest ono uznawane za ukończone, co oznacza, że nie masz już uprawnień do zarządzania nim."
+        },
+        "locationErrorHintCard":{
+          "hintCardTitle": "Lokalizacja jest wymagana",
+          "hintCardDescription": "Zgodnie z polityką firmy aby rozpocząć wykonywanie zadania musisz udostępnić swoją lokalizację. Twoje położenie bedzie zapisywane i przetwarzane podczas pracy w celu uniknięcia błedów podczas pracy.",
+          "enableLocationLink": "Włącz lokalizację"
+        },
+        "enableLocationAlert": {
+          "title": "Włącz lokalizację",
+          "description": "Aby rozpocząć pracę, musisz włączyć lokalizację. Twoje położenie będzie zapisywane i przetwarzane podczas pracy w celu uniknięcia błędów podczas pracy.",
+          "okButton": "Włącz",
+          "cancelButton": "Anuluj"
+        },
+        "locationPrompt": {
+          "title": "Włącz lokalizację",
+          "description": "Aby rozpocząć pracę, musisz włączyć lokalizację. Twoje położenie będzie zapisywane i przetwarzane podczas pracy w celu uniknięcia błędów podczas pracy."
+        },
+        "closedByOwnerAlert": {
+          "title": "Task has been closed",
+          "description": "This task has been closed by the owner, you can no longer manage it"
+        }
+      }
+    },
+    "activityDesktopRoot": {
+      "welcome": "Witaj",
+      "newTaskIncomeHeader": "Nowe zadanie !",
+      "newTaskIncomeDescription": "Masz nowe zadanie do wykonania",
+      "emptyListHint": "Trochę tu pusto...",
+      "emptyListHintDescription": "Trochę tu pusto \uD83D\uDE15 Nie byliśmy w stanie odnaleźć żadnych aktywności powiazanych z twoją firmą. Nic się nei martw prawdopodobie dopiero zaczynsz swoja przygodę. Zacznij dodając prawcowników, klientów pola itp a poźniej rozsiądz się wygodnie i obserwuj jak praca wre"
+    }
+  },
+  "serviceDefaults": {
+    "unauthorised": "Nieautoryzowany dostęp",
+    "default": "Coś poszło nie tak"
+  },
+  "userService": {
+    "errorMessages": {
+      "wrongCredentials": "Niepoprawny e-mail lub hasło"
+    }
+  },
+  "components": {
+    "alert": {
+      "okButton": "Zatwierdź",
+      "cancelButton": "Anuluj"
+    },
+    "taskSessionManagement": {
+      "sessionInfoTitle": "Informacje o sesji",
+      "openedAtLabel": "OTWARTO O",
+      "closedAtLabel": "ZAMKNIĘTO O",
+      "onOpenWorkerLatLabel": "POŁOŻENIE X PRZY OTWARCIU:",
+      "onOpenWorkerLongLabel": "POŁOŻENIE Y PRZY OTWARCIU:",
+      "onCloseWorkerLatLabel": "POŁOŻENIE X PRZY ZAMKNIĘCIU:",
+      "onCloseWorkerLongLabel": "POŁOŻENIE Y PRZY ZAMKNIĘCIU:",
+      "backButton": "Wstecz",
+      "openStartOnMapButton": "Pokaż start na mapie",
+      "openENDOnMapButton": "Pokaż koniec na mapie",
+      "workerOnOpenLabel": "Pracownik przy otwarciu",
+      "workerOnCloseLabel": "Pracownik przy zamknięciu",
+      "toastOpenMapErrorHeader": "Błąd",
+      "toastOpenMapErrorDescription": "Nie udało się otworzyć mapy"
+    },
+    "taskWorkView": {
+      "errorToastTitleClose": "Nie można zamknąć zadania",
+      "errorToastTitlePause": "Nie można wstrzymać zadania",
+      "locationErrorHeader": "Error",
+      "locationErrorDescription": "Wystąpił błąd lokalizacji spróbuj później",
+      "pauseButton": "Pauza",
+      "focusOnFieldButton": "Wycentruj na pole",
+      "autofocusSwitch": "Podążaj za mną",
+      "markAsDoneButton": "Oznacz jako zrobione"
+    },
+    "accountingTaskCard": {
+      "task": "Zadanie",
+      "area": "Pow.",
+      "price": "Cena",
+      "priceWithTax": "Cena(VAT)"
+    },
+    "orderForm": {
+      "pendingStatus": "Tworzenie zamówienia...",
+      "submitButtonText": "Utwórz zamówienie"
+    },
+    "verticalList": {
+      "problemOccurred": "Coś poszło nie tak, spróbuj ponownie później"
+    },
+    "listInfo": {
+      "unknownError": "Coś poszło nie tak",
+      "emptyListHeader": "Brak danych do wyświetlenia"
+    },
+    "emptyListItemCreator": {
+      "button": "Dodaj nowy"
+    },
+    "list": {
+      "cannotSelectMore": "Nie można wybrać więcej elementów",
+      "cannotSelectMoreDescription": "Osiągnięto maksymalną liczbę wybranych elementów"
+    },
+    "taskInfoCard": {
+      "type": "Typ",
+      "worker": "Pracownik",
+      "machine": "Maszyna",
+      "createdAt": "Utworzono dnia",
+      "openedAt": "Otwarte dnia",
+      "closedAt": "Zamknięte dnia",
+      "fieldArea": "Obszar pola",
+      "ha": "Ha",
+      "deleteButton": "Usuń",
+      "closeTaskButton": "Zamknij",
+      "onDeleteAlertTitle": "NIEODWRACALNA OPERACJA",
+      "onDeleteAlertDescription": "Czy na pewno chcesz usunąć to zadanie? Wszystkie zapisane sesje zostaną utracone. Ta operacja jest nieodwracalna!!!"
+    },
+    "fieldSelector": {
+      "title": "Wybierz pola",
+      "searchPlaceholder": "Znajdź pole"
+    },
+    "workerSelector":{
+      "title": "Wybierz pracownika",
+      "searchPlaceholder": "Znajdź pracownika"
+    },
+    "taskSelector":{
+      "title": "Wybierz zadania",
+      "searchPlaceholder": "Znajdź zadanie",
+      "buttonTitle": "Przejdź dalej"
+    },
+    "machineSelector": {
+      "title": "Wybierz maszynę",
+      "searchPlaceholder": "Znajdź maszynę"
+    },
+    "clientsFieldsList": {
+      "searchPlaceholder": "Znajdź pole"
+    },
+    "buttonTamagui": {
+      "processing": "Przetwarzanie..."
+    },
+    "sendMail": {
+      "title": "Wyślij e-mail",
+      "cannotSendAlertTitle": "Błąd wysyłania e-maila",
+      "cannotSendAlertMessage": "Nie udało się wysłać e-maila. Prawdopodobnie nie masz skonfigurowanego klienta poczty na swoim urządzeniu."
+    },
+    "call": {
+      "title": "Zadzwoń",
+      "cannotCallAlertTitle": "Błąd połączenia",
+      "cannotCallAlertMessage": "Nie udało się wykonać połączenia. Prawdopodobnie to urządzenie nie obsługuje dzwonienia."
+    },
+    "CallAndMailPanel": {
+      "sign": "Wysłano z FarmService T.M"
+    },
+    "universalList": {
+      "listEmptyText": "Brak danych do wyświetlenia...",
+      "listLoadingText": "Pobiranie Klientów..."
+    },
+
+    "toast": {
+      "clientsFetchErrorHeader": "Błąd pobierania klientów",
+      "workerUpdateErrorHeader": "Błąd aktualizacji pracownika",
+      "clientsFetchErrorContext": "Nie udało się pobrać listy klientów. Spróbuj ponownie później.",
+      "workerUpdateErrorContext": "Nie udało sie zaktualizować danych.",
+      "openMapErrorHeader": "Błąd otwierania mapy",
+      "openMapErrorDescription": "Aby korzystać z tej funkcji, musisz zainstalować aplikację Map",
+      "cantDeleteFieldHeader": "Cannot delete field",
+      "cantDeleteFieldDescription": "Sorry we cannot delete field, try later",
+      "cantCreateOrderHeader": "Cannot create order",
+      "cantCreateOrderDescription": "Sorry we cannot create order, try later",
+      "canUpdateOrderHeader": "Cannot update order",
+      "canUpdateOrderDescription": "Sorry we cannot update order, try later",
+      "cantAddMachine": "Nie można dodać maszyny",
+      "cantAddMachineDescription": "Przepraszamy, nie można dodać maszyny, spróbuj ponownie później",
+      "cantUpdateMachine": "Nie można zaktualizować maszyny",
+      "cantUpdateMachineDescription": "Przepraszamy, nie można zaktualizować maszyny, spróbuj ponownie później",
+      "cantDeleteMachine": "Nie można usunąć maszyny",
+      "cantDeleteMachineDescription": "Przepraszamy, nie można usunąć maszyny, spróbuj ponownie później",
+      "cantCreateTask": "Nie można utworzyć zadania",
+      "cantCreateTaskDescription": "Przepraszamy, nie można utworzyć zadania, spróbuj ponownie później"
+    },
+    "filedBottomSheet": {
+      "showOnMapButton": "Pokaż na mapie",
+      "editButton": "Edytuj",
+      "deleteButton": "Usuń",
+      "addButton": "Przypisz do zamówienia",
+      "historyButton": "Historia",
+      "address": "Adres",
+      "deleteFieldAlertTitle": "Jeseś pewien?",
+      "deleteFieldAlertDescription": "Czy na pewno chcesz usunąć to pole? Ta operacja jest nieodwracalna.",
+      "deleteFieldAlertDeleteButton": "Usuń",
+      "deleteFieldAlertCancelButton": "Anuluj",
+      "ha": "Ha"
+    },
+    "orderPerformanceChart": {
+      "errorFetchingData": "Błąd pobierania danych",
+      "tryAgainLater": "Spróbuj ponownie później",
+      "computingPerformance": "Obliczanie wydajności...",
+      "hintCardTitle": "Brak danych",
+      "hintCardDescription": "Brak danych do wyświetlenia, wykres zostanie wyświetlony po wykonaniu co najmniej jednego zadania",
+      "dailyPerformance": "Dzienna wydajność"
+    }
+  },
+  "addressForm": {
+    "formPlaceholder": {
+      "city": "Miasto",
+      "county": "Powiat",
+      "street": "Ulica",
+      "houseNumber": "Numer domu",
+      "apartmentNumber": "Numer mieszkania",
+      "postalCode": "Kod pocztowy",
+      "country": "Kraj",
+      "voivodeship": "Województwo",
+      "latitude": "X",
+      "longitude": "Y"
+    },
+    "validation": {
+      "city": "Miasto jest wymagane",
+      "county": "Powiat jest wymagany",
+      "street": "Ulica jest wymagana",
+      "houseNumber": "Numer domu jest wymagany",
+      "apartmentNumber": "Numer mieszkania jest wymagany",
+      "postalCode": "Kod pocztowy musi być w formacie XX-XXX",
+      "country": "Kraj jest wymagany",
+      "voivodeship": "Województwo jest wymagane",
+      "validationAtLeast": "must have at least ",
+      "validationMaximum ": "nie może być dłuższy niż ",
+      "validationCharacters": "znaków",
+      "latitude": "X jest wymagane",
+      "longitude": "Y jest wymagane"
+    }
+  },
+  "createCompanyForm":{
+    "formPlaceholder": {
+      "email": "E-mail",
+      "name": "Nazwa firmy",
+      "NIP": "NIP",
+      "phoneNumber": "Numer telefonu"
+    },
+    "validation": {
+      "email": "E-mail jest wymagany",
+      "name": "Nazwa firmy jest wymagana",
+      "NIP": "NIP  jest wymagany",
+      "phoneNumber": "Numer telefonu jest wymagany",
+      "validationAtLeast": "musi zawierać co najmniej ",
+      "validationMaximum ": "nie może być dłuższy niż ",
+      "validationCharacters": "znaków"
+    }
+  },
+  "createClientForm":{
+    "formPlaceholder": {
+      "email": "E-mail",
+      "name": "Imię",
+      "surname": "Nazwisko",
+      "phoneNumber": "Numer telefonu"
+    },
+    "validation": {
+      "email": "E-mail jest wymagany",
+      "emailPattern": "Niepoprawny format e-maila",
+      "name": "Imię klienta jest wymagane",
+      "surname": "Nazwisko klienta jest wymagane",
+      "phoneNumber": "Numer telefonu jest wymagany",
+      "validationAtLeast": "musi zawierać co najmniej ",
+      "validationMaximum ": "nie może być dłuższy niż ",
+      "validationCharacters": "znaków"
+    }
+  },
+  "createFieldForm":{
+  "formPlaceholder": {
+    "nameLabel": "Nazwa pola",
+    "area": "Obszar",
+    "polishSystemId": "Id w systemie polskim"
+  },
+  "validation": {
+    "nameLabel": "Nazwa pola jest wymagana",
+    "polishSystemId": "Id w systemie polskim jest wymagane",
+    "polishSystemIdPattern": "PL_ID musi być w formacie PL_ID (np. 181102_2.0010.211)",
+    "area": "Obszar jest wymagany",
+    "validationAtLeast": "musi być co najmniej ",
+    "validationMaximum ": "może mieć maksimum ",
+    "validationCharacters": "znaków",
+    "moreThan": "Obszar musi być większy niż",
+    "lessThan": "Obszar nie może być mniejszy niż"
+    }
+  },
+  "createOrderForm": {
+    "formPlaceholder": {
+      "name": "Nazwa",
+      "additionalInfo": "Dodatkowe informacje",
+      "performanceDate": "Data wykonania",
+      "pricePerUnit": "Cena za jednostkę"
+    },
+    "validation": {
+      "name": "Nazwa jest wymagana",
+      "performanceDate": "Data wykonania jest wymagana"
+
+    }
+  },
+  "taskTypePriceForm": {
+    "formPlaceholder": {
+      "harvesting": "Koszenie",
+      "transport": "Transport",
+      "tax": "Iloczyn podatku"
+    },
+    "validation": {
+      "priceRequired": "Cena jest wymagana",
+      "priceAsNumber": "Cena musi być liczbą",
+      "taxIsRequired": "Podatek musi zostać zdefiniowany",
+      "taxMinValue": "Wielkość podatku nie może być ujemna",
+      "taxMaxValue": "Wielkość podatku nie może być większa niż 1"
+    }
+  },
+  "createMachineForm": {
+    "formPlaceholder": {
+      "name": "Nazwa",
+      "licensePlate": "Numer rejestracyjny"
+    },
+    "validation": {
+      "name": "Nazwa jest wymagana",
+      "nameMinLength": "Nazwa za krótka",
+      "nameMaxLength": "Nazwa za długa",
+      "licensePlate": "Numer rejestracyjny jest wymagany",
+      "licensePlateMinLength": "Numer rejestracyjny za krótki",
+      "licensePlateMaxLength": "Numer rejestracyjny za długi"
+    }
+  },
+  "sessionAsActivity": {
+    "openSessionTitle": "Sesja Otwarta",
+    "closeSessionTitle": "Sesja Zamknięta",
+    "openTask": "Zadanie Otwarte",
+    "closeTask": "Zadanie Zamknięte",
+    "worker": "Pracownik",
+    "has": "has",
+    "opened": "rozpoczął",
+    "closed": "zakończył",
+    "aSessionOnAField": "sesje  pracy na polu",
+    "workOnAField": "prace na polu",
+    "somethingWentWrong": "Coś poszło nie tak, spróbuj ponownie później"
+
+  }
 }

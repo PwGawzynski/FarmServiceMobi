@@ -1,29 +1,86 @@
-import { AxiosError, HttpStatusCode } from 'axios';
-import { Api } from '../Api';
-import { ErrorCause } from '../../types/self/api/ErrorTypes';
+import { LoginUser } from '../../FarmServiceApiTypes/User/LoginUser';
+import {
+  CreateUserReqI,
+  UserResetPasswordReqI,
+} from '../../FarmServiceApiTypes/User/Requests';
+import { UserResponseBase } from '../../FarmServiceApiTypes/User/Responses';
+import { query } from '../../helepers/Api/QueryDriver';
 
 /**
- * Method used when user login in app
- * @returns boolean to indicate that access is given or not
- * @throws Error as ErrorCause when server response with UNAUTHORIZED
- * @throws Error with only message on any other error
+ * Method used to get user data from api
+ * @throws Error when session expired or something went wrong
+ * @return UserResponseBase | undefined
  */
 export async function me() {
-  const UNAUTHORIZED_MSG = 'Session expired, please login again';
-  const DEFAULT_MSG = 'Something went wrong, try again later';
-  try {
-    return (await Api.me()).payload;
-  } catch (e) {
-    if (e instanceof AxiosError) {
-      console.log(e.response?.status);
-      switch (e.response?.status) {
-        case HttpStatusCode.Unauthorized:
-          throw new Error(UNAUTHORIZED_MSG, {
-            cause: HttpStatusCode.Unauthorized,
-          } as ErrorCause);
-        default:
-          throw new Error(DEFAULT_MSG);
-      }
-    } else throw new Error(DEFAULT_MSG);
-  }
+  return query<undefined, UserResponseBase>({
+    type: 'GET',
+    path: '/user/me',
+  });
+}
+
+/**
+ * Method used to login user
+ * @param data : LoginUser
+ * @throws Error when credentials are wrong or something went wrong
+ * @return UserResponseBase | undefined
+ */
+export async function login(
+  data: LoginUser,
+): Promise<UserResponseBase | undefined> {
+  return query<LoginUser, UserResponseBase>({
+    type: 'CUSTOM',
+    path: '/user/login',
+    data,
+    fnName: 'loginUser',
+  });
+}
+
+export async function resetPwd(data: UserResetPasswordReqI) {
+  return query<UserResetPasswordReqI, UserResponseBase>({
+    type: 'PUT',
+    path: '/user/reset-password',
+    config: {
+      params: { email: data?.email },
+    },
+  });
+}
+
+export async function registerUser(data: CreateUserReqI) {
+  return query<CreateUserReqI, UserResponseBase>({
+    type: 'CUSTOM',
+    path: '/user',
+    data,
+    fnName: 'registerNewUser',
+  });
+}
+
+export async function loginByGoogle(idToken: string) {
+  return query<string, UserResponseBase>({
+    type: 'CUSTOM',
+    path: '/auth/g-login',
+    config: {
+      params: { 'id-token': idToken },
+    },
+    fnName: 'googleLogin',
+    queryCustomSettings: { treatAsText: true },
+  });
+}
+
+export async function isMailFree(email: string) {
+  return query<undefined, boolean>({
+    type: 'CUSTOM',
+    path: '/auth/exist',
+    config: {
+      params: { email },
+    },
+    fnName: 'isMailFree',
+  });
+}
+
+export async function logout() {
+  return query<undefined, undefined>({
+    type: 'CUSTOM',
+    path: '/user/logout',
+    fnName: 'logout',
+  });
 }

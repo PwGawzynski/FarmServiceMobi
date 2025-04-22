@@ -5,7 +5,9 @@ import Animated, {
 } from 'react-native-reanimated';
 import { View } from 'react-native';
 
-const ANIMATION_DURATION = 3000;
+export const LANDING_ANIMATION_DURATION = /* process.env.EXPO_PUBLIC_IS_DEV
+  ? 0
+  : */ 1500;
 
 export type Props = {
   play: boolean;
@@ -15,23 +17,16 @@ export function LandingLogo({ play }: Props) {
   const opacity = useSharedValue(0);
   const animatedStyle = useAnimatedStyle(() => ({ opacity: opacity.value }));
 
-  if (play) opacity.value = withTiming(1, { duration: ANIMATION_DURATION });
+  if (play)
+    opacity.value = withTiming(1, { duration: LANDING_ANIMATION_DURATION });
   return (
-    <View className="justify-center ">
+    <View className="justify-center items-center">
       <Animated.Text
         style={[animatedStyle]}
         className="text-3xl text-dark dark:text-green font-bold"
       >
         FarmService
       </Animated.Text>
-      <View className="">
-        <Animated.Text
-          style={[animatedStyle]}
-          className="text-xs text-dark dark:text-green text-right"
-        >
-          © PwG
-        </Animated.Text>
-      </View>
     </View>
   );
 }

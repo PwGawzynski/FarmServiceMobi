@@ -1,10 +1,740 @@
 {
-  "test": "test",
   "screens": {
     "AuthDriver": {
       "chooseLoginType": {
-        "instructionHeader": "Choose Login Type"
+        "header": "Sing up for FarmService",
+        "email": "e-mail or NIP ",
+        "google": "Go with Google",
+        "registerButton": "Create One Now",
+        "registerText": "Don't have an account?",
+        "instruction": "Sing up for FarmService, and start working with pleasure"
+      },
+      "landing": {
+        "connecting": "Connecting to server..."
+      },
+      "chooseRegisterType": {
+        "header": "Create New Account",
+        "email": "Use e-mail or NIP ",
+        "google": "Use Google",
+        "instruction": "Work smarter, not harder with FarmService"
+      },
+      "loginByEmail": {
+        "header": "Sign in with e-mail or NIP",
+        "email": "e-mail or NIP",
+        "password": "Password",
+        "forgotPassword": "Forgot password?",
+        "resetPassword": "Reset password",
+        "loginButton": "Sign in",
+        "emailValidationInvalid": "Invalid e-mail or NIP",
+        "emailValidationRequired": "e-mail or NIP is required",
+        "emailValidationMinLength": "e-mail or NIP must be at least ",
+        "emailValidationMaxLength": "e-mail or NIP must be at most ",
+        "passwordValidationRequired": "Password is required",
+        "passwordValidationMinLength": "Password must be at least ",
+        "passwordValidationMaxLength": "Password must be at most ",
+        "passwordValidationCharacters": "characters",
+        "passwordValidationPattern": "Password must contain at least one letter and one number and one special character",
+        "pendingStatus": "Signing in...",
+        "emailPlaceholder": "e-mail or NIP",
+        "passwordPlaceholder": "Password"
+      },
+      "passwordReset": {
+        "instruction": "Enter your e-mail address and we will send you a link to reset your password",
+        "header": "Reset password",
+        "button": "Reset password",
+        "pendingStatus": "Sending...",
+        "afterSuccess": "It's done. If the e-mail address is correct, you will receive a link to reset your password"
+      },
+      "createCompany": {
+          "screenTitle": "Create company",
+          "submitButton": "Create",
+          "successMessage": "It's done, you ready to go, let's start working with pleasure"
+      },
+      "createField": {
+        "screenTitle": "Add field",
+        "submitButton": "Add",
+        "editSubmitButton": "Save",
+        "editScreenTitle": "Edit field",
+        "successMessage": "It's done, new field has been added",
+        "gpsConnecting": "Connecting to GPS...",
+        "gpsAccess": "To use this feature, you need to give us access to your location, please go to settings and enable location",
+        "gpsMoreInfo": "Location Usage Policy",
+        "gpsError": "Error occurred while connecting to GPS, please try again later",
+        "serverError": "Hmmm something went wrong, please try again later",
+        "locationPolicyTitle": "Location Usage Policy",
+        "locationPolicyDescription": "We use your location to provide you with the best possible experience, we don't store your location data, we use it only to get the coordinates of the field",
+        "locationPolicyButton": "I understand",
+        "resetButton": "Reset",
+        "markerName": "Field",
+        "markerDescription": "Estimated Field Location"
+      },
+      "register": {
+        "title": "Register",
+        "confirmation": "User has been created successfully, remember to confirm your email address.",
+        "registerButton": "Register"
+      },
+      "chooseRole": {
+        "title": "Choose role",
+        "owner": "Owner",
+        "worker": "Worker"
       }
+    },
+    "appSettings": {
+      "screenTitle": "App settings",
+      "settings": {
+        "logout": "Log out",
+        "changeTheme": "Change theme",
+        "changeLang": "Change Language",
+        "logoutErrorAlertTitle": "Error",
+        "logoutErrorAlertDescription": "An error occurred while logging out, please try again"
+      }
+    },
+    "activityDesktopRoot": {
+      "title": "Last activities",
+      "newActivity": "New activity",
+      "newActivityDescription": "New activity has been registered",
+      "noActivities": "No activities to display",
+      "emptyListHint": "No activities to display",
+      "emptyListHintDescription": "A little empty here 😕 We were unable to find any activity related to your company. Don't worry, you're probably just getting started. Start by adding employees, customers, fields, etc. and then sit back and watch the work unfold."
+    },
+    "machineDesktopDriver": {
+      "addMachineScreen": {
+        "screenTitle": "Add machine",
+        "screenEditTitle": "Edit machine",
+        "button": {
+          "creating": "Create",
+          "save": "Save"
+        }
+      },
+        "machinesDesktop": {
+            "title": "Machines",
+            "searchPlaceholder": "Find a machine",
+            "emptyList": "No machines to display, swipe right and add new one"
+        }
+    },
+    "machineDriver": {
+      "machineDetailsScreen": {
+        "screenBaseName": "Machine Details",
+        "entityAsACard": {
+          "topRightButtonName": "Edit",
+          "cardName": "Details",
+          "names": {
+            "id": "ID",
+            "name": "Name",
+            "licensePlate": "License Plate"
+          }
+        },
+        "deleteButton": "Safely delete"
+      }
+    },
+    "clientDriver": {
+      "assignCompanyToClient": {
+        "screenTitle": "Assign company",
+        "assignationSubmitButton": "Assign",
+        "editSubmitButton": "Save",
+        "createButton": "Create Client with company",
+        "successMessageStart": "It's done, client ",
+        "successMessageEnd": " has been added and company has been assigned to it",
+        "pendingStatus": "Processing..."
+      },
+      "clientDetails": {
+        "personalData": "Personal",
+        "address": "Address",
+        "companyData": "Company",
+        "companyAddress": "Address",
+        "editButton": "Edit",
+        "assignCompanyButton": "Assign company data"
+      },
+      "clientControlPanel": {
+        "title": "Client control panel",
+        "clientDataButton": "Info",
+        "clientFieldsButton": "Fields",
+        "clientOrdersButton": "Start new order"
+      },
+      "clientFields": {
+        "title": "Fields",
+        "searchPlaceholder": "Find a field",
+        "submitButton": "Add field"
+      }
+    },
+    "clientDesktopDriver": {
+      "createClient": {
+        "screenTitle": "Create new client",
+        "submitButton": "Create",
+        "editSubmitButton": "Save",
+        "successMessage": "It's done, new client has been added",
+        "alertTitle": "Has your client a owner of company ?",
+        "alertDescription": "If your client has a company, click create to save its data to be able to use it in the future accounting",
+        "alertGoWithoutButton": "Go without",
+        "alertCreateButton": "Create",
+        "alertOnScreenBlurTitle": "Are you sure?",
+        "alertOnScreenBlurDescription": "You have unsaved changes, are you sure you want to leave this page?",
+        "alertOnScreenBlurLeaveButton": "Leave",
+        "alertOnScreenBlurStayButton": "Stay",
+        "pendingStatus": "Creating..."
+      },
+      "clientsDesktop": {
+        "title": "Clients",
+        "searchPlaceholder": "Find a client",
+        "emptyList": "No clients to display, swipe right and add new one"
+      }
+    },
+    "orderDriver": {
+      "editOrder": {
+        "screenTitle": "Edit order",
+        "submitButton": "Save"
+      },
+      "orderTasksScreen": {
+        "screenName": "Tasks",
+        "taskListHeader": "Tasks",
+        "detailsCard": {
+          "cardName": "Details",
+          "fields": {
+            "name": "Name",
+            "performanceDate": "Performance Date",
+            "creationDate": "Creation Date",
+            "openedAt": "Opened At",
+            "totalTaskArea": "Total Task Area"
+          },
+          "topRightButtonName": "Edit"
+        },
+        "additionalInfo": "Additional Info",
+        "clientCard": {
+          "cardName": "Client",
+          "topRightButtonName": "More",
+          "fields": {
+            "name": "Name",
+            "surname": "Surname"
+          }
+        },
+        "tasksButton": "Tasks",
+        "taskStatus": {
+          "done": "Closed",
+          "notDone": "Opened",
+          "new": "New"
+        }
+      },
+      "createTask": {
+        "screenTitle": "Create task",
+        "screenSummaryTitle": "Task summary",
+        "ha": "Ha",
+        "submitButton": "Create",
+        "pendingStatus": "Creating...",
+        "selectWorkers": {
+          "stepSelectWorkers": "Select workers",
+          "hintHeader": "Hint",
+          "hintDescription": "Choose a worker, that will perform the task",
+          "searchPlaceholder": "Find a worker"
+        },
+        "selectMachines": {
+          "stepSelectMachine": "Select machine",
+          "hintHeader": "Hint",
+          "hintDescription": "Choose a machine, that will be used to perform the task",
+            "searchPlaceholder": "Find a machine"
+        },
+        "selectFields": {
+          "stepSelectFields": "Select fields",
+          "submitButton": "Next step",
+          "hintHeader": "Hint",
+          "hintDescription": "You can choose multiple fields, each field will be considered as a separate task",
+            "searchPlaceholder": "Find a field"
+        },
+        "summary": {
+          "summaryCard": {
+            "fields": "Fields",
+            "workers": "Workers",
+            "machines": "Machines",
+            "type": "Type",
+            "totalArea": "Total area"
+          },
+          "typeSelector": {
+            "label": "Task Type",
+            "description": "Task Type",
+            "creatingTasks": "Will be created: "
+          }
+        },
+        "fieldSelectorEmptyList": "No fields to display, click below to create new one",
+        "workerSelectorEmptyList": "No workers to display, click below to create new one",
+        "machineSelectorEmptyList": "No machines to display, click below to create new one"
+      },
+      "accountingSummary": {
+        "clientInvoiceData": "Client Invoice Data",
+        "useClientsCompanyData": "Use Clients Company Data",
+        "createCompanyData": "Create Client Company Data",
+        "companyName": "Company Name",
+        "companyNIP": "Company NIP",
+        "county": "County",
+        "apartmentNumber": "Apartment Number",
+        "voivodeship": "Voivodeship",
+        "name": "Name",
+        "surname": "Surname",
+        "phoneNumber": "Phone Number",
+        "orderName": "Order Name",
+        "performanceDate": "Performance Date",
+        "totalArea": "Total Area",
+        "status": "Status",
+        "openedAt": "Opened At",
+        "createdAt": "Created At",
+        "taxValue": "Tax value",
+        "totalPrice": "Total Price",
+        "totalPriceWithTax": "Total Price With Tax",
+        "harvestingTotalArea": "Harvesting total area",
+        "transportTotalArea": "Transport total area",
+        "harvestingTotalPrice": "Harvesting total price",
+        "transportTotalPrice": "Transport total price",
+        "companyDataIsEmpty": "Company data is empty",
+        "clientNoCompany": "Your client has no company data, click bellow to fill company data",
+        "companyEmail": "Company Email",
+        "companyPhoneNumber": "Company Phone Number",
+        "city": "City",
+        "street": "Street",
+        "postalCode": "Postal Code",
+        "houseNumber": "House Number",
+        "fillCompanyData": "Fill Company Data",
+        "usingClientPersonalDataHintHeader": "Using Client Personal Data",
+        "usingClientPersonalDataHintDesc": "When using the customer's personal data, you will only be able to create named invoices, which means that the customer's company data will not be on the invoice even if they exist.",
+        "noData": "No data",
+        "alertTitle": "Something happened :(",
+        "alertDescription": "An error occurred while generating the invoice, please try again.",
+        "clientCardName": "Client",
+        "clientCardTopRightButtonName": "More",
+        "orderCardName": "Order",
+        "generateInvoiceButton": "Generate invoice"
+      },
+      "orderAccounting": {
+        "screenTitle": "Order accounting"
+      },
+      "OrderAccountingSelectPrices": {
+        "screenTitle": "Set Pricing",
+        "area": "AREA",
+        "total": "total:",
+        "sum": "SUM:",
+        "totalWithTax": "TOTAL (W. TAX):",
+        "tasksNotSelected": "No tasks selected",
+        "nextButton": "Next"
+      },
+      "orderInvoices": {
+        "screenTitle": "Order invoices",
+        "backButton": "Back"
+      }
+    },
+    "ordersDesktopDriver":{
+        "addOrder": {
+            "screenTitle": "Create  order",
+            "submitButton": "Create",
+            "step1Communicat": "Step 1: Choose client",
+            "step2Communicat": "Step 2: Fill in order details",
+            "emptyList": "Cannot find given client, click below to create new one",
+            "createClientButton": "Create new client"
+        },
+        "orderDesktop": {
+            "title": "Orders",
+            "searchPlaceholder": "Find an order",
+            "emptyList": "No orders to display, swipe right and add new one"
+        }
+    },
+    "ownerRootDriver": {
+      "addWorker": {
+        "screenTitle": "Add worker",
+        "scanQrCode": "Scan QR code from worker's app",
+        "pendingStatus": "Adding worker...",
+        "welcomeAnimationStartText": "Worker",
+        "welcomeAnimationEndText": "has been added"
+      },
+      "workerAssignation": {
+        "qrCodeScanCommunication": "Let the owner scan the QR code to assign you to the company",
+        "qrCodeTimeOut": "Scan this code before the timer runs out",
+        "connectionTimeout": "Connection timeout...",
+        "error": "Error occurred...",
+        "retryButton": "Retry",
+        "welcomeText": "Welcome on board! ",
+        "pendingStatus": "Querying your data..."
+      },
+      "workersDesktop": {
+        "title": "Workers",
+        "searchPlaceholder": "Find a worker",
+        "emptyList": "No workers to display, swipe right and add new one by scanning QR code"
+      },
+      "workerDetails": {
+        "personalData": "Personal",
+        "address": "Address",
+        "status": "Status",
+        "Position": "Position",
+        "editButton": "Edit",
+        "choose": "Choose",
+        "hintTitle": "Hint",
+        "hintDescription": "Status is used to determine if the worker is active or not, if the worker is not active, he will not be able to perform tasks"
+      }
+
     }
+  },
+  "workerScreens": {
+    "activityDriver": {
+      "taskView": {
+        "errorToastTitleOpen": "Cannot open task",
+        "errorToastTitleResume": "Cannot resume task",
+        "screenTitle": "Task View",
+        "resumeButton": "Resume",
+        "openButton": "Open",
+        "taskInfoPanel": {
+          "sessionsCardTitle": "Sessions",
+          "reset_map": "Reset Map",
+          "task_view": "Task View",
+          "task_info": "Task Info",
+          "field_info": "Field Info",
+          "address_info": "Address Info",
+          "created_at": "Created At",
+          "closed_at": "Closed At",
+          "opened_at": "Opened At",
+          "performance_date": "Performance Date",
+          "type": "Type",
+          "status": "Status",
+          "done": "Done",
+          "not_done": "Not Done",
+          "name": "Name",
+          "pl_id": "PL_ID",
+          "area": "Area",
+          "doc_data": "DOC Data",
+          "city": "City",
+          "county": "County",
+          "longitude": "Longitude",
+          "latitude": "Latitude",
+          "voivodeship": "Voivodeship"
+        },
+        "doneTaskHintCard":{
+            "doneTaskHintCardTitle": "Task has been marked as done",
+            "doneTaskHintCardDescription": "When you marked this task as done, it is considered a completed task, which means you no longer have permissions to manage it."
+        },
+        "locationErrorHintCard":{
+          "hintCardTitle": "Location is disabled",
+          "hintCardDescription": "According to the company's policy, in order to start a task you must make your location available. Your location will be recorded and processed while you are working to avoid errors while working.",
+          "enableLocationLink": "Enable location"
+        },
+        "enableLocationAlert": {
+          "title": "Location is disabled",
+          "description": "To start a task, you must enable location. Your location will be recorded and processed while you are working to avoid errors while working.",
+          "okButton": "Enable",
+          "cancelButton": "Cancel"
+        },
+        "locationPrompt": {
+            "title": "Location is disabled",
+            "description": "To start a task, you must enable location. Your location will be recorded and processed while you are working to avoid errors while working."
+        },
+        "closedByOwnerAlert": {
+            "title": "Task has been closed",
+            "description": "This task has been closed by the owner, you can no longer manage it"
+        }
+      }
+    },
+    "activityDesktopRoot": {
+      "welcome": "Welcome",
+      "newTaskIncomeHeader": "New task !",
+      "newTaskIncomeDescription": "You have been added to task list"
+    }
+  },
+  "serviceDefaults": {
+    "unauthorised": "Session expired, please login again",
+    "default": "Something went wrong, please try again later"
+  },
+  "userService": {
+    "errorMessages": {
+      "wrongCredentials": "Wrong credentials"
+    }
+  },
+  "components": {
+    "alert": {
+      "okButton": "OK",
+        "cancelButton": "Cancel"
+    },
+    "taskSessionManagement": {
+      "sessionInfoTitle": "Session Info",
+      "openedAtLabel": "OPENED AT",
+      "closedAtLabel": "CLOSED AT",
+      "onOpenWorkerLatLabel": "ON OPEN WORKER LAT:",
+      "onOpenWorkerLongLabel": "ON OPEN WORKER LONG:",
+      "onCloseWorkerLatLabel": "ON CLOSE WORKER LAT:",
+      "onCloseWorkerLongLabel": "ON CLOSE WORKER LONG:",
+      "backButton": "Back",
+      "openStartOnMapButton": "Show start-point",
+      "openEndOnMapButton": "Show end-point",
+      "workerOnOpenLabel": "Worker on open",
+      "workerOnCloseLabel": "Worker on close",
+      "toastOpenMapErrorHeader": "Error",
+      "toastOpenMapErrorDescription": "Failed to open map"
+    },
+    "taskWorkView": {
+      "errorToastTitleClose": "Cannot close task",
+      "errorToastTitlePause": "Cannot pause task",
+      "locationErrorHeader": "Error",
+      "locationErrorDescription": "Location Error Occurred, try later",
+      "pauseButton": "Pause",
+      "focusOnFieldButton": "Focus on field",
+      "autofocusSwitch": "Autofocus",
+      "markAsDoneButton": "Mark as done"
+    },
+    "accountingTaskCard": {
+      "task": "Task",
+      "area": "Area",
+      "price": "Price",
+      "priceWithTax": "Price(Tax)"
+    },
+    "orderForm": {
+      "pendingStatus": "Creating order...",
+      "submitButton": "Create"
+    },
+    "verticalList": {
+      "problemOccurred": "Problem occurred, please try again later"
+    },
+    "listInfo": {
+      "unknownError": "Unknown error occurred",
+      "emptyListHeader": "No data to display"
+    },
+    "emptyListItemCreator": {
+      "button": "Create"
+    },
+    "list": {
+      "cannotSelectMore": "Cannot select more items",
+      "cannotSelectMoreDescription": "You have reached the maximum number of selected items"
+    },
+    "taskInfoCard": {
+      "type": "Type",
+      "worker": "Worker",
+      "machine": "Machine",
+      "createdAt": "Created at",
+      "openedAt": "Opened at",
+      "closedAt": "Closed at",
+      "fieldArea": "Field Area",
+      "ha": "Ha",
+      "deleteButton": "Delete",
+      "closeTaskButton": "Close",
+      "onDeleteAlertTitle": "DANGER ACTION",
+      "onDeleteAlertDescription": "Are you sure you want to delete this task? You will loose all session data and won't  be able to revert them. This action cannot be undone!!"
+    },
+    "fieldSelector": {
+      "title": "Select fields",
+      "searchPlaceholder": "Find a field"
+    },
+    "workerSelector":{
+        "title": "Select workers",
+        "searchPlaceholder": "Find a worker"
+    },
+    "taskSelector":{
+      "title": "Select Tasks",
+      "searchPlaceholder": "Find a task",
+      "buttonTitle": "Next step"
+    },
+    "machineSelector": {
+      "title": "Select machines",
+      "searchPlaceholder": "Find a machine"
+    },
+    "clientsFieldsList": {
+      "searchPlaceholder": "Find a field"
+    },
+    "buttonTamagui": {
+      "processing": "Processing..."
+    },
+    "sendMail": {
+      "title": "Send E-mail",
+      "cannotSendAlertTitle": "Cannot send e-mail",
+      "cannotSendAlertMessage": "Sorry we cannot send e-mail, possibly you don't have any e-mail client installed"
+    },
+    "call": {
+      "title": "Call",
+      "cannotCallAlertTitle": "Cannot call",
+      "cannotCallAlertMessage": "Sorry we cannot call, possibly this device doesn't support calling"
+    },
+    "CallAndMailPanel": {
+      "sign": "Sent from FarmService T.M."
+    },
+    "universalList": {
+      "listEmptyText": "No data to display...",
+      "listLoadingText": "Loading clients..."
+    },
+    "toast": {
+      "clientsFetchErrorHeader": "Clients fetch error",
+      "workerUpdateErrorHeader": "Worker update error",
+      "clientsFetchErrorContext": "Sorry we cannot fetch clients",
+      "workerUpdateErrorContext": "Sorry we cannot update worker",
+      "openMapErrorHeader":  "Sorry we cannot open map",
+      "openMapErrorDescription": "To use this function you need to have Maps  installed",
+      "cantDeleteFieldHeader": "Cannot delete field",
+      "cantDeleteFieldDescription": "Sorry we cannot delete field, try later",
+      "cantCreateOrderHeader": "Cannot create order",
+      "cantCreateOrderDescription": "Sorry we cannot create order, try later",
+      "canUpdateOrderHeader": "Cannot update order",
+      "canUpdateOrderDescription": "Sorry we cannot update order, try later",
+      "cantAddMachine": "Cannot add machine",
+      "cantAddMachineDescription": "Sorry we cannot add machine, try later",
+      "cantUpdateMachine": "Cannot update machine",
+      "cantUpdateMachineDescription": "Sorry we cannot update machine, try later",
+      "cantDeleteMachine": "Cannot delete machine",
+      "cantDeleteMachineDescription": "Sorry we cannot delete machine, try later",
+      "cantCreateTask": "Cannot create task",
+      "cantCreateTaskDescription": "Something went wrong, try again later"
+    },
+    "filedBottomSheet": {
+      "showOnMapButton": "Show on map",
+      "editButton": "Edit",
+      "deleteButton": "Delete",
+      "addButton": "Add to order",
+      "historyButton": "History",
+      "address": "Address",
+      "deleteFieldAlertTitle": "Are you sure?",
+      "deleteFieldAlertDescription": "Are you sure you want to delete this field? This action cannot be undone",
+      "deleteFieldAlertDeleteButton": "Delete",
+      "deleteFieldAlertCancelButton": "Cancel",
+      "ha": "Ha"
+    },
+    "orderPerformanceChart": {
+      "errorFetchingData": "There was an error while fetching the data",
+      "tryAgainLater": "try again later",
+      "computingPerformance": "Computing performance...",
+      "hintCardTitle": "Statistic Not aviable",
+      "hintCardDescription": "There is not enough data to generate statistics, try again later",
+      "dailyPerformance": "Daily performance"
+    }
+  },
+  "addressForm": {
+    "formPlaceholder": {
+      "city": "City",
+      "county": "County",
+      "street": "Street",
+      "houseNumber": "House number",
+      "apartmentNumber": "Apartment number",
+      "postalCode": "Postal code",
+      "country": "Country",
+      "voivodeship": "Voivodeship",
+      "latitude": "Latitude",
+      "longitude": "Longitude"
+    },
+    "validation": {
+      "city": "City is required",
+      "county": "County is required",
+      "street": "Street is required",
+      "houseNumber": "House number is required",
+      "apartmentNumber": "Apartment number is required",
+      "postalCode": "Postal code must be in format XX-XXX",
+      "country": "Country is required",
+      "voivodeship": "Voivodeship is required",
+      "validationAtLeast": "must be at least ",
+      "validationMaximum ": "can have maximum ",
+      "validationCharacters": "characters",
+      "latitude": "Latitude is required",
+      "longitude": "Longitude is required"
+    }
+  },
+  "createCompanyForm":{
+    "formPlaceholder": {
+      "email": "E-mail",
+      "name": "Company name",
+      "NIP": "NIP",
+      "phoneNumber": "Phone number",
+      "county": "County",
+      "street": "Street",
+      "houseNumber": "House number",
+      "apartmentNumber": "Apartment number",
+      "postalCode": "Postal code",
+      "country": "Country",
+      "voivodeship": "Voivodeship"
+    },
+    "validation": {
+      "email": "E-mail is required",
+      "name": "Company name is required",
+      "NIP": "NIP  is required",
+      "phoneNumber": "Phone number is required",
+      "validationAtLeast": "must be at least ",
+      "validationMaximum ": "can have maximum ",
+      "validationCharacters": "characters"
+    }
+  },
+  "createClientForm":{
+    "formPlaceholder": {
+      "email": "E-mail",
+      "name": "Client name",
+      "surname": "Client surname",
+      "phoneNumber": "Phone number"
+    },
+    "validation": {
+      "email": "E-mail is required",
+      "emailPattern": "E-mail must be in email format",
+      "name": "Client name is required",
+      "surname": "Client surname is required",
+      "NIP": "NIP  is required",
+      "phoneNumber": "Phone number is required",
+      "validationAtLeast": "must be at least ",
+      "validationMaximum ": "can have maximum ",
+      "validationCharacters": "characters"
+    }
+  },
+  "createFieldForm":{
+    "formPlaceholder": {
+      "nameLabel": "Name",
+      "area": "Area",
+      "polishSystemId": "Polish system id"
+    },
+    "validation": {
+      "nameLabel": "Name is required",
+      "polishSystemId": "Polish system id is required",
+      "polishSystemIdPattern": "PL_ID mus be in format PL_ID (eg. 181102_2.0010.211)",
+      "area": "Area is required",
+      "validationAtLeast": "must be at least ",
+      "validationMaximum ": "can have maximum ",
+      "validationCharacters": "characters",
+      "moreThan": "Area must be more than",
+      "lessThan": "Area can't be less than"
+    }
+  },
+  "createOrderForm": {
+    "formPlaceholder": {
+      "name": "Order name",
+      "additionalInfo": "Additional info",
+      "performanceDate": "Performance date",
+      "pricePerUnit": "Price per unit"
+    },
+    "validation": {
+      "name": "Name is required",
+      "performanceDate": "Performance date is required"
+    }
+  },
+  "taskTypePriceForm": {
+    "formPlaceholder": {
+      "harvesting": "Harvesting",
+      "transport": "Transport",
+      "tax": "Tax value"
+    },
+    "validation": {
+      "priceRequired": "Price is required",
+      "priceAsNumber": "Price must be a number",
+      "taxIsRequired": "Tax must be defined",
+      "taxMinValue": "Tax value must be positive number",
+      "taxMaxValue": "Tax cannot be greater then 1"
+    }
+  },
+  "createMachineForm": {
+    "formPlaceholder": {
+      "name": "Machine name",
+      "licensePlate": "License plate"
+    },
+    "validation": {
+      "name": "Name is required",
+      "nameMinLength": "Name too short",
+      "nameMaxLength": "Name too long",
+      "licensePlate": "License plate is required",
+      "licensePlateMinLength": "License plate too short",
+      "licensePlateMaxLength": "License plate too long"
+    }
+  },
+  "sessionAsActivity": {
+    "openSessionTitle": "Session Opened",
+    "closeSessionTitle": "Session Closed",
+    "openTask": "Task Opened",
+    "closeTask": "Task Closed",
+    "worker": "Worker",
+    "has": "has",
+    "opened": "opened",
+    "closed": "closed",
+    "aSessionOnAField": "a session on a field",
+    "workOnAField": "work on a field",
+    "somethingWentWrong": "Something went wrong, please try again later"
   }
 }
